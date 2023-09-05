@@ -1,0 +1,5 @@
+remote_theme: pages-themes/cayman@v0.2.0
+title: Replicability Crisis in Science?
+description: Summer School -- 18-22 September 2023 -- University of Padova 
+plugins:
+- jekyll-remote-theme # add this line to the plugins list if you already have one

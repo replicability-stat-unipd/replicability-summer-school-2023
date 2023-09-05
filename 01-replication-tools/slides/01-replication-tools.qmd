@@ -1,0 +1,597 @@
+---
+title: Tools for reproducible research
+subtitle: Replicability Crisis in Science?
+date: last-modified
+date-format: "[18-22 September] YYYY"
+author:
+  - name: Filippo Gambarota
+    email: filippo.gambarota@unipd.it
+    twitter: fgambarota
+    github: filippogambarota
+    orcid: "`r filor::fil()$orcid`"
+  - name: Gianmarco Altoè
+    email: filippo.gambarota@unipd.it
+    orcid: "0000-0003-1154-9528"
+final-slide: true
+notation-slide: false
+embed-resources: false
+from: markdown+emoji
+toc: false
+filters: 
+    - code-fullscreen
+format:
+  filor-revealjs:
+    theme: custom.css
+---
+
+```{r}
+#| label: setup
+knitr::opts_chunk$set(echo = TRUE,
+                      dev = "svg",
+                      fig.align = "center")
+```
+
+## Doing research is hard...
+
+. . .
+
+- you have to **read** papers, textbooks, slides and track information
+
+. . .
+
+- you have to **plan** your experiment or research
+
+. . .
+
+- you have to **collect, organize and manage the research data**
+
+. . .
+
+- you have to **analyze data**, create figures and tables
+
+. . .
+
+- you have to **write** reports, papers, slides, etc.
+
+## Doing research is hard...
+
+::: {layout-nrow=2}
+![](img/meme1.jpg){width=300}
+
+![](img/meme2.jpg){width=300}
+
+![](img/meme3.png){width=300}
+
+![](img/meme4.png){width=300}
+:::
+
+## Doing reproducible research is even harder...
+
+. . .
+
+- organize data in a sharable and comprehensible format
+
+. . .
+
+- choose a future-proof place to share data along the research paper
+
+. . .
+
+- analyze data using a reproducible framework: code, programming language, scripting
+
+. . .
+
+- report data (papers, slides, etc.) using a reproducible framework
+
+# Reproducibility starter pack {.section}
+ 
+## Reproducibility starter pack :construction_worker:
+
+. . .
+
+- ### A general purpose (or flexible enough) [programming language]{.imp}
+
+. . .
+
+- ### A [literate programming]{.imp} framework to integrate code and text
+
+. . .
+
+- ### A [version control system]{.imp} to track projects
+
+. . .
+
+- ### An [online repository]{.imp} to store the project and sharing with others
+
+# R Programming Language {.section}
+
+## R
+
+> R is a free software environment for statistical computing and graphics.
+
+- Is not a proper general purpose programming language (such as C++ or Python).
+- New extensions (*packages*) allow R to do pretty everything (file manager, image processing, webscraping, etc.)
+- It is free and open-source
+- The community is extremely active and keep growing
+
+## R - CRAN
+
+The CRAN is the repository where package developers upload their packages and other users can install them.
+
+```{r}
+#| echo: false
+knitr::include_url("https://cran.r-project.org/web/packages/")
+```
+
+## R - PYPL Index
+
+| **Rank<br>** | **Language** | **Share** | **1-year trend** |
+|:---:|:---:|:---:|:---:|
+| 1 | Python | 28.04 % | +0.3 % |
+| 2 | Java | 15.78 % | -1.3 % |
+| 3 | JavaScript | 9.27 % | -0.2 % |
+| 4 | C# | 6.77 % | -0.2 % |
+| 5 | C/C++ | 6.59 % | +0.4 % |
+| 6 | PHP | 5.01 % | -0.4 % |
+| 7 | R | 4.35 % | +0.0 % |
+| 8 | TypeScript | 3.09 % | +0.3 % |
+| 9 | Swift | 2.54 % | +0.5 % |
+| 10 | Objective-C | 2.15 % | +0.1 % |
+| 11 | Rust | 2.14 % | +0.5 % |
+| 12 | Go | 1.93 % | -0.2 % |
+| 13 | Kotlin | 1.77 % | -0.0 % |
+| 14 | Matlab | 1.63 % | +0.1 % |
+: Source: [https://pypl.github.io/PYPL.html](https://pypl.github.io/PYPL.html)
+
+## R - PYPL Index
+
+The popularity is on a different scale compared to Python but still increasing:
+
+![](img/pypl-r.png)
+
+## R or Python?
+
+- Python is a good alternative. Personally I use and enjoy python but I do most of my work in R.
+
+- Python is a very general-purpose language more powerful for general task.
+
+- I find python very useful for programming cognitive experiments, image processing and manipulation, automatizing tasks and communicating with the operating system.
+
+- R is still a little bit superior in terms of plotting and data manipulation. Python as more machine learning and related implementations.
+
+## Modern R
+
+R is quite powerful and changes a lot during the last years. The scope of this week is not getting started with R but few concepts are important:
+
+- **functional programming**
+- **tidy** approach
+
+## Functional Programming
+
+> In computer science, functional programming is a programming paradigm where programs are constructed by applying and composing functions.
+
+Despite R can be used both with an imperative and object-oriented approach, the functional side is quite powerful.
+
+## Functional Programming
+
+We have a dataset (`mtcars`) and we want to calculate the mean, median, standard deviation, minimum and maximum of each column and store the result in a table.
+
+```{r}
+head(mtcars)
+str(mtcars)
+```
+
+## Functional Programming
+
+The standard option is using a `for` loop, iterating trhough columns, calculate the values and store into another data structure.
+
+```{r}
+ncols <- ncol(mtcars)
+means <- medians <- mins <- maxs <- rep(0, ncols)
+
+for(i in 1:ncols){
+  means[i] <- mean(mtcars[[i]])
+  medians[i] <- mean(mtcars[[i]])
+  mins[i] <- mean(mtcars[[i]])
+  maxs[i] <- mean(mtcars[[i]])
+}
+
+results <- data.frame(means, medians, mins, maxs)
+results$col <- names(mtcars)
+
+results
+```
+
+## Functional Programming
+
+We can decompose (and symplify the problem) by individuating the repeated patterns and writing a function.
+
+```{r}
+summ <- function(x){
+  data.frame(means = mean(x), medians = median(x), mins = min(x), maxs = max(x))
+}
+ncols <- ncol(mtcars)
+dfs <- vector(mode = "list", length = ncols)
+
+for(i in 1:ncols){
+  dfs[[i]] <- summ(mtcars[[i]])
+}
+
+results <- do.call(rbind, dfs)
+results
+```
+
+## Functional Programming
+
+We can be even more minimalistic by removing the `for` loop and using the `*apply` family that provide a series of compact iterative method.
+
+```{r}
+results <- lapply(mtcars, summ)
+results <- do.call(rbind, results)
+results
+```
+
+## Why functional programming?
+
+. . .
+
+- We can write less and reusable code that can be shared
+
+. . .
+
+- The scripts are more compact, less errors prone and more flexible (imagine that you want to improve the `summ` function, you only need to change it once instead of touching the `for` loop)
+
+. . .
+
+- Functions can be easily and consistently documented (see [roxygen](https://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html) documentation) improving the reproducibility and clarity of the code
+
+## More about functional programming in R
+
+- Advanced R by Hadley Wickham, section on Functional Programming ([https://adv-r.hadley.nz/fp.html](https://adv-r.hadley.nz/fp.html))
+- Hands-On Programming with R by Garrett Grolemund [https://rstudio-education.github.io/hopr/](https://rstudio-education.github.io/hopr/)
+- [https://carpentries-incubator.github.io/open-science-with-r/07-making-functions-r/index.html](https://carpentries-incubator.github.io/open-science-with-r/07-making-functions-r/index.html)
+- Hadley Wickham: [The Joy of Functional Programming (for Data Science)](https://www.youtube.com/watch?v=bzUmK0Y07ck)
+- [Bruno Rodrigues Youtube Channel](https://www.youtube.com/@brodriguesco/videos)
+
+::: {layout-ncol=2}
+![Advanced R](img/advanced-r.jpg){width=200 fig-align="center"}
+![Hands-on Programming With R](img/hand-on-programming.jpeg){width=200 fig-align="center"}
+:::
+
+## The Tidy approach
+
+The `tidyverse` is a series of high-quality R packages to do modern data science:
+
+- data manipulation (`dplyr`, `tidyr`)
+- plotting (`ggplot2`)
+- reporting (`rmarkdown`)
+- string manipulation (`stringr`)
+- functionals (`purrr`)
+- ...
+
+![](https://raw.githubusercontent.com/rstudio/hex-stickers/main/SVG/tidyverse.svg){fig-align="center" width=400}
+
+## The Tidy approach - Pipes
+
+One of the great improvement from the `tidyverse` is the usage of the pipe `%>%` now introduced in base R as `|>`. You will se these symbols a lot when looking at modern R code.
+
+. . .
+
+The idea is very simple, the standard pattern to apply a function is `function(argument)`. The pipe can reverse the pattern as `argument |> function()`. Normally when we apply multiple functions progressively the pattern is this:
+
+. . .
+
+```{r}
+#| eval: false
+x <- rnorm(100)
+x <- round(x, 3)
+x <- abs(x)
+x <- as.character(x)
+```
+
+. . .
+
+When using the pipe, we remove the redundand assignment `<-` pattern:
+
+```{r}
+#| eval: false
+x <- rnorm(100)
+x |>
+  round(3) |>
+  abs() |>
+  as.character()
+```
+
+The pipe can be read as *"from **x** apply `round`, then `abs`, etc.".* The first argument of the piped function is assumed to be the result of the previus call.
+
+## More about the Tidy approach
+
+The `tidy` approach contains tons of functions and packages. The overall philosopgy can be deepen in the R for Data Science book.
+
+![[https://r4ds.hadley.nz/](https://r4ds.hadley.nz/)](img/r4ds.jpg)
+
+## ggplot2
+
+::: {.panel-tabset}
+
+### Code
+
+Only an honour mention to `ggplot2` [https://ggplot2-book.org/](https://ggplot2-book.org/) (part of the `tidyverse`) that is an amazing package for data visualization following the *piping* and *tidy* approach. Is the implementation of the **grammar of graphics** idea.
+
+```{r}
+#| eval: false
+library(tidyverse)
+iris |>
+  mutate(wi = runif(n())) |>
+  ggplot(aes(x = Sepal.Length, y = Petal.Width, color = Species)) +
+  geom_point(aes(size = wi)) +
+  guides(size = "none") +
+  theme_minimal(15)
+```
+
+### Result
+
+```{r}
+#| echo: false
+library(tidyverse)
+iris |>
+  mutate(wi = runif(n())) |>
+  ggplot(aes(x = Sepal.Length, y = Petal.Width, color = Species)) +
+  geom_point(aes(size = wi)) +
+  guides(size = "none") +
+  theme_minimal(15)
+```
+
+:::
+
+## ggplot2
+
+The `ggplot2` book [https://ggplot2-book.org/](https://ggplot2-book.org/) is a great resource to produce high-quality, publication ready plots. Clearly, the advantage of producing the figures entirely writing code are immense in terms of reusability and reproducibility.
+
+::: {layout-ncol=2}
+
+![](https://raw.githubusercontent.com/rstudio/hex-stickers/main/SVG/ggplot2.svg){width=300 fig-align="center"}
+
+![](img/ggplot2.jpg){width=300 fig-align="center"}
+:::
+
+# Literate Programming {.section}
+
+## Literate Programming^[[https://en.wikipedia.org/wiki/Literate_programming](https://en.wikipedia.org/wiki/Literate_programming)]
+
+> Donald Knuth first defined literate programming as a script, notebook, or computational document that contains an explanation of the program logic in a natural language, interspersed with snippets of macros and source code, which can be compiled and rerun
+
+For example **jupyter notebooks**, **R Markdown** and now **Quarto** are literate programming frameworks to integrate code and text.
+
+![](img/lp.svg){fig-align="center"}
+
+## Literate Programming, the markup language
+
+Beyond the coding part, the markup language is the core element of a literate programming framework. The idea of a markup language is separating the result from what you actually write. Some examples are:
+
+- LaTeX
+- HTML
+- Markdown
+- XML
+- ...
+
+## LaTex
+
+<iframe src="https://latexbase.com/d/47cd5b2a-3a74-47cc-ac13-042c9760e192" height="700" width="1000" style="border: 1px solid #464646;display:block;" allowfullscreen="" allow="autoplay"></iframe>
+
+## HTML
+
+```html
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>My First Heading</h1>
+
+Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo prese una cassetta di caratteri e li assemblò per preparare un testo campione. È sopravvissuto non solo a più di cinque secoli, ma anche al passaggio alla videoimpaginazione, pervenendoci sostanzialmente inalterato. Fu reso popolare, negli anni ’60, con la diffusione dei fogli di caratteri trasferibili “Letraset”, che contenevano passaggi del Lorem Ipsum, e più recentemente da software di impaginazione come Aldus PageMaker, che includeva versioni del Lorem Ipsum.
+
+<h2>My Second Heading</h2>
+
+Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. 
+
+Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo 
+
+tipografo prese una cassetta di caratteri e li assemblò per preparare un testo campione. 
+
+È sopravvissuto non solo a più di cinque secoli, ma anche al passaggio alla videoimpaginazione, pervenendoci sostanzialmente inalterato. 
+
+Fu reso popolare, negli anni ’60, con la diffusione dei 
+
+fogli di caratteri trasferibili “Letraset”, che contenevano passaggi del Lorem Ipsum
+
+più recentemente da software di impaginazione come Aldus PageMaker, che includeva versioni del Lorem Ipsum.
+
+</body>
+</html>
+```
+## Markdown
+
+<iframe src="https://markdownlivepreview.com/" height="700" width="1000" style="border: 1px solid #464646;display:block;" allowfullscreen="" allow="autoplay"></iframe>
+
+## Markdown
+
+Markdown is one of the most popular markup languages for several reasons:
+
+- easy to write and read compared to Latex and HTML
+- easy to convert from Markdown to basically every other format using `pandoc`
+- easy to implement new features
+
+## What's wrong about Microsoft Word?
+
+MS Word is a WYSIWYG (*what you see is what you get editor*) that force users to think about formatting, numbering, etc. Markup languages receive the content (plain text) and the rules and creates the final document.
+
+:::: {.columns}
+::: {.column width='50%'}
+
+![](img/wordmeme1.jpg)
+
+:::
+::: {.column width='50%'}
+
+![](img/wordmeme2.jpg)
+
+:::
+::::
+
+## What's wrong about Microsoft Word?
+
+Beyond the pure writing process, there are other aspects related to research data.
+
+- writing math formulas
+- reporting statistics in the text
+- producing tables
+- producing plots
+
+In MS Word (or similar) we need to produce everyting outside and then manually put figures and tables.
+
+## The solution... Quarto
+
+Quarto ([https://quarto.org/](https://quarto.org/)) is the evolution of R Markdown that integrate a programming language with the Markdown markup language. It is very simple but quite powerful.
+
+:::: {.columns}
+::: {.column width='50%'}
+
+![](https://raw.githubusercontent.com/rstudio/hex-stickers/main/SVG/rmarkdown.svg)
+
+:::
+::: {.column width='50%'}
+
+![](https://raw.githubusercontent.com/rstudio/hex-stickers/main/SVG/quarto.svg)
+
+:::
+::::
+
+# Let's see a practical example!
+
+## More about Quarto and R Markdown
+
+The topic is extremely vast. You can do pretty everything, a website, thesis, your CV, etc.
+
+- Yihui Xie - R Markdown Cookbook [https://bookdown.org/yihui/rmarkdown-cookbook/](https://bookdown.org/yihui/rmarkdown-cookbook/)
+- Yihui Xie - R Markdown: The Definitive Guide [https://bookdown.org/yihui/rmarkdown/](https://bookdown.org/yihui/rmarkdown/)
+- Quarto documentation [https://quarto.org/docs/guide/](https://quarto.org/docs/guide/)
+
+# GIT and Github
+
+The basic idea is to track changes within a folder, assign a `message` and eventually a `tag` to a specific version obtaining a version hystory. The version history is completely navigable, you can go back to a previous version of the code.
+
+The are advanced features like `branches` for creating an independent version of the project to test new features and then `merge` into the main streamline.
+
+The entire (local) Git project can be hosted on Github to improve collaboration. Other people or collaborators can `clone` the repository and `push` their changes to the project.
+
+# Veeeery basic Git workflow {.section}
+
+## Veeeery basic Git workflow
+
+- After installing Git, you can start a new repository opening a terminal on a folder and typing `git init`. The folder is now a git project you can notice by the hidden `.git` folder.
+
+```bash
+cd ~/some/folder
+git init
+```
+
+- Then you can `add` files to the staging area. Basically these files are ready to be `committed` i.e. "written" in the Git history.
+
+```bash
+git add file1.txt
+# git add . # add everyting
+```
+
+- Finally you can commit the modified version of the file using `git commit -m message`
+
+```bash
+git commit -m "my first amazing commit"
+```
+
+- you can see the Git hystory with all your commits:
+
+```bash
+git log
+```
+```{r}
+#| echo: false
+setwd("../../docs/git-example/")
+cat(system("git log", intern = TRUE), sep = "\n")
+```
+
+## Github
+
+Imagine to put everyting into a server with nice viewing options and advanced features. Github is just an hosting service for your `git` folder.
+
+You can create an empty repository on Github named `git-test`. Now my repo has the path `git@github.com:filippogambarota/git-test.git`.
+
+```bash
+git remote add origin git@github.com:filippogambarota/git-test.git
+git push
+```
+
+Now our local repository is linked with the remote repository. Every time we do `git push` our local commits will be uploaded.
+
+If you worked on the repository from another machine or a colleague add some changes, you can do `git pull` and your local machine will be updated.
+
+## Github
+
+An now let's see on Github the result:
+
+```{r}
+#| fig-align: center
+#| echo: false
+knitr::include_graphics("img/git-test.png")
+```
+
+## More about Git and Github
+
+There are a lot of resources online:
+
+- The Open Science Manual - Zandonella and Massidda - [Git](https://arca-dpss.github.io/manual-open-science/git-chapter.html) and [Github](https://arca-dpss.github.io/manual-open-science/github-chapter.html) chapters.
+- https://agripongit.vincenttunru.com/
+- https://git-scm.com/docs/gittutorial
+
+# Open Science Framework {.section}
+
+## Open Science Framework
+
+> OSF is a free, open platform to support your research and enable collaboration.
+
+Is a great tool to upload and share materials with others and collaborate on a project. Similarly to Github you can track the changes made to a project.
+
+The great addition is having a DOI thus the project is persistently online and can be cited.
+
+It is now common practice to create a OSF project supporting a research paper and put the link within the paper containing supplementary materials, raw data, scripts etc.
+
+![](img/osf.jpeg)
+
+## Open Science Framework
+
+It's very easy to create a new project, then you simply need to add files and share it.
+
+![](img/osf-test.png)
+
+## Open Science Framework
+
+### OSF and Github
+
+An interesting feature is linking a Github repository to OSF. Now all changes made on Github (easier to manage) are mirrored into OSF. You can easily work in Github for the coding part and use OSF to upload other data or information and to assign a DOI to the project.
+
+### Preprints
+
+OSF is also linked to a popular service for preprints called PsyArXiv [https://psyarxiv.com/](https://psyarxiv.com/) thus you can link a preprint to an OSF project.
+
+## More on OSF
+
+- https://help.osf.io/article/342-getting-started-on-the-osf
+- https://arca-dpss.github.io/manual-open-science/osf-chapter.html
+
+## More on reproducibility
+
+In general, I highly suggest the online book **The Open Science Manual** [https://arca-dpss.github.io/manual-open-science/](https://arca-dpss.github.io/manual-open-science/) written by my friend **Claudio Zandonella** and **Davide Massidda** where these and other topics are explained in details:
+
+```{r}
+#| echo: false
+knitr::include_url("https://arca-dpss.github.io/manual-open-science/")
+```

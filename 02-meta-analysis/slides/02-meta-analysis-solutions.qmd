@@ -1,0 +1,91 @@
+## 1. Importing and exploring
+
+We have `nrow(dep)` studies, and this is the dataset structure with some summary statistics:
+
+```{r}
+dep <- readRDS(here("02-meta-analysis/objects/depression.rds"))
+
+str(dep)
+
+summary(dep)
+```
+
+## 1. Importing and exploring
+
+Let's plot the variables:
+
+```{r}
+par(mfrow = c(3, 2))
+barplot(table(dep$age_group))
+hist(dep$mean_age)
+barplot(table(dep$country))
+barplot(table(dep$format))
+hist(dep$yi)
+hist(dep$sei)
+```
+
+## 2. Models
+
+::: {.panel-tabset}
+
+## EE model
+
+```{r}
+dep$vi <- dep$sei^2
+fit_ee <- rma(yi, vi, data = dep, method = "EE")
+summary(fit_ee)
+```
+
+## RE model
+
+```{r}
+fit_re <- rma(yi, vi, data = dep, method = "REML")
+summary(fit_re)
+```
+
+## Comparison
+
+```{r}
+filor::compare_rma(fit_ee, fit_re)
+```
+
+:::
+
+## 3. Forest Plots
+
+::: {.panel-tabset}
+
+### EE model
+
+```{r}
+forest(fit_ee)
+```
+
+### RE model
+
+```{r}
+forest(fit_re)
+```
+
+:::
+
+## 4. Funnel Plot
+
+```{r}
+funnel(fit_re)
+```
+
+## 5. Publication Bias
+
+```{r}
+egg <- regtest(fit_re)
+egg
+```
+
+## 5. Publication Bias
+
+```{r}
+funnel(fit_re)
+se <- seq(0,1.8,length=100)
+lines(coef(egg$fit)[1] + coef(egg$fit)[2]*se, se, lwd=3)
+```

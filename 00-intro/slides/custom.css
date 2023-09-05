@@ -1,0 +1,21 @@
+/*-- scss:rules --*/
+
+.about h2{
+    text-align: center!important;
+}
+
+.about h3{
+    text-align: center!important;
+}
+  
+.about {
+    font-size: 80%;
+}
+
+.button p::before{
+    content: "💾";
+}
+
+.button{
+   font-size: 25px;
+}

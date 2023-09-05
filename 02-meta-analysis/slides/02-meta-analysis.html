@@ -1,0 +1,2481 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="02-meta-analysis_files/libs/clipboard/clipboard.min.js"></script>
+<script src="02-meta-analysis_files/libs/quarto-html/tabby.min.js"></script>
+<script src="02-meta-analysis_files/libs/quarto-html/popper.min.js"></script>
+<script src="02-meta-analysis_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="02-meta-analysis_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="02-meta-analysis_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="02-meta-analysis_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="02-meta-analysis_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="02-meta-analysis_files/libs/quarto-contrib/jquery-3.6.3/jquery-3.6.3.min.js"></script>
+<script src="02-meta-analysis_files/libs/quarto-contrib/code-fullscreen-1.0.0/code-fullscreen.js" defer="true"></script>
+<link href="02-meta-analysis_files/libs/quarto-contrib/code-fullscreen-1.0.0/code-fullscreen.css" rel="stylesheet"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+<meta name="author" content="Filippo Gambarota">
+<meta name="author" content="Gianmarco Altoè">
+<title>Meta-Analysis and Multi-Lab Replication studies</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+<link rel="stylesheet" href="02-meta-analysis_files/libs/revealjs/dist/reset.css">
+<link rel="stylesheet" href="02-meta-analysis_files/libs/revealjs/dist/reveal.css">
+<style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+<link rel="stylesheet" href="02-meta-analysis_files/libs/revealjs/dist/theme/quarto.css">
+<link href="02-meta-analysis_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+<link href="02-meta-analysis_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+<link href="02-meta-analysis_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+<link href="02-meta-analysis_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+<style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+<style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+<script src="02-meta-analysis_files/libs/quarto-diagram/mermaid.min.js"></script><script src="02-meta-analysis_files/libs/quarto-diagram/mermaid-init.js"></script><link href="02-meta-analysis_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center"><h1 class="title">Meta-Analysis and Multi-Lab Replication studies</h1>
+  <p class="subtitle">Replicability Crisis in Science?</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Filippo Gambarota <a href="https://orcid.org/0000-0002-6666-1747" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
+</div>
+<div class="quarto-title-author-email">
+<a href="mailto:filippo.gambarota@unipd.it">filippo.gambarota@unipd.it</a>
+</div>
+</div>
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Gianmarco Altoè <a href="https://orcid.org/0000-0003-1154-9528" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
+</div>
+<div class="quarto-title-author-email">
+<a href="mailto:gianmarco.altoe@unipd.it">gianmarco.altoe@unipd.it</a>
+</div>
+</div>
+</div>
+
+  <p class="date">18-22 September 2023</p>
+</section><section id="setup" class="slide level2"><h2>Setup</h2>
+<h3 id="packages">Packages</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># for data manipulation</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(metafor) <span class="co"># for meta-analysis</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>devtools<span class="sc">::</span><span class="fu">load_all</span>() <span class="co"># load all utils functions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section><section id="meta-analysis" class="title-slide slide level1 section center"><h1>Meta-analysis</h1>
+
+</section><section id="meta-analysis-1" class="slide level2"><h2>Meta-analysis</h2>
+<ul>
+<li><p>The meta-analysis is a statistical procedure to combine evidence from a group of studies.</p></li>
+<li><p>It is usually combined with a systematic review of the literature</p></li>
+<li><p>Is somehow the gold-standard approach when we want to summarise and make inference on a specific research area</p></li>
+</ul></section><section id="effect-size" class="slide level2"><h2>Effect size</h2>
+<p>To compare results from different studies, we should use a common metrics. Frequently meta-analysis use the so called <em>standardized</em> effect size. For example the Pearson correlation or the Cohen’s <span class="math inline">\(d\)</span>.</p>
+<p><span class="math display">\[
+r = \frac{\sum{(x_i - \bar{x})(y_i - \bar{y})}}{\sqrt{\sum{(x_i - \bar{x})^2}\sum{(y_i - \bar{y})^2}}}
+\]</span></p>
+<p><span class="math display">\[
+d = \frac{\bar{x_1} - \bar{x_2}}{s_p}
+\]</span></p>
+<p><span class="math display">\[
+s_p = \sqrt{\frac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}}
+\]</span></p>
+</section><section id="effect-size-1" class="slide level2"><h2>Effect size</h2>
+<p>The advantage of standandardized effect size is that regardless the original variable, the intepretation and the scale is the same. For example the pearson correlation ranges between -1 and 1 and the Cohen’s <span class="math inline">\(d\)</span> between <span class="math inline">\(- \inf\)</span> and <span class="math inline">\(\inf\)</span> and is intepreted as how many standard deviations the two groups differs.</p>
+<div class="cell" data-layout-align="center">
+<details><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>S <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.7</span>, <span class="fl">0.7</span>, <span class="dv">1</span>), <span class="at">nrow =</span> <span class="dv">2</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a>X <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">mvrnorm</span>(<span class="dv">100</span>, <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">2</span>), S, <span class="at">empirical =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="fu">plot</span>(X, <span class="at">xlab =</span> <span class="st">"x"</span>, <span class="at">ylab =</span> <span class="st">"y"</span>, <span class="at">cex =</span> <span class="fl">1.3</span>, <span class="at">pch =</span> <span class="dv">19</span>,</span>
+<span id="cb2-6"><a href="#cb2-6"></a>     <span class="at">cex.lab =</span> <span class="fl">1.2</span>, <span class="at">cex.axis =</span> <span class="fl">1.2</span>,</span>
+<span id="cb2-7"><a href="#cb2-7"></a>     <span class="at">main =</span> latex2exp<span class="sc">::</span><span class="fu">TeX</span>(<span class="fu">sprintf</span>(<span class="st">"$r = %.2f$"</span>, <span class="fu">cor</span>(X[, <span class="dv">1</span>], X[, <span class="dv">2</span>]))))</span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="fu">abline</span>(<span class="fu">lm</span>(X[, <span class="dv">2</span>] <span class="sc">~</span> X[, <span class="dv">1</span>]), <span class="at">col =</span> <span class="st">"firebrick"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb2-9"><a href="#cb2-9"></a></span>
+<span id="cb2-10"><a href="#cb2-10"></a></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="fu">plot</span>(<span class="fu">density</span>(X[, <span class="dv">1</span>]), <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">7</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="at">col =</span> <span class="st">"dodgerblue"</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb2-12"><a href="#cb2-12"></a>     <span class="at">main =</span> latex2exp<span class="sc">::</span><span class="fu">TeX</span>(<span class="fu">sprintf</span>(<span class="st">"$d = %.2f$"</span>, lsr<span class="sc">::</span><span class="fu">cohensD</span>(X[, <span class="dv">1</span>], X[, <span class="dv">2</span>]))),</span>
+<span id="cb2-13"><a href="#cb2-13"></a>     <span class="at">xlab =</span> <span class="st">""</span>)</span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="fu">lines</span>(<span class="fu">density</span>(X[, <span class="dv">2</span>]), <span class="at">col =</span> <span class="st">"firebrick"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-6-1.svg" width="960" class="r-stretch quarto-figure-center"></section><section id="sec-effsize-se" class="slide level2"><h2>Effect size Standard Error</h2>
+<p>Crucially, we can calculate also the standard error of each effect size. The standard error tell us how precise is the estimate.</p>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby">
+<li><a data-tabby-default="" href="#tabset-1-1">Formula</a></li>
+<li><a href="#tabset-1-2">Plot</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<p>For example, he standard error of the Cohen’s <span class="math inline">\(d\)</span> has several estimator. Just as example: <span class="math display">\[
+SE_d = \frac{n_1 + n_2}{n_1 n_2} + \frac{d^2}{2(n_1 + n_2)}
+\]</span></p>
+</div>
+<div id="tabset-1-2">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-7-1.svg" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="notation" class="slide level2 smaller"><h2>Notation</h2>
+<p>Meta-analysis notation is a little bit inconsistent in textbooks and papers. We define here some rules to simplify the work<sup>1</sup></p>
+<ul>
+<li>
+<span class="math inline">\(k\)</span> is the number of studies</li>
+<li>
+<span class="math inline">\(n_j\)</span> is the sample size of the group <span class="math inline">\(j\)</span> within a study</li>
+<li>
+<span class="math inline">\(y_i\)</span> are the observed effect size included in the meta-analysis</li>
+<li>
+<span class="math inline">\(\sigma_i^2\)</span> are the observed sampling variance of studies and <span class="math inline">\(\epsilon_i\)</span> are the sampling errors</li>
+<li>
+<span class="math inline">\(\theta\)</span> is the equal-effects parameter (see <a href="#/sec-ee">Equation&nbsp;3</a>)</li>
+<li>
+<span class="math inline">\(\delta_i\)</span> is the random-effect (see <a href="#/random-effects-model-re">Equation&nbsp;5</a>)</li>
+<li>
+<span class="math inline">\(\mu_\theta\)</span> is the average effect of a random-effects model (see <a href="#/random-effects-model-re">Equation&nbsp;4</a>)</li>
+<li>
+<span class="math inline">\(w_i\)</span> are the meta-analysis weights (e.g., see <a href="#/meta-analysis-as-a-weighted-average-2">Equation&nbsp;1</a>)</li>
+<li>
+<span class="math inline">\(\tau^2\)</span> is the heterogeneity (see <a href="#/random-effects-model-re">Equation&nbsp;5</a>)</li>
+<li>
+<span class="math inline">\(\Delta\)</span> is the (generic) population effect size</li>
+<li>
+<span class="math inline">\(s_j^2\)</span> is the variance of the group <span class="math inline">\(j\)</span> within a study</li>
+</ul><aside><ol class="aside-footnotes"><li id="fn1"><p>The proposed notation could not be the best from the formal point of view</p></li></ol></aside></section><section id="extra---simulating-meta-analysis" class="slide level2"><h2>Extra - Simulating Meta-Analysis</h2>
+<p>For the examples and plots I’m going to use simulated data<sup>1</sup>. We simulate <em>unstandardized</em> effect sizes (UMD) because the computations are easier and the estimator is unbiased <span class="citation" data-cites="Viechtbauer2005-zt">(e.g., <a href="#/references" role="doc-biblioref" onclick="">Viechtbauer 2005</a>)</span></p>
+<p>More specifically we simulate hypothetical studies where two independent groups are compared:</p>
+<p><span class="math display">\[
+\Delta = \overline{X_1} - \overline{X_2}
+\]</span></p>
+<p><span class="math display">\[
+SE_y = \sqrt{\frac{s^2_1}{n_1} + \frac{s^2_2}{n_2}}
+\]</span></p>
+<p>With <span class="math inline">\(X_{1_i} \sim \mathcal{N}(0, 1)\)</span> and <span class="math inline">\(X_{2_i} \sim \mathcal{N}(\Delta, 1)\)</span></p>
+<aside><ol class="aside-footnotes"><li id="fn2"><p>If you are interested in meta-analysis simulation we wrote a preprint <a href="https://psyarxiv.com/br6vy/">https://psyarxiv.com/br6vy/</a></p></li></ol></aside></section><section id="meta-analysis-as-a-weighted-average" class="slide level2"><h2>Meta-analysis as a (weighted) average</h2>
+<p>Let’s imagine to have <span class="math inline">\(k = 10\)</span> studies:</p>
+<div class="cell" data-layout-align="center">
+<details><summary>Code</summary><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>k <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>ni <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">runif</span>(k, <span class="dv">10</span>, <span class="dv">100</span>))</span>
+<span id="cb3-3"><a href="#cb3-3"></a>dat <span class="ot">&lt;-</span> <span class="fu">sim_studies</span>(k, <span class="fl">0.5</span>, <span class="dv">0</span>, ni, ni)</span>
+<span id="cb3-4"><a href="#cb3-4"></a>qf <span class="ot">&lt;-</span> <span class="fu">quick_forest</span>(dat)</span>
+<span id="cb3-5"><a href="#cb3-5"></a>qf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-8-1.svg" width="960" class="r-stretch quarto-figure-center"><p>What could you say about the phenomenon?</p>
+</section><section id="meta-analysis-as-a-weighted-average-1" class="slide level2"><h2>Meta-analysis as a (weighted) average</h2>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby">
+<li><a data-tabby-default="" href="#tabset-2-1">Plot</a></li>
+<li><a href="#tabset-2-2">Formula</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-2-1">
+<p>We could say that the average effect is roughly ~0.5 and there is not a lot of variability around the average.</p>
+<div class="cell" data-layout-align="center">
+<details><summary>Code</summary><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>avg <span class="ot">&lt;-</span> <span class="fu">mean</span>(dat<span class="sc">$</span>yi)</span>
+<span id="cb4-2"><a href="#cb4-2"></a>qf <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> avg, <span class="at">color =</span> <span class="st">"firebrick"</span>) <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> yi, <span class="at">y =</span> id<span class="fl">-0.3</span>, <span class="at">xend =</span> avg, <span class="at">yend =</span> id<span class="fl">-0.3</span>),</span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="at">color =</span> <span class="st">"firebrick"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-9-1.svg" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-2">
+<p><span class="math display">\[
+\overline y = \frac{\sum_{i = 1}^k y}{k}$T$\
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>ybar <span class="ot">&lt;-</span> <span class="fu">mean</span>(dat<span class="sc">$</span>yi)</span>
+<span id="cb5-2"><a href="#cb5-2"></a>ybar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5061501</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="meta-analysis-as-a-weighted-average-2" class="slide level2"><h2>Meta-analysis as a (weighted) average</h2>
+<div class="panel-tabset">
+<ul id="tabset-3" class="panel-tabset-tabby">
+<li><a data-tabby-default="" href="#tabset-3-1">Plot</a></li>
+<li><a href="#tabset-3-2">Equation</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-3-1">
+<p>The simple average is a good statistics. But some studies are clearly more precise (narrower confidence intervals) than others.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-11-1.svg" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-3-2">
+<p>We can compute a weighted average where each study is weighted (<span class="math inline">\(w_i\)</span>) by the inverse of the variance. This is called inverse-variance weighting. Clarly a weighted average were all weights are the same reduced to a simple aritmetic average.</p>
+<p><span class="math display">\[
+\overline y = \frac{\sum_{i = 1}^k y_iw_i}{\sum_{i = 1}^k w_i}
+\]</span> <span id="eq-wi"><span class="math display">\[
+w_i = \frac{1}{v_i}
+\qquad(1)\]</span></span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>wi <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>dat<span class="sc">$</span>vi</span>
+<span id="cb7-2"><a href="#cb7-2"></a>ywbar <span class="ot">&lt;-</span> <span class="fu">weighted.mean</span>(dat<span class="sc">$</span>yi, wi) </span>
+<span id="cb7-3"><a href="#cb7-3"></a>ywbar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5213075</code></pre>
+</div>
+</div>
+<p>Compared to the unweighted version (0.5061501), given that weights are non homogeneous the values are different.</p>
+</div>
+</div>
+</div>
+</section><section id="meta-analysis-as-a-weighted-average-3" class="slide level2"><h2>Meta-analysis as a (weighted) average</h2>
+<p>What we did is a very simple model but actually is a meta-analysis model. This is commonly known as <strong>equal-effects model</strong> (or fixed-effect) <strong>model</strong>.</p>
+<div class="cell" data-layout-align="center">
+<details><summary>Code</summary><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">quick_forest</span>(dat, <span class="at">weigth =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> ywbar, <span class="at">color =</span> <span class="st">"firebrick"</span>) <span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">ggtitle</span>(<span class="st">"Weighted Average"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-13-1.svg" width="960" class="r-stretch quarto-figure-center"></section><section id="sec-ee" class="slide level2"><h2>Equal-effects model (EE)</h2>
+<div class="panel-tabset">
+<ul id="tabset-4" class="panel-tabset-tabby">
+<li><a data-tabby-default="" href="#tabset-4-1">Assumptions</a></li>
+<li><a href="#tabset-4-2">Equations</a></li>
+<li><a href="#tabset-4-3">Plots</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-4-1">
+<p>The EE model is the simplest meta-analysis model. The assumptions are:</p>
+<ul>
+<li>there is a unique, true effect size to estimate <span class="math inline">\(\theta\)</span>
+</li>
+<li>each study is a more or less precise estimate of <span class="math inline">\(\theta\)</span>
+</li>
+<li>there is no TRUE variability among studies. The observed variability is due to studies that are imprecise (i.e., sampling error)</li>
+</ul>
+</div>
+<div id="tabset-4-2">
+<p>Formally, we can define the EE model as: <span id="eq-ee1"><span class="math display">\[
+y_i = \theta + \epsilon_i
+\qquad(2)\]</span></span></p>
+<p><span id="eq-ee1"><span class="math display">\[
+\epsilon_i \sim \mathcal{N}(0, \sigma^2_i)
+\qquad(3)\]</span></span></p>
+<p>Where <span class="math inline">\(\sigma^2_i\)</span> is the vector of sampling variabilities of <span class="math inline">\(k\)</span> studies. Clearly this is a model with heterogeneous variances. In meta-analysis the sampling variances (e.g., calculated as in Slide <a href="#/sec-effsize-se">1.4</a>)</p>
+</div>
+<div id="tabset-4-3">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-14-1.svg" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="sec-ee-high-low" class="slide level2"><h2>Equal-effects model (EE)</h2>
+<p>A crucial part of the EE model is that, assuming studies with very large sample sizes, <span class="math inline">\(\epsilon_i\)</span> will tend to 0 and each study is an almost perfect estimation of <span class="math inline">\(\theta\)</span>. Let’s simulate two models, with <span class="math inline">\(k = 10\)</span> studies and <span class="math inline">\(n = 30\)</span> and <span class="math inline">\(n = 500\)</span>. The effect size is the same <span class="math inline">\(0.5\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<details><summary>Code</summary><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>dat_low  <span class="ot">&lt;-</span> <span class="fu">sim_studies</span>(<span class="dv">10</span>, <span class="fl">0.5</span>, <span class="dv">0</span>, <span class="dv">30</span>, <span class="dv">30</span>)</span>
+<span id="cb10-2"><a href="#cb10-2"></a>dat_high <span class="ot">&lt;-</span> <span class="fu">sim_studies</span>(<span class="dv">10</span>, <span class="fl">0.5</span>, <span class="dv">0</span>, <span class="dv">500</span>, <span class="dv">500</span>)</span>
+<span id="cb10-3"><a href="#cb10-3"></a></span>
+<span id="cb10-4"><a href="#cb10-4"></a>qf_low <span class="ot">&lt;-</span> <span class="fu">quick_forest</span>(dat_low) <span class="sc">+</span> </span>
+<span id="cb10-5"><a href="#cb10-5"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">"firebrick"</span>) <span class="sc">+</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>  <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a>  <span class="fu">ggtitle</span>(latex2exp<span class="sc">::</span><span class="fu">TeX</span>(<span class="st">"$n_{1,2} = 30$"</span>))</span>
+<span id="cb10-8"><a href="#cb10-8"></a></span>
+<span id="cb10-9"><a href="#cb10-9"></a>qf_high <span class="ot">&lt;-</span> <span class="fu">quick_forest</span>(dat_high) <span class="sc">+</span> </span>
+<span id="cb10-10"><a href="#cb10-10"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">"firebrick"</span>) <span class="sc">+</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a>  <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a>  <span class="fu">ggtitle</span>(latex2exp<span class="sc">::</span><span class="fu">TeX</span>(<span class="st">"$n_{1,2} = 500$"</span>))</span>
+<span id="cb10-13"><a href="#cb10-13"></a></span>
+<span id="cb10-14"><a href="#cb10-14"></a>plt_high_low <span class="ot">&lt;-</span> cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(</span>
+<span id="cb10-15"><a href="#cb10-15"></a>  qf_low,</span>
+<span id="cb10-16"><a href="#cb10-16"></a>  qf_high</span>
+<span id="cb10-17"><a href="#cb10-17"></a>)</span>
+<span id="cb10-18"><a href="#cb10-18"></a></span>
+<span id="cb10-19"><a href="#cb10-19"></a>plt_high_low</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-15-1.svg" width="960" class="r-stretch quarto-figure-center"></section><section id="equal-effects-model-ee" class="slide level2"><h2>Equal-effects model (EE)</h2>
+<p>Clearly, as <span class="math inline">\(n\)</span> increase, each study is essentially a perfect estimation of <span class="math inline">\(\theta\)</span> as depicted in the theoretical figure (see slide <a href="#/sec-ee">1.11</a>).</p>
+
+<img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-16-1.svg" width="960" class="r-stretch quarto-figure-center"></section></section><section><section id="are-the-ee-assumptions-realistic" class="title-slide slide level1 question center"><h1>Are the EE assumptions realistic?</h1>
+
+</section><section id="are-the-ee-assumptions-realistic-1" class="slide level2"><h2>Are the EE assumptions realistic?</h2>
+<p>The EE model is appropriate if our studies are somehow exact replications of the exact same effect. We are assuming that there is no real variability.</p>
+<div class="fragment">
+<p>However, meta-analysis rarely report the results of <span class="math inline">\(k\)</span> exact replicates. It is more common to include studies with the same <strong>underlying</strong> objective but a roughly similar method.</p>
+<ul>
+<li>people with different ages or other participant-level differences</li>
+<li>different methodology</li>
+<li>…</li>
+</ul>
+</div>
+</section><section id="are-the-ee-assumptions-realistic-2" class="slide level2"><h2>Are the EE assumptions realistic?</h2>
+<p>In this case, even with extremely large studies, our effect could be larger in some conditions or smaller or absent in other conditions.</p>
+<p>In other terms we are assuming that there could be some variability (i.e., <strong>heterogeneity</strong>) among studies that is independent from the sample size (or more generally the precision)</p>
+</section><section id="random-effects-model-re" class="slide level2"><h2>Random-effects model (RE)</h2>
+<div class="panel-tabset">
+<ul id="tabset-5" class="panel-tabset-tabby">
+<li><a data-tabby-default="" href="#tabset-5-1">Theory</a></li>
+<li><a href="#tabset-5-2">Equations</a></li>
+<li><a href="#tabset-5-3">Equations</a></li>
+<li><a href="#tabset-5-4">Plots</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-5-1">
+<p>We can extend the EE model including another source of variability, <span class="math inline">\(\tau^2\)</span>. <span class="math inline">\(\tau^2\)</span> is the true heterogeneity among studies caused by methdological differences or intrisic variability in the phenomenon.</p>
+</div>
+<div id="tabset-5-2">
+<p>Formally we can extend the equation <a href="#/sec-ee">3</a> as: <span id="eq-re-mod1"><span class="math display">\[
+y_i = \mu_{\theta} + \delta_i + \epsilon_i
+\qquad(4)\]</span></span></p>
+<p><span id="eq-re-mod2"><span class="math display">\[
+\delta_i \sim \mathcal{N}(0, \tau^2)
+\qquad(5)\]</span></span></p>
+<p><span class="math display">\[
+\epsilon_i \sim \mathcal{N}(0, \sigma^2_i)
+\]</span></p>
+<p>Where <span class="math inline">\(\mu_{\theta}\)</span> is the average effect size and <span class="math inline">\(\delta_i\)</span> is the study-specific deviation from the average effect (regulated by <span class="math inline">\(\tau^2\)</span>).</p>
+</div>
+<div id="tabset-5-3">
+<p>Given that we extended the EE model equation. Also the estimation of the average effect need to be extended. Basically the RE is still a weigthed average but weigths need to include also <span class="math inline">\(\tau^2\)</span>.</p>
+<p><span id="eq-re1"><span class="math display">\[
+\overline y = \frac{\sum_{i = 1}^k y_iw^*_i}{\sum_{i = 1}^k w^*_i}
+\qquad(6)\]</span></span></p>
+<p><span id="eq-re2"><span class="math display">\[
+w^*_i = \frac{1}{v_i + \tau^2}
+\qquad(7)\]</span></span></p>
+<p>The consequence is that weights are different where extremely precise/imprecise studies will impact less the estimation of the average effect under the RE model compared to EE.</p>
+</div>
+<div id="tabset-5-4">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-17-1.svg" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="random-effects-model" class="slide level2"><h2>Random-effects model</h2>
+<p>The crucial difference with the EE model is that even with large <span class="math inline">\(n\)</span>, only the <span class="math inline">\(\mu_{\theta} + \delta_i\)</span> are estimated (almost) without error. As long <span class="math inline">\(\tau^2 \neq 0\)</span> there will be variability in the effect sizes.</p>
+
+<img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-18-1.svg" width="960" class="r-stretch quarto-figure-center"></section><section id="random-effects-model-1" class="slide level2"><h2>Random-effects model</h2>
+<p>Again, we can easily demonstrate this with a simulation. We use the same simulation as slide <a href="#/sec-ee-high-low">1.12</a> but including <span class="math inline">\(\tau^2 = 0.2\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<details><summary>Code</summary><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>dat_low  <span class="ot">&lt;-</span> <span class="fu">sim_studies</span>(<span class="dv">10</span>, <span class="fl">0.5</span>, <span class="fl">0.2</span>, <span class="dv">30</span>, <span class="dv">30</span>)</span>
+<span id="cb11-2"><a href="#cb11-2"></a>dat_high <span class="ot">&lt;-</span> <span class="fu">sim_studies</span>(<span class="dv">10</span>, <span class="fl">0.5</span>, <span class="fl">0.2</span>, <span class="dv">500</span>, <span class="dv">500</span>)</span>
+<span id="cb11-3"><a href="#cb11-3"></a></span>
+<span id="cb11-4"><a href="#cb11-4"></a>qf_low <span class="ot">&lt;-</span> <span class="fu">quick_forest</span>(dat_low) <span class="sc">+</span> </span>
+<span id="cb11-5"><a href="#cb11-5"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">"firebrick"</span>) <span class="sc">+</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a>  <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">3</span>)) <span class="sc">+</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a>  <span class="fu">ggtitle</span>(latex2exp<span class="sc">::</span><span class="fu">TeX</span>(<span class="st">"$n_{1,2} = 30$"</span>))</span>
+<span id="cb11-8"><a href="#cb11-8"></a></span>
+<span id="cb11-9"><a href="#cb11-9"></a>qf_high <span class="ot">&lt;-</span> <span class="fu">quick_forest</span>(dat_high) <span class="sc">+</span> </span>
+<span id="cb11-10"><a href="#cb11-10"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">"firebrick"</span>) <span class="sc">+</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a>  <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">3</span>)) <span class="sc">+</span></span>
+<span id="cb11-12"><a href="#cb11-12"></a>  <span class="fu">ggtitle</span>(latex2exp<span class="sc">::</span><span class="fu">TeX</span>(<span class="st">"$n_{1,2} = 500$"</span>))</span>
+<span id="cb11-13"><a href="#cb11-13"></a></span>
+<span id="cb11-14"><a href="#cb11-14"></a>qf_tau_high_low <span class="ot">&lt;-</span> cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(</span>
+<span id="cb11-15"><a href="#cb11-15"></a>  qf_low,</span>
+<span id="cb11-16"><a href="#cb11-16"></a>  qf_high</span>
+<span id="cb11-17"><a href="#cb11-17"></a>)</span>
+<span id="cb11-18"><a href="#cb11-18"></a>qf_tau_high_low</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-19-1.svg" width="960" class="r-stretch quarto-figure-center"></section><section id="extra---simulating-meta-analysis-1" class="slide level2"><h2>Extra - Simulating Meta-Analysis</h2>
+<p>For the simulations, I’m sampling from effect size and variance sampling distributions.</p>
+<div class="panel-tabset">
+<ul id="tabset-6" class="panel-tabset-tabby">
+<li><a data-tabby-default="" href="#tabset-6-1">Equations</a></li>
+<li><a href="#tabset-6-2">Code</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-6-1">
+<p>The unstandardized effect size is a mean difference. The sampling distribution is:</p>
+<p><span class="math display">\[
+y_i \sim \mathcal{N}(\Delta, \frac{1}{n_1} + \frac{1}{n_2})
+\]</span></p>
+<p>Where ES is the population level effect size and <span class="math inline">\(n_{1,2}\)</span> are the sample sizes of the two studies. The sampling variances are generated from a <span class="math inline">\(\chi^2\)</span> distribution: <span class="math display">\[
+\sigma_i^2 \sim \frac{\chi^2_{n_1 + n_2 - 2}}{n_1 + n_2 - 2} (\frac{1}{n_1} + \frac{1}{n_2})
+\]</span></p>
+</div>
+<div id="tabset-6-2">
+<p>The simulation is implemented in the <code>sim_studies</code> function:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>sim_studies <span class="ot">&lt;-</span> <span class="cf">function</span>(k, theta, tau2, n0, n1, <span class="at">summary =</span> <span class="cn">FALSE</span>){</span>
+<span id="cb12-2"><a href="#cb12-2"></a>  yi <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(k, theta, <span class="fu">sqrt</span>(tau2 <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>n0 <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>n1))</span>
+<span id="cb12-3"><a href="#cb12-3"></a>  vi <span class="ot">&lt;-</span> (<span class="fu">rchisq</span>(k, n0 <span class="sc">+</span> n1 <span class="sc">-</span> <span class="dv">2</span>) <span class="sc">/</span> (n0 <span class="sc">+</span> n1 <span class="sc">-</span> <span class="dv">2</span>)) <span class="sc">*</span> (<span class="dv">1</span><span class="sc">/</span>n0 <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>n1)</span>
+<span id="cb12-4"><a href="#cb12-4"></a>  out <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(yi, vi, <span class="at">sei =</span> <span class="fu">sqrt</span>(vi))</span>
+<span id="cb12-5"><a href="#cb12-5"></a>  <span class="cf">if</span>(summary){</span>
+<span id="cb12-6"><a href="#cb12-6"></a>    out <span class="ot">&lt;-</span> <span class="fu">summary_es</span>(out)</span>
+<span id="cb12-7"><a href="#cb12-7"></a>  }</span>
+<span id="cb12-8"><a href="#cb12-8"></a>  <span class="fu">return</span>(out)</span>
+<span id="cb12-9"><a href="#cb12-9"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">sim_studies</span>(<span class="at">k =</span> <span class="dv">10</span>, <span class="at">theta =</span> <span class="fl">0.5</span>, <span class="at">tau2 =</span> <span class="fl">0.2</span>, <span class="at">n0 =</span> <span class="dv">30</span>, <span class="at">n1 =</span> <span class="dv">30</span>)</span>
+<span id="cb13-2"><a href="#cb13-2"></a>dat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            yi         vi       sei
+1   0.60944540 0.07509819 0.2740405
+2   0.38586318 0.07759971 0.2785672
+3  -0.47011805 0.06503872 0.2550269
+4   0.94492375 0.07717265 0.2777996
+5  -0.03559900 0.05265940 0.2294764
+6  -0.08831836 0.09134084 0.3022265
+7   0.78653753 0.08107453 0.2847359
+8   1.50512804 0.06046087 0.2458879
+9   0.32766265 0.06647390 0.2578253
+10  0.90256919 0.05627682 0.2372274</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="heterogeneity" class="slide level2"><h2>Heterogeneity</h2>
+<p>We discussed so far about estimating the average effect (<span class="math inline">\(\theta\)</span> or <span class="math inline">\(\mu_\theta\)</span>). But how to estimate the heterogeneity?</p>
+<p>There are several estimators for <span class="math inline">\(\tau^2\)</span> <span class="citation" data-cites="Viechtbauer2005-zt Veroniki2016-zs">(see <a href="#/references" role="doc-biblioref" onclick="">Viechtbauer 2005</a>; <a href="#/references" role="doc-biblioref" onclick="">Veroniki et al. 2016</a>)</span></p>
+<ul>
+<li>Hunter–Schmidt</li>
+<li>Hedges</li>
+<li>DerSimonian–Laird</li>
+<li>Maximum-Likelihood</li>
+<li>Restricted Maximum-Likelihood</li>
+</ul></section><section id="the-q-statistics" class="slide level2"><h2>The Q Statistics<sup>1</sup>
+</h2>
+<p>The Q statistics is used to make statistical inference on the heterogeneity. Can be considered as a weighted sum of squares:</p>
+<p><span class="math display">\[
+Q = \sum^k_{i = 1}w_i(\hat \theta_i - \hat \theta)^2
+\]</span></p>
+<p>Where <span class="math inline">\(\hat \theta\)</span> is EE estimation (regardless if <span class="math inline">\(\tau^2 \neq 0\)</span>) and <span class="math inline">\(w_i\)</span> are the inverse-variance weights. Note that in the case of <span class="math inline">\(w_1 = w_2 ... = w_i\)</span>, Q is just a standard sum of squares (or deviance).</p>
+<aside><ol class="aside-footnotes"><li id="fn3"><p>See <span class="citation" data-cites="Harrer2021-go">Harrer et al. (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span> (Chapter 5) and <span class="citation" data-cites="Hedges2019-ry">Hedges and Schauer (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span> for an overview about the Q statistics</p></li></ol></aside></section><section id="the-q-statistics-1" class="slide level2"><h2>The Q Statistics</h2>
+<ul>
+<li><p>Given that we are summing up squared distances, they should be approximately <span class="math inline">\(\chi^2\)</span> with <span class="math inline">\(df = k - 1\)</span>. In case of no heterogeneity (<span class="math inline">\(\tau^2 = 0\)</span>) the observed variability is caused by sampling error only. The expectd value of the <span class="math inline">\(\chi^2\)</span> is just the degrees of freedom (<span class="math inline">\(df = k - 1\)</span>).</p></li>
+<li><p>In case of <span class="math inline">\(\tau^2 \neq 0\)</span>, the expected value is <span class="math inline">\(k - 1 + \lambda\)</span> where <span class="math inline">\(\lambda\)</span> is a non-centrality parameter.</p></li>
+<li><p>In other terms, if the expected value of <span class="math inline">\(Q\)</span> exceed the expected value assuming no heterogeneity, we have evidence that <span class="math inline">\(\tau^2 \neq 0\)</span>.</p></li>
+</ul></section><section id="the-q-statistics-2" class="slide level2"><h2>The Q Statistics</h2>
+<p>Let’s try a more practical approach. We simulate a lot of meta-analysis with and without heterogeneity and we check the Q statistics.</p>
+<div class="cell" data-layout-align="center">
+<details><summary>Code</summary><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>get_Q <span class="ot">&lt;-</span> <span class="cf">function</span>(yi, vi){</span>
+<span id="cb15-2"><a href="#cb15-2"></a>  wi <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>vi</span>
+<span id="cb15-3"><a href="#cb15-3"></a>  theta_ee <span class="ot">&lt;-</span> <span class="fu">weighted.mean</span>(yi, wi)</span>
+<span id="cb15-4"><a href="#cb15-4"></a>  <span class="fu">sum</span>(wi<span class="sc">*</span>(yi <span class="sc">-</span> theta_ee)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb15-5"><a href="#cb15-5"></a>}</span>
+<span id="cb15-6"><a href="#cb15-6"></a></span>
+<span id="cb15-7"><a href="#cb15-7"></a>k <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a>n <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb15-9"><a href="#cb15-9"></a>tau2 <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb15-10"><a href="#cb15-10"></a>nsim <span class="ot">&lt;-</span> <span class="fl">1e4</span></span>
+<span id="cb15-11"><a href="#cb15-11"></a></span>
+<span id="cb15-12"><a href="#cb15-12"></a>Qs_tau2_0 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, nsim)</span>
+<span id="cb15-13"><a href="#cb15-13"></a>Qs_tau2 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, nsim)</span>
+<span id="cb15-14"><a href="#cb15-14"></a>res2_tau2_0 <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">"list"</span>, nsim)</span>
+<span id="cb15-15"><a href="#cb15-15"></a>res2_tau2 <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">"list"</span>, nsim)</span>
+<span id="cb15-16"><a href="#cb15-16"></a></span>
+<span id="cb15-17"><a href="#cb15-17"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
+<span id="cb15-18"><a href="#cb15-18"></a>  dat_tau2_0 <span class="ot">&lt;-</span> <span class="fu">sim_studies</span>(<span class="at">k =</span> <span class="dv">30</span>, <span class="at">theta =</span> <span class="fl">0.5</span>, <span class="at">tau2 =</span> <span class="dv">0</span>, <span class="at">n0 =</span> n, <span class="at">n1 =</span> n)</span>
+<span id="cb15-19"><a href="#cb15-19"></a>  dat_tau2 <span class="ot">&lt;-</span> <span class="fu">sim_studies</span>(<span class="at">k =</span> <span class="dv">30</span>, <span class="at">theta =</span> <span class="fl">0.5</span>, <span class="at">tau2 =</span> tau2, <span class="at">n0 =</span> n, <span class="at">n1 =</span> n)</span>
+<span id="cb15-20"><a href="#cb15-20"></a>  </span>
+<span id="cb15-21"><a href="#cb15-21"></a>  theta_ee_tau2_0 <span class="ot">&lt;-</span> <span class="fu">weighted.mean</span>(dat_tau2_0<span class="sc">$</span>yi, <span class="dv">1</span><span class="sc">/</span>dat_tau2_0<span class="sc">$</span>vi)</span>
+<span id="cb15-22"><a href="#cb15-22"></a>  theta_ee <span class="ot">&lt;-</span> <span class="fu">weighted.mean</span>(dat_tau2<span class="sc">$</span>yi, <span class="dv">1</span><span class="sc">/</span>dat_tau2<span class="sc">$</span>vi)</span>
+<span id="cb15-23"><a href="#cb15-23"></a>  </span>
+<span id="cb15-24"><a href="#cb15-24"></a>  res2_tau2_0[[i]] <span class="ot">&lt;-</span> dat_tau2_0<span class="sc">$</span>yi <span class="sc">-</span> theta_ee_tau2_0</span>
+<span id="cb15-25"><a href="#cb15-25"></a>  res2_tau2[[i]] <span class="ot">&lt;-</span> dat_tau2<span class="sc">$</span>yi <span class="sc">-</span> theta_ee</span>
+<span id="cb15-26"><a href="#cb15-26"></a>  </span>
+<span id="cb15-27"><a href="#cb15-27"></a>  Qs_tau2_0[i] <span class="ot">&lt;-</span> <span class="fu">get_Q</span>(dat_tau2_0<span class="sc">$</span>yi, dat_tau2_0<span class="sc">$</span>vi)</span>
+<span id="cb15-28"><a href="#cb15-28"></a>  Qs_tau2[i] <span class="ot">&lt;-</span> <span class="fu">get_Q</span>(dat_tau2<span class="sc">$</span>yi, dat_tau2<span class="sc">$</span>vi)</span>
+<span id="cb15-29"><a href="#cb15-29"></a>}</span>
+<span id="cb15-30"><a href="#cb15-30"></a></span>
+<span id="cb15-31"><a href="#cb15-31"></a>df <span class="ot">&lt;-</span> k <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb15-32"><a href="#cb15-32"></a></span>
+<span id="cb15-33"><a href="#cb15-33"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb15-34"><a href="#cb15-34"></a><span class="fu">hist</span>(Qs_tau2_0, <span class="at">probability =</span> <span class="cn">TRUE</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.08</span>), <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">150</span>),</span>
+<span id="cb15-35"><a href="#cb15-35"></a>     <span class="at">xlab =</span> <span class="st">"Q"</span>,</span>
+<span id="cb15-36"><a href="#cb15-36"></a>     <span class="at">main =</span> latex2exp<span class="sc">::</span><span class="fu">TeX</span>(<span class="st">"$</span><span class="sc">\\</span><span class="st">tau^2 = 0$"</span>))</span>
+<span id="cb15-37"><a href="#cb15-37"></a><span class="fu">curve</span>(<span class="fu">dchisq</span>(x, df), <span class="dv">0</span>, <span class="dv">100</span>, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> <span class="st">"firebrick"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb15-38"><a href="#cb15-38"></a></span>
+<span id="cb15-39"><a href="#cb15-39"></a><span class="fu">hist</span>(<span class="fu">unlist</span>(res2_tau2_0), <span class="at">probability =</span> <span class="cn">TRUE</span>, <span class="at">main =</span> latex2exp<span class="sc">::</span><span class="fu">TeX</span>(<span class="st">"$</span><span class="sc">\\</span><span class="st">tau^2 = 0$"</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">2</span>),</span>
+<span id="cb15-40"><a href="#cb15-40"></a>     <span class="at">xlab =</span> latex2exp<span class="sc">::</span><span class="fu">TeX</span>(<span class="st">"$y_i - </span><span class="sc">\\</span><span class="st">hat{</span><span class="sc">\\</span><span class="st">theta_i}$"</span>))</span>
+<span id="cb15-41"><a href="#cb15-41"></a><span class="fu">curve</span>(<span class="fu">dnorm</span>(x, <span class="dv">0</span>, <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>n <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>n)), <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> <span class="st">"dodgerblue"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb15-42"><a href="#cb15-42"></a></span>
+<span id="cb15-43"><a href="#cb15-43"></a><span class="fu">hist</span>(Qs_tau2, <span class="at">probability =</span> <span class="cn">TRUE</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.08</span>), <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">150</span>),</span>
+<span id="cb15-44"><a href="#cb15-44"></a>     <span class="at">xlab =</span> <span class="st">"Q"</span>,</span>
+<span id="cb15-45"><a href="#cb15-45"></a>     <span class="at">main =</span> latex2exp<span class="sc">::</span><span class="fu">TeX</span>(<span class="st">"$</span><span class="sc">\\</span><span class="st">tau^2 = 0.1$"</span>))</span>
+<span id="cb15-46"><a href="#cb15-46"></a><span class="fu">curve</span>(<span class="fu">dchisq</span>(x, df), <span class="dv">0</span>, <span class="dv">100</span>, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> <span class="st">"firebrick"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb15-47"><a href="#cb15-47"></a></span>
+<span id="cb15-48"><a href="#cb15-48"></a><span class="fu">hist</span>(<span class="fu">unlist</span>(res2_tau2), <span class="at">probability =</span> <span class="cn">TRUE</span>, <span class="at">main =</span> latex2exp<span class="sc">::</span><span class="fu">TeX</span>(<span class="st">"$</span><span class="sc">\\</span><span class="st">tau^2 = 0.1$"</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">2</span>),</span>
+<span id="cb15-49"><a href="#cb15-49"></a>     <span class="at">xlab =</span> latex2exp<span class="sc">::</span><span class="fu">TeX</span>(<span class="st">"$y_i - </span><span class="sc">\\</span><span class="st">hat{</span><span class="sc">\\</span><span class="st">theta_i}$"</span>))</span>
+<span id="cb15-50"><a href="#cb15-50"></a><span class="fu">curve</span>(<span class="fu">dnorm</span>(x, <span class="dv">0</span>, <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>n <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>n)), <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> <span class="st">"dodgerblue"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-22-1.svg" width="960" class="r-stretch quarto-figure-center"></section><section id="the-q-statistics-3" class="slide level2"><h2>The Q Statistics</h2>
+<p>Let’s try a more practical approach. We simulate a lot of meta-analysis with and without heterogeneity and we check the Q statistics.</p>
+<div class="fragment">
+<ul>
+<li>clearly, in the presence of heterogeneity, the expected value of the Q statistics is higher (due to <span class="math inline">\(\lambda\)</span>) and also residuals are larger.</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>we can calculate a p-value for deviation from the <span class="math inline">\(\tau^2 = 0\)</span> case as evidence agaist the absence of heterogeneity</li>
+</ul>
+</div>
+</section><section id="estimating-tau2" class="slide level2"><h2>Estimating <span class="math inline">\(\tau^2\)</span>
+</h2>
+<p>The Q statistics is rarely used to directly represent the heterogeneity. The raw measure of heterogeneity is <span class="math inline">\(\tau^2\)</span>. The REML (restricted maximum likelihood) estimator is often used.</p>
+<p><span class="math display">\[
+\hat \tau^2 = \frac{\sum_{i = 1}^k w_i^2[(y_i - \hat \mu)^2 - \sigma^2_i]}{\sum_{i = 1}^k w_i^2} + \frac{1}{\sum_{i = 1}^k w_i}
+\]</span></p>
+<p>Where <span class="math inline">\(\hat{\mu}\)</span> is the weighted average (i.e., maximum likelihood estimation, see <a href="#/random-effects-model-re">Equation&nbsp;6</a> and <a href="#/random-effects-model-re">Equation&nbsp;7</a>).</p>
+</section><section id="tau2-as-heterogeneity-measure" class="slide level2"><h2>
+<span class="math inline">\(\tau^2\)</span> as heterogeneity measure</h2>
+<ul>
+<li>
+<span class="math inline">\(\tau^2\)</span> is the direct measure of heterogeneity in meta-analysis</li>
+<li>it is intepreted as a standard deviation (or variance) of the distribution of true effects</li>
+<li>a phenomenon associated with an higher <span class="math inline">\(\tau^2\)</span> is interpred as more variable</li>
+</ul></section><section id="tau2-as-heterogeneity-measure-1" class="slide level2"><h2>
+<span class="math inline">\(\tau^2\)</span> as heterogeneity measure</h2>
+<div class="cell" data-layout-align="center">
+<details><summary>Code</summary><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># we generate 1e5 values from a random-effect model with certain parameters and different tau2 values</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="co"># and check the expected distrubution of effect sizes</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a></span>
+<span id="cb16-4"><a href="#cb16-4"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a>k <span class="ot">&lt;-</span> <span class="fl">1e5</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a>tau2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.5</span>)</span>
+<span id="cb16-7"><a href="#cb16-7"></a></span>
+<span id="cb16-8"><a href="#cb16-8"></a>dats <span class="ot">&lt;-</span> <span class="fu">lapply</span>(tau2, <span class="cf">function</span>(x) <span class="fu">sim_studies</span>(k, <span class="fl">0.5</span>, x, n, n))</span>
+<span id="cb16-9"><a href="#cb16-9"></a><span class="fu">names</span>(dats) <span class="ot">&lt;-</span> tau2</span>
+<span id="cb16-10"><a href="#cb16-10"></a></span>
+<span id="cb16-11"><a href="#cb16-11"></a>dat <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(dats, <span class="at">.id =</span> <span class="st">"tau2"</span>) </span>
+<span id="cb16-12"><a href="#cb16-12"></a>dat<span class="sc">$</span>tau2 <span class="ot">&lt;-</span> <span class="fu">factor</span>(dat<span class="sc">$</span>tau2)</span>
+<span id="cb16-13"><a href="#cb16-13"></a>dat<span class="sc">$</span>tau2 <span class="ot">&lt;-</span> <span class="fu">factor</span>(dat<span class="sc">$</span>tau2, <span class="at">labels =</span> latex2exp<span class="sc">::</span><span class="fu">TeX</span>(<span class="fu">sprintf</span>(<span class="st">"$</span><span class="sc">\\</span><span class="st">tau^2 = %s$"</span>, <span class="fu">levels</span>(dat<span class="sc">$</span>tau2))))</span>
+<span id="cb16-14"><a href="#cb16-14"></a></span>
+<span id="cb16-15"><a href="#cb16-15"></a>dat <span class="sc">|&gt;</span> </span>
+<span id="cb16-16"><a href="#cb16-16"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> yi, <span class="at">y =</span> <span class="fu">after_stat</span>(density))) <span class="sc">+</span></span>
+<span id="cb16-17"><a href="#cb16-17"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">50</span>) <span class="sc">+</span></span>
+<span id="cb16-18"><a href="#cb16-18"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">0.5</span>, <span class="at">lwd =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">"firebrick"</span>) <span class="sc">+</span></span>
+<span id="cb16-19"><a href="#cb16-19"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>tau2, <span class="at">labeller =</span> label_parsed) <span class="sc">+</span></span>
+<span id="cb16-20"><a href="#cb16-20"></a>  <span class="fu">ggtitle</span>(latex2exp<span class="sc">::</span><span class="fu">TeX</span>(<span class="st">"Expected $y_i$ distribution, $d = 0.5$, $n_{1,2} = 100$"</span>)) <span class="sc">+</span></span>
+<span id="cb16-21"><a href="#cb16-21"></a>  <span class="fu">xlab</span>(latex2exp<span class="sc">::</span><span class="fu">TeX</span>(<span class="st">"$y_i$"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-23-1.svg" width="960" class="r-stretch quarto-figure-center"></section><section id="i2-higgins2002-fh" class="slide level2"><h2>
+<span class="math inline">\(I^2\)</span> <span class="citation" data-cites="Higgins2002-fh">(<a href="#/references" role="doc-biblioref" onclick="">Higgins and Thompson 2002</a>)</span>
+</h2>
+<p>We have two sources of variability in a random-effects meta-analysis, the sampling variabilities <span class="math inline">\(\sigma_i^2\)</span> and <span class="math inline">\(\tau^2\)</span>. We can use the <span class="math inline">\(I^2\)</span> to express the interplay between the two. <span id="eq-i2"><span class="math display">\[
+I^2 = 100\% \times \frac{\hat{\tau}^2}{\hat{\tau}^2 + \tilde{v}}
+\qquad(8)\]</span></span></p>
+<p><span class="math display">\[
+\tilde{v} = \frac{(k-1) \sum w_i}{(\sum w_i)^2 - \sum w_i^2},
+\]</span></p>
+<p>Where <span class="math inline">\(\tilde{v}\)</span> is the typical sampling variability. <span class="math inline">\(I^2\)</span> is intepreted as the proportion of total variability due to real heterogeneity (i.e., <span class="math inline">\(\tau^2\)</span>)</p>
+</section><section id="i2-higgins2002-fh-1" class="slide level2"><h2>
+<span class="math inline">\(I^2\)</span> <span class="citation" data-cites="Higgins2002-fh">(<a href="#/references" role="doc-biblioref" onclick="">Higgins and Thompson 2002</a>)</span><sup>1</sup>
+</h2>
+<p>Note that we can have the same <span class="math inline">\(I^2\)</span> in two completely different meta-analysis. An high <span class="math inline">\(I^2\)</span> does not represent high heterogeneity. Let’s assume to have two meta-analysis with <span class="math inline">\(k\)</span> studies and small (<span class="math inline">\(n = 30\)</span>) vs large (<span class="math inline">\(n = 500\)</span>) sample sizes.</p>
+<p>Let’s solve <a href="#/i2-higgins2002-fh">Equation&nbsp;8</a> for <span class="math inline">\(\tau^2\)</span> (using <code><a href="https://filippogambarota.github.io/filor/reference/tau2_from_I2.html">filor::tau2_from_I2()</a></code>) and we found that the same <span class="math inline">\(I^2\)</span> can be obtained with two completely different <span class="math inline">\(\tau^2\)</span> values:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>n_1 <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>vi_1 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>n_1 <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>n_1</span>
+<span id="cb17-3"><a href="#cb17-3"></a>tau2_1 <span class="ot">&lt;-</span> filor<span class="sc">::</span><span class="fu">tau2_from_I2</span>(<span class="fl">0.8</span>, vi_1)</span>
+<span id="cb17-4"><a href="#cb17-4"></a>tau2_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2666667</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>n_2 <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>vi_2 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>n_2 <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>n_2</span>
+<span id="cb19-3"><a href="#cb19-3"></a>tau2_2 <span class="ot">&lt;-</span> filor<span class="sc">::</span><span class="fu">tau2_from_I2</span>(<span class="fl">0.8</span>, vi_2)</span>
+<span id="cb19-4"><a href="#cb19-4"></a>tau2_2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.016</code></pre>
+</div>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn4"><p>see <a href="https://www.meta-analysis-workshops.com/download/common-mistakes1.pdf">https://www.meta-analysis-workshops.com/download/common-mistakes1.pdf</a></p></li></ol></aside></section><section id="i2-higgins2002-fh-2" class="slide level2"><h2>
+<span class="math inline">\(I^2\)</span> <span class="citation" data-cites="Higgins2002-fh">(<a href="#/references" role="doc-biblioref" onclick="">Higgins and Thompson 2002</a>)</span>
+</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>n_1 <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>vi_1 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>n_1 <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>n_1</span>
+<span id="cb21-3"><a href="#cb21-3"></a>tau2_1 <span class="ot">&lt;-</span> filor<span class="sc">::</span><span class="fu">tau2_from_I2</span>(<span class="fl">0.8</span>, vi_1)</span>
+<span id="cb21-4"><a href="#cb21-4"></a>tau2_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2666667</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>n_2 <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>vi_2 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>n_2 <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>n_2</span>
+<span id="cb23-3"><a href="#cb23-3"></a>tau2_2 <span class="ot">&lt;-</span> filor<span class="sc">::</span><span class="fu">tau2_from_I2</span>(<span class="fl">0.8</span>, vi_2)</span>
+<span id="cb23-4"><a href="#cb23-4"></a>tau2_2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.016</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p>In other terms, the <span class="math inline">\(I^2\)</span> can be considered a good index of heterogeneity only when the total variance (<span class="math inline">\(\tilde{v} + \tau^2\)</span>) is the same.</p>
+</div>
+</section></section><section><section id="meta-analysis-in-r" class="title-slide slide level1 section center"><h1>Meta-analysis in R</h1>
+
+</section><section id="meta-analysis-in-r-1" class="slide level2"><h2>Meta-analysis in R</h2>
+<p>In R there are several packages to conduct a meta-analysis. For me, the best package is <code>metafor</code> <span class="citation" data-cites="Viechtbauer2010-xz">(<a href="#/references" role="doc-biblioref" onclick="">Viechtbauer 2010</a>)</span>. The package support all steps in meta-analysis providing also an amazing documentation:</p>
+<div class="cell" data-layout-align="center">
+<iframe src="https://www.metafor-project.org/doku.php/metafor" width="960" height="400px" data-external="1">
+</iframe>
+</div>
+</section><section id="equal-effects-model-in-r" class="slide level2"><h2>Equal-effects model in R</h2>
+<p>Disclaimer: we are omitting the important part of collecting the information from published studies and calculating the (un)standardized effect sizes. Clerly this part is highly dependent on the actual dataset.</p>
+<p>There are few useful resources:</p>
+<ul>
+<li>Chapters 1-9 from Borestein et al. <span class="citation" data-cites="Borenstein2009-mo">(<a href="#/references" role="doc-biblioref" onclick="">2009</a>)</span>
+</li>
+<li>The <code><a href="https://wviechtb.github.io/metafor/reference/escalc.html">metafor::escalc()</a></code> <a href="https://wviechtb.github.io/metafor/reference/escalc.html">function</a> that calculate all effects size and report an useful documentation</li>
+</ul></section><section id="equal-effects-model-in-r-1" class="slide level2"><h2>Equal-effects model in R</h2>
+<p>We can simulate an EE dataset (i.e., <span class="math inline">\(\tau^2 = 0\)</span>) and then fit the model with <code>metafor</code>:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>theta <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>k <span class="ot">&lt;-</span> <span class="dv">30</span> <span class="co"># number of studies</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a>n <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">runif</span>(k, <span class="dv">10</span>, <span class="dv">60</span>)) <span class="co"># random sample sizes with a plausible range</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a>dat <span class="ot">&lt;-</span> <span class="fu">sim_studies</span>(<span class="at">k =</span> k, <span class="at">theta =</span> theta, <span class="at">tau2 =</span> <span class="dv">0</span>, <span class="at">n0 =</span> n, <span class="at">n1 =</span> n)</span>
+<span id="cb25-5"><a href="#cb25-5"></a>dat<span class="sc">$</span>n <span class="ot">&lt;-</span> n <span class="co"># n1 and n2 are the same, put only one</span></span>
+<span id="cb25-6"><a href="#cb25-6"></a><span class="fu">head</span>(dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          yi         vi       sei  n
+1  0.6024530 0.25641843 0.5063778 12
+2  0.2348228 0.07274918 0.2697206 34
+3 -0.0806240 0.06450374 0.2539759 33
+4  0.2989215 0.26569232 0.5154535 11
+5  0.3405177 0.04677380 0.2162725 49
+6  0.3426122 0.04514737 0.2124791 39</code></pre>
+</div>
+</div>
+</section><section id="equal-effects-model-in-r-2" class="slide level2"><h2>Equal-effects model in R</h2>
+<p>We can start by some summary statistics:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># unweighted summary statistics for the effect</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="fu">summary</span>(dat<span class="sc">$</span>yi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+-0.6097  0.0585  0.2225  0.2447  0.4639  1.0751 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co"># unweighted summary statistics for the variances</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="fu">summary</span>(dat<span class="sc">$</span>vi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+0.03720 0.05299 0.08461 0.10363 0.11167 0.34686 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># sample sizes</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="fu">summary</span>(dat<span class="sc">$</span>n) <span class="co"># n0 and n1 are the same</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   10.0    15.0    25.0    26.4    37.0    56.0 </code></pre>
+</div>
+</div>
+</section><section id="equal-effects-model-in-r-3" class="slide level2"><h2>Equal-effects model in R</h2>
+<p>Then we can use the <code><a href="https://wviechtb.github.io/metafor/reference/rma.uni.html">metafor::rma.uni()</a></code> function (or more simply <code><a href="https://wviechtb.github.io/metafor/reference/rma.uni.html">metafor::rma()</a></code>) providing the effect size, variances and <code>method = "EE"</code> to specify that we are fitting an equal-effects model.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>fit_ee <span class="ot">&lt;-</span> <span class="fu">rma</span>(yi, vi, <span class="at">method =</span> <span class="st">"EE"</span>, <span class="at">data =</span> dat)</span>
+<span id="cb33-2"><a href="#cb33-2"></a><span class="fu">summary</span>(fit_ee)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Equal-Effects Model (k = 30)
+
+  logLik  deviance       AIC       BIC      AICc   
+ -6.9395   31.9689   15.8789   17.2801   16.0218   
+
+I^2 (total heterogeneity / total variability):   9.29%
+H^2 (total variability / sampling variability):  1.10
+
+Test for Heterogeneity:
+Q(df = 29) = 31.9689, p-val = 0.3212
+
+Model Results:
+
+estimate      se    zval    pval   ci.lb   ci.ub      
+  0.2530  0.0502  5.0378  &lt;.0001  0.1546  0.3515  *** 
+
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section><section id="random-effects-model-in-r" class="slide level2"><h2>Random-effects model in R</h2>
+<p>The syntax for a random-effects model is the same, we just need to use <code>method = "REML"</code> (or another <span class="math inline">\(\tau^2\)</span> estimation method)</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>fit_re <span class="ot">&lt;-</span> <span class="fu">rma</span>(yi, vi, <span class="at">method =</span> <span class="st">"REML"</span>, <span class="at">data =</span> dat)</span>
+<span id="cb35-2"><a href="#cb35-2"></a><span class="fu">summary</span>(fit_re)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Random-Effects Model (k = 30; tau^2 estimator: REML)
+
+  logLik  deviance       AIC       BIC      AICc   
+ -7.2582   14.5164   18.5164   21.2510   18.9779   
+
+tau^2 (estimated amount of total heterogeneity): 0.0067 (SE = 0.0202)
+tau (square root of estimated tau^2 value):      0.0817
+I^2 (total heterogeneity / total variability):   8.05%
+H^2 (total variability / sampling variability):  1.09
+
+Test for Heterogeneity:
+Q(df = 29) = 31.9689, p-val = 0.3212
+
+Model Results:
+
+estimate      se    zval    pval   ci.lb   ci.ub      
+  0.2502  0.0529  4.7315  &lt;.0001  0.1465  0.3538  *** 
+
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section><section id="random-effects-model-in-r-1" class="slide level2"><h2>Random-effects model in R</h2>
+<p>We can easily compare the models using the <code>compare_rma()</code> function:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>filor<span class="sc">::</span><span class="fu">compare_rma</span>(fit_ee, fit_re)  <span class="sc">|&gt;</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a>  <span class="fu">round</span>(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       fit_ee  fit_re
+b     0.25302 0.25015
+se    0.05022 0.05287
+zval  5.03776 4.73149
+pval  0.00000 0.00000
+ci.lb 0.15458 0.14653
+ci.ub 0.35146 0.35377
+I2    9.28671 8.04772
+tau2  0.00000 0.00668</code></pre>
+</div>
+</div>
+</section><section id="random-effects-model-in-r-2" class="slide level2"><h2>Random-effects model in R</h2>
+<p>Clearly, given that we simulated <span class="math inline">\(\tau^2 = 0\)</span> the <code>RE</code> model results is very close (if not equal) to the <code>EE</code> model. We can simulate a <code>RE</code> model:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>tau2 <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
+<span id="cb39-2"><a href="#cb39-2"></a>dat <span class="ot">&lt;-</span> <span class="fu">sim_studies</span>(<span class="at">k =</span> k, <span class="at">theta =</span> theta, <span class="at">tau2 =</span> tau2, <span class="at">n0 =</span> n, <span class="at">n1 =</span> n)</span>
+<span id="cb39-3"><a href="#cb39-3"></a></span>
+<span id="cb39-4"><a href="#cb39-4"></a>fit_re <span class="ot">&lt;-</span> <span class="fu">rma</span>(yi, vi, <span class="at">method =</span> <span class="st">"REML"</span>, <span class="at">data =</span> dat)</span>
+<span id="cb39-5"><a href="#cb39-5"></a><span class="fu">summary</span>(fit_re)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Random-Effects Model (k = 30; tau^2 estimator: REML)
+
+  logLik  deviance       AIC       BIC      AICc   
+-28.1236   56.2472   60.2472   62.9818   60.7087   
+
+tau^2 (estimated amount of total heterogeneity): 0.3214 (SE = 0.1063)
+tau (square root of estimated tau^2 value):      0.5670
+I^2 (total heterogeneity / total variability):   81.86%
+H^2 (total variability / sampling variability):  5.51
+
+Test for Heterogeneity:
+Q(df = 29) = 163.3147, p-val &lt; .0001
+
+Model Results:
+
+estimate      se    zval    pval   ci.lb   ci.ub      
+  0.4796  0.1164  4.1212  &lt;.0001  0.2515  0.7076  *** 
+
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section><section id="forest-plot" class="slide level2"><h2>Forest Plot</h2>
+<p>The most common plot to represent meta-analysis results is the forest plot:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="fu">forest</span>(fit_re)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-33-1.svg" width="960" class="r-stretch quarto-figure-center"></section><section id="forest-plot-1" class="slide level2"><h2>Forest Plot</h2>
+<p>The most common plot to represent meta-analysis results is the forest plot:</p>
+<ul>
+<li>The <code>x</code> axis represent the <strong>effect size</strong>
+</li>
+<li>The <code>y</code> axis represent the <strong>studies</strong>
+</li>
+<li>The <code>size of the square</code> is the <strong>weigth</strong> of that study (<span class="math inline">\(w_i = 1/\sigma_i^2\)</span>)</li>
+<li>The <code>interval</code> is the <strong>95% confidence interval</strong>
+</li>
+<li>The <code>diamond</code> is the <strong>estimated effect and the 95% confidence interval</strong>
+</li>
+</ul></section></section><section><section id="multilab-studies" class="title-slide slide level1 section center"><h1>Multilab Studies</h1>
+
+</section><section id="multilab-studies-1" class="slide level2"><h2>Multilab Studies</h2>
+<p>So far we reasoned about collecting published studies and conducting a meta-analysis. Despite pooling evidence from multiple studies there are several limitations:</p>
+<div class="fragment">
+<ul>
+<li>publication bias</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>small number of studies (<span class="math inline">\(k\)</span>) thus low power and low estimation precision</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>the estimated <span class="math inline">\(\tau^2\)</span> could be high because the methdological heterogeneity is high –&gt; each research group use a different methodology</li>
+</ul>
+</div>
+</section><section id="multilab-studies-2" class="slide level2"><h2>Multilab Studies</h2>
+<p>With multilab studies we define a new data collection where different research group conduct an experiment with a similar (or the exact same) methodology. In this way we can:</p>
+<div class="fragment">
+<ul>
+<li>eliminate the publication bias</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>calibrate the number of studies (<span class="math inline">\(k\)</span>) and observations (<span class="math inline">\(n\)</span>) according to our criteria (power, precision, etc.)</li>
+</ul>
+</div>
+</section><section id="multilab-studies-and-meta-analysis" class="slide level2"><h2>Multilab Studies and meta-analysis</h2>
+<p>From a statistical point of view, the only difference is the source of the data (planned and collected vs collected from the literature). In fact, a multilab study can be analyzed also using standard meta-analysis tools.</p>
+<p>When intepreting the results we could highlight some differences:</p>
+<div class="fragment">
+<ul>
+<li>
+<span class="math inline">\(\tau^2\)</span> in standard meta-analysis is considered the true variability of the phenomenon. In multilab studies (assuming an exact replication approach) should be low or close to zero.</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>In standard meta-analysis we could try to explain <span class="math inline">\(\tau^2\)</span> using meta-regression (e.g., putting the average participant age as predictor) while in multilab studies we could plan to use the same age thus removing the age effect.</li>
+</ul>
+</div>
+</section><section id="extra---planning-a-multilab-study" class="slide level2"><h2>Extra - Planning a Multilab Study</h2>
+<p>Let’s imagine to plan a multilab study with the same setup as the previous meta-analysis. We are not collecting data from the literature but we want to know the number of studies <span class="math inline">\(k\)</span> that we need to achieve e.g.&nbsp;a good statistical Power.</p>
+<div class="fragment">
+<p>We define power as the probability of correctly rejecting the null hypothesis of no effect when the effect is actually present</p>
+</div>
+</section><section id="extra---planning-a-multilab-study-1" class="slide level2"><h2>Extra - Planning a Multilab Study</h2>
+<p>We can do a Power analysis using Monte Carlo simulations:</p>
+<ol type="1">
+<li>simulate a meta-analysis given a set of parameters</li>
+<li>fit the meta-analysis model</li>
+<li>extract the p-value</li>
+<li>repeat the steps 1-3 a lot of times e.g.&nbsp;10000</li>
+<li>count the number of significant (e.g., <span class="math inline">\(\leq \alpha\)</span>) p-values</li>
+</ol></section><section id="extra---planning-a-multilab-study-2" class="slide level2"><h2>Extra - Planning a Multilab Study</h2>
+<p>We can implement a simple simulation as:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="fu">library</span>(metafor)</span>
+<span id="cb42-2"><a href="#cb42-2"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb42-3"><a href="#cb42-3"></a></span>
+<span id="cb42-4"><a href="#cb42-4"></a><span class="co"># set.seed(2023)</span></span>
+<span id="cb42-5"><a href="#cb42-5"></a></span>
+<span id="cb42-6"><a href="#cb42-6"></a>k <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">10</span>)</span>
+<span id="cb42-7"><a href="#cb42-7"></a>n <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">20</span>)</span>
+<span id="cb42-8"><a href="#cb42-8"></a>es <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
+<span id="cb42-9"><a href="#cb42-9"></a>tau2 <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb42-10"><a href="#cb42-10"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb42-11"><a href="#cb42-11"></a>nsim <span class="ot">&lt;-</span> <span class="fl">1e3</span></span>
+<span id="cb42-12"><a href="#cb42-12"></a></span>
+<span id="cb42-13"><a href="#cb42-13"></a>sim <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">expand_grid</span>(k, n, es, tau2)</span>
+<span id="cb42-14"><a href="#cb42-14"></a>sim<span class="sc">$</span>power <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb42-15"><a href="#cb42-15"></a></span>
+<span id="cb42-16"><a href="#cb42-16"></a><span class="co"># handle errors, return NA</span></span>
+<span id="cb42-17"><a href="#cb42-17"></a>srma <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">possibly</span>(rma, <span class="at">otherwise =</span> <span class="cn">NA</span>)</span>
+<span id="cb42-18"><a href="#cb42-18"></a></span>
+<span id="cb42-19"><a href="#cb42-19"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(sim)){ <span class="co"># iterate for each condition</span></span>
+<span id="cb42-20"><a href="#cb42-20"></a>  pval <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, nsim)</span>
+<span id="cb42-21"><a href="#cb42-21"></a>  <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){ <span class="co"># iterate for each simulation</span></span>
+<span id="cb42-22"><a href="#cb42-22"></a>    dat <span class="ot">&lt;-</span> <span class="fu">sim_studies</span>(<span class="at">k =</span> sim<span class="sc">$</span>k[i], </span>
+<span id="cb42-23"><a href="#cb42-23"></a>                       <span class="at">theta =</span> sim<span class="sc">$</span>es[i], </span>
+<span id="cb42-24"><a href="#cb42-24"></a>                       <span class="at">tau2 =</span> sim<span class="sc">$</span>tau2[i],</span>
+<span id="cb42-25"><a href="#cb42-25"></a>                       <span class="at">n0 =</span> sim<span class="sc">$</span>n[i],</span>
+<span id="cb42-26"><a href="#cb42-26"></a>                       <span class="at">n1 =</span> sim<span class="sc">$</span>n[i])</span>
+<span id="cb42-27"><a href="#cb42-27"></a>    fit <span class="ot">&lt;-</span> <span class="fu">rma</span>(yi, vi, <span class="at">data =</span> dat, <span class="at">method =</span> <span class="st">"REML"</span>)</span>
+<span id="cb42-28"><a href="#cb42-28"></a>    pval[j] <span class="ot">&lt;-</span> fit<span class="sc">$</span>pval</span>
+<span id="cb42-29"><a href="#cb42-29"></a>  }</span>
+<span id="cb42-30"><a href="#cb42-30"></a>  sim<span class="sc">$</span>power[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(pval <span class="sc">&lt;=</span> alpha) <span class="co"># calculate power</span></span>
+<span id="cb42-31"><a href="#cb42-31"></a>  filor<span class="sc">::</span><span class="fu">pb</span>(<span class="fu">nrow</span>(sim), i)</span>
+<span id="cb42-32"><a href="#cb42-32"></a>}</span>
+<span id="cb42-33"><a href="#cb42-33"></a></span>
+<span id="cb42-34"><a href="#cb42-34"></a><span class="fu">saveRDS</span>(sim, <span class="fu">here</span>(<span class="st">"04-meta-analysis/objects/power-example.rds"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="extra---planning-a-multilab-study-3" class="slide level2"><h2>Extra - Planning a Multilab Study</h2>
+<p>Then we can plot the results:</p>
+<div class="cell" data-layout-align="center">
+<details><summary>Code</summary><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>sim <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">here</span>(<span class="st">"02-meta-analysis/objects/power-example.rds"</span>))</span>
+<span id="cb43-2"><a href="#cb43-2"></a></span>
+<span id="cb43-3"><a href="#cb43-3"></a>title <span class="ot">&lt;-</span> <span class="st">"$</span><span class="sc">\\</span><span class="st">mu_</span><span class="sc">\\</span><span class="st">theta = 0.3$, $</span><span class="sc">\\</span><span class="st">tau^2 = 0.1$, $</span><span class="sc">\\</span><span class="st">alpha = 0.05"</span></span>
+<span id="cb43-4"><a href="#cb43-4"></a></span>
+<span id="cb43-5"><a href="#cb43-5"></a>sim <span class="sc">|&gt;</span> </span>
+<span id="cb43-6"><a href="#cb43-6"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> k, <span class="at">y =</span> power, <span class="at">group =</span> n, <span class="at">color =</span> <span class="fu">factor</span>(n))) <span class="sc">+</span></span>
+<span id="cb43-7"><a href="#cb43-7"></a>  <span class="fu">geom_line</span>(<span class="at">lwd =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb43-8"><a href="#cb43-8"></a>  <span class="fu">xlab</span>(<span class="st">"Number of Studies (k)"</span>) <span class="sc">+</span></span>
+<span id="cb43-9"><a href="#cb43-9"></a>  <span class="fu">ylab</span>(<span class="st">"Power"</span>) <span class="sc">+</span></span>
+<span id="cb43-10"><a href="#cb43-10"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"Sample Size"</span>) <span class="sc">+</span></span>
+<span id="cb43-11"><a href="#cb43-11"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) <span class="sc">+</span></span>
+<span id="cb43-12"><a href="#cb43-12"></a>  <span class="fu">ggtitle</span>(latex2exp<span class="sc">::</span><span class="fu">TeX</span>(title))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-35-1.svg" width="960" class="r-stretch quarto-figure-center"></section></section><section><section id="publication-bias" class="title-slide slide level1 section center"><h1>Publication Bias</h1>
+
+</section><section id="publication-bias-pb" class="slide level2"><h2>Publication Bias (PB)</h2>
+<p>The PB is one of the most problematic aspects of meta-analysis. Essentially the probability of publishing a paper (and thus including into the meta-analysis) is not the same regardless the result.</p>
+
+<img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-36-1.svg" width="960" class="r-stretch quarto-figure-center"></section><section id="publication-bias-pb-1" class="slide level2"><h2>Publication Bias (PB)</h2>
+<p>Clearly we cannot solve the PB using statistical tools. The PB is a problem of the publishing process and cannot be completely removed from available literature.</p>
+<ul>
+<li>pre-registrations, multi-lab studies, etc. can completely solve the problem populating the literature with unbiased studies (at least from the publishing process point of view)</li>
+<li>there are statistical tools to detect, estimate and correct for the publication bias. Unfortunately they are strongly affected by the presence of heterogeneity, the number of studies and other factors.</li>
+</ul></section><section id="publication-bias-pb---the-big-picture" class="slide level2"><h2>Publication Bias (PB) - The Big Picture<sup>1</sup>
+</h2>
+<div class="cell" data-reveal="true" data-fig-width="6.5">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    A[Publication Bias] --&gt; B[Visual Inspection]
+    A[Publication Bias] --&gt; L[Robustness]
+    A[Publication Bias] --&gt; C[Detection]
+    A[Publication Bias] --&gt; D[Correction]
+    L[Robustness] --&gt; M[Fail-safe N]
+    B[Visual Inspection] --&gt; E[Funnel Plot]
+    C[Detection] --&gt; G[Regression Methods]
+    D[Correction] --&gt; H[Trim and Fill]
+    D[Correction] --&gt; I[Selection Models]
+</pre>
+</div>
+</div>
+</div>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn5"><p>Thanks to the Wolfgang Viechtbauer’s course <a href="https://www.wvbauer.com/doku.php/course_ma">https://www.wvbauer.com/doku.php/course_ma</a></p></li></ol></aside></section><section id="publication-bias-pb---funnel-plot" class="slide level2"><h2>Publication Bias (PB) - Funnel Plot</h2>
+<p>The first tool is called funnel plot. This is a visual tool to check the presence of publication bias. If meta-analysis assumptions are respected, and there is no publication bias:</p>
+<ul>
+<li>effects should be normally distributed around the average effect</li>
+<li>more precise studies should be closer to the average effect</li>
+<li>less precise studies could be equally distributed around the average effect</li>
+</ul>
+<p>Let’s simulate a lot of studies to show:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">set.seed</span>(<span class="dv">2023</span>)</span>
+<span id="cb44-2"><a href="#cb44-2"></a>k <span class="ot">&lt;-</span> <span class="fl">1e3</span></span>
+<span id="cb44-3"><a href="#cb44-3"></a>n <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">runif</span>(k, <span class="dv">10</span>, <span class="dv">200</span>))</span>
+<span id="cb44-4"><a href="#cb44-4"></a>dat <span class="ot">&lt;-</span> <span class="fu">sim_studies</span>(<span class="at">k =</span> k, <span class="at">theta =</span> <span class="fl">0.5</span>, <span class="at">tau2 =</span> <span class="dv">0</span>, <span class="at">n0 =</span> n, <span class="at">n1 =</span> n)</span>
+<span id="cb44-5"><a href="#cb44-5"></a>fit <span class="ot">&lt;-</span> <span class="fu">rma</span>(yi, vi, <span class="at">method =</span> <span class="st">"EE"</span>, <span class="at">data =</span> dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="publication-bias-pb---funnel-plot-1" class="slide level2"><h2>Publication Bias (PB) - Funnel Plot</h2>
+<p>Let’s plot the distribution of the data:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="fu">hist</span>(dat<span class="sc">$</span>yi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-39-1.svg" width="960" class="r-stretch quarto-figure-center"><p>The distribution is clearly normal and centered on the true simulated value. Now let’s add the precision (in this case standard error thus <span class="math inline">\(\sqrt{\sigma_i^2}\)</span>) on the y-axis.</p>
+</section><section id="publication-bias-pb---funnel-plot-2" class="slide level2"><h2>Publication Bias (PB) - Funnel Plot</h2>
+<p>Note that the <code>y</code> axis is reversed so high-precise studies (<span class="math inline">\(\sqrt{\sigma_i^2}\)</span> close to 0) are on top.</p>
+<div class="cell" data-layout-align="center">
+<details><summary>Code</summary><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="fu">plot</span>(dat<span class="sc">$</span>yi, dat<span class="sc">$</span>sei, <span class="at">ylim =</span> <span class="fu">rev</span>(<span class="fu">range</span>(dat<span class="sc">$</span>sei)),</span>
+<span id="cb46-2"><a href="#cb46-2"></a>     <span class="at">xlab =</span> latex2exp<span class="sc">::</span><span class="fu">TeX</span>(<span class="st">"$y_i$"</span>),</span>
+<span id="cb46-3"><a href="#cb46-3"></a>     <span class="at">ylab =</span> latex2exp<span class="sc">::</span><span class="fu">TeX</span>(<span class="st">"$</span><span class="sc">\\</span><span class="st">sqrt{</span><span class="sc">\\</span><span class="st">sigma_i^2}$"</span>),</span>
+<span id="cb46-4"><a href="#cb46-4"></a>     <span class="at">pch =</span> <span class="dv">19</span>,</span>
+<span id="cb46-5"><a href="#cb46-5"></a>     <span class="at">col =</span> scales<span class="sc">::</span><span class="fu">alpha</span>(<span class="st">"firebrick"</span>, <span class="fl">0.5</span>))</span>
+<span id="cb46-6"><a href="#cb46-6"></a><span class="fu">abline</span>(<span class="at">v =</span> fit<span class="sc">$</span>b[[<span class="dv">1</span>]], <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">lwd =</span> <span class="fl">1.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-40-1.svg" width="960" class="r-stretch quarto-figure-center"></section><section id="publication-bias-pb---funnel-plot-3" class="slide level2"><h2>Publication Bias (PB) - Funnel Plot</h2>
+<p>The plot assume the typical funnel shape and there are not missing spots on the at the bottom. The presence of missing spots is a potential index of publication bias.</p>
+
+<img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-41-1.svg" width="960" class="r-stretch quarto-figure-center"></section><section id="publication-bias-pb---funnel-plot-4" class="slide level2"><h2>Publication Bias (PB) - Funnel Plot</h2>
+<p>The plot assume the typical funnel shape and there are not missing spots on the at the bottom. The presence of missing spots is a potential index of publication bias.</p>
+
+<img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-42-1.svg" width="960" class="r-stretch quarto-figure-center"></section><section id="robustness-to-pb---fail-safe-n" class="slide level2"><h2>Robustness to PB - Fail-safe N</h2>
+<p>The Fail-safe N <span class="citation" data-cites="Rosenthal1979-yx">(<a href="#/references" role="doc-biblioref" onclick="">Rosenthal 1979</a>)</span> idea is very simple. Given a meta-analysis with a significant result (i.e., <span class="math inline">\(p \leq \alpha\)</span>). How many null studies (i.e., <span class="math inline">\(\hat \theta = 0\)</span>) do I need to obtain <span class="math inline">\(p &gt; \alpha\)</span>?</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a>metafor<span class="sc">::</span><span class="fu">fsn</span>(yi, vi, <span class="at">data =</span> dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Fail-safe N Calculation Using the Rosenthal Approach
+
+Observed Significance Level: &lt;.0001
+Target Significance Level:   0.05
+
+Fail-safe N: 4396757</code></pre>
+</div>
+</div>
+</section><section id="robustness-to-pb---fail-safe-n-1" class="slide level2"><h2>Robustness to PB - Fail-safe N</h2>
+<p>There are several criticism to the Fail-safe N procedure:</p>
+<div class="fragment">
+<ul>
+<li>is not actually <em>detecting</em> the PB but suggesting the required publication bias size to remove the effect. A very large N suggest that even if present, it’s unlikely the results could be completely changed by actually reporting null studies</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>
+<span class="citation" data-cites="Orwin1983-vu">Orwin (<a href="#/references" role="doc-biblioref" onclick="">1983</a>)</span> proposed a new method calculating the number of studies required to reduce the effect size to a given target</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>
+<span class="citation" data-cites="Rosenberg2005-ie">Rosenberg (<a href="#/references" role="doc-biblioref" onclick="">2005</a>)</span> proposed a method similar to Rosenthal <span class="citation" data-cites="Rosenthal1979-yx">(<a href="#/references" role="doc-biblioref" onclick="">1979</a>)</span> but combining the (weighted) effect sizes and not the p-values.</li>
+</ul>
+</div>
+</section><section id="detecting-pb---egger-regression" class="slide level2"><h2>Detecting PB - Egger Regression</h2>
+<p>A basic method to test the funnel plot asymmetry is using an the Egger regression test. Basically we calculate the relationship between <span class="math inline">\(y_i\)</span> and <span class="math inline">\(\sqrt{\sigma^2_i}\)</span>. In the absence of asimmetry, the line slope should be not different from 0.</p>
+<p>We can use the <code><a href="https://wviechtb.github.io/metafor/reference/regtest.html">metafor::regtest()</a></code> function:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>egger <span class="ot">&lt;-</span> <span class="fu">regtest</span>(fit)</span>
+<span id="cb49-2"><a href="#cb49-2"></a>egger</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Regression Test for Funnel Plot Asymmetry
+
+Model:     fixed-effects meta-regression model
+Predictor: standard error
+
+Test for Funnel Plot Asymmetry: z = 1.0847, p = 0.2781
+Limit Estimate (as sei -&gt; 0):   b = 0.4821 (CI: 0.4521, 0.5122)</code></pre>
+</div>
+</div>
+</section><section id="publication-bias-pb---egger-regression" class="slide level2"><h2>Publication Bias (PB) - Egger Regression</h2>
+
+<img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-45-1.svg" width="960" class="r-stretch quarto-figure-center"></section><section id="correcting-pb---trim-and-fill" class="slide level2"><h2>Correcting PB - Trim and Fill</h2>
+<p>The Trim and Fill method <span class="citation" data-cites="Duval2000-ym">(<a href="#/references" role="doc-biblioref" onclick="">Duval and Tweedie 2000</a>)</span> is used to impute the hypothetical missing studies according to the funnel plot and recomputing the meta-analysis effect. Shi and Lin <span class="citation" data-cites="Shi2019-pj">(<a href="#/references" role="doc-biblioref" onclick="">Shi and Lin 2019</a>)</span> provide an updated overview of the method with some criticisms.</p>
+<p>Let’s simulate again a <strong>publication</strong> bias with <span class="math inline">\(k = 100\)</span> studies:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="fu">set.seed</span>(<span class="dv">2023</span>)</span>
+<span id="cb51-2"><a href="#cb51-2"></a>k <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="co"># we increased k to better show the effect</span></span>
+<span id="cb51-3"><a href="#cb51-3"></a>theta <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb51-4"><a href="#cb51-4"></a>tau2 <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb51-5"><a href="#cb51-5"></a></span>
+<span id="cb51-6"><a href="#cb51-6"></a>dat <span class="ot">&lt;-</span> <span class="fu">sim_pub_bias</span>(<span class="at">selmodel =</span> <span class="fu">list</span>(<span class="at">method =</span> <span class="st">"2step"</span>, <span class="at">param =</span> <span class="st">"pval"</span>, <span class="at">th =</span> <span class="fl">0.05</span>, <span class="at">side =</span> <span class="st">"&lt;="</span>), <span class="at">k =</span> k, <span class="at">theta =</span> theta, <span class="at">tau2 =</span> tau2, <span class="at">nmin =</span> <span class="dv">10</span>, <span class="at">nmax =</span> <span class="dv">200</span>)</span>
+<span id="cb51-7"><a href="#cb51-7"></a>fit <span class="ot">&lt;-</span> <span class="fu">rma</span>(yi, vi, <span class="at">data =</span> dat, <span class="at">method =</span> <span class="st">"REML"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="correcting-pb---trim-and-fill-1" class="slide level2"><h2>Correcting PB - Trim and Fill</h2>
+<p>Now we can use the <code><a href="https://wviechtb.github.io/metafor/reference/trimfill.html">metafor::trimfill()</a></code> function:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a>taf <span class="ot">&lt;-</span> metafor<span class="sc">::</span><span class="fu">trimfill</span>(fit)</span>
+<span id="cb52-2"><a href="#cb52-2"></a>taf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Estimated number of missing studies on the left side: 29 (SE = 6.4513)
+
+Random-Effects Model (k = 129; tau^2 estimator: REML)
+
+tau^2 (estimated amount of total heterogeneity): 0.1382 (SE = 0.0203)
+tau (square root of estimated tau^2 value):      0.3718
+I^2 (total heterogeneity / total variability):   88.56%
+H^2 (total variability / sampling variability):  8.74
+
+Test for Heterogeneity:
+Q(df = 128) = 1073.8812, p-val &lt; .0001
+
+Model Results:
+
+estimate      se     zval    pval   ci.lb   ci.ub      
+  0.4851  0.0357  13.5951  &lt;.0001  0.4152  0.5551  *** 
+
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>The trim-and-fille estimate that 29 are missing. The new effect size after including the studies is reduced and closer to the simulated value.</p>
+</section><section id="correcting-pb---trim-and-fill-2" class="slide level2"><h2>Correcting PB - Trim and Fill</h2>
+<p>We can also visualize the funnel plot highligting the points that are included by the method.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="fu">funnel</span>(taf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<details><summary>Code</summary><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="fu">funnel</span>(taf)</span>
+<span id="cb55-2"><a href="#cb55-2"></a>egg <span class="ot">&lt;-</span> <span class="fu">regtest</span>(fit)</span>
+<span id="cb55-3"><a href="#cb55-3"></a>egg_npb <span class="ot">&lt;-</span> <span class="fu">regtest</span>(taf)</span>
+<span id="cb55-4"><a href="#cb55-4"></a>se <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="fl">1.8</span>,<span class="at">length=</span><span class="dv">100</span>)</span>
+<span id="cb55-5"><a href="#cb55-5"></a><span class="fu">lines</span>(<span class="fu">coef</span>(egg<span class="sc">$</span>fit)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(egg<span class="sc">$</span>fit)[<span class="dv">2</span>]<span class="sc">*</span>se, se, <span class="at">lwd=</span><span class="dv">3</span>, <span class="at">col =</span> <span class="st">"black"</span>)</span>
+<span id="cb55-6"><a href="#cb55-6"></a><span class="fu">lines</span>(<span class="fu">coef</span>(egg_npb<span class="sc">$</span>fit)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(egg_npb<span class="sc">$</span>fit)[<span class="dv">2</span>]<span class="sc">*</span>se, se, <span class="at">lwd=</span><span class="dv">3</span>, <span class="at">col =</span> <span class="st">"firebrick"</span>)</span>
+<span id="cb55-7"><a href="#cb55-7"></a><span class="fu">legend</span>(<span class="st">"topleft"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Original"</span>, <span class="st">"Corrected"</span>), <span class="at">fill =</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"firebrick"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-49-1.svg" width="960" class="r-stretch quarto-figure-center"></section><section id="correcting-pb---selection-models-sm" class="slide level2"><h2>Correcting PB - Selection Models (SM)</h2>
+<div class="fragment">
+<ul>
+<li>SM assume a relationship between the p-value and the probability of publishing</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>SM estimate this relationship from available studies and correct the average effect</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cons">
+<ul>
+<li>The models are complicated (number of parameters) and need a large <span class="math inline">\(k\)</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="fragment">
+<div class="pros">
+<ul>
+<li>They provide a very elegant framework to formalize the publication bias supporting simulations and methods development</li>
+</ul>
+</div>
+</div>
+</section><section id="sm---publication-bias-function" class="slide level2"><h2>SM - Publication Bias Function</h2>
+<ul>
+<li>The publication bias can be formalized using a weight function that assign a probability to a certain study properties (e.g., p-value, sample size, z-score, etc.) representing the likelihood of that study being published.</li>
+</ul>
+<div class="fragment">
+<ul>
+<li>The general idea <span class="citation" data-cites="Citkowicz2017-ox">(e.g., <a href="#/references" role="doc-biblioref" onclick="">Citkowicz and Vevea 2017</a>)</span> is to use a weighted probability density function (wPDF). In the presence of publication bias, the parameters of the wPDF will be different (i.e., adjusted) compared to unweighted PDF (i.e., assuming no publication bias)</li>
+</ul>
+</div>
+</section><section id="sm---publication-bias-function-1" class="slide level2"><h2>SM - Publication Bias Function</h2>
+<p>The random-effect meta-analysis PDF can be written as <span class="citation" data-cites="Citkowicz2017-ox">(e.g., <a href="#/references" role="doc-biblioref" onclick="">Citkowicz and Vevea 2017</a>)</span>:</p>
+<p><span class="math display">\[
+f\left(y_i \mid \beta, \tau^2 ; \sigma_i^2\right)=\phi\left(\frac{Y_i-\Delta_i}{\sqrt{\sigma_i^2+\tau^2}}\right) / \sqrt{\sigma_i^2+\tau^2},
+\]</span></p>
+<p>And adding the weigth function:</p>
+<p><span class="math display">\[
+f\left(Y_i \mid \beta, \tau^2 ; \sigma_i^2\right)=\frac{\mathrm{w}\left(p_i\right) \phi\left(\frac{Y_i-\Delta_i}{\sqrt{\sigma_i^2+\tau^2}}\right) / \sqrt{\sigma_i^2+\tau^2}}{\int_{-\infty}^{\infty} \mathrm{w}\left(p_i\right) \phi\left(\frac{Y_i-\Delta_i}{\sqrt{\sigma_i^2+\tau^2}}\right) / \sqrt{\sigma_i^2+\tau^2} d Y_i}
+\]</span></p>
+</section><section id="sec-pub-bias-fun" class="slide level2"><h2>SM - Publication Bias Function</h2>
+<p>For example, Citkowicz and Vevea <span class="citation" data-cites="Citkowicz2017-ox">(<a href="#/references" role="doc-biblioref" onclick="">2017</a>)</span> proposed a model using the beta weight function<sup>1</sup> <span class="math inline">\(w(p_i) = p_i^{a - 1} \times (1 - p_i)^{b - 1}\)</span>:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-50-1.svg" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn6"><p><a href="https://www.youtube.com/watch?v=ucmOCuyCk-c">https://www.youtube.com/watch?v=ucmOCuyCk-c</a></p></li></ol></aside></section><section id="selection-models" class="slide level2"><h2>Selection Models</h2>
+<p>In R we can use the <code><a href="https://wviechtb.github.io/metafor/reference/selmodel.html">metafor::selmodel()</a></code> function to implement several type of models. For example we can apply the Citkowicz and Vevea <span class="citation" data-cites="Citkowicz2017-ox">(<a href="#/references" role="doc-biblioref" onclick="">2017</a>)</span> model:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a>sel_beta <span class="ot">&lt;-</span> <span class="fu">selmodel</span>(fit, <span class="at">type =</span> <span class="st">"beta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="panel-tabset">
+<ul id="tabset-7" class="panel-tabset-tabby">
+<li><a data-tabby-default="" href="#tabset-7-1">Results</a></li>
+<li><a href="#tabset-7-2">Plot</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-7-1">
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Random-Effects Model (k = 100; tau^2 estimator: ML)
+
+tau^2 (estimated amount of total heterogeneity): 0.0857 (SE = 0.0255)
+tau (square root of estimated tau^2 value):      0.2928
+
+Test for Heterogeneity:
+LRT(df = 1) = 293.8104, p-val &lt; .0001
+
+Model Results:
+
+estimate      se    zval    pval   ci.lb   ci.ub      
+  0.4847  0.1020  4.7521  &lt;.0001  0.2848  0.6846  *** 
+
+Test for Selection Model Parameters:
+LRT(df = 2) = 14.3271, p-val = 0.0008
+
+Selection Model Results:
+
+         estimate      se     zval    pval   ci.lb   ci.ub     
+delta.1    0.8174  0.0700  -2.6075  0.0091  0.6802  0.9547  ** 
+delta.2    0.7017  0.2009  -1.4846  0.1376  0.3080  1.0955     
+
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-7-2">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a><span class="fu">plot</span>(sel_beta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-53-1.svg" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="more-on-sm-and-publication-bias" class="slide level2"><h2>More on SM and Publication Bias</h2>
+<ul>
+<li>The SM documentation of <code><a href="https://wviechtb.github.io/metafor/reference/selmodel.html">metafor::selmodel()</a></code> <a href="https://www.youtube.com/watch?v=ucmOCuyCk-c">https://wviechtb.github.io/metafor/reference/selmodel.html</a>
+</li>
+<li>Wolfgang Viechtbauer overview of PB <a href="https://www.youtube.com/watch?v=ucmOCuyCk-c">https://www.youtube.com/watch?v=ucmOCuyCk-c</a>
+</li>
+<li>
+<span class="citation" data-cites="Harrer2021-go">Harrer et al. (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span> - Doing Meta-analysis in R - <a href="https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/pub-bias.html">Chapter 9</a>
+</li>
+<li>
+<span class="citation" data-cites="McShane2016-bk">McShane, Böckenholt, and Hansen (<a href="#/references" role="doc-biblioref" onclick="">2016</a>)</span> for a nice introduction about publication bias and SM</li>
+<li>Another good overview by <span class="citation" data-cites="Jin2015-ik">Jin, Zhou, and He (<a href="#/references" role="doc-biblioref" onclick="">2015</a>)</span>
+</li>
+<li>See also <span class="citation" data-cites="Guan2016-kn">Guan and Vandekerckhove (<a href="#/references" role="doc-biblioref" onclick="">2016</a>)</span>, <span class="citation" data-cites="Maier2023-js">Maier, Bartoš, and Wagenmakers (<a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span> and <span class="citation" data-cites="Bartos2022-im">Bartoš et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> for Bayesian approaches to PB</li>
+</ul></section><section id="more-on-sm-and-publication-bias-1" class="slide level2"><h2>More on SM and Publication Bias</h2>
+<p>Assessing, testing and developing sofisticated models for publication bias is surely important and interesting. But as Wolfgang Viechtbauer (the author of <code>metafor</code>) said:</p>
+<blockquote>
+<p>hopefully there won’t be need for these models in the future <span class="citation" data-cites="Viechtbauer2021-od">(<a href="#/references" role="doc-biblioref" onclick="">Viechtbauer 2021</a>)</span></p>
+</blockquote>
+</section><section id="extra---simulating-publication-bias" class="slide level2"><h2>Extra - Simulating Publication Bias</h2>
+<p>I wrote two custom functions to generate a biased dataset based on different criteria:</p>
+<ul>
+<li>a simple step function with a threshold (e.g., <span class="math inline">\(p \leq 0.05\)</span> then 1 else 0)</li>
+<li>the weight function from slide <a href="#/sec-pub-bias-fun">Section&nbsp;5.19</a>
+</li>
+<li>a custom criterion (e.g., select only <span class="math inline">\(|y_i| &gt; 0.5\)</span>)</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a>weigth_beta <span class="ot">&lt;-</span> <span class="cf">function</span>(x, a, b){</span>
+<span id="cb59-2"><a href="#cb59-2"></a>  x<span class="sc">^</span>(a <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> x)<span class="sc">^</span>(b <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb59-3"><a href="#cb59-3"></a>}</span>
+<span id="cb59-4"><a href="#cb59-4"></a>weigth_2step <span class="ot">&lt;-</span> <span class="cf">function</span>(x, th, <span class="at">side =</span> <span class="st">"&lt;="</span>){</span>
+<span id="cb59-5"><a href="#cb59-5"></a>  <span class="fu">ifelse</span>(<span class="fu">eval</span>(<span class="fu">call</span>(side, x, th)), <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb59-6"><a href="#cb59-6"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>…continue</p>
+</section><section id="extra---simulating-publication-bias-1" class="slide level2"><h2>Extra - Simulating Publication Bias</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a>sim_pub_bias <span class="ot">&lt;-</span> <span class="cf">function</span>(selmodel,</span>
+<span id="cb60-2"><a href="#cb60-2"></a>                         k, </span>
+<span id="cb60-3"><a href="#cb60-3"></a>                         theta, </span>
+<span id="cb60-4"><a href="#cb60-4"></a>                         tau2, </span>
+<span id="cb60-5"><a href="#cb60-5"></a>                         nmin, </span>
+<span id="cb60-6"><a href="#cb60-6"></a>                         nmax){</span>
+<span id="cb60-7"><a href="#cb60-7"></a>  selmodel<span class="sc">$</span>method <span class="ot">&lt;-</span> <span class="fu">match.arg</span>(selmodel<span class="sc">$</span>method, <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"custom"</span>, <span class="st">"2step"</span>, <span class="st">"beta"</span>))</span>
+<span id="cb60-8"><a href="#cb60-8"></a>  res <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">"list"</span>, <span class="at">length =</span> k)</span>
+<span id="cb60-9"><a href="#cb60-9"></a>  i <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb60-10"><a href="#cb60-10"></a>  <span class="cf">while</span>(i <span class="sc">&lt;=</span> k){</span>
+<span id="cb60-11"><a href="#cb60-11"></a>    n <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">runif</span>(<span class="dv">1</span>, nmin, nmax))</span>
+<span id="cb60-12"><a href="#cb60-12"></a>    dat_i <span class="ot">&lt;-</span> <span class="fu">sim_studies</span>(<span class="at">k =</span> <span class="dv">1</span>, <span class="at">theta =</span> theta, <span class="at">tau2 =</span> tau2, <span class="at">n0 =</span> n, <span class="at">n1 =</span> n)</span>
+<span id="cb60-13"><a href="#cb60-13"></a>    dat_i<span class="sc">$</span>n <span class="ot">&lt;-</span> n</span>
+<span id="cb60-14"><a href="#cb60-14"></a>    dat_i <span class="ot">&lt;-</span> metafor<span class="sc">::</span><span class="fu">escalc</span>(<span class="at">yi =</span> yi, <span class="at">vi =</span> vi, <span class="at">sei =</span> sei, <span class="at">data =</span> dat_i)</span>
+<span id="cb60-15"><a href="#cb60-15"></a>    dat_i <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">summary</span>(dat_i))</span>
+<span id="cb60-16"><a href="#cb60-16"></a>    </span>
+<span id="cb60-17"><a href="#cb60-17"></a>    <span class="cf">if</span>(selmodel<span class="sc">$</span>method <span class="sc">==</span> <span class="st">"2step"</span>){</span>
+<span id="cb60-18"><a href="#cb60-18"></a>      ppub <span class="ot">&lt;-</span> <span class="fu">weigth_2step</span>(<span class="at">x =</span> dat_i[[selmodel<span class="sc">$</span>param]], <span class="at">th =</span> selmodel<span class="sc">$</span>th, <span class="at">side =</span> selmodel<span class="sc">$</span>side)</span>
+<span id="cb60-19"><a href="#cb60-19"></a>    }<span class="cf">else</span> <span class="cf">if</span>(selmodel<span class="sc">$</span>method <span class="sc">==</span> <span class="st">"beta"</span>){</span>
+<span id="cb60-20"><a href="#cb60-20"></a>      ppub <span class="ot">&lt;-</span> <span class="fu">weigth_beta</span>(<span class="at">x =</span> dat_i<span class="sc">$</span>pval, <span class="at">a =</span> selmodel<span class="sc">$</span>a, <span class="at">b =</span> selmodel<span class="sc">$</span>b)</span>
+<span id="cb60-21"><a href="#cb60-21"></a>    }<span class="cf">else</span>{</span>
+<span id="cb60-22"><a href="#cb60-22"></a>      ppub <span class="ot">&lt;-</span> <span class="fu">with</span>(dat_i, <span class="fu">eval</span>(<span class="fu">parse</span>(<span class="at">text =</span> selmodel<span class="sc">$</span>operation)))</span>
+<span id="cb60-23"><a href="#cb60-23"></a>    }</span>
+<span id="cb60-24"><a href="#cb60-24"></a>    </span>
+<span id="cb60-25"><a href="#cb60-25"></a>    <span class="cf">if</span>(<span class="fu">rbinom</span>(<span class="dv">1</span>, <span class="dv">1</span>, ppub) <span class="sc">==</span> <span class="dv">1</span>){</span>
+<span id="cb60-26"><a href="#cb60-26"></a>      res[[i]] <span class="ot">&lt;-</span> dat_i</span>
+<span id="cb60-27"><a href="#cb60-27"></a>      i <span class="ot">&lt;-</span> i <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb60-28"><a href="#cb60-28"></a>    }</span>
+<span id="cb60-29"><a href="#cb60-29"></a>  }</span>
+<span id="cb60-30"><a href="#cb60-30"></a>  </span>
+<span id="cb60-31"><a href="#cb60-31"></a>  dat <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, res)</span>
+<span id="cb60-32"><a href="#cb60-32"></a>  <span class="fu">return</span>(dat)</span>
+<span id="cb60-33"><a href="#cb60-33"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="extra---simulating-publication-bias-2" class="slide level2"><h2>Extra - Simulating Publication Bias</h2>
+<p>For example, let’s simulate a pretty simple publication bias model where we included <span class="math inline">\(k = 40\)</span> studies. The biased criteria is that only <span class="math inline">\(p \leq 0.05\)</span> are included.</p>
+<ul>
+<li><span class="math inline">\(\theta = 0.5\)</span></li>
+<li>
+<span class="math inline">\(\tau^2 = 0\)</span> i.e.&nbsp;an EE model</li>
+<li><span class="math inline">\(n \sim \mathcal{U}(10, 200)\)</span></li>
+</ul>
+
+<img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-56-1.svg" width="960" class="r-stretch quarto-figure-center"></section><section id="extra---simulating-publication-bias-3" class="slide level2"><h2>Extra - Simulating Publication Bias</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a><span class="fu">set.seed</span>(<span class="dv">2023</span>)</span>
+<span id="cb61-2"><a href="#cb61-2"></a>k <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb61-3"><a href="#cb61-3"></a>theta <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb61-4"><a href="#cb61-4"></a>tau2 <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb61-5"><a href="#cb61-5"></a></span>
+<span id="cb61-6"><a href="#cb61-6"></a>dat <span class="ot">&lt;-</span> <span class="fu">sim_pub_bias</span>(<span class="at">selmodel =</span> <span class="fu">list</span>(<span class="at">method =</span> <span class="st">"2step"</span>, <span class="at">param =</span> <span class="st">"pval"</span>, <span class="at">th =</span> <span class="fl">0.05</span>, <span class="at">side =</span> <span class="st">"&lt;="</span>), <span class="at">k =</span> k, <span class="at">theta =</span> theta, <span class="at">tau2 =</span> tau2, <span class="at">nmin =</span> <span class="dv">10</span>, <span class="at">nmax =</span> <span class="dv">200</span>)</span>
+<span id="cb61-7"><a href="#cb61-7"></a></span>
+<span id="cb61-8"><a href="#cb61-8"></a>filor<span class="sc">::</span><span class="fu">trim_df</span>(dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     yi    vi   sei   n    zi  pval ci.lb ci.ub
+1 0.352  0.02  0.14  99  2.52 0.012 0.078 0.627
+2 0.605 0.022 0.147  91 4.103     0 0.316 0.894
+3 1.714 0.038 0.195  44  8.81     0 1.333 2.096
+4 0.697 0.027 0.166  71 4.208     0 0.372 1.022
+5   ...   ...   ... ...   ...   ...   ...   ...
+6 0.682 0.026 0.161  70 4.239     0 0.367 0.997
+7 0.888 0.108 0.329  28 2.698 0.007 0.243 1.533
+8 1.033 0.089 0.298  21 3.464 0.001 0.449 1.618
+9 0.974  0.01   0.1 181 9.722     0 0.777  1.17</code></pre>
+</div>
+</div>
+</section><section id="extra---simulating-publication-bias-4" class="slide level2"><h2>Extra - Simulating Publication Bias</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">rma</span>(yi, vi, <span class="at">data =</span> dat)</span>
+<span id="cb63-2"><a href="#cb63-2"></a><span class="fu">summary</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Random-Effects Model (k = 100; tau^2 estimator: REML)
+
+  logLik  deviance       AIC       BIC      AICc   
+-28.2354   56.4709   60.4709   65.6611   60.5959   
+
+tau^2 (estimated amount of total heterogeneity): 0.0811 (SE = 0.0145)
+tau (square root of estimated tau^2 value):      0.2847
+I^2 (total heterogeneity / total variability):   82.87%
+H^2 (total variability / sampling variability):  5.84
+
+Test for Heterogeneity:
+Q(df = 99) = 583.0508, p-val &lt; .0001
+
+Model Results:
+
+estimate      se     zval    pval   ci.lb   ci.ub      
+  0.6232  0.0321  19.4055  &lt;.0001  0.5603  0.6862  *** 
+
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Clearly, <span class="math inline">\(\theta\)</span> is overestimated because we are systematic omitting non-significant p-values. These studies are more likely to be imprecise studies thus we are probably creating a funnel plot asymmetry.</p>
+</section><section id="extra---simulating-publication-bias-5" class="slide level2"><h2>Extra - Simulating Publication Bias</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a>egger <span class="ot">&lt;-</span> <span class="fu">regtest</span>(fit)</span>
+<span id="cb65-2"><a href="#cb65-2"></a><span class="fu">funnel</span>(fit, <span class="at">cex.lab =</span> <span class="fl">1.2</span>, <span class="at">cex =</span> <span class="fl">1.2</span>)</span>
+<span id="cb65-3"><a href="#cb65-3"></a>se <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="fl">1.8</span>,<span class="at">length=</span><span class="dv">100</span>)</span>
+<span id="cb65-4"><a href="#cb65-4"></a><span class="fu">lines</span>(<span class="fu">coef</span>(egger<span class="sc">$</span>fit)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(egger<span class="sc">$</span>fit)[<span class="dv">2</span>]<span class="sc">*</span>se, se, <span class="at">lwd=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-59-1.svg" width="960" class="r-stretch quarto-figure-center"></section></section><section><section id="practical-meta-analysis" class="title-slide slide level1 section center"><h1>Practical meta-analysis</h1>
+
+</section><section id="dataset" class="slide level2"><h2>Dataset</h2>
+<p>We will analyze the data provided by <a href="https://www.metapsy.org/">https://www.metapsy.org/</a>. In particular the dataset about the efficacy of psychoterapy on depression using randomized-controlled trials (<a href="https://www.metapsy.org/database/depression-psychotherapy">https://www.metapsy.org/database/depression-psychotherapy</a>).</p>
+<div class="cell" data-layout-align="center">
+<iframe src="https://docs.metapsy.org/" width="960" height="400px" data-external="1">
+</iframe>
+</div>
+</section><section id="dataset-1" class="slide level2"><h2>Dataset</h2>
+<p>The dataset for the exercises is <code>depression.rds</code>. The dataset has been minimally pre-processed to remove extra columns and converted to the <code>rds</code> format.</p>
+<p>In particular:</p>
+<ul>
+<li>studies using <em>cognitive-behavioral</em> therapy</li>
+<li>studies with controls in waiting lists</li>
+<li>studies with therapy delivered individually or in groups</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>  id            study age_group mean_age country format        yi       sei
+1  1      Amani, 2021      adul    31.55     can    grp 1.3073531 0.3625159
+2  5       Ayen, 2004      adul    51.30      eu    grp 3.3600000 0.6946767
+3  6      Beach, 1992      adul    39.14      us    ind 1.0032798 0.3886573
+4  9      Brown, 1984      adul    36.50      us    ind 0.2763874 0.4117515
+5 11 Castonguay, 2004      adul    38.80      us    ind 1.8407242 0.5276788
+6 14       Chan, 2012      adul    46.43     eas    grp 0.6043108 0.3565626</code></pre>
+</div>
+</div>
+</section><section id="dataset-2" class="slide level2"><h2>Dataset</h2>
+<p>The columns represent:</p>
+<ul>
+<li>
+<code>study</code>: identifier for each included study</li>
+<li>
+<code>age_group</code>: the age group of individual in the experimental group (<code>adul</code> = adults, <code>yadul</code> = young adults, <code>old</code> = old)</li>
+<li>
+<code>mean_age</code>: the average age of the experimental group</li>
+<li>
+<code>country</code>: country where the study was conducted</li>
+<li>
+<code>format</code>: the therapy format (<code>grp</code> = group, <code>ind</code> = individual)</li>
+<li>
+<code>yi</code>: the effect size in the form of Hedges’s <span class="math inline">\(g\)</span> <span class="citation" data-cites="Hedges1989-ip">(see <a href="#/references" role="doc-biblioref" onclick="">Hedges 1989</a>, Cohen’s <span class="math inline">\(d\)</span> corrected for small-sample bias)</span>. Positive values means that the treatment is effective.</li>
+<li>
+<code>sei</code>: standard error of the Hedges’s <span class="math inline">\(g\)</span>
+</li>
+</ul></section><section id="pre-processing" class="slide level2"><h2>Pre-processing</h2>
+<blockquote>
+<p><strong>Crucially</strong>, some papers have multiple studies. This data structure should be handled using a multilevel model. For the sake of simplicity we sampled randomly a study from multiple studies.</p>
+</blockquote>
+<p>These are the pre-processing steps:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a><span class="fu">library</span>(metapsyData)</span>
+<span id="cb67-2"><a href="#cb67-2"></a></span>
+<span id="cb67-3"><a href="#cb67-3"></a>dat <span class="ot">&lt;-</span> <span class="fu">getData</span>(<span class="st">"depression-psyctr"</span>)<span class="sc">$</span>data</span>
+<span id="cb67-4"><a href="#cb67-4"></a></span>
+<span id="cb67-5"><a href="#cb67-5"></a><span class="co"># selecting only CBT as therapy, waiting list as control and format as individual</span></span>
+<span id="cb67-6"><a href="#cb67-6"></a></span>
+<span id="cb67-7"><a href="#cb67-7"></a>idx <span class="ot">&lt;-</span> dat<span class="sc">$</span>condition_arm1 <span class="sc">==</span> <span class="st">"cbt"</span> <span class="sc">&amp;</span> dat<span class="sc">$</span>condition_arm2 <span class="sc">==</span> <span class="st">"wl"</span> <span class="sc">&amp;</span> dat<span class="sc">$</span>format <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"grp"</span>, <span class="st">"ind"</span>) <span class="sc">&amp;</span> dat<span class="sc">$</span>age_group <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"adul"</span>, <span class="st">"yadul"</span>, <span class="st">"old"</span>)</span>
+<span id="cb67-8"><a href="#cb67-8"></a></span>
+<span id="cb67-9"><a href="#cb67-9"></a><span class="co"># selecting relevant columns</span></span>
+<span id="cb67-10"><a href="#cb67-10"></a></span>
+<span id="cb67-11"><a href="#cb67-11"></a>cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"study"</span>, <span class="st">"age_group"</span>, <span class="st">"mean_age"</span>, <span class="st">"country"</span>, <span class="st">"format"</span>, <span class="st">".g"</span>, <span class="st">".g_se"</span>)</span>
+<span id="cb67-12"><a href="#cb67-12"></a></span>
+<span id="cb67-13"><a href="#cb67-13"></a>dat_clean <span class="ot">&lt;-</span> dat[idx, cols]</span>
+<span id="cb67-14"><a href="#cb67-14"></a></span>
+<span id="cb67-15"><a href="#cb67-15"></a>dat_clean<span class="sc">$</span>id <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(dat_clean)</span>
+<span id="cb67-16"><a href="#cb67-16"></a></span>
+<span id="cb67-17"><a href="#cb67-17"></a>dat_clean <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">select</span>(dat_clean, id, dplyr<span class="sc">::</span><span class="fu">everything</span>())</span>
+<span id="cb67-18"><a href="#cb67-18"></a></span>
+<span id="cb67-19"><a href="#cb67-19"></a><span class="fu">names</span>(dat_clean) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"id"</span>, <span class="st">"study"</span>, <span class="st">"age_group"</span>, <span class="st">"mean_age"</span>, <span class="st">"country"</span>, <span class="st">"format"</span>, <span class="st">"yi"</span>, <span class="st">"sei"</span>)</span>
+<span id="cb67-20"><a href="#cb67-20"></a></span>
+<span id="cb67-21"><a href="#cb67-21"></a>dat_clean <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">split</span>(dat_clean, dat_clean<span class="sc">$</span>study), <span class="cf">function</span>(x) <span class="cf">if</span>(<span class="fu">nrow</span>(x) <span class="sc">&gt;</span> <span class="dv">1</span>) x[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(x), <span class="dv">1</span>), ] <span class="cf">else</span> x)</span>
+<span id="cb67-22"><a href="#cb67-22"></a>dat_clean <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">bind_rows</span>(dat_clean)</span>
+<span id="cb67-23"><a href="#cb67-23"></a></span>
+<span id="cb67-24"><a href="#cb67-24"></a><span class="fu">rownames</span>(dat_clean) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb67-25"><a href="#cb67-25"></a></span>
+<span id="cb67-26"><a href="#cb67-26"></a><span class="fu">saveRDS</span>(dat_clean, <span class="st">"04-meta-analysis/objects/depression.rds"</span>)</span>
+<span id="cb67-27"><a href="#cb67-27"></a></span>
+<span id="cb67-28"><a href="#cb67-28"></a>dat_clean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="steps" class="slide level2"><h2>Steps</h2>
+<blockquote>
+<p><strong>Important</strong>, the dataset is real but the preprocessing steps and the models are examples without a clinical meaning. We are surely missing important predictors and/or analysis steps thus take the results only for educational purposes.</p>
+</blockquote>
+<ol type="1">
+<li>Import the data and explore (summary statistics, plots, etc.) the variables</li>
+<li>Fit an equal-effects model and a random-effects model
+<ol type="1">
+<li>Intepret the results</li>
+<li>Intepret the heterogeneity (if relevant)</li>
+<li>Compare the two models. Is there any difference? Which model is more appropriate</li>
+</ol>
+</li>
+<li>Plot the model results using a forest plot</li>
+<li>Create a funnel plot and comment the pattern</li>
+<li>Analize the publication bias using the Egger regression and comment the result</li>
+</ol></section><section id="advanced-steps" class="slide level2"><h2>Advanced Steps</h2>
+<p>We did not introduced <strong>meta-regressions</strong> i.e.&nbsp;the possibility to include predictors in a meta-analysis model. The implementation is quite straightforward. E.g. see <a href="https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/metareg.html">https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/metareg.html</a> and the <code>mods</code> argument of <code><a href="https://wviechtb.github.io/metafor/reference/rma.uni.html">metafor::rma.uni()</a></code> function <a href="https://wviechtb.github.io/metafor/reference/rma.uni.html">https://wviechtb.github.io/metafor/reference/rma.uni.html</a>.</p>
+<ul>
+<li>Try to compute a meta-regression model checking the impact of <code>format</code>
+<ul>
+<li>intepret the results</li>
+<li>is the heterogeneity different from the model without predictors?</li>
+</ul>
+</li>
+</ul></section></section><section><section id="proposed-solutions" class="title-slide slide level1 section center"><h1>Proposed solutions</h1>
+
+</section><section id="importing-and-exploring" class="slide level2"><h2>1. Importing and exploring</h2>
+<p>We have <code>nrow(dep)</code> studies, and this is the dataset structure with some summary statistics:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a>dep <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">here</span>(<span class="st">"02-meta-analysis/objects/depression.rds"</span>))</span>
+<span id="cb68-2"><a href="#cb68-2"></a></span>
+<span id="cb68-3"><a href="#cb68-3"></a><span class="fu">str</span>(dep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   49 obs. of  8 variables:
+ $ id       : int  1 5 6 9 11 14 16 18 19 21 ...
+ $ study    : chr  "Amani, 2021" "Ayen, 2004" "Beach, 1992" "Brown, 1984" ...
+ $ age_group: chr  "adul" "adul" "adul" "adul" ...
+ $ mean_age : num  31.6 51.3 39.1 36.5 38.8 ...
+ $ country  : chr  "can" "eu" "us" "us" ...
+ $ format   : chr  "grp" "grp" "ind" "ind" ...
+ $ yi       : num  1.307 3.36 1.003 0.276 1.841 ...
+ $ sei      : num  0.363 0.695 0.389 0.412 0.528 ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a><span class="fu">summary</span>(dep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       id            study            age_group            mean_age    
+ Min.   :  1.00   Length:49          Length:49          Min.   :20.08  
+ 1st Qu.: 26.00   Class :character   Class :character   1st Qu.:37.42  
+ Median : 48.00   Mode  :character   Mode  :character   Median :41.32  
+ Mean   : 55.61                                         Mean   :42.97  
+ 3rd Qu.: 90.00                                         3rd Qu.:48.72  
+ Max.   :112.00                                         Max.   :68.53  
+                                                        NA's   :3      
+   country             format                yi               sei        
+ Length:49          Length:49          Min.   :-0.1493   Min.   :0.1042  
+ Class :character   Class :character   1st Qu.: 0.6409   1st Qu.:0.2597  
+ Mode  :character   Mode  :character   Median : 0.8459   Median :0.3821  
+                                       Mean   : 1.2476   Mean   :0.3794  
+                                       3rd Qu.: 1.8282   3rd Qu.:0.4570  
+                                       Max.   : 4.8273   Max.   :0.7451  
+                                                                         </code></pre>
+</div>
+</div>
+</section><section id="importing-and-exploring-1" class="slide level2"><h2>1. Importing and exploring</h2>
+<p>Let’s plot the variables:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>))</span>
+<span id="cb72-2"><a href="#cb72-2"></a><span class="fu">barplot</span>(<span class="fu">table</span>(dep<span class="sc">$</span>age_group))</span>
+<span id="cb72-3"><a href="#cb72-3"></a><span class="fu">hist</span>(dep<span class="sc">$</span>mean_age)</span>
+<span id="cb72-4"><a href="#cb72-4"></a><span class="fu">barplot</span>(<span class="fu">table</span>(dep<span class="sc">$</span>country))</span>
+<span id="cb72-5"><a href="#cb72-5"></a><span class="fu">barplot</span>(<span class="fu">table</span>(dep<span class="sc">$</span>format))</span>
+<span id="cb72-6"><a href="#cb72-6"></a><span class="fu">hist</span>(dep<span class="sc">$</span>yi)</span>
+<span id="cb72-7"><a href="#cb72-7"></a><span class="fu">hist</span>(dep<span class="sc">$</span>sei)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-64-1.svg" width="960" class="r-stretch quarto-figure-center"></section><section id="models" class="slide level2"><h2>2. Models</h2>
+<div class="panel-tabset">
+<ul id="tabset-8" class="panel-tabset-tabby">
+<li><a data-tabby-default="" href="#tabset-8-1">EE model</a></li>
+<li><a href="#tabset-8-2">RE model</a></li>
+<li><a href="#tabset-8-3">Comparison</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-8-1">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1"></a>dep<span class="sc">$</span>vi <span class="ot">&lt;-</span> dep<span class="sc">$</span>sei<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb73-2"><a href="#cb73-2"></a>fit_ee <span class="ot">&lt;-</span> <span class="fu">rma</span>(yi, vi, <span class="at">data =</span> dep, <span class="at">method =</span> <span class="st">"EE"</span>)</span>
+<span id="cb73-3"><a href="#cb73-3"></a><span class="fu">summary</span>(fit_ee)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Equal-Effects Model (k = 49)
+
+   logLik   deviance        AIC        BIC       AICc   
+-138.2206   289.9970   278.4412   280.3330   278.5263   
+
+I^2 (total heterogeneity / total variability):   83.45%
+H^2 (total variability / sampling variability):  6.04
+
+Test for Heterogeneity:
+Q(df = 48) = 289.9970, p-val &lt; .0001
+
+Model Results:
+
+estimate      se     zval    pval   ci.lb   ci.ub      
+  0.8354  0.0392  21.3029  &lt;.0001  0.7585  0.9122  *** 
+
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-8-2">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1"></a>fit_re <span class="ot">&lt;-</span> <span class="fu">rma</span>(yi, vi, <span class="at">data =</span> dep, <span class="at">method =</span> <span class="st">"REML"</span>)</span>
+<span id="cb75-2"><a href="#cb75-2"></a><span class="fu">summary</span>(fit_re)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Random-Effects Model (k = 49; tau^2 estimator: REML)
+
+  logLik  deviance       AIC       BIC      AICc   
+-64.4008  128.8016  132.8016  136.5440  133.0683   
+
+tau^2 (estimated amount of total heterogeneity): 0.6685 (SE = 0.1658)
+tau (square root of estimated tau^2 value):      0.8176
+I^2 (total heterogeneity / total variability):   89.54%
+H^2 (total variability / sampling variability):  9.56
+
+Test for Heterogeneity:
+Q(df = 48) = 289.9970, p-val &lt; .0001
+
+Model Results:
+
+estimate      se    zval    pval   ci.lb   ci.ub      
+  1.1802  0.1293  9.1307  &lt;.0001  0.9268  1.4335  *** 
+
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-8-3">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1"></a>filor<span class="sc">::</span><span class="fu">compare_rma</span>(fit_ee, fit_re)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             fit_ee       fit_re
+b      8.353690e-01 1.180179e+00
+se     3.921379e-02 1.292545e-01
+zval   2.130294e+01 9.130661e+00
+pval  1.066166e-100 6.808211e-20
+ci.lb  7.585114e-01 9.268452e-01
+ci.ub  9.122266e-01 1.433514e+00
+I2     8.344810e+01 8.953622e+01
+tau2   0.000000e+00 6.684953e-01</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="forest-plots" class="slide level2"><h2>3. Forest Plots</h2>
+<div class="panel-tabset">
+<ul id="tabset-9" class="panel-tabset-tabby">
+<li><a data-tabby-default="" href="#tabset-9-1">EE model</a></li>
+<li><a href="#tabset-9-2">RE model</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-9-1">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1"></a><span class="fu">forest</span>(fit_ee)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-68-1.svg" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-9-2">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1"></a><span class="fu">forest</span>(fit_re)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-69-1.svg" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="funnel-plot" class="slide level2"><h2>4. Funnel Plot</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1"></a><span class="fu">funnel</span>(fit_re)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-70-1.svg" width="960" class="r-stretch quarto-figure-center"></section><section id="publication-bias-1" class="slide level2"><h2>5. Publication Bias</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1"></a>egg <span class="ot">&lt;-</span> <span class="fu">regtest</span>(fit_re)</span>
+<span id="cb82-2"><a href="#cb82-2"></a>egg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Regression Test for Funnel Plot Asymmetry
+
+Model:     mixed-effects meta-regression model
+Predictor: standard error
+
+Test for Funnel Plot Asymmetry: z =  4.2894, p &lt; .0001
+Limit Estimate (as sei -&gt; 0):   b = -0.0256 (CI: -0.6089, 0.5576)</code></pre>
+</div>
+</div>
+</section><section id="publication-bias-2" class="slide level2"><h2>5. Publication Bias</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1"></a><span class="fu">funnel</span>(fit_re)</span>
+<span id="cb84-2"><a href="#cb84-2"></a>se <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="fl">1.8</span>,<span class="at">length=</span><span class="dv">100</span>)</span>
+<span id="cb84-3"><a href="#cb84-3"></a><span class="fu">lines</span>(<span class="fu">coef</span>(egg<span class="sc">$</span>fit)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(egg<span class="sc">$</span>fit)[<span class="dv">2</span>]<span class="sc">*</span>se, se, <span class="at">lwd=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-72-1.svg" width="960" class="r-stretch quarto-figure-center"></section><section id="references" class="slide level2 smaller scrollable"><h2>References</h2>
+<div class="footer footer-default">
+
+</div>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Bartos2022-im" class="csl-entry" role="listitem">
+Bartoš, František, Maximilian Maier, Daniel S Quintana, and Eric-Jan Wagenmakers. 2022. <span>“Adjusting for Publication Bias in JASP and r: Selection Models, PET-PEESE, and Robust Bayesian Meta-Analysis.”</span> <em>Adv. Methods Pract. Psychol. Sci.</em> 5 (July): 251524592211092. <a href="https://doi.org/10.1177/25152459221109259">https://doi.org/10.1177/25152459221109259</a>.
+</div>
+<div id="ref-Borenstein2009-mo" class="csl-entry" role="listitem">
+Borenstein, Michael, Larry V Hedges, Julian P T Higgins, and Hannah R Rothstein. 2009. <span>“Introduction to <span>Meta-Analysis</span>.”</span> <a href="https://doi.org/10.1002/9780470743386">https://doi.org/10.1002/9780470743386</a>.
+</div>
+<div id="ref-Citkowicz2017-ox" class="csl-entry" role="listitem">
+Citkowicz, Martyna, and Jack L Vevea. 2017. <span>“A Parsimonious Weight Function for Modeling Publication Bias.”</span> <em>Psychol. Methods</em> 22 (March): 28–41. <a href="https://doi.org/10.1037/met0000119">https://doi.org/10.1037/met0000119</a>.
+</div>
+<div id="ref-Duval2000-ym" class="csl-entry" role="listitem">
+Duval, S, and R Tweedie. 2000. <span>“Trim and Fill: A Simple Funnel-Plot-Based Method of Testing and Adjusting for Publication Bias in Meta-Analysis.”</span> <em>Biometrics</em> 56 (June): 455–63. <a href="https://doi.org/10.1111/j.0006-341x.2000.00455.x">https://doi.org/10.1111/j.0006-341x.2000.00455.x</a>.
+</div>
+<div id="ref-Guan2016-kn" class="csl-entry" role="listitem">
+Guan, Maime, and Joachim Vandekerckhove. 2016. <span>“A Bayesian Approach to Mitigation of Publication Bias.”</span> <em>Psychon. Bull. Rev.</em> 23 (February): 74–86. <a href="https://doi.org/10.3758/s13423-015-0868-6">https://doi.org/10.3758/s13423-015-0868-6</a>.
+</div>
+<div id="ref-Harrer2021-go" class="csl-entry" role="listitem">
+Harrer, Mathias, Pim Cuijpers, Toshi Furukawa, and David Ebert. 2021. <em>Doing Meta-Analysis with r: A Hands-on Guide</em>. 1st ed. London, England: CRC Press.
+</div>
+<div id="ref-Hedges1989-ip" class="csl-entry" role="listitem">
+Hedges, Larry V. 1989. <span>“An Unbiased Correction for Sampling Error in Validity Generalization Studies.”</span> <em>J. Appl. Psychol.</em> 74 (June): 469–77. <a href="https://doi.org/10.1037/0021-9010.74.3.469">https://doi.org/10.1037/0021-9010.74.3.469</a>.
+</div>
+<div id="ref-Hedges2019-ry" class="csl-entry" role="listitem">
+Hedges, Larry V, and Jacob M Schauer. 2019. <span>“Statistical Analyses for Studying Replication: Meta-Analytic Perspectives.”</span> <em>Psychol. Methods</em> 24 (October): 557–70. <a href="https://doi.org/10.1037/met0000189">https://doi.org/10.1037/met0000189</a>.
+</div>
+<div id="ref-Higgins2002-fh" class="csl-entry" role="listitem">
+Higgins, Julian P T, and Simon G Thompson. 2002. <span>“Quantifying Heterogeneity in a Meta-Analysis.”</span> <em>Stat. Med.</em> 21 (June): 1539–58. <a href="https://doi.org/10.1002/sim.1186">https://doi.org/10.1002/sim.1186</a>.
+</div>
+<div id="ref-Jin2015-ik" class="csl-entry" role="listitem">
+Jin, Zhi-Chao, Xiao-Hua Zhou, and Jia He. 2015. <span>“Statistical Methods for Dealing with Publication Bias in Meta-Analysis.”</span> <em>Stat. Med.</em> 34 (January): 343–60. <a href="https://doi.org/10.1002/sim.6342">https://doi.org/10.1002/sim.6342</a>.
+</div>
+<div id="ref-Maier2023-js" class="csl-entry" role="listitem">
+Maier, Maximilian, František Bartoš, and Eric-Jan Wagenmakers. 2023. <span>“Robust Bayesian Meta-Analysis: Addressing Publication Bias with Model-Averaging.”</span> <em>Psychol. Methods</em> 28 (February): 107–22. <a href="https://doi.org/10.1037/met0000405">https://doi.org/10.1037/met0000405</a>.
+</div>
+<div id="ref-McShane2016-bk" class="csl-entry" role="listitem">
+McShane, Blakeley B, Ulf Böckenholt, and Karsten T Hansen. 2016. <span>“Adjusting for Publication Bias in Meta-Analysis: An Evaluation of Selection Methods and Some Cautionary Notes: An Evaluation of Selection Methods and Some Cautionary Notes.”</span> <em>Perspect. Psychol. Sci.</em> 11 (September): 730–49. <a href="https://doi.org/10.1177/1745691616662243">https://doi.org/10.1177/1745691616662243</a>.
+</div>
+<div id="ref-Orwin1983-vu" class="csl-entry" role="listitem">
+Orwin, Robert G. 1983. <span>“A Fail-SafeN for Effect Size in Meta-Analysis.”</span> <em>J. Educ. Stat.</em> 8 (June): 157–59. <a href="https://doi.org/10.3102/10769986008002157">https://doi.org/10.3102/10769986008002157</a>.
+</div>
+<div id="ref-Rosenberg2005-ie" class="csl-entry" role="listitem">
+Rosenberg, Michael S. 2005. <span>“The File-Drawer Problem Revisited: A General Weighted Method for Calculating Fail-Safe Numbers in Meta-Analysis.”</span> <em>Evolution</em> 59 (February): 464–68. <a href="https://doi.org/10.1111/j.0014-3820.2005.tb01004.x">https://doi.org/10.1111/j.0014-3820.2005.tb01004.x</a>.
+</div>
+<div id="ref-Rosenthal1979-yx" class="csl-entry" role="listitem">
+Rosenthal, Robert. 1979. <span>“The File Drawer Problem and Tolerance for Null Results.”</span> <em>Psychol. Bull.</em> 86 (May): 638–41. <a href="https://doi.org/10.1037/0033-2909.86.3.638">https://doi.org/10.1037/0033-2909.86.3.638</a>.
+</div>
+<div id="ref-Shi2019-pj" class="csl-entry" role="listitem">
+Shi, Linyu, and Lifeng Lin. 2019. <span>“The Trim-and-Fill Method for Publication Bias: Practical Guidelines and Recommendations Based on a Large Database of Meta-Analyses: Practical Guidelines and Recommendations Based on a Large Database of Meta-Analyses.”</span> <em>Medicine (Baltimore)</em> 98 (June): e15987. <a href="https://doi.org/10.1097/MD.0000000000015987">https://doi.org/10.1097/MD.0000000000015987</a>.
+</div>
+<div id="ref-Veroniki2016-zs" class="csl-entry" role="listitem">
+Veroniki, Areti Angeliki, Dan Jackson, Wolfgang Viechtbauer, Ralf Bender, Jack Bowden, Guido Knapp, Oliver Kuss, Julian P T Higgins, Dean Langan, and Georgia Salanti. 2016. <span>“Methods to Estimate the Between-Study Variance and Its Uncertainty in Meta-Analysis.”</span> <em>Res. Synth. Methods</em> 7 (March): 55–79. <a href="https://doi.org/10.1002/jrsm.1164">https://doi.org/10.1002/jrsm.1164</a>.
+</div>
+<div id="ref-Viechtbauer2005-zt" class="csl-entry" role="listitem">
+Viechtbauer, Wolfgang. 2005. <span>“Bias and Efficiency of Meta-Analytic Variance Estimators in the Random-Effects Model.”</span> <em>J. Educ. Behav. Stat.</em> 30 (September): 261–93. <a href="https://doi.org/10.3102/10769986030003261">https://doi.org/10.3102/10769986030003261</a>.
+</div>
+<div id="ref-Viechtbauer2010-xz" class="csl-entry" role="listitem">
+———. 2010. <span>“Conducting Meta-Analyses in <span>R</span> with the <span class="nocase">metafor</span> Package.”</span> <em>Journal of Statistical Software</em>. <a href="https://doi.org/10.18637/jss.v036.i03">https://doi.org/10.18637/jss.v036.i03</a>.
+</div>
+<div id="ref-Viechtbauer2021-od" class="csl-entry" role="listitem">
+———. 2021. <span>“Selection Models for Publication Bias in Meta-Analysis. Presentation at ESMARConf2021.”</span> figshare. <a href="https://doi.org/10.6084/M9.FIGSHARE.13637900.V1">https://doi.org/10.6084/M9.FIGSHARE.13637900.V1</a>.
+</div>
+</div>
+</section></section><!-- FINAL SLIDE --><!-- END FINAL SLIDE -->
+</div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="02-meta-analysis_files/libs/revealjs/dist/reveal.js"></script><!-- reveal.js plugins --><script src="02-meta-analysis_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script><script src="02-meta-analysis_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script><script src="02-meta-analysis_files/libs/revealjs/plugin/reveal-menu/menu.js"></script><script src="02-meta-analysis_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script><script src="02-meta-analysis_files/libs/revealjs/plugin/quarto-support/support.js"></script><script src="02-meta-analysis_files/libs/revealjs/plugin/notes/notes.js"></script><script src="02-meta-analysis_files/libs/revealjs/plugin/search/search.js"></script><script src="02-meta-analysis_files/libs/revealjs/plugin/zoom/zoom.js"></script><script src="02-meta-analysis_files/libs/revealjs/plugin/math/math.js"></script><script>window.define = window.backupDefine; window.backupDefine = undefined;</script><script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'smaller': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: false,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script><script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script><script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        };
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+
+
+</body></html>

@@ -1,0 +1,12 @@
+Package: ReprSummerSchool2023
+Title: Materials And Code For Reproducibility Summer School
+Version: 0.0.1
+Authors@R: 
+    person("Filippo", "Gambarota", , "filippo.gambarota@unipd.it", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-6666-1747"))
+Description: Collect code, functions and materials for the Summer School: "Replicability Crisis in Science?", University of Padova, 18-22 September 2023
+License: `use_mit_license()`
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+LazyData: true

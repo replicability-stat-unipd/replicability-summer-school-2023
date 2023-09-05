@@ -1,0 +1,1372 @@
+---
+title: Meta-Analysis and Multi-Lab Replication studies
+subtitle: Replicability Crisis in Science?
+date: last-modified
+date-format: "[18-22 September] YYYY"
+author: 
+  - name: Filippo Gambarota
+    email: filippo.gambarota@unipd.it
+    orcid: "`r filor::fil()$orcid`"
+  - name: Gianmarco Altoè
+    email: gianmarco.altoe@unipd.it
+    orcid: "0000-0003-1154-9528"
+final-slide: false
+filters: 
+    - code-fullscreen
+    - line-highlight
+format:
+  filor-revealjs:
+    toc: false
+    margin: 0.1
+bibliography: "`r filor::fil()$bib`"
+code-link: true
+notation-slide: false
+params:
+  solutions: true
+---
+
+## Setup
+
+```{r}
+#| label: setup
+knitr::opts_chunk$set(echo = TRUE,
+                      dev = "svg",
+                      fig.align = "center")
+```
+
+### Packages
+```{r}
+#| label: packages-ws
+library(tidyverse) # for data manipulation
+library(metafor) # for meta-analysis
+devtools::load_all() # load all utils functions
+```
+
+```{r}
+#| label: ggplot-setup
+#| include: false
+mytheme <- function(){
+  theme(plot.title = element_text(hjust = 0.5)) +
+    theme_minimal(15)
+}
+
+theme_set(mytheme())
+```
+
+```{r}
+#| label: packages
+#| include: false
+library(ggdist)
+library(here)
+```
+
+```{r}
+#| include: false
+#source(here("02-meta-analysis", "scripts", "r-img.R"))
+imgs <- readRDS(here("02-meta-analysis", "objects", "r-imgs.rds"))
+funs <- filor::get_funs(here("R", "utils-meta.R"))
+```
+
+# Meta-analysis {.section}
+
+## Meta-analysis
+
+- The meta-analysis is a statistical procedure to combine evidence from a group of studies.
+
+- It is usually combined with a systematic review of the literature
+
+- Is somehow the gold-standard approach when we want to summarise and make inference on a specific research area
+
+## Effect size
+
+To compare results from different studies, we should use a common metrics. Frequently meta-analysis use the so called *standardized* effect size. For example the Pearson correlation or the Cohen's $d$.
+
+$$
+r = \frac{\sum{(x_i - \bar{x})(y_i - \bar{y})}}{\sqrt{\sum{(x_i - \bar{x})^2}\sum{(y_i - \bar{y})^2}}}
+$$
+
+$$
+d = \frac{\bar{x_1} - \bar{x_2}}{s_p}
+$$
+
+$$
+s_p = \sqrt{\frac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}}
+$$
+
+## Effect size
+
+The advantage of standandardized effect size is that regardless the original variable, the intepretation and the scale is the same. For example the pearson correlation ranges between -1 and 1 and the Cohen's $d$ between $- \inf$ and $\inf$ and is intepreted as how many standard deviations the two groups differs.
+
+```{r}
+#| code-fold: true
+S <- matrix(c(1, 0.7, 0.7, 1), nrow = 2)
+X <- MASS::mvrnorm(100, c(0, 2), S, empirical = TRUE)
+
+par(mfrow = c(1,2))
+plot(X, xlab = "x", ylab = "y", cex = 1.3, pch = 19,
+     cex.lab = 1.2, cex.axis = 1.2,
+     main = latex2exp::TeX(sprintf("$r = %.2f$", cor(X[, 1], X[, 2]))))
+abline(lm(X[, 2] ~ X[, 1]), col = "firebrick", lwd = 2)
+
+
+plot(density(X[, 1]), xlim = c(-5, 7), ylim = c(0, 0.5), col = "dodgerblue", lwd = 2,
+     main = latex2exp::TeX(sprintf("$d = %.2f$", lsr::cohensD(X[, 1], X[, 2]))),
+     xlab = "")
+lines(density(X[, 2]), col = "firebrick", lwd = 2)
+```
+
+## Effect size Standard Error {#sec-effsize-se}
+
+Crucially, we can calculate also the standard error of each effect size. The standard error tell us how precise is the estimate.
+
+::: {.panel-tabset}
+
+### Formula
+
+For example, he standard error of the Cohen's $d$ has several estimator. Just as example:
+$$
+SE_d = \frac{n_1 + n_2}{n_1 n_2} + \frac{d^2}{2(n_1 + n_2)}
+$$
+
+### Plot
+
+```{r}
+#| echo: false
+n <- seq(10, 500)
+d <- 2
+se <- (n+n) / (n*n) + d^2/(2*(n+n))
+
+plot(n, se, type = "l", xlab = "N", ylab = latex2exp::TeX("$SE_d$"),
+     main = latex2exp::TeX("$d = 2$"))
+```
+
+:::
+
+## Notation {.smaller}
+
+Meta-analysis notation is a little bit inconsistent in textbooks and papers. We define here some rules to simplify the work^[The proposed notation could not be the best from the formal point of view]
+
+- $k$ is the number of studies
+- $n_j$ is the sample size of the group $j$ within a study
+- $y_i$ are the observed effect size included in the meta-analysis
+- $\sigma_i^2$ are the observed sampling variance of studies and $\epsilon_i$ are the sampling errors
+- $\theta$ is the equal-effects parameter (see @eq-ee1)
+- $\delta_i$ is the random-effect (see @eq-re-mod2)
+- $\mu_\theta$ is the average effect of a random-effects model (see @eq-re-mod1)
+- $w_i$ are the meta-analysis weights (e.g., see @eq-wi)
+- $\tau^2$ is the heterogeneity (see @eq-re-mod2)
+- $\Delta$ is the (generic) population effect size
+- $s_j^2$ is the variance of the group $j$ within a study
+ 
+## Extra - Simulating Meta-Analysis
+
+For the examples and plots I'm going to use simulated data^[If you are interested in meta-analysis simulation we wrote a preprint [https://psyarxiv.com/br6vy/](https://psyarxiv.com/br6vy/)]. We simulate *unstandardized* effect sizes (UMD) because the computations are easier and the estimator is unbiased [e.g., @Viechtbauer2005-zt]
+
+More specifically we simulate hypothetical studies where two independent groups are compared:
+
+$$
+\Delta = \overline{X_1} - \overline{X_2}
+$$
+
+$$
+SE_y = \sqrt{\frac{s^2_1}{n_1} + \frac{s^2_2}{n_2}}
+$$
+
+With $X_{1_i} \sim \mathcal{N}(0, 1)$ and $X_{2_i} \sim \mathcal{N}(\Delta, 1)$
+
+## Meta-analysis as a (weighted) average
+
+Let's imagine to have $k = 10$ studies:
+
+```{r}
+#| code-fold: true
+k <- 10
+ni <- round(runif(k, 10, 100))
+dat <- sim_studies(k, 0.5, 0, ni, ni)
+qf <- quick_forest(dat)
+qf
+```
+
+What could you say about the phenomenon?
+
+## Meta-analysis as a (weighted) average
+
+::: {.panel-tabset}
+
+### Plot
+
+We could say that the average effect is roughly ~0.5 and there is not a lot of variability around the average.
+
+```{r}
+#| code-fold: true
+avg <- mean(dat$yi)
+qf + geom_vline(xintercept = avg, color = "firebrick") +
+geom_segment(aes(x = yi, y = id-0.3, xend = avg, yend = id-0.3),
+color = "firebrick")
+```
+
+### Formula
+
+$$
+\overline y = \frac{\sum_{i = 1}^k y}{k}$T$\
+$$
+
+```{r}
+ybar <- mean(dat$yi)
+ybar
+```
+
+:::
+
+## Meta-analysis as a (weighted) average
+
+::: {.panel-tabset}
+
+### Plot
+
+The simple average is a good statistics. But some studies are clearly more precise (narrower confidence intervals) than others.
+
+```{r}
+#| echo: false
+quick_forest(dat, weigth = TRUE)
+```
+
+### Equation
+
+We can compute a weighted average where each study is weighted ($w_i$) by the inverse of the variance. This is called inverse-variance weighting. Clarly a weighted average were all weights are the same reduced to a simple aritmetic average.
+
+$$
+\overline y = \frac{\sum_{i = 1}^k y_iw_i}{\sum_{i = 1}^k w_i}
+$$
+$$
+w_i = \frac{1}{v_i}
+$${#eq-wi}
+
+```{r}
+wi <- 1/dat$vi
+ywbar <- weighted.mean(dat$yi, wi) 
+ywbar
+```
+
+Compared to the unweighted version (`r ybar`), given that weights are non homogeneous the values are different.
+
+:::
+
+## Meta-analysis as a (weighted) average
+
+What we did is a very simple model but actually is a meta-analysis model. This is commonly known as **equal-effects model** (or fixed-effect) **model**.
+
+```{r}
+#| code-fold: true
+quick_forest(dat, weigth = TRUE) +
+  geom_vline(xintercept = ywbar, color = "firebrick") +
+  ggtitle("Weighted Average")
+```
+
+## Equal-effects model (EE) {#sec-ee}
+
+::: {.panel-tabset}
+
+### Assumptions
+
+The EE model is the simplest meta-analysis model. The assumptions are:
+
+- there is a unique, true effect size to estimate $\theta$
+- each study is a more or less precise estimate of $\theta$
+- there is no TRUE variability among studies. The observed variability is due to studies that are imprecise (i.e., sampling error)
+
+### Equations
+
+Formally, we can define the EE model as:
+$$
+y_i = \theta + \epsilon_i
+$$ {#eq-ee1}
+
+$$
+\epsilon_i \sim \mathcal{N}(0, \sigma^2_i)
+$$ {#eq-ee1}
+
+Where $\sigma^2_i$ is the vector of sampling variabilities of $k$ studies. Clearly this is a model with heterogeneous variances. In meta-analysis the sampling variances (e.g., calculated as in Slide [-@sec-effsize-se])
+
+### Plots
+
+```{r}
+#| echo: false
+imgs$equal
+```
+
+:::
+
+## Equal-effects model (EE) {#sec-ee-high-low}
+
+A crucial part of the EE model is that, assuming studies with very large sample sizes, $\epsilon_i$ will tend to 0 and each study is an almost perfect estimation of $\theta$. Let's simulate two models, with $k = 10$ studies and $n = 30$ and $n = 500$. The effect size is the same $0.5$.
+
+```{r}
+#| code-fold: true
+dat_low  <- sim_studies(10, 0.5, 0, 30, 30)
+dat_high <- sim_studies(10, 0.5, 0, 500, 500)
+
+qf_low <- quick_forest(dat_low) + 
+  geom_vline(xintercept = 0.5, color = "firebrick") +
+  xlim(c(-2, 2)) +
+  ggtitle(latex2exp::TeX("$n_{1,2} = 30$"))
+
+qf_high <- quick_forest(dat_high) + 
+  geom_vline(xintercept = 0.5, color = "firebrick") +
+  xlim(c(-2, 2)) +
+  ggtitle(latex2exp::TeX("$n_{1,2} = 500$"))
+
+plt_high_low <- cowplot::plot_grid(
+  qf_low,
+  qf_high
+)
+
+plt_high_low
+```
+
+## Equal-effects model (EE)
+
+Clearly, as $n$ increase, each study is essentially a perfect estimation of $\theta$ as depicted in the theoretical figure (see slide [-@sec-ee]).
+
+```{r}
+#| echo: false
+plt_high_low
+```
+
+# Are the EE assumptions realistic? {.question}
+
+## Are the EE assumptions realistic?
+
+The EE model is appropriate if our studies are somehow exact replications of the exact same effect. We are assuming that there is no real variability.
+
+. . .
+
+However, meta-analysis rarely report the results of $k$ exact replicates. It is more common to include studies with the same **underlying** objective but a roughly similar method.
+
+- people with different ages or other participant-level differences
+- different methodology
+- ...
+
+## Are the EE assumptions realistic?
+
+In this case, even with extremely large studies, our effect could be larger in some conditions or smaller or absent in other conditions.
+
+In other terms we are assuming that there could be some variability (i.e., **heterogeneity**) among studies that is independent from the sample size (or more generally the precision)
+
+## Random-effects model (RE)
+
+::: {.panel-tabset}
+
+### Theory
+
+We can extend the EE model including another source of variability, $\tau^2$. $\tau^2$ is the true heterogeneity among studies caused by methdological differences or intrisic variability in the phenomenon.
+
+### Equations
+
+Formally we can extend the equation [-@eq-ee1] as:
+$$
+y_i = \mu_{\theta} + \delta_i + \epsilon_i
+$$ {#eq-re-mod1}
+
+$$
+\delta_i \sim \mathcal{N}(0, \tau^2)
+$$ {#eq-re-mod2}
+
+$$
+\epsilon_i \sim \mathcal{N}(0, \sigma^2_i)
+$$
+
+Where $\mu_{\theta}$ is the average effect size and $\delta_i$ is the study-specific deviation from the average effect (regulated by $\tau^2$).
+
+### Equations
+
+Given that we extended the EE model equation. Also the estimation of the average effect need to be extended. Basically the RE is still a weigthed average but weigths need to include also $\tau^2$.
+
+$$
+\overline y = \frac{\sum_{i = 1}^k y_iw^*_i}{\sum_{i = 1}^k w^*_i}
+$$ {#eq-re1}
+
+$$
+w^*_i = \frac{1}{v_i + \tau^2}
+$$ {#eq-re2}
+
+The consequence is that weights are different where extremely precise/imprecise studies will impact less the estimation of the average effect under the RE model compared to EE.
+
+### Plots
+
+```{r}
+#| echo: false
+imgs$random
+```
+
+:::
+
+## Random-effects model
+
+The crucial difference with the EE model is that even with large $n$, only the $\mu_{\theta} + \delta_i$ are estimated (almost) without error. As long $\tau^2 \neq 0$ there will be variability in the effect sizes.
+
+```{r}
+#| echo: false
+imgs$equal_vs_random
+```
+
+## Random-effects model
+
+Again, we can easily demonstrate this with a simulation. We use the same simulation as slide [-@sec-ee-high-low] but including $\tau^2 = 0.2$.
+
+```{r}
+#| code-fold: true
+dat_low  <- sim_studies(10, 0.5, 0.2, 30, 30)
+dat_high <- sim_studies(10, 0.5, 0.2, 500, 500)
+
+qf_low <- quick_forest(dat_low) + 
+  geom_vline(xintercept = 0.5, color = "firebrick") +
+  xlim(c(-3, 3)) +
+  ggtitle(latex2exp::TeX("$n_{1,2} = 30$"))
+
+qf_high <- quick_forest(dat_high) + 
+  geom_vline(xintercept = 0.5, color = "firebrick") +
+  xlim(c(-3, 3)) +
+  ggtitle(latex2exp::TeX("$n_{1,2} = 500$"))
+
+qf_tau_high_low <- cowplot::plot_grid(
+  qf_low,
+  qf_high
+)
+qf_tau_high_low
+```
+
+## Extra - Simulating Meta-Analysis
+
+For the simulations, I'm sampling from effect size and variance sampling distributions.
+
+::: {.panel-tabset}
+
+### Equations
+
+The unstandardized effect size is a mean difference. The sampling distribution is:
+
+$$
+y_i \sim \mathcal{N}(\Delta, \frac{1}{n_1} + \frac{1}{n_2})
+$$
+
+Where ES is the population level effect size and $n_{1,2}$ are the sample sizes of the two studies. The sampling variances are generated from a $\chi^2$ distribution:
+$$
+\sigma_i^2 \sim \frac{\chi^2_{n_1 + n_2 - 2}}{n_1 + n_2 - 2} (\frac{1}{n_1} + \frac{1}{n_2})
+$$
+
+### Code
+
+The simulation is implemented in the `sim_studies` function:
+
+```{r}
+#| echo: false
+#| output: asis
+filor::print_fun(funs$sim_studies)
+```
+
+```{r}
+dat <- sim_studies(k = 10, theta = 0.5, tau2 = 0.2, n0 = 30, n1 = 30)
+dat
+```
+
+:::
+
+## Heterogeneity
+
+We discussed so far about estimating the average effect ($\theta$ or $\mu_\theta$). But how to estimate the heterogeneity?
+
+There are several estimators for $\tau^2$ [see @Viechtbauer2005-zt; @Veroniki2016-zs]
+
+- Hunter–Schmidt
+- Hedges
+- DerSimonian–Laird
+- Maximum-Likelihood
+- Restricted Maximum-Likelihood
+
+## The Q Statistics^[See @Harrer2021-go (Chapter 5) and @Hedges2019-ry for an overview about the Q statistics]
+
+The Q statistics is used to make statistical inference on the heterogeneity. Can be considered as a weighted sum of squares:
+
+$$
+Q = \sum^k_{i = 1}w_i(\hat \theta_i - \hat \theta)^2
+$$
+
+Where $\hat \theta$ is EE estimation (regardless if $\tau^2 \neq 0$) and $w_i$ are the inverse-variance weights. Note that in the case of $w_1 = w_2 ... = w_i$, Q is just a standard sum of squares (or deviance).
+
+## The Q Statistics
+
+- Given that we are summing up squared distances, they should be approximately $\chi^2$ with $df = k - 1$. In case of no heterogeneity ($\tau^2 = 0$) the observed variability is caused by sampling error only. The expectd value of the $\chi^2$ is just the degrees of freedom ($df = k - 1$).
+
+- In case of $\tau^2 \neq 0$, the expected value is $k - 1 + \lambda$ where $\lambda$ is a non-centrality parameter.
+
+- In other terms, if the expected value of $Q$ exceed the expected value assuming no heterogeneity, we have evidence that $\tau^2 \neq 0$.
+
+## The Q Statistics
+
+Let's try a more practical approach. We simulate a lot of meta-analysis with and without heterogeneity and we check the Q statistics.
+
+```{r}
+#| code-fold: true
+get_Q <- function(yi, vi){
+  wi <- 1/vi
+  theta_ee <- weighted.mean(yi, wi)
+  sum(wi*(yi - theta_ee)^2)
+}
+
+k <- 30
+n <- 30
+tau2 <- 0.1
+nsim <- 1e4
+
+Qs_tau2_0 <- rep(0, nsim)
+Qs_tau2 <- rep(0, nsim)
+res2_tau2_0 <- vector("list", nsim)
+res2_tau2 <- vector("list", nsim)
+
+for(i in 1:nsim){
+  dat_tau2_0 <- sim_studies(k = 30, theta = 0.5, tau2 = 0, n0 = n, n1 = n)
+  dat_tau2 <- sim_studies(k = 30, theta = 0.5, tau2 = tau2, n0 = n, n1 = n)
+  
+  theta_ee_tau2_0 <- weighted.mean(dat_tau2_0$yi, 1/dat_tau2_0$vi)
+  theta_ee <- weighted.mean(dat_tau2$yi, 1/dat_tau2$vi)
+  
+  res2_tau2_0[[i]] <- dat_tau2_0$yi - theta_ee_tau2_0
+  res2_tau2[[i]] <- dat_tau2$yi - theta_ee
+  
+  Qs_tau2_0[i] <- get_Q(dat_tau2_0$yi, dat_tau2_0$vi)
+  Qs_tau2[i] <- get_Q(dat_tau2$yi, dat_tau2$vi)
+}
+
+df <- k - 1
+
+par(mfrow = c(2,2))
+hist(Qs_tau2_0, probability = TRUE, ylim = c(0, 0.08), xlim = c(0, 150),
+     xlab = "Q",
+     main = latex2exp::TeX("$\\tau^2 = 0$"))
+curve(dchisq(x, df), 0, 100, add = TRUE, col = "firebrick", lwd = 2)
+
+hist(unlist(res2_tau2_0), probability = TRUE, main = latex2exp::TeX("$\\tau^2 = 0$"), ylim = c(0, 2),
+     xlab = latex2exp::TeX("$y_i - \\hat{\\theta_i}$"))
+curve(dnorm(x, 0, sqrt(1/n + 1/n)), add = TRUE, col = "dodgerblue", lwd = 2)
+
+hist(Qs_tau2, probability = TRUE, ylim = c(0, 0.08), xlim = c(0, 150),
+     xlab = "Q",
+     main = latex2exp::TeX("$\\tau^2 = 0.1$"))
+curve(dchisq(x, df), 0, 100, add = TRUE, col = "firebrick", lwd = 2)
+
+hist(unlist(res2_tau2), probability = TRUE, main = latex2exp::TeX("$\\tau^2 = 0.1$"), ylim = c(0, 2),
+     xlab = latex2exp::TeX("$y_i - \\hat{\\theta_i}$"))
+curve(dnorm(x, 0, sqrt(1/n + 1/n)), add = TRUE, col = "dodgerblue", lwd = 2)
+```
+
+## The Q Statistics
+
+Let's try a more practical approach. We simulate a lot of meta-analysis with and without heterogeneity and we check the Q statistics.
+
+. . .
+
+- clearly, in the presence of heterogeneity, the expected value of the Q statistics is higher (due to $\lambda$) and also residuals are larger.
+
+. . .
+
+- we can calculate a p-value for deviation from the $\tau^2 = 0$ case as evidence agaist the absence of heterogeneity
+
+## Estimating $\tau^2$
+
+The Q statistics is rarely used to directly represent the heterogeneity. The raw measure of heterogeneity is $\tau^2$. The REML (restricted maximum likelihood) estimator is often used.
+
+$$
+\hat \tau^2 = \frac{\sum_{i = 1}^k w_i^2[(y_i - \hat \mu)^2 - \sigma^2_i]}{\sum_{i = 1}^k w_i^2} + \frac{1}{\sum_{i = 1}^k w_i}
+$$
+
+Where $\hat{\mu}$ is the weighted average (i.e., maximum likelihood estimation, see @eq-re1 and @eq-re2).
+
+## $\tau^2$ as heterogeneity measure
+
+- $\tau^2$ is the direct measure of heterogeneity in meta-analysis
+- it is intepreted as a standard deviation (or variance) of the distribution of true effects
+- a phenomenon associated with an higher $\tau^2$ is interpred as more variable 
+
+## $\tau^2$ as heterogeneity measure
+
+```{r}
+#| code-fold: true
+#| fig-width: 10
+
+# we generate 1e5 values from a random-effect model with certain parameters and different tau2 values
+# and check the expected distrubution of effect sizes
+
+n <- 100
+k <- 1e5
+tau2 <- c(0, 0.1, 0.2, 0.5)
+
+dats <- lapply(tau2, function(x) sim_studies(k, 0.5, x, n, n))
+names(dats) <- tau2
+
+dat <- bind_rows(dats, .id = "tau2") 
+dat$tau2 <- factor(dat$tau2)
+dat$tau2 <- factor(dat$tau2, labels = latex2exp::TeX(sprintf("$\\tau^2 = %s$", levels(dat$tau2))))
+
+dat |> 
+  ggplot(aes(x = yi, y = after_stat(density))) +
+  geom_histogram(bins = 50) +
+  geom_vline(xintercept = 0.5, lwd = 0.5, color = "firebrick") +
+  facet_wrap(~tau2, labeller = label_parsed) +
+  ggtitle(latex2exp::TeX("Expected $y_i$ distribution, $d = 0.5$, $n_{1,2} = 100$")) +
+  xlab(latex2exp::TeX("$y_i$"))
+```
+
+## $I^2$ [@Higgins2002-fh]
+
+We have two sources of variability in a random-effects meta-analysis, the sampling variabilities $\sigma_i^2$ and $\tau^2$. We can use the $I^2$ to express the interplay between the two.
+$$
+I^2 = 100\% \times \frac{\hat{\tau}^2}{\hat{\tau}^2 + \tilde{v}}
+$${#eq-i2}
+
+$$
+\tilde{v} = \frac{(k-1) \sum w_i}{(\sum w_i)^2 - \sum w_i^2},
+$$
+
+Where $\tilde{v}$ is the typical sampling variability. $I^2$ is intepreted as the proportion of total variability due to real heterogeneity (i.e., $\tau^2$)
+
+## $I^2$ [@Higgins2002-fh]^[see [https://www.meta-analysis-workshops.com/download/common-mistakes1.pdf](https://www.meta-analysis-workshops.com/download/common-mistakes1.pdf)]
+
+Note that we can have the same $I^2$ in two completely different meta-analysis. An high $I^2$ does not represent high heterogeneity. Let's assume to have two meta-analysis with $k$ studies and small ($n = 30$) vs large ($n = 500$) sample sizes. 
+
+Let's solve @eq-i2 for $\tau^2$ (using `filor::tau2_from_I2()`) and we found that the same $I^2$ can be obtained with two completely different $\tau^2$ values:
+
+```{r}
+n_1 <- 30
+vi_1 <- 1/n_1 + 1/n_1
+tau2_1 <- filor::tau2_from_I2(0.8, vi_1)
+tau2_1
+
+n_2 <- 500
+vi_2 <- 1/n_2 + 1/n_2
+tau2_2 <- filor::tau2_from_I2(0.8, vi_2)
+tau2_2
+```
+
+## $I^2$ [@Higgins2002-fh]
+
+```{r}
+n_1 <- 30
+vi_1 <- 1/n_1 + 1/n_1
+tau2_1 <- filor::tau2_from_I2(0.8, vi_1)
+tau2_1
+
+n_2 <- 500
+vi_2 <- 1/n_2 + 1/n_2
+tau2_2 <- filor::tau2_from_I2(0.8, vi_2)
+tau2_2
+```
+
+. . .
+
+In other terms, the $I^2$ can be considered a good index of heterogeneity only when the total variance ($\tilde{v} + \tau^2$) is the same.
+
+# Meta-analysis in R {.section}
+
+## Meta-analysis in R
+
+In R there are several packages to conduct a meta-analysis. For me, the best package is `metafor` [@Viechtbauer2010-xz]. The package support all steps in meta-analysis providing also an amazing documentation:
+
+```{r}
+#| echo: false
+
+knitr::include_url("https://www.metafor-project.org/doku.php/metafor")
+```
+
+## Equal-effects model in R
+
+Disclaimer: we are omitting the important part of collecting the information from published studies and calculating the (un)standardized effect sizes. Clerly this part is highly dependent on the actual dataset.
+
+There are few useful resources:
+
+- Chapters 1-9 from Borestein et al. [-@Borenstein2009-mo]
+- The `metafor::escalc()` [function](https://wviechtb.github.io/metafor/reference/escalc.html) that calculate all effects size and report an useful documentation 
+
+## Equal-effects model in R
+
+We can simulate an EE dataset (i.e., $\tau^2 = 0$) and then fit the model with `metafor`:
+
+```{r}
+theta <- 0.3
+k <- 30 # number of studies
+n <- round(runif(k, 10, 60)) # random sample sizes with a plausible range
+dat <- sim_studies(k = k, theta = theta, tau2 = 0, n0 = n, n1 = n)
+dat$n <- n # n1 and n2 are the same, put only one
+head(dat)
+```
+
+## Equal-effects model in R
+
+We can start by some summary statistics:
+
+```{r}
+# unweighted summary statistics for the effect
+summary(dat$yi)
+
+# unweighted summary statistics for the variances
+summary(dat$vi)
+
+# sample sizes
+summary(dat$n) # n0 and n1 are the same
+```
+
+## Equal-effects model in R
+
+Then we can use the `metafor::rma.uni()` function (or more simply `metafor::rma()`) providing the effect size, variances and `method = "EE"` to specify that we are fitting an equal-effects model.
+
+```{r}
+fit_ee <- rma(yi, vi, method = "EE", data = dat)
+summary(fit_ee)
+```
+
+## Random-effects model in R
+
+The syntax for a random-effects model is the same, we just need to use `method = "REML"` (or another $\tau^2$ estimation method)
+
+```{r}
+fit_re <- rma(yi, vi, method = "REML", data = dat)
+summary(fit_re)
+```
+
+## Random-effects model in R
+
+We can easily compare the models using the `compare_rma()` function:
+
+```{r}
+filor::compare_rma(fit_ee, fit_re)  |>
+  round(5)
+```
+
+## Random-effects model in R
+
+Clearly, given that we simulated $\tau^2 = 0$ the `RE` model results is very close (if not equal) to the `EE` model. We can simulate a `RE` model:
+```{r}
+tau2 <- 0.2
+dat <- sim_studies(k = k, theta = theta, tau2 = tau2, n0 = n, n1 = n)
+
+fit_re <- rma(yi, vi, method = "REML", data = dat)
+summary(fit_re)
+```
+
+## Forest Plot
+
+The most common plot to represent meta-analysis results is the forest plot:
+```{r}
+#| fig-width: 10
+#| fig-height: 6
+forest(fit_re)
+```
+
+## Forest Plot
+
+The most common plot to represent meta-analysis results is the forest plot:
+
+- The `x` axis represent the **effect size**
+- The `y` axis represent the **studies**
+- The `size of the square` is the **weigth** of that study ($w_i = 1/\sigma_i^2$)
+- The `interval` is the **95% confidence interval**
+- The `diamond` is the **estimated effect and the 95% confidence interval**
+
+# Multilab Studies  {.section}
+
+## Multilab Studies
+
+So far we reasoned about collecting published studies and conducting a meta-analysis. Despite pooling evidence from multiple studies there are several limitations:
+
+. . .
+
+- publication bias
+
+. . .
+
+- small number of studies ($k$) thus low power and low estimation precision
+
+. . .
+
+- the estimated $\tau^2$ could be high because the methdological heterogeneity is high --> each research group use a different methodology
+
+## Multilab Studies
+
+With multilab studies we define a new data collection where different research group conduct an experiment with a similar (or the exact same) methodology. In this way we can:
+
+. . .
+
+- eliminate the publication bias
+
+. . .
+
+- calibrate the number of studies ($k$) and observations ($n$) according to our criteria (power, precision, etc.)
+
+## Multilab Studies and meta-analysis
+
+From a statistical point of view, the only difference is the source of the data (planned and collected vs collected from the literature). In fact, a multilab study can be analyzed also using standard meta-analysis tools.
+
+When intepreting the results we could highlight some differences:
+
+. . .
+
+- $\tau^2$ in standard meta-analysis is considered the true variability of the phenomenon. In multilab studies (assuming an exact replication approach) should be low or close to zero.
+
+. . .
+
+- In standard meta-analysis we could try to explain $\tau^2$ using meta-regression (e.g., putting the average participant age as predictor) while in multilab studies we could plan to use the same age thus removing the age effect.
+
+## Extra - Planning a Multilab Study
+
+Let's imagine to plan a multilab study with the same setup as the previous meta-analysis. We are not collecting data from the literature but we want to know the number of studies $k$ that we need to achieve e.g. a good statistical Power.
+
+. . .
+
+We define power as the probability of correctly rejecting the null hypothesis of no effect when the effect is actually present
+
+## Extra - Planning a Multilab Study
+
+We can do a Power analysis using Monte Carlo simulations:
+
+1. simulate a meta-analysis given a set of parameters
+2. fit the meta-analysis model
+3. extract the p-value
+4. repeat the steps 1-3 a lot of times e.g. 10000
+5. count the number of significant (e.g., $\leq \alpha$) p-values
+
+## Extra - Planning a Multilab Study
+
+We can implement a simple simulation as:
+
+```{r}
+#| output: asis
+#| echo: false
+
+filor::show_file(here("02-meta-analysis/scripts/power-example.R"), how = "code")
+```
+
+## Extra - Planning a Multilab Study
+
+Then we can plot the results:
+
+```{r}
+#| code-fold: true
+
+sim <- readRDS(here("02-meta-analysis/objects/power-example.rds"))
+
+title <- "$\\mu_\\theta = 0.3$, $\\tau^2 = 0.1$, $\\alpha = 0.05"
+
+sim |> 
+  ggplot(aes(x = k, y = power, group = n, color = factor(n))) +
+  geom_line(lwd = 1) +
+  xlab("Number of Studies (k)") +
+  ylab("Power") +
+  labs(color = "Sample Size") +
+  theme(legend.position = "bottom") +
+  ggtitle(latex2exp::TeX(title))
+```
+
+# Publication Bias {.section}
+
+## Publication Bias (PB)
+
+The PB is one of the most problematic aspects of meta-analysis. Essentially the probability of publishing a paper (and thus including into the meta-analysis) is not the same regardless the result.
+
+```{r}
+#| echo: false
+par(mfrow = c(1,2))
+pval <- seq(0, 1, 0.01)
+
+plot(pval, dbeta(pval, 1, 1), 
+     type = "l", 
+     xlab = "P Value", 
+     ylab = "Probability of Publishing",
+     yaxt = "n",
+     main = "No Publication Bias")
+
+plot(pval, dbeta(pval, 1, 20), 
+     type = "l", 
+     xlab = "P Value", 
+     ylab = "Probability of Publishing",
+     yaxt = "n",
+     main = "Publication Bias")
+```
+
+## Publication Bias (PB)
+
+Clearly we cannot solve the PB using statistical tools. The PB is a problem of the publishing process and cannot be completely removed from available literature.
+
+- pre-registrations, multi-lab studies, etc. can completely solve the problem populating the literature with unbiased studies (at least from the publishing process point of view)
+- there are statistical tools to detect, estimate and correct for the publication bias. Unfortunately they are strongly affected by the presence of heterogeneity, the number of studies and other factors.
+
+## Publication Bias (PB) - The Big Picture^[Thanks to the Wolfgang Viechtbauer's course [https://www.wvbauer.com/doku.php/course_ma](https://www.wvbauer.com/doku.php/course_ma)]
+
+```{mermaid}
+%%| fig-width: 6.5
+flowchart TD
+    A[Publication Bias] --> B[Visual Inspection]
+    A[Publication Bias] --> L[Robustness]
+    A[Publication Bias] --> C[Detection]
+    A[Publication Bias] --> D[Correction]
+    L[Robustness] --> M[Fail-safe N]
+    B[Visual Inspection] --> E[Funnel Plot]
+    C[Detection] --> G[Regression Methods]
+    D[Correction] --> H[Trim and Fill]
+    D[Correction] --> I[Selection Models]
+```
+
+## Publication Bias (PB) - Funnel Plot
+
+The first tool is called funnel plot. This is a visual tool to check the presence of publication bias. If meta-analysis assumptions are respected, and there is no publication bias:
+
+- effects should be normally distributed around the average effect
+- more precise studies should be closer to the average effect
+- less precise studies could be equally distributed around the average effect
+
+Let's simulate a lot of studies to show:
+```{r}
+set.seed(2023)
+k <- 1e3
+n <- round(runif(k, 10, 200))
+dat <- sim_studies(k = k, theta = 0.5, tau2 = 0, n0 = n, n1 = n)
+fit <- rma(yi, vi, method = "EE", data = dat)
+```
+
+## Publication Bias (PB) - Funnel Plot
+
+Let's plot the distribution of the data:
+
+```{r}
+hist(dat$yi)
+```
+
+The distribution is clearly normal and centered on the true simulated value. Now let's add the precision (in this case standard error thus $\sqrt{\sigma_i^2}$) on the y-axis.
+
+## Publication Bias (PB) - Funnel Plot
+
+Note that the `y` axis is reversed so high-precise studies ($\sqrt{\sigma_i^2}$ close to 0) are on top.
+
+```{r}
+#| code-fold: true
+plot(dat$yi, dat$sei, ylim = rev(range(dat$sei)),
+     xlab = latex2exp::TeX("$y_i$"),
+     ylab = latex2exp::TeX("$\\sqrt{\\sigma_i^2}$"),
+     pch = 19,
+     col = scales::alpha("firebrick", 0.5))
+abline(v = fit$b[[1]], col = "black", lwd = 1.2)
+```
+
+## Publication Bias (PB) - Funnel Plot
+
+The plot assume the typical funnel shape and there are not missing spots on the at the bottom. The presence of missing spots is a potential index of publication bias.
+
+```{r}
+#| echo: false
+dat$pb <- dat$yi > 0.3 | dat$sei < 0.2
+
+with(dat[dat$pb, ],
+     plot(yi, sei,
+          ylim = rev(range(dat$sei)),
+          xlab = latex2exp::TeX("$y_i$"),
+          ylab = latex2exp::TeX("$\\sqrt{\\sigma_i^2}$"),
+          xlim = range(dat$yi),
+          pch = 19,
+          col = scales::alpha("firebrick", 0.5))
+)
+
+with(dat[!dat$pb, ],
+     points(yi, sei, col = scales::alpha("black", 0.5), pch = 19)
+)
+
+abline(v = fit$b[[1]], col = "black", lwd = 1.2)
+```
+
+## Publication Bias (PB) - Funnel Plot
+
+The plot assume the typical funnel shape and there are not missing spots on the at the bottom. The presence of missing spots is a potential index of publication bias.
+
+```{r}
+#| echo: false
+with(dat[dat$pb, ],
+     plot(yi, sei,
+          ylim = rev(range(dat$sei)),
+          xlab = latex2exp::TeX("$y_i$"),
+          ylab = latex2exp::TeX("$\\sqrt{\\sigma_i^2}$"),
+          xlim = range(dat$yi),
+          pch = 19,
+          col = scales::alpha("firebrick", 0.5))
+)
+
+abline(v = fit$b[[1]], col = "black", lwd = 1.2)
+```
+
+## Robustness to PB - Fail-safe N
+
+The Fail-safe N [@Rosenthal1979-yx] idea is very simple. Given a meta-analysis with a significant result (i.e., $p \leq \alpha$). How many null studies (i.e., $\hat \theta = 0$) do I need to obtain $p > \alpha$?
+
+```{r}
+metafor::fsn(yi, vi, data = dat)
+```
+
+## Robustness to PB - Fail-safe N
+
+There are several criticism to the Fail-safe N procedure:
+
+. . .
+
+- is not actually *detecting* the PB but suggesting the required publication bias size to remove the effect. A very large N suggest that even if present, it's unlikely the results could be completely changed by actually reporting null studies
+
+. . .
+
+- @Orwin1983-vu proposed a new method calculating the number of studies required to reduce the effect size to a given target
+
+. . .
+
+- @Rosenberg2005-ie proposed a method similar to Rosenthal [-@Rosenthal1979-yx] but combining the (weighted) effect sizes and not the p-values.
+
+
+## Detecting PB - Egger Regression
+
+A basic method to test the funnel plot asymmetry is using an the Egger regression test. Basically we calculate the relationship between $y_i$ and $\sqrt{\sigma^2_i}$. In the absence of asimmetry, the line slope should be not different from 0.
+
+We can use the `metafor::regtest()` function:
+
+```{r}
+egger <- regtest(fit)
+egger
+```
+
+## Publication Bias (PB) - Egger Regression
+
+```{r}
+#| echo: false
+egger_pb <- regtest(update(fit, data = dat[dat$pb, ]))
+
+par(mfrow = c(1, 2))
+
+with(dat,
+     plot(yi, sei,
+          ylim = rev(range(dat$sei)),
+          xlab = latex2exp::TeX("$y_i$"),
+          ylab = latex2exp::TeX("$\\sqrt{\\sigma_i^2}$"),
+          xlim = range(dat$yi),
+          pch = 19,
+          main = "No Publication Bias",
+          col = scales::alpha("firebrick", 0.5))
+)
+
+se <- seq(0,1.8,length=100)
+lines(coef(egger$fit)[1] + coef(egger$fit)[2]*se, se, lwd=3)
+
+with(dat[dat$pb, ],
+     plot(yi, sei,
+          ylim = rev(range(dat$sei)),
+          xlab = latex2exp::TeX("$y_i$"),
+          ylab = latex2exp::TeX("$\\sqrt{\\sigma_i^2}$"),
+          xlim = range(dat$yi),
+          pch = 19,
+          main = "Publication Bias",
+          col = scales::alpha("firebrick", 0.5))
+)
+
+se <- seq(0,1.8,length=100)
+lines(coef(egger_pb$fit)[1] + coef(egger_pb$fit)[2]*se, se, lwd=3)
+```
+
+## Correcting PB - Trim and Fill
+
+The Trim and Fill method [@Duval2000-ym] is used to impute the hypothetical missing studies according to the funnel plot and recomputing the meta-analysis effect. Shi and Lin [@Shi2019-pj] provide an updated overview of the method with some criticisms.
+
+Let's simulate again a **publication** bias with $k = 100$ studies:
+
+```{r}
+set.seed(2023)
+k <- 100 # we increased k to better show the effect
+theta <- 0.5
+tau2 <- 0.1
+
+dat <- sim_pub_bias(selmodel = list(method = "2step", param = "pval", th = 0.05, side = "<="), k = k, theta = theta, tau2 = tau2, nmin = 10, nmax = 200)
+fit <- rma(yi, vi, data = dat, method = "REML")
+```
+
+
+## Correcting PB - Trim and Fill
+
+Now we can use the `metafor::trimfill()` function:
+
+```{r}
+taf <- metafor::trimfill(fit)
+taf
+```
+
+The trim-and-fille estimate that `r taf$k0` are missing. The new effect size after including the studies is reduced and closer to the simulated value.
+
+## Correcting PB - Trim and Fill
+
+We can also visualize the funnel plot highligting the points that are included by the method.
+
+```{r}
+#| eval: false
+funnel(taf)
+```
+
+```{r}
+#| code-fold: true
+funnel(taf)
+egg <- regtest(fit)
+egg_npb <- regtest(taf)
+se <- seq(0,1.8,length=100)
+lines(coef(egg$fit)[1] + coef(egg$fit)[2]*se, se, lwd=3, col = "black")
+lines(coef(egg_npb$fit)[1] + coef(egg_npb$fit)[2]*se, se, lwd=3, col = "firebrick")
+legend("topleft", legend = c("Original", "Corrected"), fill = c("black", "firebrick"))
+```
+
+## Correcting PB - Selection Models (SM)
+
+. . .
+
+- SM assume a relationship between the p-value and the probability of publishing
+
+. . .
+
+- SM estimate this relationship from available studies and correct the average effect
+
+. . .
+
+:::{.cons}
+- The models are complicated (number of parameters) and need a large $k$
+:::
+
+. . .
+
+:::{.pros}
+- They provide a very elegant framework to formalize the publication bias supporting simulations and methods development
+:::
+
+## SM - Publication Bias Function
+
+- The publication bias can be formalized using a weight function that assign a probability to a certain study properties (e.g., p-value, sample size, z-score, etc.) representing the likelihood of that study being published.
+
+. . .
+
+- The general idea [e.g., @Citkowicz2017-ox] is to use a weighted probability density function (wPDF). In the presence of publication bias, the parameters of the wPDF will be different (i.e., adjusted) compared to unweighted PDF (i.e., assuming no publication bias)
+
+## SM - Publication Bias Function
+
+The random-effect meta-analysis PDF can be written as [e.g., @Citkowicz2017-ox]:
+
+$$
+f\left(y_i \mid \beta, \tau^2 ; \sigma_i^2\right)=\phi\left(\frac{Y_i-\Delta_i}{\sqrt{\sigma_i^2+\tau^2}}\right) / \sqrt{\sigma_i^2+\tau^2},
+$$
+
+And adding the weigth function:
+
+$$
+f\left(Y_i \mid \beta, \tau^2 ; \sigma_i^2\right)=\frac{\mathrm{w}\left(p_i\right) \phi\left(\frac{Y_i-\Delta_i}{\sqrt{\sigma_i^2+\tau^2}}\right) / \sqrt{\sigma_i^2+\tau^2}}{\int_{-\infty}^{\infty} \mathrm{w}\left(p_i\right) \phi\left(\frac{Y_i-\Delta_i}{\sqrt{\sigma_i^2+\tau^2}}\right) / \sqrt{\sigma_i^2+\tau^2} d Y_i}
+$$
+
+## SM - Publication Bias Function {#sec-pub-bias-fun}
+
+For example, Citkowicz and Vevea [-@Citkowicz2017-ox] proposed a model using the beta weight function^[[https://www.youtube.com/watch?v=ucmOCuyCk-c](https://www.youtube.com/watch?v=ucmOCuyCk-c)] 
+$w(p_i) = p_i^{a - 1} \times (1 - p_i)^{b - 1}$:
+
+```{r}
+#| echo: false
+wbeta <- function(x, a, b) x^(a - 1) * (1 - x)^(b - 1)
+
+pval <- seq(0, 1, 0.01)
+plot(pval, wbeta(pval, 1, 1), type = "l", ylim = c(0, 1), col = 1, lwd = 2,
+xlab = "P-value", ylab = "Relative Likelihood of Selection")
+lines(pval, wbeta(pval, 1, 5), col = 2, lwd = 2)
+lines(pval, wbeta(pval, 1, 20), col = 3, lwd = 2)
+lines(pval, wbeta(pval, 1, 50), col = 4, lwd = 2)
+
+legend("topright", legend = c("a = 1, b = 1", "a = 1, b = 5", "a = 1, b = 20", "a = 1, b = 50"), fill = 1:4)
+```
+
+## Selection Models
+
+In R we can use the `metafor::selmodel()` function to implement several type of models. For example we can apply the Citkowicz and Vevea [-@Citkowicz2017-ox] model:
+
+```{r}
+sel_beta <- selmodel(fit, type = "beta")
+```
+
+::: {.panel-tabset}
+
+### Results
+
+```{r}
+#| echo: false
+sel_beta
+```
+
+### Plot
+
+```{r}
+plot(sel_beta)
+```
+
+:::
+
+## More on SM and Publication Bias
+
+- The SM documentation of `metafor::selmodel()` [https://wviechtb.github.io/metafor/reference/selmodel.html](https://www.youtube.com/watch?v=ucmOCuyCk-c)
+- Wolfgang Viechtbauer overview of PB [https://www.youtube.com/watch?v=ucmOCuyCk-c](https://www.youtube.com/watch?v=ucmOCuyCk-c)
+- @Harrer2021-go - Doing Meta-analysis in R - [Chapter 9](https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/pub-bias.html)
+- @McShane2016-bk for a nice introduction about publication bias and SM
+- Another good overview by @Jin2015-ik
+- See also @Guan2016-kn, @Maier2023-js and @Bartos2022-im for Bayesian approaches to PB
+
+## More on SM and Publication Bias
+
+Assessing, testing and developing sofisticated models for publication bias is surely important and interesting. But as Wolfgang Viechtbauer (the author of `metafor`) said:
+
+> hopefully there won't be need for these models in the future [@Viechtbauer2021-od]
+
+## Extra - Simulating Publication Bias
+
+I wrote two custom functions to generate a biased dataset based on different criteria:
+
+- a simple step function with a threshold (e.g., $p \leq 0.05$ then 1 else 0)
+- the weight function from slide [@sec-pub-bias-fun]
+- a custom criterion (e.g., select only $|y_i| > 0.5$)
+
+```{r}
+#| echo: false
+#| output: asis
+filor::print_fun(c(funs$weigth_beta, funs$weigth_2step))
+```
+
+...continue
+
+## Extra - Simulating Publication Bias
+
+```{r}
+#| echo: false
+#| output: asis
+filor::print_fun(c(funs$sim_pub_bias))
+```
+
+## Extra - Simulating Publication Bias
+
+For example, let's simulate a pretty simple publication bias model where we included $k = 40$ studies. The biased criteria is that only $p \leq 0.05$ are included.
+
+- $\theta = 0.5$
+- $\tau^2 = 0$ i.e. an EE model
+- $n \sim \mathcal{U}(10, 200)$
+
+```{r}
+#| echo: false
+
+pval <- seq(0, 1, 0.01)
+plot(pval, ifelse(pval <= 0.05, 1, 0), type = "l", xlab = "P Value", ylab = "Probability of Publishing", lwd = 2, col = "firebrick")
+```
+
+## Extra - Simulating Publication Bias
+
+```{r}
+set.seed(2023)
+k <- 100
+theta <- 0.5
+tau2 <- 0.1
+
+dat <- sim_pub_bias(selmodel = list(method = "2step", param = "pval", th = 0.05, side = "<="), k = k, theta = theta, tau2 = tau2, nmin = 10, nmax = 200)
+
+filor::trim_df(dat)
+```
+
+## Extra - Simulating Publication Bias
+
+```{r}
+fit <- rma(yi, vi, data = dat)
+summary(fit)
+```
+
+Clearly, $\theta$ is overestimated because we are systematic omitting non-significant p-values. These studies are more likely to be imprecise studies thus we are probably creating a funnel plot asymmetry.
+
+## Extra - Simulating Publication Bias
+
+```{r}
+egger <- regtest(fit)
+funnel(fit, cex.lab = 1.2, cex = 1.2)
+se <- seq(0,1.8,length=100)
+lines(coef(egger$fit)[1] + coef(egger$fit)[2]*se, se, lwd=3)
+```
+
+# Practical meta-analysis {.section}
+
+## Dataset
+
+We will analyze the data provided by [https://www.metapsy.org/](https://www.metapsy.org/). In particular the dataset about the efficacy of psychoterapy on depression using randomized-controlled trials ([https://www.metapsy.org/database/depression-psychotherapy](https://www.metapsy.org/database/depression-psychotherapy)).
+
+```{r}
+#| echo: false
+knitr::include_url("https://docs.metapsy.org/")
+```
+
+## Dataset
+
+The dataset for the exercises is `depression.rds`. The dataset has been minimally pre-processed to remove extra columns and converted to the `rds` format.
+
+In particular:
+
+- studies using *cognitive-behavioral* therapy
+- studies with controls in waiting lists
+- studies with therapy delivered individually or in groups
+
+```{r}
+#| echo: false
+dep <- readRDS(here("02-meta-analysis/objects/depression.rds"))
+head(dep)
+```
+
+## Dataset
+
+The columns represent:
+
+- `study`: identifier for each included study
+- `age_group`: the age group of individual in the experimental group (`adul` = adults, `yadul` = young adults, `old` = old)
+- `mean_age`: the average age of the experimental group
+- `country`: country where the study was conducted
+- `format`: the therapy format (`grp` = group, `ind` = individual)
+- `yi`: the effect size in the form of Hedges's $g$ [see @Hedges1989-ip, Cohen's $d$ corrected for small-sample bias]. Positive values means that the treatment is effective.
+- `sei`: standard error of the Hedges's $g$
+
+## Pre-processing
+
+> **Crucially**, some papers have multiple studies. This data structure should be handled using a multilevel model. For the sake of simplicity we sampled randomly a study from multiple studies.
+
+These are the pre-processing steps:
+```{r}
+#| output: asis
+#| echo: false
+filor::show_file(here("02-meta-analysis/scripts/depression-pre-processing.R"), how = "code")
+```
+
+## Steps
+
+> **Important**, the dataset is real but the preprocessing steps and the models are examples without a clinical meaning. We are surely missing important predictors and/or analysis steps thus take the results only for educational purposes.
+
+1. Import the data and explore (summary statistics, plots, etc.) the variables
+2. Fit an equal-effects model and a random-effects model
+   1. Intepret the results
+   2. Intepret the heterogeneity (if relevant)
+   3. Compare the two models. Is there any difference? Which model is more appropriate
+3. Plot the model results using a forest plot
+4. Create a funnel plot and comment the pattern
+5. Analize the publication bias using the Egger regression and comment the result
+
+## Advanced Steps
+
+We did not introduced **meta-regressions** i.e. the possibility to include predictors in a meta-analysis model. The implementation is quite straightforward. E.g. see [https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/metareg.html](https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/metareg.html) and the `mods` argument of `metafor::rma.uni()` function [https://wviechtb.github.io/metafor/reference/rma.uni.html](https://wviechtb.github.io/metafor/reference/rma.uni.html).
+
+- Try to compute a meta-regression model checking the impact of `format`
+  - intepret the results
+  - is the heterogeneity different from the model without predictors?
+
+# Proposed solutions {.section}
+
+{{< include 02-meta-analysis-solutions.qmd >}}
+
+## References {.smaller}

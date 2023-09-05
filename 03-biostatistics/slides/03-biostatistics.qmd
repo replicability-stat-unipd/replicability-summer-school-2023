@@ -1,0 +1,842 @@
+---
+title: Exploring Replicability in Biostatistics
+subtitle: Replicability Crisis in Science?
+date: last-modified
+date-format: "[18-22 September] YYYY"
+author: 
+  - name: Filippo Gambarota
+    email: filippo.gambarota@unipd.it
+    orcid: "`r filor::fil()$orcid`"
+  - name: Gianmarco Altoè
+    email: gianmarco.altoe@unipd.it
+    orcid: "0000-0003-1154-9528"
+final-slide: false
+filters: 
+    - code-fullscreen
+    - parse-latex
+format:
+  filor-revealjs:
+    toc: false
+    margin: 0.1
+bibliography: "`r filor::fil()$bib`"
+notation-slide: true
+params:
+  solutions: true
+---
+
+```{r}
+#| label: setup
+knitr::opts_chunk$set(echo = TRUE,
+                      dev = "svg",
+                      fig.align = "center")
+```
+
+```{css, include = FALSE}
+.reveal > .slides > section > section {
+    transform-style: flat;
+}
+```
+
+## Setup R
+
+### Packages
+
+```{r}
+#| label: workshop-packages
+library(tidyverse) # for data manipulation
+library(curatedOvarianData) # workshop data
+library(pROC)
+devtools::load_all() # load all functions for the workshop
+```
+
+```{r}
+#| label: packages
+#| include: false
+library(here) # for paths
+library(kableExtra)
+```
+
+```{r}
+#| label: ggplot-setup
+#| include: false
+mytheme <- function(){
+  theme(plot.title = element_text(hjust = 0.5)) +
+    #ggthemes::theme_par(base_size = 15)
+    cowplot::theme_half_open(15)
+}
+
+theme_set(mytheme())
+```
+
+```{r}
+#| label: functions
+#| include: false
+
+qtab <- function(data){
+  require(kableExtra)
+  data |> 
+    kable(digits = 3, 
+          format = "html", 
+          escape = FALSE) |> 
+    kable_styling(full_width = FALSE)
+}
+
+funs <- filor::get_funs(here("R", "utils-biostat.R"))
+```
+
+### Loading Data
+
+```{r}
+#| label: data
+datl <- readRDS(here("03-biostatistics", "data", "gene_data_clean.rds"))
+```
+
+# Reproducibility in Biostatistics
+
+## Reproducibility in Biostatistics
+
+- In *Biostatistics* is common to have a similar experimental setup (i.e., same genes and variables), repeated across multiple studies. Replicability in this framework refer to how consistent is a variable (e.g., gene expression) in predicting a certain outcome across different dataset.
+
+- Recent research suggest the importance of cross-study training of prediction models to improve the overall predictive performance and replicability [@Patil2018-hm; @Parmigiani2023-dr; @Masoero2023-wb]
+
+- We will try to assess how a certain variable consistently (or not) predict a certain outcome using a binary classification and meta-analytic approach
+
+# Background {.section}
+
+## Background
+
+For this lecture we will use:
+
+- Gene expression data
+- Analysis of **contingency tables**
+- Binary classifiers
+- **Receiver Operating Characteristic** (ROC) curves
+- The **Youden index** to analyze ROC curves
+
+## Genes expression data
+
+We are going to use the `curatedOvarianData` dataset [see @Waldron2014-yv for details]. Ganzfried [-@Ganzfried2013-ut] provide a detailed description of the dataset structure.
+
+```{r}
+#| echo: false
+knitr::include_url("https://bioconductor.org/packages/release/data/experiment/html/curatedOvarianData.html")
+```
+
+## Data structure
+
+Gene **Expression** data are very complex in terms of acquisition, pre-processing and organization. For the purpose of this workshop we will transform the gene-phenotype database in a standard 2d dataframe using the `get_bio_data()` function. The majority of packages that we are going to use works better with this data structure.
+
+```{r, results='asis', echo=FALSE}
+filor::print_fun(funs$get_bio_data)
+```
+
+## Data structure
+
+All the datasets are available using the `data(dataset, package = "curatedOvarianData")`. To see a list of available datasets (when the package is loaded using `library()` the `package =` argument can be omitted):
+
+```{r}
+data(package = "curatedOvarianData")$result[, "Item"]
+```
+
+## Data structure
+
+```{r}
+#| echo: false
+data(package = "curatedOvarianData")$result[, c("Item", "Title")] |> 
+  data.frame()
+```
+
+## Data structure
+
+For example, we want to extract the `ARHGAP5` and `ZNF487` *genes* and `debulking` and `tumorstage` *phenotype* variables.
+
+```{r}
+data(GSE32063_eset) # load the dataset
+get_bio_data(GSE32063_eset, c("ARHGAP5", "ZNF487"), c("debulking", "tumorstage"))
+```
+
+## Data structure
+
+We performed a little bit of pre-processing to have a more clean and minimal dataset. The pre-processing are described into the `03-biostatistics/scripts/gene-data-preprocessing.R`:
+
+```{r}
+#| results: asis
+#| echo: false
+filor::show_file(here("03-biostatistics/scripts/gene-data-preprocessing.R"), how = "code")
+```
+
+## Data structure
+
+The pre-processing create a dataframe with datasets having both the `debulking` variable and all genes in common. In this way we can analyze and compare genes among all datasets.
+
+```{r}
+datl <- readRDS(here("03-biostatistics", "data", "gene_data_clean.rds"))
+str(datl, max.level = 1)
+```
+
+## Data structure
+
+I prefer always working (if possible) with a simple dataframe:
+
+```{r}
+dat <- dplyr::bind_rows(datl, .id = "dataset")
+head(dat)
+```
+
+## Contingency tables (CT)
+
+CTs are tables that summarize 2 or more categorical variables using absolute or relative frequencies.
+
+```{r}
+#| echo: false
+knitr::include_graphics("img/contingency-table.svg")
+```
+
+## Contingency tables (CT)
+
+```{r}
+#| echo: false
+x <- rbinom(150, 1, 0.5)
+y <- rbinom(150, 1, 0.5)
+
+x <- factor(x, levels = c(1, 0))
+y <- factor(y, levels = c(1, 0))
+
+xy_tab <- xtabs(~ x + y)
+sjPlot::tab_xtab(x, y, show.summary = FALSE, show.cell.prc = TRUE)
+```
+
+## Contingency tables (CT)
+
+Regardless of the content, contingency tables can be expressed with a common nomenclature.
+
+```{r}
+#| echo: false
+dd <- data.frame(
+  stringsAsFactors = FALSE,
+                V1 = c("Prediction", "Prediction"),
+                V2 = c(1L, 0L),
+                V3 = c("True Positive (TP)", "False Negative (FN)"),
+                V4 = c("False Positive (FP)", "True Negative (TN)")
+      ) 
+
+dd$V3 <- cell_spec(dd$V3, background = ifelse(dd$V3 == "True Positive (TP)", "lightgreen", "#FC8D8D"))
+dd$V4 <- cell_spec(dd$V4, background = ifelse(dd$V4 == "True Negative (TN)", "lightgreen", "#FC8D8D"))
+
+dd |> 
+  kable(col.names = c("", "", "", ""),
+        align = "c",
+        escape = FALSE) |> 
+  kable_styling() |>
+  column_spec(1:2, bold = TRUE) |> 
+  add_header_above(c(" " = 2, 1, 0)) |> 
+  add_header_above(c(" " = 2, "Truth" = 2)) |> 
+  collapse_rows(1)
+```
+
+## Contingency tables (CT)
+
+There are a lot of metrics that can be calculated from a simple contingency tables:
+
+```{r}
+#| echo: false
+knitr::include_url("https://en.wikipedia.org/wiki/Confusion_matrix")
+```
+
+## Contingency tables (CT) metrics
+
+The most important (and used) measures are:
+
+- the **Sensitivity** (aka **True Positive Rate** TPR or *recall*) is $\frac{TP}{(TP + FN)}$
+- the **Specificity** (aka **True Negative Rate** TNR) is $\frac{TN}{(FP + TN)}$
+- the **Accuracy** is $\frac{(TP + TN)}{(TP + TN + FP + FN)}$
+- the **Positive Predictive Value** is $\frac{TP}{TP + FP}$ or $\frac{TPR \times \rho}{TPR \times \rho + (1 - TPR) \times (1 - \rho)}$ where $\rho$ is the prevalence i.e. $TP + FP$
+- Area Under the Curve (AUC) is the area under the ROC curve that represent classification performance
+
+## Contingency tables (CT) metrics
+
+```{r}
+#| echo: false
+#| results: asis
+dd <- data.frame(
+  stringsAsFactors = FALSE,
+  V1 = c("Test", "Test", "", ""),
+  V2 = c(1L, 0L, "", ""),
+  V3 = c("True Positive (TP)", "False Negative (FN)", "$Sensitivity = \\frac{TP}{TP + FN}$", "$\\rho = \\frac{TP + FN}{N}$"),
+  V4 = c("False Positive (FP)", "True Negative (TN)", "$Specificity = \\frac{TN}{TN + FP}$", "$1 - \\rho = \\frac{FP + TN}{N}$"),
+  V5 = c("$PPV = \\frac{TP}{TP + FP}$", "$NPV = \\frac{TN}{TN + FN}$", "$N = TP + FP + FN + TN$", "$N = TP + FP + FN + TN$")
+) 
+
+dd$V3 <- cell_spec(dd$V3, 
+                   background = dplyr::case_when(
+                     dd$V3 == "True Positive (TP)" ~ "lightgreen",
+                     dd$V3 == "False Negative (FN)" ~ "#FC8D8D",
+                     TRUE ~ "white")
+)
+
+dd$V4 <- cell_spec(dd$V4, 
+                   background = dplyr::case_when(
+                     dd$V4 == "True Negative (TN)" ~ "lightgreen",
+                     dd$V4 == "False Positive (FP)" ~ "#FC8D8D",
+                   TRUE ~ "white")
+)
+
+tab <- dd |> 
+  kable(col.names = c("", "", "", "", ""),
+        align = "c",
+        escape = FALSE) |> 
+  kable_styling() |>
+  column_spec(1:2, bold = TRUE) |> 
+  add_header_above(c(" " = 2, 1, 0, "")) |> 
+  add_header_above(c(" " = 2, "Truth" = 2, "")) |> 
+  collapse_rows(c(1,5))
+
+cat(tab)
+```
+
+## Contingency tables (CT) metrics
+
+```{r}
+#| echo: false
+#| results: asis
+
+dd <- data.frame(
+  stringsAsFactors = FALSE,
+  V1 = c("Test", "Test", "", ""),
+  V2 = c(1L, 0L, "", ""),
+  V3 = c("$Sensitivity \\times \\rho$", "$(1 - Sensitivity) \\times \\rho$", "$Sensitivity = \\frac{TP}{TP + FN}$", "$\\rho$"),
+  V4 = c("$(1 - Specificity) \\times (1 - \\rho)$", "$Specificity \\times (1 - \\rho)$", "$Specificity = \\frac{TN}{TN + FP}$", "$1 - \\rho$"),
+  V5 = c("$PPV = \\frac{Sensitivity \\times \\rho}{Sensitivity \\times \\rho + (1 - Sensitivity) \\times (1 - \\rho)}$", "$NPV = \\frac{Specificity \\times (1 - \\rho)}{(1 - Sensitivity) \\times \\rho + Specificity \\times (1 - \\rho)}$", "1", "1")
+)
+
+dd |> 
+  kable(col.names = c("", "", "", "", ""),
+        align = "c",
+        escape = FALSE) |> 
+  kable_styling() |>
+  column_spec(1:2, bold = TRUE) |> 
+  add_header_above(c(" " = 2, 1, 0, "")) |> 
+  add_header_above(c(" " = 2, "Truth" = 2, "")) |> 
+  collapse_rows(c(1,5))  |>
+  cat()
+```
+
+## Sensitivity and Specificity
+
+To better understand the *sensitivity* and *specificity* we can use several formulations. *Sensitivity* and *Specificity* (and also other metrics) are essentially conditional probabilities.
+
+$$
+Sensitivity = p(T^+|S^+) = \frac{p(S^+|T^+)p(T^+)}{p(S^+)} = \frac{\frac{TP}{TP + FP}\frac{TP + FP}{N}}{\frac{TP + FN}{N}} = \frac{PPVp(T^+)}{\rho}
+$$
+
+$$
+Specificity = p(T^-|S^-) = \frac{p(S^-|T^-)p(T^-)}{p(S^-)} = \frac{\frac{TN}{TN + FN}\frac{TN + FN}{N}}{\frac{FP + TN}{N}} = \frac{NPVp(T^-)}{1 -\rho}
+$$
+
+## Positive Predictive Value (PPV)
+
+The PPV is the probability of having a diseases given that my test is positive. While sensitivity and specificity are generally stable regardless the prevalence [but see @Brenner1997-yq], PPV is strongly affected by the disease prevalence.
+
+Let's write a function to calculate the PPV:
+
+```{r}
+#| results: asis
+#| echo: false
+filor::print_fun(funs$ppv)
+```
+
+## Positive Predictive Value (PPV)
+
+Now we can calculate the PPV, fixing *sensitivity* and *specificity* by changing the **prevalence**:
+
+```{r}
+# let's vary the prevalence
+prevalence <- seq(0, 1, 0.01)
+
+# computing ppv for each prevalence, fixing the specificity and sensitivity
+ppvs <- ppv(sensitivity = 0.9, specificity = 0.8, prevalence = prevalence)
+```
+
+```{r}
+#| echo: false
+plot(prevalence*100, ppvs, 
+     type = "l", 
+     xlab = "Prevalence (%)", 
+     ylab = "PPV",
+     cex.lab = 1.2,
+     main = "Sensitivity = 0.9, Specificity = 0.8")
+```
+
+## Youden's J, disclaimer
+
+The Youden's J is just an option among several alternatives for choosing the best threshold. For example the `cutpointr` package:
+
+```{r}
+#| echo: false
+
+knitr::include_url("https://cran.r-project.org/web/packages/cutpointr/vignettes/cutpointr.html#:~:text=in%20both%20classes-,Metric%20functions,-The%20included%20metrics")
+```
+
+## An example...
+
+Let's imagine to have a group of patients with a certain disease (called $S$) or condition measured by a **gold-standard** test. We are developing a new faster and cheaper test (called $T$) but we are not sure about the capacity to reliably detect the condition.
+
+```{r}
+#| code-fold: true
+#| code-summary: Simulation code
+dat_ex <- sim_bin_class(0.75, n = 100, prevalence = 0.2, var.names = c(x = "test", y = "state"))
+dat_ex$state <- factor(dat_ex$state, levels = c(1, 0), labels = c("sick", "healthy"))
+```
+
+```{r}
+#| echo: false
+filor::trim_df(dat_ex)
+```
+
+## Binary classifiers
+
+::: {.panel-tabset}
+
+### Summary
+
+```{r}
+# total
+nrow(dat_ex)
+
+# prevalence
+table(dat_ex$state)
+table(dat_ex$state) / nrow(dat_ex)
+
+# difference in the test between the two groups
+tapply(dat_ex$test, dat_ex$state, mean)
+```
+
+### Dotplot
+
+```{r}
+#| echo: false
+dat_ex$y <- ifelse(dat_ex$state == "sick", 1, 0)
+dat_ex |> 
+  ggplot(aes(x = test, 
+             color = state,
+             y = y)) +
+  geom_point(size = 3,
+             position = position_jitter(height = 0.02),
+             alpha = 0.7) +
+  ylab("State") +
+  xlab("Test") +
+  theme(legend.position = "bottom",
+        legend.title = element_blank())
+```
+
+
+### Density Plot
+
+Probably the most intuitive way is the density plot for each group:
+
+```{r}
+#| echo: false
+dat_ex |> 
+  ggplot(aes(x = test, 
+             color = state,
+             fill = state)) +
+  geom_density(alpha = 0.1) +
+  geom_rug() +
+  theme(legend.position = "bottom",
+        legend.title = element_blank()) +
+  filor::remove_axes("x", "title") +
+  ylab("Density")
+```
+
+:::
+
+## Binary classifiers
+
+Intuitively, as the mean difference (on the predictor) between the two groups increase the two groups are easy to discriminate:
+
+```{r}
+#| echo: false
+dat_ex_50 <- sim_bin_class(auc = 0.5, n = 1e4, prevalence = 0.5, var.names = c(x = "test", y = "state"))
+dat_ex_70 <- sim_bin_class(auc = 0.7, n = 1e4, prevalence = 0.5, var.names = c(x = "test", y = "state"))
+dat_ex_90 <- sim_bin_class(auc = 0.9, n = 1e4, prevalence = 0.5, var.names = c(x = "test", y = "state"))
+
+dat_ex_all <- dplyr::bind_rows(dat_ex_50, dat_ex_70, dat_ex_90, .id = "auc")
+dat_ex_all$state <- factor(dat_ex_all$state, levels = c(1, 0), labels = c("sick", "healthy"))
+
+dat_ex_all |> 
+  mutate(auc = dplyr::case_when(
+    auc == "1" ~ "No Discrimination",
+    auc == "2" ~ "Hard Discrimination",
+    auc == "3" ~ "Easy Discrimination"
+  )) |> 
+  ggplot(aes(x = test, 
+             fill = state, 
+             color = state)) +
+  geom_density(alpha = 0.3) +
+  geom_rug(alpha = 0.2) +
+  facet_wrap(~auc) +
+  theme(legend.position = "bottom",
+        legend.title = element_blank()) +
+  ylab("Density")
+```
+
+## Binary classifiers, Thresholds
+
+To create a contingency table and calculate the related metrics we need to choose a threshold on the predictor variable:
+
+```{r}
+#| echo: false
+dat_ex_90$state <- ifelse(dat_ex_90$state == "1", "disease", "healthy")
+dat_ex_90_dens <- lapply(split(dat_ex_90, dat_ex_90$state), function(x) data.frame(density(x$test)))
+dat_ex_90_dens <- bind_rows(dat_ex_90_dens, .id = "state")
+
+class_plot <- function(data, th){
+  data_disease <- filter(data, state == "disease")
+  data_heal <- filter(data, state == "healthy")
+  
+  pp_disease <- ggplot(data = data_disease,
+                       aes(x = x, y = y)) +
+    geom_vline(xintercept = th) +
+    geom_area(aes(fill = ifelse(x < th, "FN", "TP")),
+              alpha = 0.4) +
+    geom_line() +
+    geom_line(data = data_heal,
+              aes(x = x, y = y),
+              linetype = "dashed") +
+    theme(legend.position = "left",
+          legend.title = element_blank()) +
+    xlab("Test") +
+    ylab("Density") +
+    ggtitle("Sick People") +
+    scale_fill_manual(values = c("red", "lightgreen"))
+  
+  pp_heal <- ggplot(data = data_heal,
+                    aes(x = x, y = y)) +
+    geom_vline(xintercept = th) +
+    geom_area(aes(fill = ifelse(x < th, "TN", "FP")),
+              alpha = 0.4) +
+    geom_line() +
+    geom_line(data = data_disease,
+              aes(x = x, y = y),
+              linetype = "dashed") +
+    theme(legend.position = "left",
+          legend.title = element_blank()) +
+    xlab("Test") +
+    ylab("Density") +
+    scale_fill_manual(values = c("red", "lightgreen")) +
+    ggtitle("Healthy People")
+  
+  cowplot::plot_grid(pp_disease, pp_heal, ncol = 1)
+}
+```
+
+::: {.panel-tabset}
+
+### Threshold = 0
+
+```{r}
+#| echo: false
+class_plot(dat_ex_90_dens, 0)
+```
+
+### Threshold = -1.5
+
+```{r}
+#| echo: false
+class_plot(dat_ex_90_dens, -1.5)
+```
+
+### Threshold = 2
+
+```{r}
+#| echo: false
+class_plot(dat_ex_90_dens, 2)
+```
+
+:::
+
+## Binary classifiers, Thresholds
+
+Similarly, we can create the contingency tables with related metrics:
+
+```{r}
+#| echo: false
+dat_ex_90 <- sim_bin_class(auc = 0.9, n = 1e4, prevalence = 0.5, var.names = c(x = "test", y = "state"))
+```
+
+::: {.panel-tabset}
+
+### Threshold = 0
+
+```{r}
+#| echo: false
+classify(dat_ex_90, state, test, 0) |> 
+  contingency_tab()
+```
+
+### Threshold = -1.5
+
+```{r}
+#| echo: false
+classify(dat_ex_90, state, test, -1.5) |> 
+  contingency_tab()
+```
+
+### Threshold = 2
+
+```{r}
+#| echo: false
+classify(dat_ex_90, state, test, 2) |> 
+  contingency_tab()
+```
+
+:::
+
+## ROC
+
+We can start by plotting the specificity and sensitivity for a given threshold:
+
+```{r}
+cmat <- classify(dat_ex_90, state, test, c = 0)
+cmat
+```
+
+. . .
+
+```{r}
+#| echo: false
+#| out-width: "80%"
+
+cmat |> 
+  ggplot(aes(x = tnr, y = tpr)) +
+  ylim(c(0, 1)) +
+  scale_x_reverse(limits = c(1, 0)) +
+  coord_fixed() +
+  geom_point(size = 3, color = "firebrick") +
+  theme_minimal(15) +
+  xlab("Specificity") +
+  ylab("Sensitivity") +
+  annotate("label", x = 0.8, y = 1, label = paste("Threshold =", cmat$c),
+           size = 7)
+```
+
+## ROC
+
+When evaluating **sensitivity** and **specificity** with multiple thresholds we obtain the ROC curve:
+
+. . .
+
+```{r}
+#| echo: false
+#| out-width: "50%"
+knitr::include_graphics("img/roc-anim.gif")
+```
+
+## ROC
+
+The Area Under the Curve (AUC) range between 0.5 (null classification) and 1 (perfect classification):
+
+```{r}
+#| echo: false
+perfect_roc <- sim_bin_class(auc = 0.999, 
+              n = 1e5, 
+              prevalence = 0.5) |>
+  classify(y, x, seq(-5, 5, 0.1)) |> 
+  ggROC(fill = TRUE) +
+  ggtitle("Perfect Classification")
+
+realistic_roc <- sim_bin_class(auc = 0.7, 
+              n = 1e5, 
+              prevalence = 0.5) |>
+  classify(y, x, seq(-5, 5, 0.1)) |> 
+  ggROC(fill = TRUE) +
+  ggtitle("Realistic Classification")
+
+null_roc <- sim_bin_class(auc = 0.5, 
+              n = 1e5, 
+              prevalence = 0.5) |>
+  classify(y, x, seq(-5, 5, 0.1)) |> 
+  ggROC(fill = TRUE) +
+  ggtitle("Null Classification")
+
+cowplot::plot_grid(perfect_roc, realistic_roc, null_roc, nrow = 1)
+```
+
+## Youden's J
+
+Given the trade-off between sensitivity and specificity, the choice of the best threshold ($c$) is not straightforward. An option is using the Youden's J:
+
+$$
+J = sensitivity + specificity - 1
+$$
+Thus taking the maximum of $J_i$ calculated on all threshold give us the threshold that maximize the sum between sensitivity and specificity.
+
+## Youden's J
+
+```{r}
+set.seed(104)
+dat <- sim_bin_class(auc = 0.8, n = 100, prevalence = 0.5)
+fit_roc <- roc(y ~ x, data = dat)
+J <- coords(fit_roc, "best", best.method = "youden")
+J$J <- J$specificity + J$sensitivity - 1
+Js <- fit_roc$sensitivities + fit_roc$specificities - 1
+```
+
+```{r}
+#| code-fold: true
+par(mfrow = c(1,2))
+plot(fit_roc, main = "ROC curve")
+points(x = J$specificity, y = J$sensitivity, pch = 19, col = "firebrick", cex = 1.4)
+
+plot(fit_roc$thresholds, Js, type = "l", xlab = "Thresholds", ylab = "Youden's J",
+     main = "Youden's J")
+points(J$threshold, max(Js), pch = 19, col = "firebrick", cex = 1.4)
+text(x = 0.6, y = 0.45, labels = sprintf("Cutoff = %.2f", J$threshold))
+```
+
+## Data simulation {.extra}
+
+All the example so far are based on simulated data. I wrote a little function (`sim_bin_class()`) that simulate a binary classifier assuming a latent probit model. You can play around to check what happens changing the parameters.
+
+```{r, results='asis', echo=FALSE}
+filor::print_fun(funs$sim_bin_class)
+```
+
+## Data simulation {.extra}
+
+Let's make an example simulating a binary classifier with an AUC of 0.7:
+
+```{r}
+dat <- sim_bin_class(auc = 0.7, n = 100, prevalence = 0.5)
+head(dat)
+```
+
+## Data simulation {.extra}
+
+Let's see some useful descriptive plots:
+
+```{r}
+plot_class(dat, y, x)
+```
+
+## Data simulation {.extra}
+
+The `plot_class()` function is a shortcut to produce the dotplot-density combination that is useful when plotting a binary classifier:
+
+```{r}
+#| results: asis
+#| echo: false
+filor::print_fun(funs$plot_class)
+```
+
+## Data Simulation {.extra}
+
+```{r}
+fit_roc <- pROC::roc(y ~ x, data = dat)
+fit_roc
+```
+
+```{r}
+#| code-fold: true
+fit_roc |> 
+  pROC::ggroc() + 
+  geom_abline(intercept = 1, color = "darkgrey") +
+  coord_fixed() +
+  theme_minimal(15) +
+  xlab("Specificity") +
+  ylab("Sensitivity")
+```
+
+## Data Simulation {.extra}
+
+Or manually using the `classify()` function that compute common classification metrics given one or more thresholds $c_i$:
+
+```{r}
+#| results: asis
+#| echo: false
+filor::print_fun(funs$classify)
+```
+
+## Data Simulation {.extra}
+
+```{r}
+classify(dat, y, x, 0)
+classify(dat, y, x, c(-1, 0, 1))
+
+# ~ full roc curve
+cs <- c(-Inf, seq(-4, 4, 0.1), Inf)
+car::some(classify(dat, y, x, cs))
+```
+
+## Data Simulation {.extra}
+
+```{r}
+cr <- seq(-3, 3, 0.1) # vector of thresholds
+cmat <- classify(dat, y, x, cr)
+
+plot(cmat$tnr, cmat$tpr, xlim = rev(range(cmat$tpr)), type = "l",
+     xlab = "Specificity",
+     ylab = "Sensitivity")
+```
+
+# Application to genetic data {.section}
+
+## Objectives
+
+Moving to our `curatedOvarianData` dataset, we want to explore how the information from genes ($g$) expression predict the **debulking** probability.
+
+> The term **debulking** represent the patient’s surgery success in removing the tumor mass (*optimal debulking*) vs the insuccess in removing the tumor mass (*suboptimal debulking*)
+
+Some questions are:
+
+- how different genes predict the **debulking** status
+- how results from a given gene $g_i$ change, using a different dataset
+
+## Conventions and notation
+
+We saw that working with contingency tables requires giving labels to the actual data. In this case we set the following conventions:
+
+- the **suboptimal** state is coded as 0 i.e. having the *disease*
+- the **optimal** state is coded as 1 i.e. not having the *disease*
+- higher values of gene expressions ($x_{g_i}$) are associated with higher probability of **suboptimal** state
+- we call the **state** (S) the variable representing the *TRUE* surgery outcome and **test** (T) the predicted outcome using the gene expression. Thus e.g. $p(T_1|S_1)$ is the Sensitivity
+
+## Steps
+
+1. Load and explore the data (you can the `gene_data_clean.rds` or using the raw `curatedOvarianData`)
+2. Calculate the prevalence ($p(S_1)$) of the **optimal** debulking for each dataset
+3. Choose a gene ($g_i$) and plot the $x_i$ values according to the debulking
+4. Calculate the Sensitivity, Specificity, Youden's J and PPV for all datasets based on the same gene.
+5. Compare graphically and descriptively the results
+6. Calculate the standard error of the AUC (see the `pROC::var()` function)
+7. Compute and represent a **random-effects meta-analysis** polling the AUC for the same gene, across datasets. Interpret the pooled effect, heterogeneity and Q-statistics.
+
+## Steps (optional)
+
+6. [Extra] Try to compute the standard error of the AUC using a *bootstrapping* approach. Essentially you need to sample with replacement (see `sample()`) $n$ rows from the dataset (where $n$ is the total number of rows), compute and store the AUC, repeat the process several times (at least 10000 times), calculate the standard deviation of the boostrapped AUC distribution.
+  - There is also the `pROC::ci.auc()` function with the `bootstrap` option. Try to manually code the boostrap and eventually compare the results
+  - The confidence interval can be calculated with the `quantile()` function [see @Carpenter2000-dm] with the desired coverage (e.g., 95%)
+  - Further details are available here https://cran.r-project.org/web/packages/pROC/pROC.pdf (page 5, Section Bootstrap)
+
+# Proposed solutions {.section}
+
+{{< include 03-biostatistics-solutions.qmd >}}
+
+## References
+
+```{r}
+#| echo: false
+filor::write_bib_rmd(input_bib = filor::fil()$bib,
+                     output_bib = "refs_to_download.bib")  |>
+  downloadthis::download_file(
+  output_name = "references",
+  button_label = "Download the bibtex file",
+  button_type = "danger",
+  has_icon = TRUE,
+  icon = "fa fa-book",
+  self_contained = TRUE
+)
+```
+
+</br>
+

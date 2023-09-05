@@ -1,0 +1,16 @@
+---
+---
+
+@import "{{ site.theme }}";
+.main-content {
+  h1,h2,h3,h4 {
+   color: #9B0014;
+ }
+}
+.page-header {
+  color: #fff;
+  text-align: center;
+  background-color: #8C3031;
+  background-image: url(https://replicability.stat.unipd.it/wp-content/uploads/2023/03/Dipartimento.png);
+  /*background-image: linear-gradient(120deg, #8C3031, #8C3031);*/
+}

@@ -1,0 +1,118 @@
+/*-- scss:defaults --*/
+
+// colors
+//$final-slide-bg: #7B63B6;
+//$main-color: #397EE3;
+$main-color: #0048A4;
+$final-slide-bg: #43464B;
+$final-slide-txt: #F3F3F3;
+$important: #E54330;
+
+/* Custom styles for Reveal.js menu */
+.reveal {
+  --menu-background-color: red; /* Change this to your desired background color */
+  --menu-color: #fff; /* Change this to your desired text color */
+}
+
+// Fonts
+
+$presentation-font-size-root: 30px;
+
+/*-- scss:rules --*/
+
+.final-slide {
+  background-color: $final-slide-bg!important;
+  padding-top: 25%;
+}
+
+.final-slide a {
+  color: $final-slide-txt!important;
+}
+
+.reveal h2 {
+  color: $main-color!important;
+}
+
+.imp {
+  color: $important;
+  font-weight: bold;
+}
+
+// SLIDE NUMBER
+
+
+.reveal .final-slide .slide-number {
+  font-size: 100px;
+}
+
+.reveal .slide-number {
+  font-size: 24pt;
+  color: black; 
+}
+
+p code:not(.sourceCode){
+  font-size:          75%;
+  font-weight:        400;
+  color:              #231F20;
+  background:         #E8EDEE;
+  border-radius:      3px;
+  padding:            1px 1px 1px 1px;
+}
+
+.section {
+    background-color: $main-color!important;
+    color: #F3F3F3!important;
+}
+
+.extra h2{
+  color: #D63168!important;
+}
+
+.extra h2::before{
+  content: "💬";
+}
+
+.section h1::before{
+  content: "> \00a0";
+}
+
+// hide slide number trick https://github.com/quarto-dev/quarto-cli/discussions/5566#discussioncomment-5925054
+.reveal .slide-number > a[href*='title-slide'] {
+  display: none;
+}
+
+.reveal .slide-number > a[href*='final-slide'] {
+  display: none;
+}
+
+.reveal .slide-number > a[href*='TOC'] {
+  display: none;
+}
+
+.has-dark-background .slide-number{
+  display: none!important;
+}
+
+.reveal .slide-menu-button {
+  display: none!important;
+}
+
+.question h1 {
+  color: black!important;
+}
+
+.question h1::before{
+  content:"❓\00a0";
+}
+
+.notation-slide h2{
+  text-align: center;
+}
+
+.notation-slide h2::before{
+  content: "📰";
+}
+
+.notation-slide li{
+  margin: 50px 0;
+}

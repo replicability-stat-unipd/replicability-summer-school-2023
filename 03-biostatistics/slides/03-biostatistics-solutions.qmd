@@ -1,0 +1,175 @@
+## Setup
+
+Firstly, let's subset the dataset selecting our predictor (i.e., the **debulking**), the dataset name and the selected gene.
+
+```{r}
+datl <- readRDS(here("03-biostatistics", "data", "gene_data_clean.rds"))
+dat <- dplyr::bind_rows(datl, .id = "dataset")
+
+# creating the binary debulking variable
+dat$debulking01 <- ifelse(dat$debulking == "optimal", 1, 0)
+
+gene <- "ABCA1"
+dat_meta <- dat[, c("dataset", "debulking", gene)]
+head(dat_meta)
+```
+
+## Prevalence
+
+Now let's see which is the prevalence of *optimal* debulking i.e. $S_1$
+
+::: {.panel-tabset}
+
+### Code
+
+```{r}
+prev_and_n <- function(data){
+  data.frame(
+    p = mean(data$debulking01, na.rm = TRUE),
+    n = nrow(data)
+  )
+}
+prev <- lapply(split(dat_meta, dat_meta$dataset), prev_and_n)
+prev <- dplyr::bind_rows(prev, .id = "dataset")
+head(prev)
+```
+
+### Plot
+
+```{r}
+#| code-fold: true
+prev |> 
+  ggplot(aes(x = p*100, y = dataset)) +
+  geom_col(width = 0.2) +
+  xlab("Prevalence (%)") +
+  xlim(c(0, 100))
+```
+
+:::
+
+## debulking ~ gene
+
+Let's see the density plots for dataset with the gene `r gene`:
+
+```{r}
+#| code-fold: true
+dat_meta |> 
+  drop_na(debulking) |> 
+  ggplot(aes(x = ABCA1, fill = debulking)) +
+  geom_density() +
+  facet_wrap(~dataset) +
+  theme(legend.position = c(0.9,0.1),
+        legend.title = element_blank(),
+        axis.title.y = element_blank())
+```
+
+In some datasets, the gene `r gene` discriminate more between the the debulking outcomes.
+
+## AUC and standard error
+
+::: {.panel-tabset}
+
+### ROC
+
+```{r}
+roc_list <- lapply(split(dat_meta, dat_meta$dataset), 
+                   function(x) pROC::roc(debulking ~ ABCA1, data = x))
+```
+
+### Analytical method
+
+```{r}
+aucs <- sapply(roc_list,  auc)
+# the var function is used to compute the sampling variability
+aucs_se <- sapply(roc_list, function(x) sqrt(var(x)))
+auc_d <- data.frame(dataset = names(aucs), auc = aucs, se = aucs_se)
+ci <- sapply(roc_list, function(x) pROC::ci.auc(x))
+auc_d$lower <- ci[1, ]
+auc_d$upper <- ci[3, ]
+
+head(auc_d)
+```
+
+### Plot
+
+```{r}
+#| code-fold: true
+auc_d |> 
+  ggplot(aes(x = auc, y = dataset)) +
+  geom_point() +
+  geom_segment(aes(x = lower, xend = upper, y = dataset, yend = dataset)) +
+  xlim(c(0, 1))
+```
+
+### Bootstrapping
+
+```{r}
+boot_auc <- function(data, direction = "auto", nboot = 10){
+  aucs <- rep(0, nboot)
+  for(i in 1:nboot){
+    idx <- sample(1:nrow(data), nrow(data), replace = TRUE)
+    datb <- data[idx, ]
+    aucs[[i]] <- pROC::auc(datb[, 2] ~ datb[, 3], direction = direction, quiet = TRUE)[[1]]
+  }
+  return(aucs)
+}
+
+# get the direction, auto detecting direction could lead to biased AUC see https://cran.r-project.org/web/packages/pROC/pROC.pdf
+direction <- sapply(roc_list, function(x) x$direction)
+
+auc_list <- mapply(function(d, dir) boot_auc(d, dir), split(dat_meta, dat_meta$dataset), direction)
+aucs_m <-  apply(auc_list, 2, median)
+aucs_se <- apply(auc_list, 2, sd)
+aucs_ci <- apply(auc_list, 2, function(x) quantile(x, c(0.025, 0.975)))
+aucs_d <- data.frame(auc = aucs_m, se = aucs_se, lower = aucs_ci[1, ], upper = aucs_ci[2, ], dataset = names(roc_list))
+
+head(aucs_d)
+```
+
+### Plot
+
+```{r}
+#| code-fold: true
+aucs_d |> 
+  ggplot(aes(x = auc, y = dataset)) +
+  geom_point() +
+  geom_segment(aes(x = lower, xend = upper, y = dataset, yend = dataset)) +
+  xlim(c(0, 1))
+```
+
+:::
+
+## Meta-analysis
+
+```{r}
+library(metafor)
+auc_d$var <- auc_d$se^2
+
+fit_rma <- rma(auc, var, data = auc_d)
+summary(fit_rma)
+```
+
+## Meta-analysis
+
+We need to adjust the test statistics because the null value with the AUC is not 0 but 0.5.
+
+$$
+z = \frac{\hat{AUC} - AUC_0}{\hat{SE_{AUC}}}
+$$
+
+$$
+z = \frac{\hat{AUC} - 0.5}{SE_{\hat{AUC}}}
+$$
+
+```{r}
+# pvalue testing the null of 0.5
+pnorm((fit_rma$b[[1]] - 0.5)/fit_rma$se, lower.tail = FALSE)*2
+```
+
+## Forest Plot
+
+```{r}
+forest(fit_rma, refline = 0.5)
+```
+
+# Comments? {.question}

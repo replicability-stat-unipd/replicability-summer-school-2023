@@ -1,0 +1,119 @@
+---
+title: Introduction to the workshops
+subtitle: Replicability Crisis in Science?
+date: last-modified
+date-format: "[18-22 September] YYYY"
+author:
+  - name: Filippo Gambarota
+    email: filippo.gambarota@unipd.it
+    twitter: fgambarota
+    github: filippogambarota
+    orcid: "`r filor::fil()$orcid`"
+  - name: Gianmarco Altoè
+    email: filippo.gambarota@unipd.it
+    orcid: "0000-0003-1154-9528"
+final-slide: true
+notation-slide: false
+embed-resources: false
+from: markdown+emoji
+toc: false
+filters: 
+    - code-fullscreen
+format:
+  filor-revealjs:
+    theme: custom.css
+---
+
+```{r}
+#| label: setup
+knitr::opts_chunk$set(echo = TRUE,
+                      dev = "svg",
+                      fig.align = "center")
+```
+
+# About us {.about}
+
+## About us {.about}
+
+:::: {.columns}
+::: {.column width='40%'}
+
+### Filippo Gambarota
+
+![](img/fg.jpg){width=300 fig-align="center"}
+
+- [**Postdoctoral Researcher**]{.imp}: Department of Developmental and Social Psychology
+- **Research interests**: meta-analysis, psychometrics, data simulation, programming
+
+:::
+::: {.column width='20%'}
+:::
+::: {.column width='40%'}
+
+### Gianmarco Altoè
+
+![](img/ga.png){width=300 fig-align="center"}
+
+- [**Associate Professor**]{.imp}: Department of Developmental and Social Psychology
+
+:::
+::::
+
+# Program {.section}
+
+## Program
+
+| Day | Title | Topics |
+|:---:|:---:|:---:|
+| 18/09/2023 | **Tools for reproducible research** | R, Quarto, Git/Github, Open Science Framework |
+| 18/09/2023 | **Meta-Analysis and Multi-Lab Replication studies** | Equal and random-effects model, heterogeneity, power-analysis, simulating data |
+| 18/09/2023 | **Exploring Replicability in Biostatistics** | Binary classifiers, ROC and AUC, meta-analysis with gene expression data |
+| 18/09/2023 | **Statistical Methods for Replicability Assessment** | Frequentist and Bayesian statistical methods for replicability assessment |
+
+## Materials 📘
+
+. . .
+
+- 🌐 All the **material** (code, slides, extra) are available on the **Github** of the Summer School [https://github.com/replicability-stat-unipd/replicability-summer-school-2023](https://github.com/replicability-stat-unipd/replicability-summer-school-2023). The same material can be accessed using this link [https://replicability-stat-unipd.github.io/replicability-summer-school-2023/](https://replicability-stat-unipd.github.io/replicability-summer-school-2023/)
+
+. . .
+
+- 📝 Slides are created with **Quarto**, you can use it as standard slides (in *html* format) and see the source code (`.qmd` file)
+
+. . .
+
+- 💻 For code debugging, exercises or general questions we can use this shared online code editor [etherpad.wikimedia.org/p/replicability-summer-school-2023](https://etherpad.wikimedia.org/p/replicability-summer-school-2023). Basically we can write code together.
+
+. . .
+
+- ⚙️ We are going to use mainly the slides, R Studio, the Github website and the shared editor. **I suggest you to bookmark the Github website and the editor**
+
+## Other info
+
+### References
+
+There will be references at the end of each slide deck. You will se a button where you can download the `.bib` file to import into your reference manager.
+
+</br>
+
+<center>
+<button class="button">
+<p> Download References </p>
+</button>
+</center>
+
+## Disclaimer
+
+. . .
+
+- We are using a lot of (R) code. When talking about code there is no a unique solution or method. My approach is not the best. If your code works, everything good :smile:
+
+. . .
+
+- If we have time, we can discuss about best practice in writing code in terms of efficency, organization and clarity :sunglasses:
+
+. . .
+
+- Also for statistics related topics, there are often multiple options to solve a problem. If you know other alternatives beyond the proposed topics, we can discuss it :wink:
+
+# Let's start! {.section}

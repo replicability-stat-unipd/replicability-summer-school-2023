@@ -1,0 +1,92 @@
+---
+title: Getting started
+subtitle: Replicability Crisis in Science? </br> 18-22 September 2023
+author:
+  - name: Filippo Gambarota
+    email: filippo.gambarota@unipd.it
+    twitter: fgambarota
+    github: filippogambarota
+    orcid: "`r filor::fil()$orcid`"
+  - name: Gianmarco Altoè
+    email: filippo.gambarota@unipd.it
+    orcid: "0000-0003-1154-9528"
+format: html
+from: markdown+emoji
+toc: true
+---
+
+# Installing R and R Studio
+
+## Installing R binaries
+
+The first step is installing R that is a very straightforward process. You can go to [https://cran.r-project.org/](https://cran.r-project.org/), download the installer for your operating system and follow the steps^[For linux users the procedure is a little bit more tricky, but all steps are clearly].
+
+### Additionals tools
+
+For MAC users there is an additional tool that is required called `XQuartz` [https://www.xquartz.org/](https://www.xquartz.org/).
+
+For Windows users, `Rtools` [https://cran.r-project.org/bin/windows/Rtools/](https://cran.r-project.org/bin/windows/Rtools/) is an additional tool required by some packages to works correctly. Remember to choose the version corresponding to the R version that you installed.
+
+## R Studio
+
+R Studio (now Posit) is an IDE to use the R programming language but also other programming languages. Is not the only option to use R (for hardcore users you can basically open a text editor and a terminal :skull:). Another very good option is VScode (which I personally use when writing using Quarto or R Markdown). However, I suggest you to install R Studio, you can dowload the last version from the website [https://posit.co/products/open-source/rstudio/](https://posit.co/products/open-source/rstudio/)
+
+# Quarto
+
+Quarto is the evolution of R Markdown. Is a literate programming framework where prose (written in Markdown) can be combined with code (R, Python, Julia, etc.). This is an amazing tool to create report, presentations, papers etc. you can download it from https://quarto.org/.
+
+# GIT
+
+> Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.
+
+Git is an extremely powerful tool to manage code-related projects (but not only). You can download it from the website [https://git-scm.com/](https://git-scm.com/).
+
+# Accounts
+
+## Github 
+
+Github is the online server where Git repositories can be hosted. It is an amazing service where you can also create websites for free (where this page is hosted) just using R and Quarto (or R Markdown). You can create an account on the website [https://github.com/](https://github.com/).
+
+## Open Science Framework
+
+The Open Science Framework (OSF) is an free online repository to host documents, code and files related to research work. The repository can be shared and OSF will attach a DOI thus can be cited and shared in a consistent way. OSF can be linked to several other services such as reference managers, cloud storage and Github. You can create an account on the website https://osf.io/.
+
+# R Packages
+
+Beyond the base R installation we need extra packages for the workshops. In any case, R Studio will prompt you to install missing packages when detected from a script.
+
+## CRAN Packages
+
+To install packages from CRAN you can run the following code into the R console:
+
+```{r}
+#| eval: false
+pkgs <- c("tidyverse", "car", "devtools", "here", "knitr", "rmarkdown", "metafor", "MetaUtility", "pROC", "Replicate", "rstanarm", "sjPlot", "remotes", "cli", "logspline", "pwr", "ggdist")
+
+install.packages(pkgs)
+```
+
+## Github Packages
+
+There are some packages that are not available on CRAN. You can install using the following code:
+
+```{r}
+#| eval: false
+
+if (!require("remotes", quietly = TRUE)) install.packages("remotes")
+
+gh_pkgs <- c("haozhu233/kableExtra", "filippogambarota/filor")
+remotes::install_github(gh_pkgs)
+```
+
+## Bioconductor Packages
+
+There are some packages from the `Bioconductor` repository. You can install using the following code^[On linux the procedure could be a little bit long].
+
+```{r}
+#| eval: false
+
+if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager")
+
+BiocManager::install("curatedOvarianData")
+```
