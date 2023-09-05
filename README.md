@@ -30,7 +30,7 @@ Within slides and exercises we use some custom functions developed for the works
 
 The slides are located into the specific folders. Then when relevant `script/` and `objects/` folders contains extra documents and files included in the slides. The dataset used in the slides are contained also into the `data` folder and datasets can be accessed also using the `data()` function.
 
-- **Introduction to the workshops** - 09-18-2023 - [html](00-intro/00-intro.html) - [qmd](00-intro/00-intro.qmd)
+- **Introduction to the workshops** - 09-18-2023 - [html](00-intro/slides/00-intro.html) - [qmd](00-intro/slides/00-intro.qmd)
 - **Tools for reproducible research** - 09-18-2023 - [html](01-replication-tools/slides/01-replication-tools.html) - [qmd](01-replication-tools/slides/01-replication-tools.qmd)
 	+ `examples/` containes some `qmd` documents to demonstrate Quarto features
 - **Meta-Analysis and Multi-Lab Replication studies** - 09-19-2023 - [html](02-meta-analysis/slides/02-meta-analysis.html) - [qmd](02-meta-analysis/slides/02-meta-analysis.qmd)
