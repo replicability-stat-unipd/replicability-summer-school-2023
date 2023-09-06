@@ -34,4 +34,4 @@ common_genes <- base::Reduce(base::intersect, genes)
 datl_debulking_df <- lapply(datl_debulking, get_bio_data, common_genes, "debulking")
 
 # saving
-saveRDS(datl_debulking_df, "03-biostatistics/data/gene_data_clean.rds")
+saveRDS(datl_debulking_df, "03-biostatistics/objects/gene_data_clean.rds")

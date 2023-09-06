@@ -16,7 +16,8 @@ filters:
     - line-highlight
 format:
   filor-revealjs:
-    toc: false
+    toc: true
+    toc-depth: 1
     margin: 0.1
 bibliography: "`r filor::fil()$bib`"
 code-link: true
@@ -1296,57 +1297,25 @@ lines(coef(egger$fit)[1] + coef(egger$fit)[2]*se, se, lwd=3)
 
 # Practical meta-analysis {.section}
 
-## Dataset
+## @Oliveira2023-yf dataset
 
-We will analyze the data provided by [https://www.metapsy.org/](https://www.metapsy.org/). In particular the dataset about the efficacy of psychoterapy on depression using randomized-controlled trials ([https://www.metapsy.org/database/depression-psychotherapy](https://www.metapsy.org/database/depression-psychotherapy)).
-
-```{r}
-#| echo: false
-knitr::include_url("https://docs.metapsy.org/")
-```
-
-## Dataset
-
-The dataset for the exercises is `depression.rds`. The dataset has been minimally pre-processed to remove extra columns and converted to the `rds` format.
-
-In particular:
-
-- studies using *cognitive-behavioral* therapy
-- studies with controls in waiting lists
-- studies with therapy delivered individually or in groups
+The meta-analysis by @Oliveira2023-yf is about the efficacy of Internet-delivered cognitive behavioral therapy (ICBT) interventions in reducing anxiethy among university students. They collected $k = 15$ studies with a total of 1619 participants and summarised the effect using a standardized mean difference. The dataset is `02-meta-analysis/objects/oliveira2023_clean.rds`.
 
 ```{r}
 #| echo: false
-dep <- readRDS(here("02-meta-analysis/objects/depression.rds"))
-head(dep)
+oliveira2023 <- readRDS(here("02-meta-analysis/objects/oliveira2023_clean.rds"))
+oliveira2023
 ```
 
-## Dataset
+## @Oliveira2023-yf dataset
 
-The columns represent:
+There are multiple columns with study-level features but the important variables are:
 
-- `study`: identifier for each included study
-- `age_group`: the age group of individual in the experimental group (`adul` = adults, `yadul` = young adults, `old` = old)
-- `mean_age`: the average age of the experimental group
-- `country`: country where the study was conducted
-- `format`: the therapy format (`grp` = group, `ind` = individual)
-- `yi`: the effect size in the form of Hedges's $g$ [see @Hedges1989-ip, Cohen's $d$ corrected for small-sample bias]. Positive values means that the treatment is effective.
-- `sei`: standard error of the Hedges's $g$
-
-## Pre-processing
-
-> **Crucially**, some papers have multiple studies. This data structure should be handled using a multilevel model. For the sake of simplicity we sampled randomly a study from multiple studies.
-
-These are the pre-processing steps:
-```{r}
-#| output: asis
-#| echo: false
-filor::show_file(here("02-meta-analysis/scripts/depression-pre-processing.R"), how = "code")
-```
+- `study`: identifier for each study
+- `yi`: the standardized effect size. Negative effect represent a reduction of pre-post anxiety
+- `vi`: the standardized effect size sampling variance
 
 ## Steps
-
-> **Important**, the dataset is real but the preprocessing steps and the models are examples without a clinical meaning. We are surely missing important predictors and/or analysis steps thus take the results only for educational purposes.
 
 1. Import the data and explore (summary statistics, plots, etc.) the variables
 2. Fit an equal-effects model and a random-effects model
@@ -1356,17 +1325,35 @@ filor::show_file(here("02-meta-analysis/scripts/depression-pre-processing.R"), h
 3. Plot the model results using a forest plot
 4. Create a funnel plot and comment the pattern
 5. Analize the publication bias using the Egger regression and comment the result
-
-## Advanced Steps
-
-We did not introduced **meta-regressions** i.e. the possibility to include predictors in a meta-analysis model. The implementation is quite straightforward. E.g. see [https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/metareg.html](https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/metareg.html) and the `mods` argument of `metafor::rma.uni()` function [https://wviechtb.github.io/metafor/reference/rma.uni.html](https://wviechtb.github.io/metafor/reference/rma.uni.html).
-
-- Try to compute a meta-regression model checking the impact of `format`
-  - intepret the results
-  - is the heterogeneity different from the model without predictors?
+6. Try to apply the trim and fill method and comment the result 
 
 # Proposed solutions {.section}
 
 {{< include 02-meta-analysis-solutions.qmd >}}
+
+## @Dear2019-qc dataset
+
+> Eye cues have been shown to stimulate rapid, reflexive, unconscious processing and in many experimental settings to cue increased prosocial and decreased antisocial behaviour [@Dear2019-qc].
+
+> The "watching eyes" effect refers to a strange phenomenon whereby the mere presence of pictures of eyes or stylized eye images is enough to cause people to adjust their behavior
+
+- they found $k = 15$ studies with a total of 2035 participants
+- compared to previous examples, the included studies used a 2x2 design and the effect size is calculated counting the number of people doing antisocial actions (or not) according to the experimental condition (with and without eye cues).
+- the effect size is the $log$ Odds Ratio and can be calculated using `metafor::escalc()`
+
+## @Dear2019-qc dataset
+
+The dataset can be found in `02-meta-analysis/objects/dear2019_clean.rds`:
+
+```{r}
+#| echo: false
+dear2019 <- readRDS(here("02-meta-analysis/objects/dear2019_clean.rds"))
+```
+
+## Steps
+
+1. Import the data and explore (summary statistics, plots, etc.) the variables
+2. Try to calculate the effect size (log Odds Ratio) using `metafor::escalc()` (see the documentation `?metafor::escalc()`)
+3. Do the same steps as the previous meta-analysis
 
 ## References {.smaller}

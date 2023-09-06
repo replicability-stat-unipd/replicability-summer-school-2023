@@ -88,7 +88,7 @@ funs <- filor::get_funs(here("R", "utils-biostat.R"))
 
 ```{r}
 #| label: data
-datl <- readRDS(here("03-biostatistics", "data", "gene_data_clean.rds"))
+datl <- readRDS(here("03-biostatistics", "objects", "gene_data_clean.rds"))
 ```
 
 # Reproducibility in Biostatistics
@@ -170,7 +170,7 @@ filor::show_file(here("03-biostatistics/scripts/gene-data-preprocessing.R"), how
 The pre-processing create a dataframe with datasets having both the `debulking` variable and all genes in common. In this way we can analyze and compare genes among all datasets.
 
 ```{r}
-datl <- readRDS(here("03-biostatistics", "data", "gene_data_clean.rds"))
+datl <- readRDS(here("03-biostatistics", "objects", "gene_data_clean.rds"))
 str(datl, max.level = 1)
 ```
 

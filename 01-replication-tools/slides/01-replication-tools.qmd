@@ -513,11 +513,6 @@ git commit -m "my first amazing commit"
 ```bash
 git log
 ```
-```{r}
-#| echo: false
-setwd("../../docs/git-example/")
-cat(system("git log", intern = TRUE), sep = "\n")
-```
 
 ## Github
 

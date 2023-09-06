@@ -437,7 +437,16 @@ Gianmarco Altoè <a href="https://orcid.org/0000-0003-1154-9528" class="quarto-t
 </div>
 
   <p class="date">18-22 September 2023</p>
-</section><section id="setup" class="slide level2"><h2>Setup</h2>
+</section><section id="TOC"><nav role="doc-toc"><h2 id="toc-title">Table of contents</h2>
+<ul>
+<li><a href="#/meta-analysis" id="/toc-meta-analysis">Meta-analysis</a></li>
+<li><a href="#/are-the-ee-assumptions-realistic" id="/toc-are-the-ee-assumptions-realistic">Are the EE assumptions realistic?</a></li>
+<li><a href="#/meta-analysis-in-r" id="/toc-meta-analysis-in-r">Meta-analysis in R</a></li>
+<li><a href="#/multilab-studies" id="/toc-multilab-studies">Multilab Studies</a></li>
+<li><a href="#/publication-bias" id="/toc-publication-bias">Publication Bias</a></li>
+<li><a href="#/practical-meta-analysis" id="/toc-practical-meta-analysis">Practical meta-analysis</a></li>
+<li><a href="#/proposed-solutions" id="/toc-proposed-solutions">Proposed solutions</a></li>
+</ul></nav></section><section id="setup" class="slide level2"><h2>Setup</h2>
 <h3 id="packages">Packages</h3>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># for data manipulation</span></span>
@@ -582,7 +591,7 @@ SE_y = \sqrt{\frac{s^2_1}{n_1} + \frac{s^2_2}{n_2}}
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>ybar <span class="ot">&lt;-</span> <span class="fu">mean</span>(dat<span class="sc">$</span>yi)</span>
 <span id="cb5-2"><a href="#cb5-2"></a>ybar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5061501</code></pre>
+<pre><code>[1] 0.4993974</code></pre>
 </div>
 </div>
 </div>
@@ -618,10 +627,10 @@ w_i = \frac{1}{v_i}
 <span id="cb7-2"><a href="#cb7-2"></a>ywbar <span class="ot">&lt;-</span> <span class="fu">weighted.mean</span>(dat<span class="sc">$</span>yi, wi) </span>
 <span id="cb7-3"><a href="#cb7-3"></a>ywbar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5213075</code></pre>
+<pre><code>[1] 0.5215261</code></pre>
 </div>
 </div>
-<p>Compared to the unweighted version (0.5061501), given that weights are non homogeneous the values are different.</p>
+<p>Compared to the unweighted version (0.4993974), given that weights are non homogeneous the values are different.</p>
 </div>
 </div>
 </div>
@@ -820,17 +829,17 @@ y_i \sim \mathcal{N}(\Delta, \frac{1}{n_1} + \frac{1}{n_2})
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">sim_studies</span>(<span class="at">k =</span> <span class="dv">10</span>, <span class="at">theta =</span> <span class="fl">0.5</span>, <span class="at">tau2 =</span> <span class="fl">0.2</span>, <span class="at">n0 =</span> <span class="dv">30</span>, <span class="at">n1 =</span> <span class="dv">30</span>)</span>
 <span id="cb13-2"><a href="#cb13-2"></a>dat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>            yi         vi       sei
-1   0.60944540 0.07509819 0.2740405
-2   0.38586318 0.07759971 0.2785672
-3  -0.47011805 0.06503872 0.2550269
-4   0.94492375 0.07717265 0.2777996
-5  -0.03559900 0.05265940 0.2294764
-6  -0.08831836 0.09134084 0.3022265
-7   0.78653753 0.08107453 0.2847359
-8   1.50512804 0.06046087 0.2458879
-9   0.32766265 0.06647390 0.2578253
-10  0.90256919 0.05627682 0.2372274</code></pre>
+<pre><code>           yi         vi       sei
+1   0.6215165 0.05440073 0.2332396
+2   1.3725805 0.08496553 0.2914885
+3  -0.1053946 0.06945848 0.2635498
+4   0.7467620 0.05732165 0.2394194
+5   0.3657573 0.05598327 0.2366078
+6   0.2575050 0.06145336 0.2478979
+7   0.5810309 0.06168341 0.2483615
+8  -0.6342574 0.06390868 0.2528017
+9   1.2073078 0.06134833 0.2476859
+10  0.3718484 0.07303229 0.2702449</code></pre>
 </div>
 </div>
 </div>
@@ -1042,13 +1051,13 @@ I^2 = 100\% \times \frac{\hat{\tau}^2}{\hat{\tau}^2 + \tilde{v}}
 <span id="cb25-5"><a href="#cb25-5"></a>dat<span class="sc">$</span>n <span class="ot">&lt;-</span> n <span class="co"># n1 and n2 are the same, put only one</span></span>
 <span id="cb25-6"><a href="#cb25-6"></a><span class="fu">head</span>(dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>          yi         vi       sei  n
-1  0.6024530 0.25641843 0.5063778 12
-2  0.2348228 0.07274918 0.2697206 34
-3 -0.0806240 0.06450374 0.2539759 33
-4  0.2989215 0.26569232 0.5154535 11
-5  0.3405177 0.04677380 0.2162725 49
-6  0.3426122 0.04514737 0.2124791 39</code></pre>
+<pre><code>           yi         vi       sei  n
+1  0.24343869 0.04690218 0.2165691 44
+2  0.25539044 0.08864654 0.2977357 22
+3  0.72889575 0.05907269 0.2430487 24
+4  0.27742800 0.04076820 0.2019114 47
+5  0.25437194 0.11122669 0.3335067 23
+6 -0.06751987 0.04612675 0.2147714 45</code></pre>
 </div>
 </div>
 </section><section id="equal-effects-model-in-r-2" class="slide level2"><h2>Equal-effects model in R</h2>
@@ -1058,19 +1067,19 @@ I^2 = 100\% \times \frac{\hat{\tau}^2}{\hat{\tau}^2 + \tilde{v}}
 <span id="cb27-2"><a href="#cb27-2"></a><span class="fu">summary</span>(dat<span class="sc">$</span>yi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
--0.6097  0.0585  0.2225  0.2447  0.4639  1.0751 </code></pre>
+-0.2285  0.1977  0.2961  0.3139  0.4632  0.7289 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co"># unweighted summary statistics for the variances</span></span>
 <span id="cb29-2"><a href="#cb29-2"></a><span class="fu">summary</span>(dat<span class="sc">$</span>vi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-0.03720 0.05299 0.08461 0.10363 0.11167 0.34686 </code></pre>
+0.03587 0.04622 0.07165 0.07913 0.08934 0.30185 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># sample sizes</span></span>
 <span id="cb31-2"><a href="#cb31-2"></a><span class="fu">summary</span>(dat<span class="sc">$</span>n) <span class="co"># n0 and n1 are the same</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-   10.0    15.0    25.0    26.4    37.0    56.0 </code></pre>
+  12.00   20.50   36.50   32.47   43.00   54.00 </code></pre>
 </div>
 </div>
 </section><section id="equal-effects-model-in-r-3" class="slide level2"><h2>Equal-effects model in R</h2>
@@ -1083,18 +1092,18 @@ I^2 = 100\% \times \frac{\hat{\tau}^2}{\hat{\tau}^2 + \tilde{v}}
 Equal-Effects Model (k = 30)
 
   logLik  deviance       AIC       BIC      AICc   
- -6.9395   31.9689   15.8789   17.2801   16.0218   
+ -0.2669   25.1756    2.5338    3.9350    2.6766   
 
-I^2 (total heterogeneity / total variability):   9.29%
-H^2 (total variability / sampling variability):  1.10
+I^2 (total heterogeneity / total variability):   0.00%
+H^2 (total variability / sampling variability):  0.87
 
 Test for Heterogeneity:
-Q(df = 29) = 31.9689, p-val = 0.3212
+Q(df = 29) = 25.1756, p-val = 0.6691
 
 Model Results:
 
 estimate      se    zval    pval   ci.lb   ci.ub      
-  0.2530  0.0502  5.0378  &lt;.0001  0.1546  0.3515  *** 
+  0.3202  0.0461  6.9485  &lt;.0001  0.2299  0.4106  *** 
 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
@@ -1110,20 +1119,20 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 Random-Effects Model (k = 30; tau^2 estimator: REML)
 
   logLik  deviance       AIC       BIC      AICc   
- -7.2582   14.5164   18.5164   21.2510   18.9779   
+ -0.7246    1.4491    5.4491    8.1837    5.9107   
 
-tau^2 (estimated amount of total heterogeneity): 0.0067 (SE = 0.0202)
-tau (square root of estimated tau^2 value):      0.0817
-I^2 (total heterogeneity / total variability):   8.05%
-H^2 (total variability / sampling variability):  1.09
+tau^2 (estimated amount of total heterogeneity): 0 (SE = 0.0156)
+tau (square root of estimated tau^2 value):      0
+I^2 (total heterogeneity / total variability):   0.00%
+H^2 (total variability / sampling variability):  1.00
 
 Test for Heterogeneity:
-Q(df = 29) = 31.9689, p-val = 0.3212
+Q(df = 29) = 25.1756, p-val = 0.6691
 
 Model Results:
 
 estimate      se    zval    pval   ci.lb   ci.ub      
-  0.2502  0.0529  4.7315  &lt;.0001  0.1465  0.3538  *** 
+  0.3202  0.0461  6.9485  &lt;.0001  0.2299  0.4106  *** 
 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
@@ -1136,14 +1145,14 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <span id="cb37-2"><a href="#cb37-2"></a>  <span class="fu">round</span>(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       fit_ee  fit_re
-b     0.25302 0.25015
-se    0.05022 0.05287
-zval  5.03776 4.73149
+b     0.32024 0.32024
+se    0.04609 0.04609
+zval  6.94853 6.94853
 pval  0.00000 0.00000
-ci.lb 0.15458 0.14653
-ci.ub 0.35146 0.35377
-I2    9.28671 8.04772
-tau2  0.00000 0.00668</code></pre>
+ci.lb 0.22991 0.22991
+ci.ub 0.41056 0.41056
+I2    0.00000 0.00000
+tau2  0.00000 0.00000</code></pre>
 </div>
 </div>
 </section><section id="random-effects-model-in-r-2" class="slide level2"><h2>Random-effects model in R</h2>
@@ -1159,20 +1168,20 @@ tau2  0.00000 0.00668</code></pre>
 Random-Effects Model (k = 30; tau^2 estimator: REML)
 
   logLik  deviance       AIC       BIC      AICc   
--28.1236   56.2472   60.2472   62.9818   60.7087   
+-23.1016   46.2032   50.2032   52.9378   50.6647   
 
-tau^2 (estimated amount of total heterogeneity): 0.3214 (SE = 0.1063)
-tau (square root of estimated tau^2 value):      0.5670
-I^2 (total heterogeneity / total variability):   81.86%
-H^2 (total variability / sampling variability):  5.51
+tau^2 (estimated amount of total heterogeneity): 0.2226 (SE = 0.0762)
+tau (square root of estimated tau^2 value):      0.4718
+I^2 (total heterogeneity / total variability):   78.95%
+H^2 (total variability / sampling variability):  4.75
 
 Test for Heterogeneity:
-Q(df = 29) = 163.3147, p-val &lt; .0001
+Q(df = 29) = 137.6356, p-val &lt; .0001
 
 Model Results:
 
-estimate      se    zval    pval   ci.lb   ci.ub      
-  0.4796  0.1164  4.1212  &lt;.0001  0.2515  0.7076  *** 
+estimate      se    zval    pval    ci.lb   ci.ub    
+  0.1546  0.0986  1.5680  0.1169  -0.0387  0.3479    
 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
@@ -1739,88 +1748,89 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-59-1.svg" width="960" class="r-stretch quarto-figure-center"></section></section><section><section id="practical-meta-analysis" class="title-slide slide level1 section center"><h1>Practical meta-analysis</h1>
 
-</section><section id="dataset" class="slide level2"><h2>Dataset</h2>
-<p>We will analyze the data provided by <a href="https://www.metapsy.org/">https://www.metapsy.org/</a>. In particular the dataset about the efficacy of psychoterapy on depression using randomized-controlled trials (<a href="https://www.metapsy.org/database/depression-psychotherapy">https://www.metapsy.org/database/depression-psychotherapy</a>).</p>
-<div class="cell" data-layout-align="center">
-<iframe src="https://docs.metapsy.org/" width="960" height="400px" data-external="1">
-</iframe>
-</div>
-</section><section id="dataset-1" class="slide level2"><h2>Dataset</h2>
-<p>The dataset for the exercises is <code>depression.rds</code>. The dataset has been minimally pre-processed to remove extra columns and converted to the <code>rds</code> format.</p>
-<p>In particular:</p>
-<ul>
-<li>studies using <em>cognitive-behavioral</em> therapy</li>
-<li>studies with controls in waiting lists</li>
-<li>studies with therapy delivered individually or in groups</li>
-</ul>
+</section><section id="oliveira2023-yf-dataset" class="slide level2"><h2>
+<span class="citation" data-cites="Oliveira2023-yf">Oliveira et al. (<a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span> dataset</h2>
+<p>The meta-analysis by <span class="citation" data-cites="Oliveira2023-yf">Oliveira et al. (<a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span> is about the efficacy of Internet-delivered cognitive behavioral therapy (ICBT) interventions in reducing anxiethy among university students. They collected <span class="math inline">\(k = 15\)</span> studies with a total of 1619 participants and summarised the effect using a standardized mean difference. The dataset is <code>02-meta-analysis/objects/oliveira2023_clean.rds</code>.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output cell-output-stdout">
-<pre><code>  id            study age_group mean_age country format        yi       sei
-1  1      Amani, 2021      adul    31.55     can    grp 1.3073531 0.3625159
-2  5       Ayen, 2004      adul    51.30      eu    grp 3.3600000 0.6946767
-3  6      Beach, 1992      adul    39.14      us    ind 1.0032798 0.3886573
-4  9      Brown, 1984      adul    36.50      us    ind 0.2763874 0.4117515
-5 11 Castonguay, 2004      adul    38.80      us    ind 1.8407242 0.5276788
-6 14       Chan, 2012      adul    46.43     eas    grp 0.6043108 0.3565626</code></pre>
+<pre><code>
+                Study Year Target.outcome          Outcome  Measures mean.age 
+1      Botella et al. 2010            SAD Anxiety disorder SAD-scale    24.40 
+2          Day et al. 2013        Anxiety Anxiety symptoms   DASS-21    23.55 
+3        Ellis et al. 2011        Anxiety Anxiety symptoms   DASS-21    19.67 
+4  Fitzpatrick et al. 2017        Anxiety Anxiety symptoms     GAD-7     22.2 
+5       Kählke et al. 2019            SAD Anxiety disorder      SIAS    26.70 
+6          Liu et al. 2020        Anxiety Anxiety symptoms    STAI-S     22.0 
+7       McCall et al. 2018            SAD Anxiety disorder      SIAS    21.86 
+8      McCloud et al. 2020        Anxiety Anxiety symptoms      HADS     24.3 
+9       Melnyk et al. 2015        Anxiety Anxiety symptoms     GAD-7    18.67 
+10      Morris et al. 2016        Anxiety Anxiety symptoms    STAI-S     20.5 
+11      Mullin et al. 2015        Anxiety Anxiety symptoms     GAD-7    27.86 
+12      Newman et al. 2021            GAD Anxiety disorder     GAD-7    19.91 
+13      Orbach et al. 2007   Test anxiety Anxiety disorder       TAI    23.67 
+14    Richards et al. 2016            GAD Anxiety disorder     GAD-7    23.82 
+15       Sethi et al. 2010        Anxiety Anxiety symptoms   DASS-21    19.47 
+   sample.type guidance      lenght riskofbias control.group n.exp.pos 
+1      general        n   5-8 weeks        Low       passive        30 
+2      general      yes   5-8 weeks        Low       passive        33 
+3        other      yes &lt; = 4 weeks        Low       passive        13 
+4      general        n &lt; = 4 weeks        Low        active        31 
+5      general        n  &gt;= 9 weeks        Low       passive       100 
+6      general      yes &lt; = 4 weeks   Concerns       passive        40 
+7        other        n  &gt;= 9 weeks   Concerns       passive        30 
+8      general        n   5-8 weeks   Concerns       passive        58 
+9      general        n   5-8 weeks   Concerns        active        61 
+10     general        n   5-8 weeks   Concerns       passive        43 
+11     general      yes  &gt;= 9 weeks        Low       passive        30 
+12       other      yes  &gt;= 9 weeks        Low       passive       117 
+13     general        n   5-8 weeks        Low        active        30 
+14     general      yes   5-8 weeks        Low       passive        70 
+15       other      yes &lt; = 4 weeks   Concerns       passive         9 
+   mean.exp.pos sd.exp.pos n.control.pos mean.control.pos sd.control.pos 
+1          7.67       5.81            25            11.28           7.45 
+2          5.70       4.49            33             9.93           7.77 
+3          4.46       4.91            13             9.39           5.06 
+4         17.35       0.60            25            16.84           0.67 
+5         36.72      13.86           100            44.36          14.05 
+6         41.10      10.40            14            51.90           8.70 
+7         30.73      11.12            35            41.43          13.82 
+8         11.20       3.75            70            12.60           3.88 
+9          4.90       3.90            32             5.40           4.70 
+10        45.81      11.43            47            53.09          11.25 
+11         6.09       4.01            23             8.35           5.60 
+12         5.89       3.16           105             6.82           3.10 
+13        47.31       9.49            28            54.25          11.31 
+14         7.73       4.44            67             9.13           4.13 
+15         8.60       4.10            10            13.80           3.80 
+        yi     vi 
+1  -0.5389 0.0760 
+2  -0.6588 0.0639 
+3  -0.9576 0.1715 
+4   0.7956 0.0779 
+5  -0.5454 0.0207 
+6  -1.0641 0.1069 
+7  -0.8358 0.0673 
+8  -0.3641 0.0320 
+9  -0.1184 0.0477 
+10 -0.6367 0.0468 
+11 -0.4676 0.0789 
+12 -0.2959 0.0183 
+13 -0.6579 0.0728 
+14 -0.3244 0.0296 
+15 -1.2593 0.2528 </code></pre>
 </div>
 </div>
-</section><section id="dataset-2" class="slide level2"><h2>Dataset</h2>
-<p>The columns represent:</p>
+</section><section id="oliveira2023-yf-dataset-1" class="slide level2"><h2>
+<span class="citation" data-cites="Oliveira2023-yf">Oliveira et al. (<a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span> dataset</h2>
+<p>There are multiple columns with study-level features but the important variables are:</p>
 <ul>
 <li>
-<code>study</code>: identifier for each included study</li>
+<code>study</code>: identifier for each study</li>
 <li>
-<code>age_group</code>: the age group of individual in the experimental group (<code>adul</code> = adults, <code>yadul</code> = young adults, <code>old</code> = old)</li>
+<code>yi</code>: the standardized effect size. Negative effect represent a reduction of pre-post anxiety</li>
 <li>
-<code>mean_age</code>: the average age of the experimental group</li>
-<li>
-<code>country</code>: country where the study was conducted</li>
-<li>
-<code>format</code>: the therapy format (<code>grp</code> = group, <code>ind</code> = individual)</li>
-<li>
-<code>yi</code>: the effect size in the form of Hedges’s <span class="math inline">\(g\)</span> <span class="citation" data-cites="Hedges1989-ip">(see <a href="#/references" role="doc-biblioref" onclick="">Hedges 1989</a>, Cohen’s <span class="math inline">\(d\)</span> corrected for small-sample bias)</span>. Positive values means that the treatment is effective.</li>
-<li>
-<code>sei</code>: standard error of the Hedges’s <span class="math inline">\(g\)</span>
-</li>
-</ul></section><section id="pre-processing" class="slide level2"><h2>Pre-processing</h2>
-<blockquote>
-<p><strong>Crucially</strong>, some papers have multiple studies. This data structure should be handled using a multilevel model. For the sake of simplicity we sampled randomly a study from multiple studies.</p>
-</blockquote>
-<p>These are the pre-processing steps:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a><span class="fu">library</span>(metapsyData)</span>
-<span id="cb67-2"><a href="#cb67-2"></a></span>
-<span id="cb67-3"><a href="#cb67-3"></a>dat <span class="ot">&lt;-</span> <span class="fu">getData</span>(<span class="st">"depression-psyctr"</span>)<span class="sc">$</span>data</span>
-<span id="cb67-4"><a href="#cb67-4"></a></span>
-<span id="cb67-5"><a href="#cb67-5"></a><span class="co"># selecting only CBT as therapy, waiting list as control and format as individual</span></span>
-<span id="cb67-6"><a href="#cb67-6"></a></span>
-<span id="cb67-7"><a href="#cb67-7"></a>idx <span class="ot">&lt;-</span> dat<span class="sc">$</span>condition_arm1 <span class="sc">==</span> <span class="st">"cbt"</span> <span class="sc">&amp;</span> dat<span class="sc">$</span>condition_arm2 <span class="sc">==</span> <span class="st">"wl"</span> <span class="sc">&amp;</span> dat<span class="sc">$</span>format <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"grp"</span>, <span class="st">"ind"</span>) <span class="sc">&amp;</span> dat<span class="sc">$</span>age_group <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"adul"</span>, <span class="st">"yadul"</span>, <span class="st">"old"</span>)</span>
-<span id="cb67-8"><a href="#cb67-8"></a></span>
-<span id="cb67-9"><a href="#cb67-9"></a><span class="co"># selecting relevant columns</span></span>
-<span id="cb67-10"><a href="#cb67-10"></a></span>
-<span id="cb67-11"><a href="#cb67-11"></a>cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"study"</span>, <span class="st">"age_group"</span>, <span class="st">"mean_age"</span>, <span class="st">"country"</span>, <span class="st">"format"</span>, <span class="st">".g"</span>, <span class="st">".g_se"</span>)</span>
-<span id="cb67-12"><a href="#cb67-12"></a></span>
-<span id="cb67-13"><a href="#cb67-13"></a>dat_clean <span class="ot">&lt;-</span> dat[idx, cols]</span>
-<span id="cb67-14"><a href="#cb67-14"></a></span>
-<span id="cb67-15"><a href="#cb67-15"></a>dat_clean<span class="sc">$</span>id <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(dat_clean)</span>
-<span id="cb67-16"><a href="#cb67-16"></a></span>
-<span id="cb67-17"><a href="#cb67-17"></a>dat_clean <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">select</span>(dat_clean, id, dplyr<span class="sc">::</span><span class="fu">everything</span>())</span>
-<span id="cb67-18"><a href="#cb67-18"></a></span>
-<span id="cb67-19"><a href="#cb67-19"></a><span class="fu">names</span>(dat_clean) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"id"</span>, <span class="st">"study"</span>, <span class="st">"age_group"</span>, <span class="st">"mean_age"</span>, <span class="st">"country"</span>, <span class="st">"format"</span>, <span class="st">"yi"</span>, <span class="st">"sei"</span>)</span>
-<span id="cb67-20"><a href="#cb67-20"></a></span>
-<span id="cb67-21"><a href="#cb67-21"></a>dat_clean <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">split</span>(dat_clean, dat_clean<span class="sc">$</span>study), <span class="cf">function</span>(x) <span class="cf">if</span>(<span class="fu">nrow</span>(x) <span class="sc">&gt;</span> <span class="dv">1</span>) x[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(x), <span class="dv">1</span>), ] <span class="cf">else</span> x)</span>
-<span id="cb67-22"><a href="#cb67-22"></a>dat_clean <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">bind_rows</span>(dat_clean)</span>
-<span id="cb67-23"><a href="#cb67-23"></a></span>
-<span id="cb67-24"><a href="#cb67-24"></a><span class="fu">rownames</span>(dat_clean) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb67-25"><a href="#cb67-25"></a></span>
-<span id="cb67-26"><a href="#cb67-26"></a><span class="fu">saveRDS</span>(dat_clean, <span class="st">"04-meta-analysis/objects/depression.rds"</span>)</span>
-<span id="cb67-27"><a href="#cb67-27"></a></span>
-<span id="cb67-28"><a href="#cb67-28"></a>dat_clean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section><section id="steps" class="slide level2"><h2>Steps</h2>
-<blockquote>
-<p><strong>Important</strong>, the dataset is real but the preprocessing steps and the models are examples without a clinical meaning. We are surely missing important predictors and/or analysis steps thus take the results only for educational purposes.</p>
-</blockquote>
+<code>vi</code>: the standardized effect size sampling variance</li>
+</ul></section><section id="steps" class="slide level2"><h2>Steps</h2>
 <ol type="1">
 <li>Import the data and explore (summary statistics, plots, etc.) the variables</li>
 <li>Fit an equal-effects model and a random-effects model
@@ -1833,67 +1843,19 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <li>Plot the model results using a forest plot</li>
 <li>Create a funnel plot and comment the pattern</li>
 <li>Analize the publication bias using the Egger regression and comment the result</li>
-</ol></section><section id="advanced-steps" class="slide level2"><h2>Advanced Steps</h2>
-<p>We did not introduced <strong>meta-regressions</strong> i.e.&nbsp;the possibility to include predictors in a meta-analysis model. The implementation is quite straightforward. E.g. see <a href="https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/metareg.html">https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/metareg.html</a> and the <code>mods</code> argument of <code><a href="https://wviechtb.github.io/metafor/reference/rma.uni.html">metafor::rma.uni()</a></code> function <a href="https://wviechtb.github.io/metafor/reference/rma.uni.html">https://wviechtb.github.io/metafor/reference/rma.uni.html</a>.</p>
-<ul>
-<li>Try to compute a meta-regression model checking the impact of <code>format</code>
-<ul>
-<li>intepret the results</li>
-<li>is the heterogeneity different from the model without predictors?</li>
-</ul>
-</li>
-</ul></section></section><section><section id="proposed-solutions" class="title-slide slide level1 section center"><h1>Proposed solutions</h1>
+<li>Try to apply the trim and fill method and comment the result</li>
+</ol></section></section><section><section id="proposed-solutions" class="title-slide slide level1 section center"><h1>Proposed solutions</h1>
 
 </section><section id="importing-and-exploring" class="slide level2"><h2>1. Importing and exploring</h2>
-<p>We have <code>nrow(dep)</code> studies, and this is the dataset structure with some summary statistics:</p>
+<p>We have <code>nrow(oliveira2023)</code> studies, and this is the dataset structure with some summary statistics:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a>dep <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">here</span>(<span class="st">"02-meta-analysis/objects/depression.rds"</span>))</span>
-<span id="cb68-2"><a href="#cb68-2"></a></span>
-<span id="cb68-3"><a href="#cb68-3"></a><span class="fu">str</span>(dep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>'data.frame':   49 obs. of  8 variables:
- $ id       : int  1 5 6 9 11 14 16 18 19 21 ...
- $ study    : chr  "Amani, 2021" "Ayen, 2004" "Beach, 1992" "Brown, 1984" ...
- $ age_group: chr  "adul" "adul" "adul" "adul" ...
- $ mean_age : num  31.6 51.3 39.1 36.5 38.8 ...
- $ country  : chr  "can" "eu" "us" "us" ...
- $ format   : chr  "grp" "grp" "ind" "ind" ...
- $ yi       : num  1.307 3.36 1.003 0.276 1.841 ...
- $ sei      : num  0.363 0.695 0.389 0.412 0.528 ...</code></pre>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a>oliveira2023 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">here</span>(<span class="st">"02-meta-analysis/objects/oliveira2023_clean.rds"</span>))</span>
+<span id="cb67-2"><a href="#cb67-2"></a></span>
+<span id="cb67-3"><a href="#cb67-3"></a><span class="fu">str</span>(oliveira2023)</span>
+<span id="cb67-4"><a href="#cb67-4"></a></span>
+<span id="cb67-5"><a href="#cb67-5"></a><span class="fu">summary</span>(oliveira2023)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a><span class="fu">summary</span>(dep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       id            study            age_group            mean_age    
- Min.   :  1.00   Length:49          Length:49          Min.   :20.08  
- 1st Qu.: 26.00   Class :character   Class :character   1st Qu.:37.42  
- Median : 48.00   Mode  :character   Mode  :character   Median :41.32  
- Mean   : 55.61                                         Mean   :42.97  
- 3rd Qu.: 90.00                                         3rd Qu.:48.72  
- Max.   :112.00                                         Max.   :68.53  
-                                                        NA's   :3      
-   country             format                yi               sei        
- Length:49          Length:49          Min.   :-0.1493   Min.   :0.1042  
- Class :character   Class :character   1st Qu.: 0.6409   1st Qu.:0.2597  
- Mode  :character   Mode  :character   Median : 0.8459   Median :0.3821  
-                                       Mean   : 1.2476   Mean   :0.3794  
-                                       3rd Qu.: 1.8282   3rd Qu.:0.4570  
-                                       Max.   : 4.8273   Max.   :0.7451  
-                                                                         </code></pre>
-</div>
-</div>
-</section><section id="importing-and-exploring-1" class="slide level2"><h2>1. Importing and exploring</h2>
-<p>Let’s plot the variables:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>))</span>
-<span id="cb72-2"><a href="#cb72-2"></a><span class="fu">barplot</span>(<span class="fu">table</span>(dep<span class="sc">$</span>age_group))</span>
-<span id="cb72-3"><a href="#cb72-3"></a><span class="fu">hist</span>(dep<span class="sc">$</span>mean_age)</span>
-<span id="cb72-4"><a href="#cb72-4"></a><span class="fu">barplot</span>(<span class="fu">table</span>(dep<span class="sc">$</span>country))</span>
-<span id="cb72-5"><a href="#cb72-5"></a><span class="fu">barplot</span>(<span class="fu">table</span>(dep<span class="sc">$</span>format))</span>
-<span id="cb72-6"><a href="#cb72-6"></a><span class="fu">hist</span>(dep<span class="sc">$</span>yi)</span>
-<span id="cb72-7"><a href="#cb72-7"></a><span class="fu">hist</span>(dep<span class="sc">$</span>sei)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-64-1.svg" width="960" class="r-stretch quarto-figure-center"></section><section id="models" class="slide level2"><h2>2. Models</h2>
+</section><section id="models" class="slide level2"><h2>2. Models</h2>
 <div class="panel-tabset">
 <ul id="tabset-8" class="panel-tabset-tabby">
 <li><a data-tabby-default="" href="#tabset-8-1">EE model</a></li>
@@ -1903,26 +1865,25 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="tab-content">
 <div id="tabset-8-1">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1"></a>dep<span class="sc">$</span>vi <span class="ot">&lt;-</span> dep<span class="sc">$</span>sei<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb73-2"><a href="#cb73-2"></a>fit_ee <span class="ot">&lt;-</span> <span class="fu">rma</span>(yi, vi, <span class="at">data =</span> dep, <span class="at">method =</span> <span class="st">"EE"</span>)</span>
-<span id="cb73-3"><a href="#cb73-3"></a><span class="fu">summary</span>(fit_ee)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a>fit_ee <span class="ot">&lt;-</span> <span class="fu">rma</span>(yi, vi, <span class="at">data =</span> oliveira2023, <span class="at">method =</span> <span class="st">"EE"</span>)</span>
+<span id="cb68-2"><a href="#cb68-2"></a><span class="fu">summary</span>(fit_ee)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-Equal-Effects Model (k = 49)
+Equal-Effects Model (k = 15)
 
-   logLik   deviance        AIC        BIC       AICc   
--138.2206   289.9970   278.4412   280.3330   278.5263   
+  logLik  deviance       AIC       BIC      AICc   
+-11.0632   36.6151   24.1264   24.8345   24.4341   
 
-I^2 (total heterogeneity / total variability):   83.45%
-H^2 (total variability / sampling variability):  6.04
+I^2 (total heterogeneity / total variability):   61.76%
+H^2 (total variability / sampling variability):  2.62
 
 Test for Heterogeneity:
-Q(df = 48) = 289.9970, p-val &lt; .0001
+Q(df = 14) = 36.6151, p-val = 0.0008
 
 Model Results:
 
-estimate      se     zval    pval   ci.lb   ci.ub      
-  0.8354  0.0392  21.3029  &lt;.0001  0.7585  0.9122  *** 
+estimate      se     zval    pval    ci.lb    ci.ub      
+ -0.4354  0.0566  -7.6956  &lt;.0001  -0.5463  -0.3245  *** 
 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
@@ -1931,27 +1892,27 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <div id="tabset-8-2">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1"></a>fit_re <span class="ot">&lt;-</span> <span class="fu">rma</span>(yi, vi, <span class="at">data =</span> dep, <span class="at">method =</span> <span class="st">"REML"</span>)</span>
-<span id="cb75-2"><a href="#cb75-2"></a><span class="fu">summary</span>(fit_re)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a>fit_re <span class="ot">&lt;-</span> <span class="fu">rma</span>(yi, vi, <span class="at">data =</span> oliveira2023, <span class="at">method =</span> <span class="st">"REML"</span>)</span>
+<span id="cb70-2"><a href="#cb70-2"></a><span class="fu">summary</span>(fit_re)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-Random-Effects Model (k = 49; tau^2 estimator: REML)
+Random-Effects Model (k = 15; tau^2 estimator: REML)
 
   logLik  deviance       AIC       BIC      AICc   
--64.4008  128.8016  132.8016  136.5440  133.0683   
+ -8.5533   17.1067   21.1067   22.3848   22.1976   
 
-tau^2 (estimated amount of total heterogeneity): 0.6685 (SE = 0.1658)
-tau (square root of estimated tau^2 value):      0.8176
-I^2 (total heterogeneity / total variability):   89.54%
-H^2 (total variability / sampling variability):  9.56
+tau^2 (estimated amount of total heterogeneity): 0.1024 (SE = 0.0613)
+tau (square root of estimated tau^2 value):      0.3199
+I^2 (total heterogeneity / total variability):   67.30%
+H^2 (total variability / sampling variability):  3.06
 
 Test for Heterogeneity:
-Q(df = 48) = 289.9970, p-val &lt; .0001
+Q(df = 14) = 36.6151, p-val = 0.0008
 
 Model Results:
 
-estimate      se    zval    pval   ci.lb   ci.ub      
-  1.1802  0.1293  9.1307  &lt;.0001  0.9268  1.4335  *** 
+estimate      se     zval    pval    ci.lb    ci.ub      
+ -0.4768  0.1052  -4.5315  &lt;.0001  -0.6830  -0.2706  *** 
 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
@@ -1960,17 +1921,17 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <div id="tabset-8-3">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1"></a>filor<span class="sc">::</span><span class="fu">compare_rma</span>(fit_ee, fit_re)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a>filor<span class="sc">::</span><span class="fu">compare_rma</span>(fit_ee, fit_re)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>             fit_ee       fit_re
-b      8.353690e-01 1.180179e+00
-se     3.921379e-02 1.292545e-01
-zval   2.130294e+01 9.130661e+00
-pval  1.066166e-100 6.808211e-20
-ci.lb  7.585114e-01 9.268452e-01
-ci.ub  9.122266e-01 1.433514e+00
-I2     8.344810e+01 8.953622e+01
-tau2   0.000000e+00 6.684953e-01</code></pre>
+<pre><code>             fit_ee        fit_re
+b     -4.354384e-01 -4.767719e-01
+se     5.658257e-02  1.052119e-01
+zval  -7.695628e+00 -4.531541e+00
+pval   1.408012e-14  5.855491e-06
+ci.lb -5.463382e-01 -6.829833e-01
+ci.ub -3.245386e-01 -2.705604e-01
+I2     6.176438e+01  6.730333e+01
+tau2   0.000000e+00  1.023587e-01</code></pre>
 </div>
 </div>
 </div>
@@ -1985,10 +1946,10 @@ tau2   0.000000e+00 6.684953e-01</code></pre>
 <div class="tab-content">
 <div id="tabset-9-1">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1"></a><span class="fu">forest</span>(fit_ee)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a><span class="fu">forest</span>(fit_ee)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure><p><img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-68-1.svg" width="960"></p>
+<figure><p><img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-65-1.svg" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1996,10 +1957,10 @@ tau2   0.000000e+00 6.684953e-01</code></pre>
 </div>
 <div id="tabset-9-2">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1"></a><span class="fu">forest</span>(fit_re)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1"></a><span class="fu">forest</span>(fit_re)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure><p><img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-69-1.svg" width="960"></p>
+<figure><p><img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-66-1.svg" width="960"></p>
 </figure>
 </div>
 </div>
@@ -2009,13 +1970,13 @@ tau2   0.000000e+00 6.684953e-01</code></pre>
 </div>
 </section><section id="funnel-plot" class="slide level2"><h2>4. Funnel Plot</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1"></a><span class="fu">funnel</span>(fit_re)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1"></a><span class="fu">funnel</span>(fit_re)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-70-1.svg" width="960" class="r-stretch quarto-figure-center"></section><section id="publication-bias-1" class="slide level2"><h2>5. Publication Bias</h2>
+<img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-67-1.svg" width="960" class="r-stretch quarto-figure-center"></section><section id="publication-bias-1" class="slide level2"><h2>5. Publication Bias</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1"></a>egg <span class="ot">&lt;-</span> <span class="fu">regtest</span>(fit_re)</span>
-<span id="cb82-2"><a href="#cb82-2"></a>egg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1"></a>egg <span class="ot">&lt;-</span> <span class="fu">regtest</span>(fit_re)</span>
+<span id="cb77-2"><a href="#cb77-2"></a>egg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Regression Test for Funnel Plot Asymmetry
@@ -2023,18 +1984,71 @@ Regression Test for Funnel Plot Asymmetry
 Model:     mixed-effects meta-regression model
 Predictor: standard error
 
-Test for Funnel Plot Asymmetry: z =  4.2894, p &lt; .0001
-Limit Estimate (as sei -&gt; 0):   b = -0.0256 (CI: -0.6089, 0.5576)</code></pre>
+Test for Funnel Plot Asymmetry: z = -1.5585, p = 0.1191
+Limit Estimate (as sei -&gt; 0):   b = -0.0067 (CI: -0.6306, 0.6172)</code></pre>
 </div>
 </div>
 </section><section id="publication-bias-2" class="slide level2"><h2>5. Publication Bias</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1"></a><span class="fu">funnel</span>(fit_re)</span>
-<span id="cb84-2"><a href="#cb84-2"></a>se <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="fl">1.8</span>,<span class="at">length=</span><span class="dv">100</span>)</span>
-<span id="cb84-3"><a href="#cb84-3"></a><span class="fu">lines</span>(<span class="fu">coef</span>(egg<span class="sc">$</span>fit)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(egg<span class="sc">$</span>fit)[<span class="dv">2</span>]<span class="sc">*</span>se, se, <span class="at">lwd=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1"></a><span class="fu">funnel</span>(fit_re)</span>
+<span id="cb79-2"><a href="#cb79-2"></a>se <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="fl">1.8</span>,<span class="at">length=</span><span class="dv">100</span>)</span>
+<span id="cb79-3"><a href="#cb79-3"></a><span class="fu">lines</span>(<span class="fu">coef</span>(egg<span class="sc">$</span>fit)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(egg<span class="sc">$</span>fit)[<span class="dv">2</span>]<span class="sc">*</span>se, se, <span class="at">lwd=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-72-1.svg" width="960" class="r-stretch quarto-figure-center"></section><section id="references" class="slide level2 smaller scrollable"><h2>References</h2>
+<img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-69-1.svg" width="960" class="r-stretch quarto-figure-center"></section><section id="trim-and-fill" class="slide level2"><h2>6. Trim and Fill</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1"></a>taf <span class="ot">&lt;-</span> <span class="fu">trimfill</span>(fit_re)</span>
+<span id="cb80-2"><a href="#cb80-2"></a>taf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Estimated number of missing studies on the right side: 5 (SE = 2.5492)
+
+Random-Effects Model (k = 20; tau^2 estimator: REML)
+
+tau^2 (estimated amount of total heterogeneity): 0.1485 (SE = 0.0715)
+tau (square root of estimated tau^2 value):      0.3853
+I^2 (total heterogeneity / total variability):   72.28%
+H^2 (total variability / sampling variability):  3.61
+
+Test for Heterogeneity:
+Q(df = 19) = 56.1931, p-val &lt; .0001
+
+Model Results:
+
+estimate      se     zval    pval    ci.lb    ci.ub     
+ -0.3275  0.1061  -3.0866  0.0020  -0.5355  -0.1195  ** 
+
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section><section id="trim-and-fill-1" class="slide level2"><h2>6. Trim and Fill</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1"></a><span class="fu">funnel</span>(taf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="02-meta-analysis_files/figure-revealjs/unnamed-chunk-71-1.svg" width="960" class="r-stretch quarto-figure-center"></section><section id="dear2019-qc-dataset" class="slide level2"><h2>
+<span class="citation" data-cites="Dear2019-qc">Dear, Dutton, and Fox (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span> dataset</h2>
+<blockquote>
+<p>Eye cues have been shown to stimulate rapid, reflexive, unconscious processing and in many experimental settings to cue increased prosocial and decreased antisocial behaviour <span class="citation" data-cites="Dear2019-qc">(<a href="#/references" role="doc-biblioref" onclick="">Dear, Dutton, and Fox 2019</a>)</span>.</p>
+</blockquote>
+<blockquote>
+<p>The “watching eyes” effect refers to a strange phenomenon whereby the mere presence of pictures of eyes or stylized eye images is enough to cause people to adjust their behavior</p>
+</blockquote>
+<ul>
+<li>they found <span class="math inline">\(k = 15\)</span> studies with a total of 2035 participants</li>
+<li>compared to previous examples, the included studies used a 2x2 design and the effect size is calculated counting the number of people doing antisocial actions (or not) according to the experimental condition (with and without eye cues).</li>
+<li>the effect size is the <span class="math inline">\(log\)</span> Odds Ratio and can be calculated using <code><a href="https://wviechtb.github.io/metafor/reference/escalc.html">metafor::escalc()</a></code>
+</li>
+</ul></section><section id="dear2019-qc-dataset-1" class="slide level2"><h2>
+<span class="citation" data-cites="Dear2019-qc">Dear, Dutton, and Fox (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span> dataset</h2>
+<p>The dataset can be found in <code>02-meta-analysis/objects/dear2019_clean.rds</code>:</p>
+</section><section id="steps-1" class="slide level2"><h2>Steps</h2>
+<ol type="1">
+<li>Import the data and explore (summary statistics, plots, etc.) the variables</li>
+<li>Try to calculate the effect size (log Odds Ratio) using <code><a href="https://wviechtb.github.io/metafor/reference/escalc.html">metafor::escalc()</a></code> (see the documentation <code>?metafor::escalc()</code>)</li>
+<li>Do the same steps as the previous meta-analysis</li>
+</ol></section><section id="references" class="slide level2 smaller scrollable"><h2>References</h2>
 <div class="footer footer-default">
 
 </div>
@@ -2048,6 +2062,9 @@ Borenstein, Michael, Larry V Hedges, Julian P T Higgins, and Hannah R Rothstein.
 <div id="ref-Citkowicz2017-ox" class="csl-entry" role="listitem">
 Citkowicz, Martyna, and Jack L Vevea. 2017. <span>“A Parsimonious Weight Function for Modeling Publication Bias.”</span> <em>Psychol. Methods</em> 22 (March): 28–41. <a href="https://doi.org/10.1037/met0000119">https://doi.org/10.1037/met0000119</a>.
 </div>
+<div id="ref-Dear2019-qc" class="csl-entry" role="listitem">
+Dear, Keith, Kevin Dutton, and Elaine Fox. 2019. <span>“Do <span>‘Watching Eyes’</span> Influence Antisocial Behavior? A Systematic Review &amp; Meta-Analysis.”</span> <em>Evol. Hum. Behav.</em> 40 (May): 269–80. <a href="https://doi.org/10.1016/j.evolhumbehav.2019.01.006">https://doi.org/10.1016/j.evolhumbehav.2019.01.006</a>.
+</div>
 <div id="ref-Duval2000-ym" class="csl-entry" role="listitem">
 Duval, S, and R Tweedie. 2000. <span>“Trim and Fill: A Simple Funnel-Plot-Based Method of Testing and Adjusting for Publication Bias in Meta-Analysis.”</span> <em>Biometrics</em> 56 (June): 455–63. <a href="https://doi.org/10.1111/j.0006-341x.2000.00455.x">https://doi.org/10.1111/j.0006-341x.2000.00455.x</a>.
 </div>
@@ -2056,9 +2073,6 @@ Guan, Maime, and Joachim Vandekerckhove. 2016. <span>“A Bayesian Approach to M
 </div>
 <div id="ref-Harrer2021-go" class="csl-entry" role="listitem">
 Harrer, Mathias, Pim Cuijpers, Toshi Furukawa, and David Ebert. 2021. <em>Doing Meta-Analysis with r: A Hands-on Guide</em>. 1st ed. London, England: CRC Press.
-</div>
-<div id="ref-Hedges1989-ip" class="csl-entry" role="listitem">
-Hedges, Larry V. 1989. <span>“An Unbiased Correction for Sampling Error in Validity Generalization Studies.”</span> <em>J. Appl. Psychol.</em> 74 (June): 469–77. <a href="https://doi.org/10.1037/0021-9010.74.3.469">https://doi.org/10.1037/0021-9010.74.3.469</a>.
 </div>
 <div id="ref-Hedges2019-ry" class="csl-entry" role="listitem">
 Hedges, Larry V, and Jacob M Schauer. 2019. <span>“Statistical Analyses for Studying Replication: Meta-Analytic Perspectives.”</span> <em>Psychol. Methods</em> 24 (October): 557–70. <a href="https://doi.org/10.1037/met0000189">https://doi.org/10.1037/met0000189</a>.
@@ -2074,6 +2088,9 @@ Maier, Maximilian, František Bartoš, and Eric-Jan Wagenmakers. 2023. <span>“
 </div>
 <div id="ref-McShane2016-bk" class="csl-entry" role="listitem">
 McShane, Blakeley B, Ulf Böckenholt, and Karsten T Hansen. 2016. <span>“Adjusting for Publication Bias in Meta-Analysis: An Evaluation of Selection Methods and Some Cautionary Notes: An Evaluation of Selection Methods and Some Cautionary Notes.”</span> <em>Perspect. Psychol. Sci.</em> 11 (September): 730–49. <a href="https://doi.org/10.1177/1745691616662243">https://doi.org/10.1177/1745691616662243</a>.
+</div>
+<div id="ref-Oliveira2023-yf" class="csl-entry" role="listitem">
+Oliveira, Cláudia, Mara Pacheco, Janete Borges, Liliana Meira, and Anita Santos. 2023. <span>“Internet-Delivered Cognitive Behavioral Therapy for Anxiety Among University Students: A Systematic Review and Meta-Analysis.”</span> <em>Internet Interv.</em> 31 (March): 100609. <a href="https://doi.org/10.1016/j.invent.2023.100609">https://doi.org/10.1016/j.invent.2023.100609</a>.
 </div>
 <div id="ref-Orwin1983-vu" class="csl-entry" role="listitem">
 Orwin, Robert G. 1983. <span>“A Fail-SafeN for Effect Size in Meta-Analysis.”</span> <em>J. Educ. Stat.</em> 8 (June): 157–59. <a href="https://doi.org/10.3102/10769986008002157">https://doi.org/10.3102/10769986008002157</a>.

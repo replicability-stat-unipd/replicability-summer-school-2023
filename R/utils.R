@@ -75,10 +75,15 @@ updatemd5 <- function(file){
   saveRDS(dfile, ".md5_slides/dfile.rds")
 }
 
-render_all <- function(dir = ".", force = FALSE){
+render_all <- function(dir = ".", exclude = NULL, force = FALSE){
   all_files <- list.files(path = dir, recursive = TRUE, pattern = "qmd", full.names = TRUE)
   all_files <- all_files[!grepl("deprecated|_site", all_files)]
   all_files <- gsub("\\./", "", all_files)
+  if(!is.null(exclude)){
+      exclude <- paste0(exclude, collapse = "|")
+      all_files <- all_files[!grepl(exclude, all_files)]
+  }
+  
   dfile <- readRDS(".md5_slides/dfile.rds")
   for(i in 1:length(all_files)){
     if(!force){
@@ -90,6 +95,7 @@ render_all <- function(dir = ".", force = FALSE){
       }
     }else{
       qrender(all_files[i])
+      updatemd5(all_files[i])
     }
   }
 }

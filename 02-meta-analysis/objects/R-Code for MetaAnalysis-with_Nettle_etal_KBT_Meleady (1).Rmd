@@ -1,0 +1,543 @@
+---
+title: "Eye Cue Anti-Social Behaviour Meta-Analysis - Odds & Risk Ratio"
+author: "Keith Dear"
+date: "10/17/2016"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Code
+
+This is document is provided to enable replication and critique of our analysis.  To follow it users must first install the packages 'METAFOR', 'XLConnec', DT
+```{r}
+library("userfriendlyscience")
+library("DT")
+library("metafor")
+
+```
+## Create data file
+Create a data file (df1) by reading our .csv file and display it in a datatable
+
+```{r}
+df1 <- read.csv("/Users/keith/Documents/OneDrive/001-Oxford Working Documents/003 - Literature Reviews/Anti-Social Behaviour & Eye Cue Review and Meta-Analysis/003 - Evolution & Human Behaviour/Revisions/20180305_ASB_for_R_Extended_w_Nettle_etal_KBT_Meleady_Dog.csv")
+
+datatable(df1, options = list(pageLength = 25))
+```
+
+...and display it to check the values:
+
+```{r}
+df1
+```
+## Create data table & calculate log odds ratio & variance
+Create a data frame (datMA), containing the log odds ratio and the variance:
+```{r}
+
+
+datMA <- escalc(measure="OR",ai=EYES.ASB.YES, bi=EYES.ASB.NO, ci=CTRL.ASB.YES, di=CTRL.ASB.N, data=df1)
+View(datMA)
+datatable(datMA, options = list(pageLength = 25))
+```
+# yi = log odds ratio
+# vi = variance of log odds ratio
+```{r}
+
+
+datMA <- datMA %>%
+  dplyr::mutate(SE = sqrt(vi))
+
+datMA <- datMA %>%
+  dplyr::mutate("95% CI lower" = (yi-(1.96*SE)))
+
+datMA <- datMA %>%
+  dplyr::mutate("95% CI upper" = (yi+(1.96*SE)))
+
+datMA <- datMA %>%
+  dplyr::mutate("Z" = (yi/SE))
+
+datMA <- datMA %>%
+  dplyr::mutate(P = exp(-0.717*Z-0.416*Z^2))
+
+
+datMA
+```
+
+```{r}
+write.csv(datMA, "Meta-Analysis_Table.csv")
+```
+
+##Q-Test
+Next we apply Cochrane's Q-test for homogenity of variance and report the results at 'res1':
+```{r}
+res1 <- rma.peto(ai=EYES.ASB.YES, bi=EYES.ASB.NO, ci=CTRL.ASB.YES, di=CTRL.ASB.N, data=datMA)
+res1
+```
+Since Q is significant we know we must apply a random effects model (although we would have applied this anyway given the heterogenity in study design):
+```{r}
+res1<-rma(yi, vi, data = datMA)
+res1
+```
+The estimate is our log odds ratio.
+```{r}
+exp(-0.4311)
+```
+Our odds ratio is .65 = 35% reduction in the watching eyes condition.
+
+##Influential Case Diagnostics, Funnel & Forest Plots
+
+Next we test for influential cases in our result 1 (res1):
+
+```{r}
+influence(res1)
+
+```
+
+...and goodness of fit:
+
+```{r}
+fitstats(res1)
+```
+#create a forest plot:
+
+```{r}
+forest(res1)
+```
+and a funnel plot:
+```{r}
+funnel(res1)
+```
+
+Then we examine our funnel plot of missing cases (evidence of publication bias): 
+
+```{r}
+
+res1tf <- trimfill(res1)
+```
+Then we recreate the funnel plot using the trim-fill adjusted data to check for missing cases:
+```{r}
+funnel(res1tf)
+```
+##Convert Log Odds to Odds Ratio
+
+We exponentiate the log odds ratio, in this case -0.4311, to convert it to an odds ratio (remember to change the figure here to whatever your output shows if it is different to ours):
+
+# Random Effects Model OR
+```{r}
+exp(-0.4311)
+```
+# Fixed Effects Model
+```{r}
+exp(-0.1320)
+```
+##RISK RATIO
+
+Finally we create a Risk Ratio table (datMA.RR) from our frequencies table:
+
+```{r}
+require("metafor")
+datMA.RR <-escalc(measure="RR",ai=CTRL.ASB.YES, bi=CTRL.ASB.N, ci=EYES.ASB.YES, di=EYES.ASB.NO, data=df1)
+View(datMA.RR)
+```
+
+...and calculate the Risk Ratio
+
+```{r}
+res2<-rma(yi, vi, data = datMA.RR)
+res2
+```
+# % decrease = (1-RR) x 100
+# % decrease =(1-0.2731)x100
+# % decreases = (0.7269)x100
+# % decrease = 72.69%
+
+Participants in the eyes condition had 72.69% less risk of behaving anti-socially than those in the control.
+Interpreted after http://sphweb.bumc.bu.edu/otlt/MPH-Modules/EP/EP713_Association/EP713_Association3.html
+
+
+
+Then create plots for export...
+```{r}
+
+dpi = 150
+
+png(filename = "trimfillForest.png", width = (500 * (dpi/72)), height = (300 * (dpi/72)), res = dpi, bg = "transparent")
+
+forest(res1)
+
+dev.off()
+
+dpi = 150
+
+png(filename = "trimfillFunnel2.png", width = (500 * (dpi/72)), height = (300 * (dpi/72)), res = dpi, bg = "transparent")
+
+funnel(res1tf)
+
+dev.off()
+
+```
+## PET-PEESE Analysis
+```{r}
+#install.packages("magrittr")
+
+library(magrittr)
+library(metafor)
+```
+ # Loading the code from https://github.com/Joe-Hilgard/PETPEESE/blob/master/PETPEESE_functions.R
+
+# naive meta-analysis ----
+```{r}
+
+
+naive = function(dataset, ...) {
+  rma(yi = Z,
+      sei = SE,
+      data = datMA,
+      method = "FE",
+      ...)
+}
+naive()
+```
+Naive metaanalysis on the standard errors reverses the findings suggesting that there is an increase in ASB when eyes are present when compared with a control.
+
+# Basic PET
+```{r}
+PET=function(dataset, error = "additive") {
+  if (error == "additive") {
+    petOut = rma(yi = Z, 
+                 sei = SE, 
+                 mods = ~SE, 
+                 data=datMA,
+                 method = "FE")
+  }
+  if (error == "multiplicative") {
+    petOut = lm(Z ~ SE,
+                weights = 1/SE,
+                data=datMA)
+  }
+  return(petOut)
+}
+PET()
+```
+
+# Basic PEESE Function
+```{r}
+
+PEESE=function(dataset, error = "additive") {
+  if (error == "additive") {
+    peeseOut = rma(yi = Z, 
+                   sei = SE, 
+                   mods = ~I(SE^2), 
+                   data=datMA,
+                   method = "FE")
+  }
+  if (error == "multiplicative") {
+    peeseOut = lm(Z ~ I(SE^2), 
+                  weights = 1/SE,
+                  data=datMA)
+  }
+  return(peeseOut)
+}
+
+PEESE()
+```
+PEESE finds a significant effect
+
+
+
+# funnel plot with PET line and conditional PEESE line ----
+```{r}
+
+funnelPETPEESE = function(dataset, 
+                          error = "additive",
+                          alwaysPEESE=T, plotName=NULL, printText = T,
+                          ...) {
+  naiveModel = naive(dataset)
+  petModel = PET(dataset, error)
+  peeseModel = PEESE(dataset, error)
+  # make funnel plot
+  funnel(naiveModel, ...)
+  if (printText == T) title(plotName, line=3)
+  if (printText == F) title(plotName)
+  if (error == "additive") {
+    if (printText == T) naiveModel$b[1] %>% 
+      tanh %>% 
+      round(3) %>%
+      paste("Naive meta estimate, r =", .) %>%
+      mtext(side=1)
+    # add line and text from PET
+    petModel %$% 
+      abline(a = -b[1]/b[2], b = 1/b[2])
+    r = petModel$b[1] %>% tanh %>% round(3)
+    p.effect = petModel$pval[1] %>% round(3)
+    p.bias = petModel$pval[2] %>% round(3)
+    if (printText == T) mtext(paste("PET r = ", r
+                                    , ", p-effect = ", p.effect
+                                    , ", p-bias = ", p.bias
+                                    , sep=""))
+    points(x = petModel$b[1], y=0, cex=1.5)
+    #abline(v = petModel$b[1], lty = 2)
+    #lines(x = rep(petModel$b[1], 2), y = c(ymin, ymin - .1)
+    # add line and text from PEESE
+    if(petModel$pval[1] < .05 || alwaysPEESE == T) {
+      grid = 
+        naiveModel$vi %>%
+        raise_to_power(.5) %>%
+        max %>%
+        seq(0, ., .001) %>%
+        data.frame("Std.Err" = .)
+      grid$Var = grid$Std.Err^2
+      grid$Fisher.s.Z = 
+        peeseModel$b[1] + peeseModel$b[2]*grid$Var
+      grid %$% lines(x=Fisher.s.Z, y=Std.Err, typ='l')
+      points(x = (peeseModel$b[1]), y=0, cex=1.5, pch=5)
+      #abline(v = peeseModel$b[1], lty = 2)
+      if (printText == T) { 
+        peeseModel$b[1] %>%
+          tanh %>%
+          round(3) %>%
+          paste("PEESE r =", .) %>%
+          mtext(line = 1)
+      }
+    }
+  }
+  if(error == "multiplicative") {
+    if (printText == T) naiveModel$b[1] %>% 
+      tanh %>% 
+      round(3) %>%
+      paste("Naive meta estimate, r =", .) %>%
+      mtext(side=1)
+    # add line and text from PET
+    b = summary(petModel)$coefficients[,1]
+    petModel %$% 
+      abline(a = -b[1]/b[2], b = 1/b[2])
+    r = b[1] %>% tanh %>% round(3)
+    p.effect = summary(petModel)$coefficients[1,4] %>% round(3)
+    p.bias = summary(petModel)$coefficients[2,4] %>% round(3)
+    if (printText == T) mtext(paste("PET r = ", r
+                                    , ", p-effect = ", p.effect
+                                    , ", p-bias = ", p.bias
+                                    , sep=""))
+    points(x = b[1], y=0, cex=1.5)
+    #abline(v = b[1], lty = 2)
+    # add line and text from PEESE
+    if(summary(petModel)$coefficients[1,4] < .05 || alwaysPEESE == T) {
+      grid = 
+        naiveModel$vi %>%
+        raise_to_power(.5) %>%
+        max %>%
+        seq(0, ., .001) %>%
+        data.frame("Std.Err" = .)
+      grid$Var = grid$Std.Err^2
+      b = summary(peeseModel)$coefficients[,1]
+      grid$Fisher.s.Z = 
+        b[1] + b[2]*grid$Var
+      grid %$% lines(x=Fisher.s.Z, y=Std.Err, typ='l')
+      points(x = b[1], y=0, cex=1.5, pch=5)
+      #abline(v = b[1], lty = 2)
+      if (printText == T) {
+        b[1] %>%
+          tanh %>%
+          round(3) %>%
+          paste("PEESE r =", .) %>%
+          mtext(line = 1)
+      }
+    }
+  }
+}
+funnelPETPEESE()
+```
+```{r}
+dpi = 150
+
+png(filename = "FixedEffectsPETPEESE.png", width = (500 * (dpi/72)), height = (300 * (dpi/72)), res = dpi, bg = "transparent")
+
+funnelPETPEESE()
+
+dev.off()
+```
+# PET PEESE with Random Effects Model
+
+# naive meta-analysis ----
+```{r}
+
+
+?rma
+
+naive2 = function(dataset, ...) {
+  rma(yi = Z,
+      sei = SE,
+      data = datMA,
+      method = "REML",
+      ...)
+}
+naive2()
+```
+Naive random effects model finds significant effect -1.25
+
+# Basic PET
+```{r}
+PET2=function(dataset, error = "additive") {
+  if (error == "additive") {
+    petOut = rma(yi = Z, 
+                 sei = SE, 
+                 mods = ~SE, 
+                 data=datMA,
+                 method = "REML")
+  }
+  if (error == "multiplicative") {
+    petOut = lm(Z ~ SE,
+                weights = 1/SE,
+                data=datMA)
+  }
+  return(petOut)
+}
+PET2()
+```
+Random effects generates a non-significant PET results (therefore should stop here) + CI that crosses zero & very large effect.
+
+
+# Basic PEESE Function
+```{r}
+
+PEESE2=function(dataset, error = "additive") {
+  if (error == "additive") {
+    peeseOut = rma(yi = Z, 
+                   sei = SE, 
+                   mods = ~I(SE^2), 
+                   data=datMA,
+                   method = "REML")
+  }
+  if (error == "multiplicative") {
+    peeseOut = lm(Z ~ I(SE^2), 
+                  weights = 1/SE,
+                  data=datMA)
+  }
+  return(peeseOut)
+}
+
+PEESE2()
+```
+Also NS, CI crossing zero.
+
+# funnel plot with PET line and conditional PEESE line ----
+```{r}
+
+funnelPETPEESE2 = function(dataset, 
+                          error = "additive",
+                          alwaysPEESE=T, plotName=NULL, printText = T,
+                          ...) {
+  naiveModel = naive(dataset)
+  petModel = PET2(dataset, error)
+  peeseModel = PEESE2(dataset, error)
+  # make funnel plot
+  funnel(naiveModel, ...)
+  if (printText == T) title(plotName, line=3)
+  if (printText == F) title(plotName)
+  if (error == "additive") {
+    if (printText == T) naiveModel$b[1] %>% 
+      tanh %>% 
+      round(3) %>%
+      paste("Naive meta estimate, r =", .) %>%
+      mtext(side=1)
+    # add line and text from PET
+    petModel %$% 
+      abline(a = -b[1]/b[2], b = 1/b[2])
+    r = petModel$b[1] %>% tanh %>% round(3)
+    p.effect = petModel$pval[1] %>% round(3)
+    p.bias = petModel$pval[2] %>% round(3)
+    if (printText == T) mtext(paste("PET r = ", r
+                                    , ", p-effect = ", p.effect
+                                    , ", p-bias = ", p.bias
+                                    , sep=""))
+    points(x = petModel$b[1], y=0, cex=1.5)
+    #abline(v = petModel$b[1], lty = 2)
+    #lines(x = rep(petModel$b[1], 2), y = c(ymin, ymin - .1)
+    # add line and text from PEESE
+    if(petModel$pval[1] < .05 || alwaysPEESE == T) {
+      grid = 
+        naiveModel$vi %>%
+        raise_to_power(.5) %>%
+        max %>%
+        seq(0, ., .001) %>%
+        data.frame("Std.Err" = .)
+      grid$Var = grid$Std.Err^2
+      grid$Fisher.s.Z = 
+        peeseModel$b[1] + peeseModel$b[2]*grid$Var
+      grid %$% lines(x=Fisher.s.Z, y=Std.Err, typ='l')
+      points(x = (peeseModel$b[1]), y=0, cex=1.5, pch=5)
+      #abline(v = peeseModel$b[1], lty = 2)
+      if (printText == T) { 
+        peeseModel$b[1] %>%
+          tanh %>%
+          round(3) %>%
+          paste("PEESE r =", .) %>%
+          mtext(line = 1)
+      }
+    }
+  }
+  if(error == "multiplicative") {
+    if (printText == T) naiveModel$b[1] %>% 
+      tanh %>% 
+      round(3) %>%
+      paste("Naive meta estimate, r =", .) %>%
+      mtext(side=1)
+    # add line and text from PET
+    b = summary(petModel)$coefficients[,1]
+    petModel %$% 
+      abline(a = -b[1]/b[2], b = 1/b[2])
+    r = b[1] %>% tanh %>% round(3)
+    p.effect = summary(petModel)$coefficients[1,4] %>% round(3)
+    p.bias = summary(petModel)$coefficients[2,4] %>% round(3)
+    if (printText == T) mtext(paste("PET r = ", r
+                                    , ", p-effect = ", p.effect
+                                    , ", p-bias = ", p.bias
+                                    , sep=""))
+    points(x = b[1], y=0, cex=1.5)
+    #abline(v = b[1], lty = 2)
+    # add line and text from PEESE
+    if(summary(petModel)$coefficients[1,4] < .05 || alwaysPEESE == T) {
+      grid = 
+        naiveModel$vi %>%
+        raise_to_power(.5) %>%
+        max %>%
+        seq(0, ., .001) %>%
+        data.frame("Std.Err" = .)
+      grid$Var = grid$Std.Err^2
+      b = summary(peeseModel)$coefficients[,1]
+      grid$Fisher.s.Z = 
+        b[1] + b[2]*grid$Var
+      grid %$% lines(x=Fisher.s.Z, y=Std.Err, typ='l')
+      points(x = b[1], y=0, cex=1.5, pch=5)
+      #abline(v = b[1], lty = 2)
+      if (printText == T) {
+        b[1] %>%
+          tanh %>%
+          round(3) %>%
+          paste("PEESE r =", .) %>%
+          mtext(line = 1)
+      }
+    }
+  }
+}
+funnelPETPEESE2()
+```
+
+```{r}
+
+dpi = 150
+
+png(filename = "RandomEffectsPETPEESE.png", width = (500 * (dpi/72)), height = (300 * (dpi/72)), res = dpi, bg = "transparent")
+
+funnelPETPEESE2()
+
+dev.off()
+```
+```{r}
+
+```
+

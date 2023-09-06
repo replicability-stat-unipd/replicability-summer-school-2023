@@ -354,3 +354,22 @@ plot_gene_range <- function(datal, gene){
     lines(ddlist[[i]]$optimal, col = "green", lwd = 1.2)
   }
 }
+
+ggROC <- function(data, size = 15, fill = FALSE){
+    data |> 
+        ggplot(aes(x = tnr, y = tpr)) +
+        scale_x_reverse(limits = c(1, 0)) +
+        ylim(c(0, 1)) +
+        geom_abline(intercept = 1, color = "darkgrey") +
+        geom_line(linewidth = 1) +
+        coord_fixed() +
+        theme_minimal(size) +
+        xlab("Specificity") +
+        ylab("Sensitivity") + {
+            if(fill){
+                geom_ribbon(aes(ymax = tpr, ymin = 1 - tnr),
+                            alpha = 0.1,
+                            fill = "firebrick")
+            }
+        }
+}

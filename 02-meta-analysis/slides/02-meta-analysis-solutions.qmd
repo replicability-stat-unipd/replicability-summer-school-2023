@@ -1,27 +1,14 @@
 ## 1. Importing and exploring
 
-We have `nrow(dep)` studies, and this is the dataset structure with some summary statistics:
+We have `nrow(oliveira2023)` studies, and this is the dataset structure with some summary statistics:
 
 ```{r}
-dep <- readRDS(here("02-meta-analysis/objects/depression.rds"))
+#| eval: false
+oliveira2023 <- readRDS(here("02-meta-analysis/objects/oliveira2023_clean.rds"))
 
-str(dep)
+str(oliveira2023)
 
-summary(dep)
-```
-
-## 1. Importing and exploring
-
-Let's plot the variables:
-
-```{r}
-par(mfrow = c(3, 2))
-barplot(table(dep$age_group))
-hist(dep$mean_age)
-barplot(table(dep$country))
-barplot(table(dep$format))
-hist(dep$yi)
-hist(dep$sei)
+summary(oliveira2023)
 ```
 
 ## 2. Models
@@ -31,15 +18,14 @@ hist(dep$sei)
 ## EE model
 
 ```{r}
-dep$vi <- dep$sei^2
-fit_ee <- rma(yi, vi, data = dep, method = "EE")
+fit_ee <- rma(yi, vi, data = oliveira2023, method = "EE")
 summary(fit_ee)
 ```
 
 ## RE model
 
 ```{r}
-fit_re <- rma(yi, vi, data = dep, method = "REML")
+fit_re <- rma(yi, vi, data = oliveira2023, method = "REML")
 summary(fit_re)
 ```
 
@@ -88,4 +74,17 @@ egg
 funnel(fit_re)
 se <- seq(0,1.8,length=100)
 lines(coef(egg$fit)[1] + coef(egg$fit)[2]*se, se, lwd=3)
+```
+
+## 6. Trim and Fill
+
+```{r}
+taf <- trimfill(fit_re)
+taf
+```
+
+## 6. Trim and Fill
+
+```{r}
+funnel(taf)
 ```

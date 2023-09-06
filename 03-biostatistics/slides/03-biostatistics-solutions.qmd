@@ -3,7 +3,7 @@
 Firstly, let's subset the dataset selecting our predictor (i.e., the **debulking**), the dataset name and the selected gene.
 
 ```{r}
-datl <- readRDS(here("03-biostatistics", "data", "gene_data_clean.rds"))
+datl <- readRDS(here("03-biostatistics", "objects", "gene_data_clean.rds"))
 dat <- dplyr::bind_rows(datl, .id = "dataset")
 
 # creating the binary debulking variable
