@@ -19,12 +19,14 @@ format:
     toc: true
     toc-depth: 1
     margin: 0.1
-    theme: custom.css
+    theme: "../../files/custom.css"
 bibliography: "`r filor::fil()$bib`"
+csl: "`r filor::fil()$csl`"
 notation-slide: false
+from: markdown+emoji
 final-slide: true
 params:
-  solutions: true
+  solutions: false
 ---
 
 ```{r}
@@ -70,9 +72,10 @@ library(metafor)
 devtools::load_all()
 funs <- filor::get_funs(here("R", "utils-replication.R"))
 funs_meta <- filor::get_funs(here("R", "utils-meta.R"))
+filor::write_bib_rmd(input_bib = filor::fil()$bib, output_bib = "refs_to_download.bib")
 ```
 
-# What is considered a successful or unsuccessful replication? {.question}
+# What is considered a successful or unsuccessful replication? {.question .smaller}
 
 # Some (random) concepts {.section}
 
@@ -86,9 +89,15 @@ funs_meta <- filor::get_funs(here("R", "utils-meta.R"))
 
 ## Difficulty in drawing conclusions from replications
 
-Replication is often intended as *conditioned* to the original result. The original result could be false positive. Also the replication attempt could be a false positive or a false negative [@Nosek2020-vh].
+Replication is often intended as *conditioned* to the original result. The original result could be a false positive or a biased result. Also the replication attempt could be a false positive or a false negative [@Nosek2020-vh].
+
+. . .
 
 > To be a replication, two things must be true. Outcomes consistent with a prior claim would increase confidence in the claim, and outcomes inconsistent with a prior claim would decrease confidence in the claim [@Nosek2020-vh].
+
+. . .
+
+This is somehow similar with a Bayesian reasoning where evidence about a phenomenon is updated after collecting more data.
 
 ## Exact and Conceptual replications
 
@@ -117,10 +126,10 @@ Exact replication is often not feasible. Even using the same experimental setup 
 
 ## As Exact as possible...
 
-Even when an experiment use almost the same setup of the original study there is a source of uuknown uncenrtainy. Which is the impact of a slightly change in the setup on the actual result?
+Even when an experiment use almost the same setup of the original study there is a source of unknown uncertainty. Which is the impact of a slightly change in the experimental setup on the actual result?
 
-- A study on vision that use different monitors to show stimuli --> small but very relevant change
-- A study on consumer behavior answering question using a smartphone or a computer --> small but (maybe) irrelevant change
+- A study on the human visual system: presenting stimuli on different monitors --> small change with a huge impact
+- A study on consumer behavior: participant answering question using a smartphone or a computer --> small but (maybe) irrelevant change
 
 How to evaluate the actual impact?
 
@@ -128,7 +137,12 @@ How to evaluate the actual impact?
 
 ## What we are (not) going to do?
 
-- I will not present a strictly theoretical and physlosopjhical approach to replication (*what is a replication?*, *what is the most appropriate definition?*, etc.). But we can discuss it together
+. . .
+
+- I will not present a strictly theoretical and philosophical approach to replication (*what is a replication?*, *what is the most appropriate definition?*, etc.). But we can discuss it together :smile:!
+
+. . .
+
 - According to the replication definitions and problems, we will explore some **statistical** methods to evaluate a replication success
 
 # Overall model and notation {.section}
@@ -149,7 +163,7 @@ $$
 \epsilon_i \sim \mathcal{N}(0, \sigma^2_i)
 $$
 
-## Overall model and notation
+## Overall model and notation {.smaller}
 
 - Thus each study $i$ out of the number of studies $k$.
 - $\mu_{\theta}$ is the real average effect
@@ -246,24 +260,11 @@ Regardless the method, *falsification* approaches compared the original with the
 
 ## The big picture
 
-```{mermaid}
-flowchart TD
-    A[Statistical Methods] --> B[Sign/Direction]
-    B[Sign/Direction] --> b1[Vote Counting]
-
-
-    A[Statistical Methods] --> C[Confidence/Prediction Interval]
-    C[Confidence/Prediction Interval] --> c1[CI/PI original/replication]
-    C[Confidence/Prediction Interval] --> c4[Small Telescope]
-
-
-    A[Statistical Methods] --> D[Meta-analysis]
-    D[Meta-analysis] --> d1[Equal and Random-effects]
-    D[Meta-analysis] --> d2[Q Statistics]
-
-    A[Statistical Methods] --> F[Bayesian Methods]
-    F[Bayesian Methods] --> f1[Replication Bayes Factor]
+```{r}
+#| echo: false
+knitr::include_graphics("img/big-picture.svg")
 ```
+
 
 # Statistical Methods {.section}
 
@@ -373,7 +374,7 @@ text(theta_rep, 1, labels = "Replication Study")
 Another approach check if the replication attempt $\theta_{rep}$ is contained in the % confidence interval of the original study $\theta_{orig}$. Formally:
 
 $$
-\theta_{orig} - \Phi(\alpha/2) \sigma^2_{orig} < \theta_{rep} < \theta_{orig} + \Phi(\alpha/2) \sigma^2_{orig}
+\theta_{orig} - \Phi(\alpha/2) \sqrt{\sigma^2_{orig}} < \theta_{rep} < \theta_{orig} + \Phi(\alpha/2) \sqrt{\sigma^2_{orig}}
 $$
 
 Where $\Phi$ is the cumulative standard normal distribution, $\alpha$ is the type-1 error rate.
@@ -466,7 +467,7 @@ $$
 
 The method has the same pros and cons of the previous approach. One advantage is that usually replication studies are more precise (higher sample size) thus the parameter and the % CI is more reliable.
 
-### R Code
+### Plot
 
 ```{r echo = FALSE}
 ci_rep <- theta_rep + qnorm(c(0.025, 0.975)) * se_rep
@@ -490,7 +491,7 @@ legend("topleft",
 
 ### Theory
 
-One problem of the previous approaches is taking into account only the uncertainty of the original or the replication study. @Patil2016-vc proposed a method to take into account both sources of uncenrtainty.
+One problem of the previous approaches is taking into account only the uncertainty of the original or the replication study. @Patil2016-vc proposed a method to take into account both sources of uncertainty.
 
 > What effect would we expect to see in the replication study once we have seen the original effect?
 
@@ -510,7 +511,7 @@ Where $z_{95\%}$ is the quantile of the standard normal distribution.
 :::
 :::{.cons}
 - Low precise original studies lead to wide PI. For a replication study is difficult to fall outside the PI
-- Mainly for *one-to-many* replications design
+- Mainly for *one-to-one* replications design
 :::
 
 ### Equations
@@ -537,6 +538,8 @@ eff_rep <- rnorm(1e5, 0, sqrt(4/(n_rep * 2)))
 
 preds <- eff_orig - eff_rep
 ```
+
+### Plots
 
 ```{r, echo = FALSE}
 hist(preds, breaks = 50, col = "#FA9494", main = "95% Prediction Interval",
@@ -599,9 +602,10 @@ $$
 
 - $\mu_{\theta_{rep}}$ is the pooled (i.e., meta-analytic) estimation of the $k$ replications
 - $\tau^2$ is the variance among replications
-- It is intepreted as the probability that $\theta_{orig}$ is equal or more extreme that what observed. A very low $p_{orig}$ suggest that the original study is inconsistent with replications.
 
 ### Pros-cons
+
+It is interpreted as the probability that $\theta_{orig}$ is equal or more extreme that what observed. A very low $p_{orig}$ suggest that the original study is inconsistent with replications.
 
 :::{.pros}
 - Suited for *many-to-one* designs
@@ -641,6 +645,7 @@ Replicate::p_orig(original$yi, original$vi, fit_rep$b[[1]], fit_rep$tau2, fit_re
 ### Simulation
 
 ```{r}
+#| code-fold: true
 # standard errors assuming same n and variance 1
 se_orig <- sqrt(4/(n_orig * 2))
 se_rep <- sqrt(4/(n_rep * 2))
@@ -727,7 +732,7 @@ abline(v = quantile(p_greater_boot, c(0.025, 0.975)))
 
 ## Mathur & VanderWeele [-@Mathur2020-nw] $\hat P_{\gtrless q*}$
 
-A very similar metric do not use 0 reference value but a meaningful effect size to be considered as low but different from 0. $\hat P_{\gtrless q*}$ is the proportion of (calibrated) replications greater or lower than the $q*$ value. This framework is similar to equivalence and minimal effect size testing [@Lakens2018-ri].
+Instead of using 0 as threshold, we can use meaningful effect size to be considered as low but different from 0. $\hat P_{\gtrless q*}$ is the proportion of (calibrated) replications greater or lower than the $q*$ value. This framework is similar to equivalence and minimum effect size testing [@Lakens2018-ri].
 
 ```{r}
 q <- 0.2 # minimum non zero effect
@@ -780,6 +785,12 @@ fit_random <- rma(yi, vi, method = "REML")
 summary(fit_random)
 ```
 
+### Pooling replications
+
+The previous approach can be also implemented combining replications into a single effect and then compare the original with the combined replication study.
+
+This is similar to using the CI or PI approaches but the replication effect will probably by very precise due to pooling multiple studies.
+
 :::
 
 ## Q Statistics 
@@ -799,15 +810,27 @@ Hedges & Schauer proposed to use the Q statistics to evaluate the consistency of
 - In case of *exact* replication, $\lambda = 0$ because $\theta_1 = \theta_2, ... = \theta_k$.
 - In case of *approximate* replication, $\lambda < \lambda_0$ where $\lambda_0$ is the maximum value considered as equal to null (i.e., 0).
 
-This approach is testing the consistency (i.e., homogeneity) of replications. A successfull replication should mimimize the heterogeneity and the presence of a significant Q statistics should bring evidence for not replicating the effect^[The approach has been debated by a series of opinion papers [see @Hedges2019-pr; @Mathur2019-vh]].
+This approach is testing the consistency (i.e., homogeneity) of replications. A successful replication should minimize the heterogeneity and the presence of a significant Q statistics should bring evidence for not replicating the effect^[The approach has been debated by a series of opinion papers [see @Hedges2019-pr; @Mathur2019-vh]].
 
 ## Q Statistics
 
-The method has been expanded and formalized in several papers with the objective to:
+The method has been expanded and formalized in several papers with different objectives:
 
-- cover different replications setup (burden of proof on replicating vs non-replicating, many-to-one and one-to-one)
-- intepret and choose the $\lambda$ parameter given that is the core of the approach
+. . .
+
+- to cover different replications setup (burden of proof on replicating vs non-replicating, many-to-one and one-to-one, etc.)
+
+. . .
+
+- interpret and choose the $\lambda$ parameter given that is the core of the approach
+
+. . .
+
 - evaluating the power and statistical properties under different replication scenarios
+
+. . .
+
+- the standard implementation put the burden of proof on non-replication. Thus $H_0$ is that studies replicates. They provided also a series of tests with the opposite formulation.
 
 ## Q Statistics
 
@@ -823,17 +846,22 @@ In the case of evaluating an exact replication we can use the `Qrep()` function 
 filor::print_fun(funs$Qrep)
 ```
 
-### Plot
-
-```{r}
-#| eval: false
-plot.Qrep(Qrep(dat$yi, dat$vi))
-```
+### Code
 
 ```{r}
 #| echo: false
+#| message: false
 dat <- sim_studies(100, 0.5, 0.1, 50, 50)
 Qres <- Qrep(dat$yi, dat$vi)
+```
+
+```{r}
+Qres <- Qrep(dat$yi, dat$vi)
+```
+
+### Plot
+
+```{r}
 plot.Qrep(Qres)
 ```
 
@@ -855,29 +883,43 @@ Qrep(dat$yi, dat$vi, lambda0 = (k - 1)/3)
 
 ## Small Telescopes [@Simonsohn2015-kg]
 
-Simonsohn [-@Simonsohn2015-kg] introduce 3 main questions for a method that estimate reproducibility:
+Simonsohn [-@Simonsohn2015-kg] introduced 3 main questions when evaluating replicability:
+
+. . .
 
 1. When we combine data from the original and replication study, what is our best guess of the overall effect?
+
+. . .
+
+**meta-analysis**
+
+. . .
+
 2. Is the effect of the replication study different from the original study?
-3. Does the replication study suggest that the effect of interest is undetectably different from zero?
+
+. . .
+
+**meta-analysis** and standard tests, but problematic in terms of statistical power
+
+. . .
+
+3. Does the replication study suggest that the effect of interest is undetectable different from zero?
+
+. . .
+
+**small telescopes**
 
 ## Small Telescopes [@Simonsohn2015-kg]
 
-1. For question 1 --> **meta-analysis**
-2. For question 2 --> **meta-analysis** and standard tests, but problematic in terms of statistical power
-3. The **small telescopes**
-
-## Small Telescopes [@Simonsohn2015-kg]
-
-The idea is simple but quite powerful and insighful. Let's assume that an original study found an effect of $y_{orig} = 0.7$ on a two-sample design with $n = 20$ per group.
+The idea is simple but quite powerful and insightful. Let's assume that an original study found an effect of $y_{orig} = 0.7$ on a two-sample design with $n = 20$ per group.
 
 - we define a threshold as the effect size that is associated with a certain low power level e.g., $33\%$ given the sample size i.e. $\theta_{small} = 0.5$
 - the replication study found an effect of $y{rep} = 0.2$ with $n = 100$ subjects
 
-## Small Telescopes [@Simonsohn2015-kg]
+. . .
 
 If the $y_{rep}$ is lower (i.e., the upper bound of the confidence interval) than the *small effect* ($\theta_{small} = 0.5$) we conclude that the effect is probably so low that could not have been detected by the original study. Thus there is no evidence for a replication.
-
+    
 ## Small Telescopes [@Simonsohn2015-kg]
 
 We can use the custom `small_telescope()` function on simulated data:
@@ -911,7 +953,7 @@ rep_d <- mean(g1) - mean(g0)
 rep_se <- sqrt(var(g1)/rep_n + var(g0)/rep_n)
 ```
 
-Here we are using the `pwr::pwr.t.test()` to cpmpute the effect size $\theta_{small}$ (in code `d`) associated with 33% power.
+Here we are using the `pwr::pwr.t.test()` to compute the effect size $\theta_{small}$ (in code `d`) associated with 33% power.
 
 ## Small Telescopes [@Simonsohn2015-kg]
 
@@ -932,36 +974,137 @@ quiet(small_telescope(or_d, or_se, rep_d, rep_se, d_small, ci = 0.95)) |>
 
 ## Bayes Factor
 
-@Verhagen2014-tx proposed a method to estimate the evidence of a *replication* study. The core topics to understand the proposal are:
+@Verhagen2014-tx proposed a method to estimate the evidence of a *replication* study. The core topics to understand the method are:
 
 - Bayesian hypothesis testing using the Bayes Factor [see, @Rouder2009-jh]
 - Bayes Factor using the Savage-Dickey density ratio [SDR, @Wagenmakers2010-fj]
 
-## Bayes Factor
+## Bayesian inference
 
-The idea of the Bayes Factor is computing the evidence of the data under two competing hypotheses, $H_0$ and $H_1$:
+Bayesian inference is the statistical procedure where **prior beliefs** about a phenomenon are combined, using the Bayes theorem, with **evidence from data** to obtain the **posterior beliefs**. 
+
+. . .
+
+The interesting part is that the researcher express the prior beliefs in probabilistic terms. Then after collecting data, evidence from the experiment is combined increasing or decreasing the plausibility of prior beliefs.
+
+. . .
+
+Let's make an (not a very innovative :smile:) example. We need to evaluate the fairness of a coin. The crucial parameter is $\theta$ that is the probability of success (e.g., head). We have our prior belief about the coin (e.g., fair but with some uncertainty). We toss the coin $k$ times and we observe $x$ heads. What are my conclusions?
+
+## Bayesian inference
 
 $$
-\frac{p(H_0|y)}{p(H_1|y)} = \frac{f(y|H_0)}{f(y|H_1)} \times \frac{p(H_0)}{p(H_1)}
+p(\theta|D) = \frac{p(D|\theta) \; p(\theta)}{p(D)}
+$$
+Where $\theta$ is our parameter and $D$ the data. $p(\theta|D)$ is the posterior distribution that is the product between the likelihood $p(D|\theta)$ and the prior $p(\theta)$. $p(D)$ is the probability of the data (aka marginal likelihood) and is necessary only for the posterior to be a proper probability distribution.
+
+We can "read" the formula as: *The probability of the parameter given the data is the product between the likelihood of the data given the parameter and the prior probability of the parameter*.
+
+## Bayesian inference
+
+Let's express our **prior** belief in probabilistic terms:
+
+```{r}
+#| echo: false
+
+k = 50 # number of trials
+x = 0:k # theta
+p = x/k # p
+d = 40 # observed data
+
+prior = dbeta(p, 15, 15) 
+likelihood = dbinom(d, k, p)
+posterior = (prior * likelihood) / sum(prior * likelihood)
+
+prior = prior / sum(prior)
+likelihood = likelihood/ sum(likelihood)
+
+ylim = c(0, max(c(prior, likelihood, posterior)))
+
+plot(p, prior, 
+     type = "l", 
+     ylim = ylim, 
+     lwd = 2, 
+     xlab = latex2exp::TeX("$\\theta$"), 
+     ylab = "Probability")
+```
+
+## Bayesian inference
+
+Now we collect data and we observe $x = 40$ tails out of $k = 50$ trials thus $\hat{\theta} = 0.8$ and compute the *likelihood*:
+
+```{r}
+#| echo: false
+
+plot(p, prior, 
+     type = "l", 
+     ylim = ylim, 
+     lwd = 2, 
+     xlab = latex2exp::TeX("$\\theta$"), 
+     ylab = "Probability", col = "darkgreen")
+lines(p, likelihood, col = "black", lwd = 2)
+points(d/k, 0, pch = 19, col = "firebrick", cex = 1.5)
+```
+
+## Bayesian inference
+
+Finally we combine, using the Bayes rule, **prior** and **likelihood** to obtain the **posterior** distribution:
+
+```{r}
+#| echo: false
+
+plot(p, prior, 
+     type = "l", 
+     ylim = ylim, 
+     lwd = 2, 
+     xlab = latex2exp::TeX("$\\theta$"), 
+     ylab = "Probability")
+lines(p, likelihood, col = "black", lwd = 2)
+points(d/k, 0, pch = 19, col = "firebrick", cex = 1.5)
+lines(p, posterior, lwd = 2, col = "dodgerblue")
+legend("topleft", legend = c("Prior", "Likelihood", "Posterior"), fill = c("darkgreen", "black", "dodgerblue"))
+points(d/k, 0, pch = 19, col = "firebrick", cex = 1.5)
+```
+
+## Bayes Factor
+
+The idea of the Bayes Factor is computing the evidence of the data under two competing hypotheses, $H_0$ and $H_1$ (~ $\theta$ in our previous example):
+
+$$
+\frac{p(H_0|D)}{p(H_1|D)} = \frac{f(D|H_0)}{f(D|H_1)} \times \frac{p(H_0)}{p(H_1)}
 $$
 
 Where $f$ is the likelihood function, $y$ are the data. The $\frac{p(H_0)}{p(H_1)}$ is the prior odds of the two hypothesis. The Bayes Factor is the ratio between the likelihood of the data under the two hypotheses.
 
 ## Bayes Factor using the SDR
 
-The SDR is a convenient shortcut to calculate the Bayes Factor [@Wagenmakers2010-fj]. The idea is that the ratio between the prior and posterior density distribution for the $H_0$ estimate the bayes factor calculated in the standard way.
-
+Calculating the BF can be problematic in some condition. The SDR is a convenient shortcut to calculate the Bayes Factor [@Wagenmakers2010-fj]. The idea is that the ratio between the prior and posterior density distribution for the $H_1$ is an estimate of the Bayes factor calculated in the standard way.
+    
 $$
-BF_{01} = \frac{p(y|H_0)}{p(y|H_1)} = \frac{p(\theta = x|y, H_1)}{p(\theta = x, H_1)}
+BF_{01} = \frac{p(D|H_0)}{p(D|H_1)} = \frac{p(\theta = x|D, H_1)}{p(\theta = x, H_1)}
 $$
 
-Where $\theta$ is the parameter of interest and $x$ is the null value under $H_0$ e.g., 0.
+Where $\theta$ is the parameter of interest and $x$ is the null value under $H_0$ e.g., 0. and $D$ are the data.
 
 ## Bayes Factor using the SDR, Example:
 
-As an example we are evaluating the fairness of a coin with an experiment of 20 flips. $\theta$ is the probability of success of the coin. Under $H_0$, $\theta = 0.5$, under $H_1$ we use a completely uninformative prior by setting $\theta \sim Beta(1, 1)$.
+Following the previous example $H_0: \theta = 0.5$. Under $H_1$ we use a completely uninformative prior by setting $\theta \sim Beta(1, 1)$.
 
-We flip the coin 20 times and we found that $\hat \theta = 0.75$.
+We flip again the coin 20 times and we found that $\hat \theta = 0.75$.
+
+```{r}
+#| echo: false
+
+curve(dbeta(x, 1, 1), 
+      lwd = 2, 
+      col = "darkgreen", 
+      xlab = latex2exp::TeX("$\\theta$"),
+      ylab = "Density",
+      main = latex2exp::TeX("Prior distribution for $\\theta$"),
+      cex.lab = 1.3,
+      cex.main = 1.3,
+      cex.axis = 1.3)
+```
 
 ## Bayes Factor using the SDR, Example:
 
@@ -981,7 +1124,7 @@ prior <- rep(1/length(ps), length(ps))
 likelihood <- dbinom(x, k, ps)
 posterior <- (prior * likelihood) / sum(prior * likelihood)
 
-title <- latex2exp::TeX("$x = 15$, $k = 20$, $\\hat{\\theta} = 0.75$")
+title <- latex2exp::TeX("$x = 15$, $k = 20$, $\\hat{\\theta} = 0.75$, $\\hat{\\theta_0} = 0.5$")
 plot(ps, prior, ylim = c(0, 0.05), type = "l", col = "darkgreen", lwd = 3,
      main = title,
      xlab = latex2exp::TeX("\\theta"),
@@ -1007,7 +1150,7 @@ prior <- rep(1/length(ps), length(ps))
 likelihood <- dbinom(x, k, ps)
 posterior <- (prior * likelihood) / sum(prior * likelihood)
 
-title <- latex2exp::TeX("$x = 10$, $k = 20$, $\\hat{\\theta} = 0.5$")
+title <- latex2exp::TeX("$x = 10$, $k = 20$, $\\hat{\\theta} = 0.5$, $\\hat{\\theta_0} = 0.5$")
 plot(ps, prior, ylim = c(0, 0.05), type = "l", col = "darkgreen", lwd = 3,
      main = title,
      xlab = latex2exp::TeX("\\theta"),
@@ -1024,6 +1167,12 @@ points(0.5, prior[ps == 0.5], cex = 2, pch = 19)
 points(0.5, 0, cex = 1, pch = 19, col = "firebrick")
 ```
 
+::: {.notes}
+If the probability density of the null value decrease after seeing data (from prior to posterior) this means that the Bayes factor should favor the alternative hypothesis.
+On the left, the density of 0.5 is lower after seeing the data --> evidence for H1
+On the right the density of 0.5 is higher after seeing the data --> evidence for H0
+:::
+
 ## @Verhagen2014-tx model^[see also @Ly2019-ow for an improvement]
 
 The idea is using the posterior distribution of the original study as prior for a Bayesian hypothesis testing where:
@@ -1036,15 +1185,15 @@ If $H_0$ is more likely after seeing the data, there is evidence against the rep
 ## @Verhagen2014-tx model
 
 ::: {.callout-warning}
-**Disclaimer:** The actual implementation of @Verhagen2014-tx is different (they use the $t$ statistics). The proposed implementation here is a little bit different but the idea is exactly the same.
+**Disclaimer:** The actual implementation of @Verhagen2014-tx is different (they use the $t$ statistics). The proposed implementation for the current workshop use a standard linear model.
 :::
 
 ## Example
 
-Let's assume that the original study ($n_{1,2} = 30$) estimate a $y_{orig} = 0.4$ and a standard error of $\sigma^2_1/n_1 + \sigma^2_2/n_2$. Let'assume also that $\sigma^2_1 = \sigma^2_2 = 1$. The standard error is ~`r round(sqrt(1/30 + 1/30), 2)`.
+Let's assume that the original study ($n_{1,2} = 30$) estimate a $y_{orig} = 0.4$ and a standard error of $\sigma^2_1/n_1 + \sigma^2_2/n_2$. Let's assume also that $\sigma^2_1 = \sigma^2_2 = 1$. The standard error is ~`r round(sqrt(1/30 + 1/30), 2)`.
 
 ```{r}
-#| echo = TRUE
+#| echo: true
 # original study
 n <- 30
 yorig <- 0.4
@@ -1070,6 +1219,10 @@ curve(dnorm(x, yorig, se),
       xlab = latex2exp::TeX("$\\delta$"),
       ylab = "Density")
 ```
+
+::: {.notes}
+With an uninformative prior the credible interval is the same as the confidence interval
+:::
 
 ## Example
 
@@ -1151,7 +1304,7 @@ bfplot <- data.frame(
   posterior = rnorm(1e5, fit$coefficients, fit$ses)
 )
  
-ggplot() +
+plt <- ggplot() +
   stat_function(geom = "line", 
                 aes(color = "Original Study (Prior)"),
                 linewidth = 1,
@@ -1171,9 +1324,14 @@ ggplot() +
         legend.title = element_blank())
 ```
 
-## More on statistical methods...
+## Example
 
-- @Schauer2022-mj provide a wonderful overview of replication methods with a common notation under a meta-analytic framework. The paper is focused on the Q approach
+A better custom plot:
+
+```{r}
+#| echo: false
+plt
+```
 
 # Exercises {.section}
 
@@ -1195,11 +1353,11 @@ ggplot() +
 
 ## Ego-Depletion and self-control @Hagger2016-vr
 
-The dataset can be found in `04-replication-methods/objects/hagger2016_clean.rds`:
+The dataset can be found in `04-replication-methods/objects/hagger2016.rds`:
 
 ```{r}
 #| echo: false
-hagger2016 <- readRDS(here("04-replication-methods/objects/hagger2016_clean.rds"))
+hagger2016 <- readRDS(here("04-replication-methods/objects/hagger2016.rds"))
 hagger2016
 ```
 
@@ -1219,16 +1377,16 @@ This is an interesting situation because we have a highly precise but probably b
 ## Gustatory Disgust on Moral Judgment @Ghelfi2020-ee
 
 - Eskine and colleagues [-@Eskine2011-am] found that subjects who drank a bitter beverage before reading six moral vignettes judged the characters’ actions more harshly than did subjects who drank a sweet beverage or water.
-- The found an effect of $d = 1.09$^[We recalculated the effect using `metafor` thus the results could slighlty differ]
+- The found an effect of $d = 1.09$^[We recalculated the effect using `metafor` thus the results could slightly differ]
 - @Ghelfi2020-ee conducted a multi-lab study with $k = 11$ laboratories
 
 ## Gustatory Disgust on Moral Judgment @Ghelfi2020-ee
 
-The dataset `04-replication-methods/objects/ghelfi2020_clean.rds` contains the original study and the replications:
+The dataset `04-replication-methods/objects/ghelfi2020.rds` contains the original study and the replications:
 
 ```{r}
 #| echo: false
-ghelfi2020 <- readRDS(here("04-replication-methods/objects/ghelfi2020_clean.rds"))
+ghelfi2020 <- readRDS(here("04-replication-methods/objects/ghelfi2020.rds"))
 ghelfi2020
 ```
 
@@ -1241,20 +1399,4 @@ ghelfi2020
    1. Is there evidence for replication?
    2. Are there differences among replication methods?
 
-## References
-
-```{r}
-#| echo: false
-filor::write_bib_rmd(input_bib = filor::fil()$bib,
-                     output_bib = "refs_to_download.bib")  |>
-  downloadthis::download_file(
-  output_name = "references",
-  button_label = "Download the bibtex file",
-  button_type = "danger",
-  has_icon = TRUE,
-  icon = "fa fa-book",
-  self_contained = TRUE
-)
-```
-
-</br>
+## References `r link_refs()` {.smaller}
