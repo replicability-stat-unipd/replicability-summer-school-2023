@@ -1,7 +1,7 @@
 ---
 output: github_document
 params:
-    teamwork: false
+    teamwork: true
     solutions: false
 ---
 
@@ -20,13 +20,13 @@ devtools::source_gist("c83e078bf8c81b035e32c3fc0cf04ee8",
 ```{r, include = FALSE}
 library(RefManageR)
 library(kableExtra)
+library(bib2df)
 devtools::load_all()
 ```
 
 ```{r, include = FALSE}
-bib <- ReadBib("papers/references.bib")
+bib <- RefManageR::ReadBib("papers/references.bib")
 bib <- sort(bib)
-
 files <- list.files("papers/pdfs/")
 bib_df <- bib2df::bib2df("papers/references.bib")
 df <- bib_df[, c("BIBTEXKEY", "AUTHOR")]
@@ -53,25 +53,25 @@ This page contains the materials (slide, code, extra) used during the Summer Sch
 
 # Getting started
 
-In this section are listed the software and packages required by the Summer School workshops.
+In this section are listed the software and packages required by the Summer School workshops. The elements marked with `#important` are necessary for the workshops. Other elements will be covered by during the workshops but are less relevant for the practical activities.
 
-## Installing R and R Studio
+## Installing R and R Studio `#important`
 
-### Installing R binaries
+### Installing R binaries `#important`
 
 The first step is installing R that is a very straightforward process. You can go to <https://cran.r-project.org/>, download the installer for your operating system and follow the steps.
 
-#### Additionals tools
+#### Additionals tools `#important`
 
 For MAC users there is an additional tool that is required called `XQuartz` <https://www.xquartz.org/>.
 
 For Windows users, `Rtools` <https://cran.r-project.org/bin/windows/Rtools/> is an additional tool required by some packages to works correctly. Remember to choose the version corresponding to the R version that you installed.
 
-### R Studio
+### R Studio `#important`
 
-R Studio (now Posit) is an IDE to use the R programming language but also other programming languages. Is not the only option to use R (for hardcore users you can basically open a text editor and a terminal :skull:). Another very good option is VScode (which I personally use when writing using Quarto or R Markdown). However, I suggest you to install R Studio, you can dowload the last version from the website <https://posit.co/products/open-source/rstudio/>
+R Studio (now Posit) is an IDE to use the R programming language but also other programming languages. Is not the only option to use R (for hardcore users you can basically open a text editor and a terminal :skull:). Another very good option is VScode (which I personally use when writing using Quarto or R Markdown). However, I suggest you to install R Studio, you can download the last version from the website <https://posit.co/products/open-source/rstudio/>
 
-## Quarto
+## Quarto `#important`
 
 Quarto is the evolution of R Markdown. Is a literate programming framework where prose (written in Markdown) can be combined with code (R, Python, Julia, etc.). This is an amazing tool to create report, presentations, papers etc. you can download it from <https://quarto.org/>.
 
@@ -87,15 +87,17 @@ Git is an extremely powerful tool to manage code-related projects (but not only)
 
 Github is the online server where Git repositories can be hosted. It is an amazing service where you can also create websites for free (where this page is hosted) just using R and Quarto (or R Markdown). You can create an account on the website <https://github.com/>.
 
+To use Github and Git from the command line you can use `ssh` (to avoid typing the password for each operation). You can follow this guide [https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account?tool=webui&platform=linux](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account?tool=webui&platform=linux).
+
 ### Open Science Framework
 
 The Open Science Framework (OSF) is an free online repository to host documents, code and files related to research work. The repository can be shared and OSF will attach a DOI thus can be cited and shared in a consistent way. OSF can be linked to several other services such as reference managers, cloud storage and Github. You can create an account on the website <https://osf.io/>.
 
-## R Packages
+## R Packages `#important`
 
 Beyond the base R installation we need extra packages for the workshops. In any case, R Studio will prompt you to install missing packages when detected from a script.
 
-### CRAN Packages
+### CRAN Packages `#important`
 
 To install packages from CRAN you can run the following code into the R console:
 
@@ -105,7 +107,7 @@ pkgs <- c("tidyverse", "car", "devtools", "here", "knitr", "rmarkdown", "metafor
 install.packages(pkgs)
 ```
 
-### Github Packages
+### Github Packages `#important`
 
 There are some packages that are not available on CRAN. You can install using the following code:
 
@@ -115,7 +117,7 @@ gh_pkgs <- c("haozhu233/kableExtra", "filippogambarota/filor")
 remotes::install_github(gh_pkgs)
 ```
 
-### Bioconductor Packages
+### Bioconductor Packages `#important`
 
 There are some packages from the `Bioconductor` repository. You can install using the following code.
 
@@ -124,7 +126,7 @@ if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager")
 BiocManager::install("curatedOvarianData")
 ```
 
-### All packages
+# All packages
 
 The packages indicated in the section above are the essential packages for the workshops. To reproduce the slides, plots and the overall project (not required to follow the workshops) there are extra packages. You can avoid installing it but this is a complete list:
 
@@ -134,7 +136,6 @@ all_pkgs <- get_project_packages()
 all_pkgs |> 
     kable(format = "markdown")
 ```
-
 
 # Repository
 
@@ -167,13 +168,13 @@ Relevant functions are documented. You can see the documentation directly within
 
 ## Useful links
 
-- [Shared code editor](https://etherpad.wikimedia.org/p/replicability-summer-school-2023)
+- [Shared code editor](https://etherpad.wikimedia.org/p/replicability-summer-school-2023): the shared online notepad to write code together.
 
 # Materials
 
 ## Slides
 
-The slides are located into the specific folders. Then when relevant `script/` and `objects/` folders contains extra documents and files used in the slides and for exercises.
+The slides are located into the specific folders. Then when relevant `script/` and `objects/` folders contains extra documents and files used in the slides and for exercises. You can directly open the slides clicking on `html` or accessing the source code with `qmd`.
 
 ```{r, results="asis", echo=FALSE}
 slides <- data.frame(
@@ -195,8 +196,8 @@ slides <- data.frame(
                        "[qmd](03-biostatistics/slides/03-biostatistics.qmd)",
                        "[qmd](04-replication-methods/slides/04-replication-methods.html)"),
          Solutions = c(NA,NA,
-                       "[html](02-meta-analysis/slides/02-meta-analysis_sol.html) - [qmd](02-meta-analysis/slides/02-meta-analysis-solutions.qmd)",
-                       "[html](03-biostatistics/slides/03-biostatistics_sol.html) - [qmd](03-biostatistics/slides/03-biostatistics-solutions.qmd)",NA)
+                       "[html](02-meta-analysis/slides/02-meta-analysis-solutions.html) - [qmd](02-meta-analysis/slides/02-meta-analysis-solutions.qmd)",
+                       "[html](03-biostatistics/slides/03-biostatistics-solutions.html) - [qmd](03-biostatistics/slides/03-biostatistics-solutions.qmd)",NA)
 )
 
 slides[is.na(slides)] <- ""
@@ -231,4 +232,3 @@ ls()
 
 ```{r, child="files/teamwork.Rmd", eval=params$teamwork}
 ```
-
