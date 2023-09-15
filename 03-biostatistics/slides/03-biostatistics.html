@@ -411,8 +411,6 @@
   
   <script src="03-biostatistics_files/libs/kePrint-0.0.1/kePrint.js"></script>
   <link href="03-biostatistics_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-  <link href="03-biostatistics_files/libs/font-awesome-5.13.0/css/all.min.css" rel="stylesheet">
-  <link href="03-biostatistics_files/libs/font-awesome-5.13.0/css/v4-shims.min.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -442,28 +440,15 @@ Gianmarco Altoè <a href="https://orcid.org/0000-0003-1154-9528" class="quarto-t
 </div>
 
   <p class="date">18-22 September 2023</p>
-</section>
-<section class="notation-slide" ;="" id="notation-slide">
-  <h2>General info</h2>
-<br>
-<br>
-  <p>
-    </p><ul>
-      <li>
-        Slides marked with 💬 are <b>EXTRA</b> slides with useful but not fundamental information
-      </li>
-      <li>
-        Slides marked with ❓ are <b>QUESTIONS</b> slide
-      </li>
-      <li>
-        <div class="cell" data-layout-align="center">
-          <details>
-          <summary>This is a collapsed code-block, you can open it and see the code</summary>
-          </details>
-        </div>
-      </li>
-    </ul>
-  <p></p>
+</section><section id="TOC">
+<nav role="doc-toc"> 
+<h2 id="toc-title">Table of contents</h2>
+<ul>
+<li><a href="#/replicability-in-biostatistics" id="/toc-replicability-in-biostatistics">Replicability in Biostatistics</a></li>
+<li><a href="#/background" id="/toc-background">Background</a></li>
+<li><a href="#/application-to-genetic-data" id="/toc-application-to-genetic-data">Application to genetic data</a></li>
+</ul>
+</nav>
 </section>
 
 <section id="setup-r" class="slide level2">
@@ -477,21 +462,29 @@ Gianmarco Altoè <a href="https://orcid.org/0000-0003-1154-9528" class="quarto-t
 </div>
 <h3 id="loading-data">Loading Data</h3>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>datl <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">here</span>(<span class="st">"03-biostatistics"</span>, <span class="st">"objects"</span>, <span class="st">"gene_data_clean.rds"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>datl <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">here</span>(<span class="st">"03-biostatistics"</span>, <span class="st">"objects"</span>, <span class="st">"ovarianclean.rds"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section>
-<section id="reproducibility-in-biostatistics" class="title-slide slide level1 center">
-<h1>Reproducibility in Biostatistics</h1>
+<section id="replicability-in-biostatistics" class="title-slide slide level1 section center">
+<h1>Replicability in Biostatistics</h1>
 
 </section>
-<section id="reproducibility-in-biostatistics-1" class="slide level2">
-<h2>Reproducibility in Biostatistics</h2>
+<section id="replicability-in-biostatistics-1" class="slide level2">
+<h2>Replicability in Biostatistics</h2>
 <ul>
-<li><p>In <em>Biostatistics</em> is common to have a similar experimental setup (i.e., same genes and variables), repeated across multiple studies. Replicability in this framework refer to how consistent is a variable (e.g., gene expression) in predicting a certain outcome across different dataset.</p></li>
-<li><p>Recent research suggest the importance of cross-study training of prediction models to improve the overall predictive performance and replicability <span class="citation" data-cites="Patil2018-hm Parmigiani2023-dr Masoero2023-wb">(<a href="#/references" role="doc-biblioref" onclick="">Patil and Parmigiani 2018</a>; <a href="#/references" role="doc-biblioref" onclick="">Parmigiani 2023</a>; <a href="#/references" role="doc-biblioref" onclick="">Masoero et al. 2023</a>)</span></p></li>
-<li><p>We will try to assess how a certain variable consistently (or not) predict a certain outcome using a binary classification and meta-analytic approach</p></li>
+<li>In <em>Biostatistics</em> is common to have a similar experimental setup (i.e., same genes and variables), repeated across multiple studies. Replicability in this framework refer to how consistent is a variable (e.g., gene expression) in predicting a certain outcome across different dataset.</li>
 </ul>
+<div class="fragment">
+<ul>
+<li>Recent research suggest the importance of cross-study training of prediction models to improve the overall predictive performance and replicability <span class="citation" data-cites="Patil2018-hm Parmigiani2023-dr Masoero2023-wb">(<a href="#/references-download-.bib-file" role="doc-biblioref" onclick="">Masoero et al., 2023</a>; <a href="#/references-download-.bib-file" role="doc-biblioref" onclick="">Parmigiani, 2023</a>; <a href="#/references-download-.bib-file" role="doc-biblioref" onclick="">Patil &amp; Parmigiani, 2018</a>)</span></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>We will try to assess how a certain variable consistently (or not) predict a certain outcome using a binary classification and meta-analytic approach</li>
+</ul>
+</div>
 </section></section>
 <section>
 <section id="background" class="title-slide slide level1 section center">
@@ -502,16 +495,16 @@ Gianmarco Altoè <a href="https://orcid.org/0000-0003-1154-9528" class="quarto-t
 <h2>Background</h2>
 <p>For this lecture we will use:</p>
 <ul>
-<li>Gene expression data</li>
+<li><strong>Gene expression</strong> data</li>
 <li>Analysis of <strong>contingency tables</strong></li>
-<li>Binary classifiers</li>
+<li><strong>Binary classifiers</strong></li>
 <li><strong>Receiver Operating Characteristic</strong> (ROC) curves</li>
 <li>The <strong>Youden index</strong> to analyze ROC curves</li>
 </ul>
 </section>
 <section id="genes-expression-data" class="slide level2">
 <h2>Genes expression data</h2>
-<p>We are going to use the <code>curatedOvarianData</code> dataset <span class="citation" data-cites="Waldron2014-yv">(see <a href="#/references" role="doc-biblioref" onclick="">Waldron et al. 2014</a> for details)</span>. Ganzfried <span class="citation" data-cites="Ganzfried2013-ut">(<a href="#/references" role="doc-biblioref" onclick="">2013</a>)</span> provide a detailed description of the dataset structure.</p>
+<p>We are going to use the <code>curatedOvarianData</code> dataset <span class="citation" data-cites="Waldron2014-yv">(see <a href="#/references-download-.bib-file" role="doc-biblioref" onclick="">Waldron et al., 2014</a> for details)</span>. Ganzfried <span class="citation" data-cites="Ganzfried2013-ut">(<a href="#/references-download-.bib-file" role="doc-biblioref" onclick="">2013</a>)</span> provide a detailed description of the dataset structure.</p>
 <div class="cell" data-layout-align="center">
 <iframe src="https://bioconductor.org/packages/release/data/experiment/html/curatedOvarianData.html" width="960" height="400px" data-external="1">
 </iframe>
@@ -560,79 +553,10 @@ Gianmarco Altoè <a href="https://orcid.org/0000-0003-1154-9528" class="quarto-t
 </section>
 <section id="data-structure-2" class="slide level2">
 <h2>Data structure</h2>
-<div class="cell" data-layout-align="center">
-<div class="cell-output cell-output-stdout">
-<pre><code>                      Item
-1          E.MTAB.386_eset
-2            GSE12418_eset
-3            GSE12470_eset
-4            GSE13876_eset
-5            GSE14764_eset
-6            GSE17260_eset
-7            GSE18520_eset
-8     GSE19829.GPL570_eset
-9    GSE19829.GPL8300_eset
-10           GSE20565_eset
-11            GSE2109_eset
-12           GSE26193_eset
-13           GSE26712_eset
-14           GSE30009_eset
-15           GSE30161_eset
-16   GSE32062.GPL6480_eset
-17           GSE32063_eset
-18           GSE44104_eset
-19           GSE49997_eset
-20           GSE51088_eset
-21            GSE6008_eset
-22            GSE6822_eset
-23            GSE8842_eset
-24            GSE9891_eset
-25       PMID15897565_eset
-26       PMID17290060_eset
-27       PMID19318476_eset
-28      TCGA.RNASeqV2_eset
-29 TCGA.mirna.8x15kv2_eset
-30               TCGA_eset
-                                                                                                                                                                       Title
-1                                                                  Angiogenic mRNA and microRNA gene expression signature predicts a novel subtype of serous ovarian cancer.
-2                                                                     Expression analysis of stage III serous ovarian adenocarcinoma distinguishes a sub-group of survivors.
-3                  Gene expression profiling of advanced-stage serous ovarian cancers distinguishes novel subclasses and implicates ZEB2 in tumor progression and prognosis.
-4                                                                                           Survival-related profile, pathways, and transcription factors in ovarian cancer.
-5                                                                  A prognostic gene expression index in ovarian cancer - validation across different independent data sets.
-6                                                   Gene expression profile for predicting survival in advanced-stage serous ovarian cancer across two independent datasets.
-7                                    A gene signature predictive for outcome in advanced ovarian cancer identifies a survival factor: microfibril-associated glycoprotein 2.
-8                       Gene expression profile of BRCAness that correlates with responsiveness to chemotherapy and with outcome in patients with epithelial ovarian cancer.
-9                       Gene expression profile of BRCAness that correlates with responsiveness to chemotherapy and with outcome in patients with epithelial ovarian cancer.
-10 A genomic and transcriptomic approach for a differential diagnosis between primary and secondary ovarian carcinomas in patients with a previous history of breast cancer.
-11                                                                                                                                       IGC EXpression Project for Oncology
-12                                                                               miR-141 and miR-200a act on ovarian tumorigenesis by controlling oxidative stress response.
-13                                                                           A gene signature predicting for survival in suboptimally debulked patients with ovarian cancer.
-14                                                   Multidrug resistance-linked gene signature predicts overall survival of patients with primary ovarian serous carcinoma.
-15                                  Multi-gene expression predictors of single drug responses to adjuvant chemotherapy in ovarian carcinoma: predicting platinum resistance.
-16                              High-risk ovarian cancer based on 126-gene expression signature is uniquely characterized by downregulation of antigen presentation pathway.
-17                              High-risk ovarian cancer based on 126-gene expression signature is uniquely characterized by downregulation of antigen presentation pathway.
-18                                                                                  COL11A1 promotes tumor progression and predicts poor clinical outcome in ovarian cancer.
-19                                                              Validating the impact of a molecular subtype in ovarian cancer on outcomes: a study of the OVCAD Consortium.
-20                                                                     POSTN/TGFBI-associated stromal signature predicts poor prognosis in serous epithelial ovarian cancer.
-21                                              Lysophosphatidic acid-induced transcriptional profile represents serous epithelial ovarian carcinoma and worsened prognosis.
-22                                                                                                                                   Classification of ovarian tumor samples
-23                                                                                                                Analysis of gene expression in early-stage ovarian cancer.
-24                                                                            Novel molecular subtypes of serous and endometrioid ovarian cancer linked to clinical outcome.
-25                                                                Patterns of gene expression that characterize long-term survival in advanced stage serous ovarian cancers.
-26                                                          An integrated genomic-based approach to individualized treatment of patients with advanced-stage ovarian cancer.
-27                                                                 Microarray analysis of early stage serous ovarian cancers shows profiles predictive of favorable outcome.
-28                                                                                                                         Integrated genomic analyses of ovarian carcinoma.
-29                                                                                                                         Integrated genomic analyses of ovarian carcinoma.
-30                                                                                                                         Integrated genomic analyses of ovarian carcinoma.</code></pre>
-</div>
-</div>
-</section>
-<section id="data-structure-3" class="slide level2">
-<h2>Data structure</h2>
 <p>For example, we want to extract the <code>ARHGAP5</code> and <code>ZNF487</code> <em>genes</em> and <code>debulking</code> and <code>tumorstage</code> <em>phenotype</em> variables.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">data</span>(GSE32063_eset) <span class="co"># load the dataset</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">get_bio_data</span>(GSE32063_eset, <span class="fu">c</span>(<span class="st">"ARHGAP5"</span>, <span class="st">"ZNF487"</span>), <span class="fu">c</span>(<span class="st">"debulking"</span>, <span class="st">"tumorstage"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">data</span>(GSE32063_eset) <span class="co"># load the dataset</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">get_bio_data</span>(GSE32063_eset, <span class="fu">c</span>(<span class="st">"ARHGAP5"</span>, <span class="st">"ZNF487"</span>), <span class="fu">c</span>(<span class="st">"debulking"</span>, <span class="st">"tumorstage"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    debulking tumorstage    ARHGAP5     ZNF487
 1  suboptimal          3 -1.3788404 -1.4693060
@@ -678,55 +602,55 @@ Gianmarco Altoè <a href="https://orcid.org/0000-0003-1154-9528" class="quarto-t
 </div>
 </div>
 </section>
-<section id="data-structure-4" class="slide level2">
+<section id="data-structure-3" class="slide level2">
 <h2>Data structure</h2>
 <p>We performed a little bit of pre-processing to have a more clean and minimal dataset. The pre-processing are described into the <code>03-biostatistics/scripts/gene-data-preprocessing.R</code>:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">library</span>(curatedOvarianData)</span>
-<span id="cb9-2"><a href="#cb9-2"></a>devtools<span class="sc">::</span><span class="fu">load_all</span>()</span>
-<span id="cb9-3"><a href="#cb9-3"></a></span>
-<span id="cb9-4"><a href="#cb9-4"></a>listdata <span class="ot">&lt;-</span> <span class="fu">data</span>(<span class="at">package =</span> <span class="st">"curatedOvarianData"</span>)<span class="sc">$</span>results[, <span class="st">"Item"</span>]</span>
-<span id="cb9-5"><a href="#cb9-5"></a>datl <span class="ot">&lt;-</span> <span class="fu">lapply</span>(listdata, getdata, <span class="at">package =</span> <span class="st">"curatedOvarianData"</span>)</span>
-<span id="cb9-6"><a href="#cb9-6"></a><span class="fu">names</span>(datl) <span class="ot">&lt;-</span> listdata</span>
-<span id="cb9-7"><a href="#cb9-7"></a></span>
-<span id="cb9-8"><a href="#cb9-8"></a><span class="co"># we need the debulking as phenotype, lets see which data have it</span></span>
-<span id="cb9-9"><a href="#cb9-9"></a></span>
-<span id="cb9-10"><a href="#cb9-10"></a>has_debulking <span class="ot">&lt;-</span> <span class="fu">sapply</span>(datl, <span class="cf">function</span>(d) <span class="fu">any</span>(<span class="sc">!</span><span class="fu">is.na</span>(<span class="fu">pData</span>(d)[, <span class="st">"debulking"</span>])))</span>
-<span id="cb9-11"><a href="#cb9-11"></a>datl_debulking <span class="ot">&lt;-</span> datl[has_debulking]</span>
-<span id="cb9-12"><a href="#cb9-12"></a></span>
-<span id="cb9-13"><a href="#cb9-13"></a><span class="co"># let's see how many NAs and remove the dataset with an high percentage</span></span>
-<span id="cb9-14"><a href="#cb9-14"></a></span>
-<span id="cb9-15"><a href="#cb9-15"></a>pNA <span class="ot">&lt;-</span> <span class="fu">sapply</span>(datl_debulking, <span class="cf">function</span>(x) <span class="fu">mean</span>(<span class="fu">is.na</span>(<span class="fu">pData</span>(x)[, <span class="st">"debulking"</span>])))</span>
-<span id="cb9-16"><a href="#cb9-16"></a>ncases <span class="ot">&lt;-</span> <span class="fu">sapply</span>(datl_debulking, <span class="cf">function</span>(x) <span class="fu">length</span>(<span class="fu">pData</span>(x)[, <span class="st">"debulking"</span>]))</span>
-<span id="cb9-17"><a href="#cb9-17"></a>missing <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(pNA, ncases)</span>
-<span id="cb9-18"><a href="#cb9-18"></a></span>
-<span id="cb9-19"><a href="#cb9-19"></a><span class="co"># remove dataset with more than 20% of NA on debulking</span></span>
-<span id="cb9-20"><a href="#cb9-20"></a>datl_debulking <span class="ot">&lt;-</span> datl_debulking[pNA <span class="sc">&lt;</span> <span class="fl">0.2</span>]</span>
-<span id="cb9-21"><a href="#cb9-21"></a></span>
-<span id="cb9-22"><a href="#cb9-22"></a><span class="co"># let's explore the genes, we keep the genes that are in common with all</span></span>
-<span id="cb9-23"><a href="#cb9-23"></a><span class="co"># datasets. One dataset the "TCGA.mirna.8x15kv2_eset" dataset has some genes that are</span></span>
-<span id="cb9-24"><a href="#cb9-24"></a><span class="co"># completely different from the others, we remove it.</span></span>
-<span id="cb9-25"><a href="#cb9-25"></a></span>
-<span id="cb9-26"><a href="#cb9-26"></a><span class="co"># get_gene_names(datl_debulking$TCGA.mirna.8x15kv2_eset)</span></span>
-<span id="cb9-27"><a href="#cb9-27"></a>datl_debulking <span class="ot">&lt;-</span> datl_debulking[<span class="fu">names</span>(datl_debulking) <span class="sc">!=</span> <span class="st">"TCGA.mirna.8x15kv2_eset"</span>]</span>
-<span id="cb9-28"><a href="#cb9-28"></a></span>
-<span id="cb9-29"><a href="#cb9-29"></a><span class="co"># now we intersect all the gene names to keep only the common ones</span></span>
-<span id="cb9-30"><a href="#cb9-30"></a>genes <span class="ot">&lt;-</span> <span class="fu">lapply</span>(datl_debulking, get_gene_names)</span>
-<span id="cb9-31"><a href="#cb9-31"></a>common_genes <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">Reduce</span>(base<span class="sc">::</span>intersect, genes)</span>
-<span id="cb9-32"><a href="#cb9-32"></a></span>
-<span id="cb9-33"><a href="#cb9-33"></a><span class="co"># converting into dataframe with selected </span></span>
-<span id="cb9-34"><a href="#cb9-34"></a>datl_debulking_df <span class="ot">&lt;-</span> <span class="fu">lapply</span>(datl_debulking, get_bio_data, common_genes, <span class="st">"debulking"</span>)</span>
-<span id="cb9-35"><a href="#cb9-35"></a></span>
-<span id="cb9-36"><a href="#cb9-36"></a><span class="co"># saving</span></span>
-<span id="cb9-37"><a href="#cb9-37"></a><span class="fu">saveRDS</span>(datl_debulking_df, <span class="st">"03-biostatistics/objects/gene_data_clean.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">library</span>(curatedOvarianData)</span>
+<span id="cb8-2"><a href="#cb8-2"></a>devtools<span class="sc">::</span><span class="fu">load_all</span>()</span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a>listdata <span class="ot">&lt;-</span> <span class="fu">data</span>(<span class="at">package =</span> <span class="st">"curatedOvarianData"</span>)<span class="sc">$</span>results[, <span class="st">"Item"</span>]</span>
+<span id="cb8-5"><a href="#cb8-5"></a>datl <span class="ot">&lt;-</span> <span class="fu">lapply</span>(listdata, getdata, <span class="at">package =</span> <span class="st">"curatedOvarianData"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="fu">names</span>(datl) <span class="ot">&lt;-</span> listdata</span>
+<span id="cb8-7"><a href="#cb8-7"></a></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="co"># we need the debulking as phenotype, lets see which data have it</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a></span>
+<span id="cb8-10"><a href="#cb8-10"></a>has_debulking <span class="ot">&lt;-</span> <span class="fu">sapply</span>(datl, <span class="cf">function</span>(d) <span class="fu">any</span>(<span class="sc">!</span><span class="fu">is.na</span>(<span class="fu">pData</span>(d)[, <span class="st">"debulking"</span>])))</span>
+<span id="cb8-11"><a href="#cb8-11"></a>datl_debulking <span class="ot">&lt;-</span> datl[has_debulking]</span>
+<span id="cb8-12"><a href="#cb8-12"></a></span>
+<span id="cb8-13"><a href="#cb8-13"></a><span class="co"># let's see how many NAs and remove the dataset with an high percentage</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a></span>
+<span id="cb8-15"><a href="#cb8-15"></a>pNA <span class="ot">&lt;-</span> <span class="fu">sapply</span>(datl_debulking, <span class="cf">function</span>(x) <span class="fu">mean</span>(<span class="fu">is.na</span>(<span class="fu">pData</span>(x)[, <span class="st">"debulking"</span>])))</span>
+<span id="cb8-16"><a href="#cb8-16"></a>ncases <span class="ot">&lt;-</span> <span class="fu">sapply</span>(datl_debulking, <span class="cf">function</span>(x) <span class="fu">length</span>(<span class="fu">pData</span>(x)[, <span class="st">"debulking"</span>]))</span>
+<span id="cb8-17"><a href="#cb8-17"></a>missing <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(pNA, ncases)</span>
+<span id="cb8-18"><a href="#cb8-18"></a></span>
+<span id="cb8-19"><a href="#cb8-19"></a><span class="co"># remove dataset with more than 20% of NA on debulking</span></span>
+<span id="cb8-20"><a href="#cb8-20"></a>datl_debulking <span class="ot">&lt;-</span> datl_debulking[pNA <span class="sc">&lt;</span> <span class="fl">0.2</span>]</span>
+<span id="cb8-21"><a href="#cb8-21"></a></span>
+<span id="cb8-22"><a href="#cb8-22"></a><span class="co"># let's explore the genes, we keep the genes that are in common with all</span></span>
+<span id="cb8-23"><a href="#cb8-23"></a><span class="co"># datasets. One dataset the "TCGA.mirna.8x15kv2_eset" dataset has some genes that are</span></span>
+<span id="cb8-24"><a href="#cb8-24"></a><span class="co"># completely different from the others, we remove it.</span></span>
+<span id="cb8-25"><a href="#cb8-25"></a></span>
+<span id="cb8-26"><a href="#cb8-26"></a><span class="co"># get_gene_names(datl_debulking$TCGA.mirna.8x15kv2_eset)</span></span>
+<span id="cb8-27"><a href="#cb8-27"></a>datl_debulking <span class="ot">&lt;-</span> datl_debulking[<span class="fu">names</span>(datl_debulking) <span class="sc">!=</span> <span class="st">"TCGA.mirna.8x15kv2_eset"</span>]</span>
+<span id="cb8-28"><a href="#cb8-28"></a></span>
+<span id="cb8-29"><a href="#cb8-29"></a><span class="co"># now we intersect all the gene names to keep only the common ones</span></span>
+<span id="cb8-30"><a href="#cb8-30"></a>genes <span class="ot">&lt;-</span> <span class="fu">lapply</span>(datl_debulking, get_gene_names)</span>
+<span id="cb8-31"><a href="#cb8-31"></a>common_genes <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">Reduce</span>(base<span class="sc">::</span>intersect, genes)</span>
+<span id="cb8-32"><a href="#cb8-32"></a></span>
+<span id="cb8-33"><a href="#cb8-33"></a><span class="co"># converting into dataframe with selected </span></span>
+<span id="cb8-34"><a href="#cb8-34"></a>ovarianclean <span class="ot">&lt;-</span> <span class="fu">lapply</span>(datl_debulking, get_bio_data, common_genes, <span class="st">"debulking"</span>)</span>
+<span id="cb8-35"><a href="#cb8-35"></a></span>
+<span id="cb8-36"><a href="#cb8-36"></a><span class="co"># saving</span></span>
+<span id="cb8-37"><a href="#cb8-37"></a><span class="fu">saveRDS</span>(ovarianclean, <span class="st">"03-biostatistics/objects/ovarianclean.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="data-structure-5" class="slide level2">
+<section id="data-structure-4" class="slide level2">
 <h2>Data structure</h2>
 <p>The pre-processing create a dataframe with datasets having both the <code>debulking</code> variable and all genes in common. In this way we can analyze and compare genes among all datasets.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>datl <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">here</span>(<span class="st">"03-biostatistics"</span>, <span class="st">"objects"</span>, <span class="st">"gene_data_clean.rds"</span>))</span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="fu">str</span>(datl, <span class="at">max.level =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>datl <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">here</span>(<span class="st">"03-biostatistics"</span>, <span class="st">"objects"</span>, <span class="st">"ovarianclean.rds"</span>))</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">str</span>(datl, <span class="at">max.level =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>List of 15
  $ E.MTAB.386_eset      :'data.frame':  129 obs. of  220 variables:
@@ -747,12 +671,12 @@ Gianmarco Altoè <a href="https://orcid.org/0000-0003-1154-9528" class="quarto-t
 </div>
 </div>
 </section>
-<section id="data-structure-6" class="slide level2">
+<section id="data-structure-5" class="slide level2">
 <h2>Data structure</h2>
 <p>I prefer always working (if possible) with a simple dataframe:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>dat <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">bind_rows</span>(datl, <span class="at">.id =</span> <span class="st">"dataset"</span>)</span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="fu">head</span>(dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>dat <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">bind_rows</span>(datl, <span class="at">.id =</span> <span class="st">"dataset"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="fu">head</span>(dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          dataset  debulking     ABCA1    ABCA2    ABCA3    ABCA4    ABCA5
 1 E.MTAB.386_eset suboptimal 10.839395 6.845599 8.962037 7.735899 6.911055
@@ -981,28 +905,28 @@ Gianmarco Altoè <a href="https://orcid.org/0000-0003-1154-9528" class="quarto-t
 </tr>
 <tr class="odd">
 <td style="text-align: left; padding: 0.2cm; vertical-align: middle;">1</td>
-<td style="text-align: center; padding: 0.2cm;"><span style="color:black;">43</span><br>
-<span style="color:#993333;">28.7&nbsp;%</span></td>
-<td style="text-align: center; padding: 0.2cm;"><span style="color:black;">38</span><br>
-<span style="color:#993333;">25.3&nbsp;%</span></td>
-<td style="text-align: center; padding: 0.2cm;"><span style="color:black;">81</span><br>
-<span style="color:#993333;">54&nbsp;%</span></td>
+<td style="text-align: center; padding: 0.2cm;"><span style="color:black;">32</span><br>
+<span style="color:#993333;">21.3&nbsp;%</span></td>
+<td style="text-align: center; padding: 0.2cm;"><span style="color:black;">40</span><br>
+<span style="color:#993333;">26.7&nbsp;%</span></td>
+<td style="text-align: center; padding: 0.2cm;"><span style="color:black;">72</span><br>
+<span style="color:#993333;">48&nbsp;%</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left; padding: 0.2cm; vertical-align: middle;">0</td>
-<td style="text-align: center; padding: 0.2cm;"><span style="color:black;">37</span><br>
-<span style="color:#993333;">24.7&nbsp;%</span></td>
-<td style="text-align: center; padding: 0.2cm;"><span style="color:black;">32</span><br>
-<span style="color:#993333;">21.3&nbsp;%</span></td>
-<td style="text-align: center; padding: 0.2cm;"><span style="color:black;">69</span><br>
-<span style="color:#993333;">46&nbsp;%</span></td>
+<td style="text-align: center; padding: 0.2cm;"><span style="color:black;">47</span><br>
+<span style="color:#993333;">31.3&nbsp;%</span></td>
+<td style="text-align: center; padding: 0.2cm;"><span style="color:black;">31</span><br>
+<span style="color:#993333;">20.7&nbsp;%</span></td>
+<td style="text-align: center; padding: 0.2cm;"><span style="color:black;">78</span><br>
+<span style="color:#993333;">52&nbsp;%</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left; padding: 0.2cm; border-bottom: double; font-weight: bolder; font-style: italic; vertical-align: middle;">Total</td>
-<td style="text-align: center; padding: 0.2cm; border-bottom: double;"><span style="color:black;">80</span><br>
-<span style="color:#993333;">53.3&nbsp;%</span></td>
-<td style="text-align: center; padding: 0.2cm; border-bottom: double;"><span style="color:black;">70</span><br>
-<span style="color:#993333;">46.7&nbsp;%</span></td>
+<td style="text-align: center; padding: 0.2cm; border-bottom: double;"><span style="color:black;">79</span><br>
+<span style="color:#993333;">52.7&nbsp;%</span></td>
+<td style="text-align: center; padding: 0.2cm; border-bottom: double;"><span style="color:black;">71</span><br>
+<span style="color:#993333;">47.3&nbsp;%</span></td>
 <td style="text-align: center; padding: 0.2cm; border-bottom: double;"><span style="color:black;">150</span><br>
 <span style="color:#993333;">100&nbsp;%</span></td>
 </tr>
@@ -1196,7 +1120,7 @@ Test
 <h2>Contingency tables (CT) metrics</h2>
 <div class="cell" data-layout-align="center">
 
-<table class="table" style="margin-left: auto; margin-right: auto;">
+<table class="table" style="font-size: 23px; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="empty-cells: hide;border-bottom:hidden;" colspan="2">
@@ -1312,36 +1236,36 @@ Specificity = p(T^-|S^-) = \frac{p(S^-|T^-)p(T^-)}{p(S^-)} = \frac{\frac{TN}{TN 
 </section>
 <section id="positive-predictive-value-ppv" class="slide level2">
 <h2>Positive Predictive Value (PPV)</h2>
-<p>The PPV is the probability of having a diseases given that my test is positive. While sensitivity and specificity are generally stable regardless the prevalence <span class="citation" data-cites="Brenner1997-yq">(but see <a href="#/references" role="doc-biblioref" onclick="">Brenner and Gefeller 1997</a>)</span>, PPV is strongly affected by the disease prevalence.</p>
+<p>The PPV is the probability of having a diseases given that my test is positive. While sensitivity and specificity are generally stable regardless the prevalence <span class="citation" data-cites="Brenner1997-yq">(but see <a href="#/references-download-.bib-file" role="doc-biblioref" onclick="">Brenner &amp; Gefeller, 1997</a>)</span>, PPV is strongly affected by the disease prevalence.</p>
 <p>Let’s write a function to calculate the PPV:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>ppv <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">tp =</span> <span class="cn">NULL</span>,</span>
-<span id="cb14-2"><a href="#cb14-2"></a>                <span class="at">fp =</span> <span class="cn">NULL</span>, </span>
-<span id="cb14-3"><a href="#cb14-3"></a>                <span class="at">sensitivity =</span> <span class="cn">NULL</span>, </span>
-<span id="cb14-4"><a href="#cb14-4"></a>                <span class="at">specificity =</span> <span class="cn">NULL</span>, </span>
-<span id="cb14-5"><a href="#cb14-5"></a>                <span class="at">prevalence =</span> <span class="cn">NULL</span>){</span>
-<span id="cb14-6"><a href="#cb14-6"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(tp) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.null</span>(fp)){</span>
-<span id="cb14-7"><a href="#cb14-7"></a>    tp <span class="sc">/</span> (tp <span class="sc">+</span> fp)</span>
-<span id="cb14-8"><a href="#cb14-8"></a>  } <span class="cf">else</span> <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(sensitivity) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.null</span>(specificity) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.null</span>(prevalence)){</span>
-<span id="cb14-9"><a href="#cb14-9"></a>    (sensitivity <span class="sc">*</span> prevalence) <span class="sc">/</span> (sensitivity <span class="sc">*</span> prevalence <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">-</span> specificity) <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> prevalence))</span>
-<span id="cb14-10"><a href="#cb14-10"></a>  } <span class="cf">else</span>{</span>
-<span id="cb14-11"><a href="#cb14-11"></a>    <span class="fu">stop</span>(<span class="st">"To calculate PPV tp AND fp OR sensitivity AND specificity AND prevalence need to be specified!"</span>)</span>
-<span id="cb14-12"><a href="#cb14-12"></a>  }</span>
-<span id="cb14-13"><a href="#cb14-13"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>ppv <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">tp =</span> <span class="cn">NULL</span>,</span>
+<span id="cb13-2"><a href="#cb13-2"></a>                <span class="at">fp =</span> <span class="cn">NULL</span>, </span>
+<span id="cb13-3"><a href="#cb13-3"></a>                <span class="at">sensitivity =</span> <span class="cn">NULL</span>, </span>
+<span id="cb13-4"><a href="#cb13-4"></a>                <span class="at">specificity =</span> <span class="cn">NULL</span>, </span>
+<span id="cb13-5"><a href="#cb13-5"></a>                <span class="at">prevalence =</span> <span class="cn">NULL</span>){</span>
+<span id="cb13-6"><a href="#cb13-6"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(tp) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.null</span>(fp)){</span>
+<span id="cb13-7"><a href="#cb13-7"></a>    tp <span class="sc">/</span> (tp <span class="sc">+</span> fp)</span>
+<span id="cb13-8"><a href="#cb13-8"></a>  } <span class="cf">else</span> <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(sensitivity) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.null</span>(specificity) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.null</span>(prevalence)){</span>
+<span id="cb13-9"><a href="#cb13-9"></a>    (sensitivity <span class="sc">*</span> prevalence) <span class="sc">/</span> (sensitivity <span class="sc">*</span> prevalence <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">-</span> specificity) <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> prevalence))</span>
+<span id="cb13-10"><a href="#cb13-10"></a>  } <span class="cf">else</span>{</span>
+<span id="cb13-11"><a href="#cb13-11"></a>    <span class="fu">stop</span>(<span class="st">"To calculate PPV tp AND fp OR sensitivity AND specificity AND prevalence need to be specified!"</span>)</span>
+<span id="cb13-12"><a href="#cb13-12"></a>  }</span>
+<span id="cb13-13"><a href="#cb13-13"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="positive-predictive-value-ppv-1" class="slide level2">
 <h2>Positive Predictive Value (PPV)</h2>
 <p>Now we can calculate the PPV, fixing <em>sensitivity</em> and <em>specificity</em> by changing the <strong>prevalence</strong>:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># let's vary the prevalence</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a>prevalence <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.01</span>)</span>
-<span id="cb15-3"><a href="#cb15-3"></a></span>
-<span id="cb15-4"><a href="#cb15-4"></a><span class="co"># computing ppv for each prevalence, fixing the specificity and sensitivity</span></span>
-<span id="cb15-5"><a href="#cb15-5"></a>ppvs <span class="ot">&lt;-</span> <span class="fu">ppv</span>(<span class="at">sensitivity =</span> <span class="fl">0.9</span>, <span class="at">specificity =</span> <span class="fl">0.8</span>, <span class="at">prevalence =</span> prevalence)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># let's vary the prevalence</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>prevalence <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.01</span>)</span>
+<span id="cb14-3"><a href="#cb14-3"></a></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="co"># computing ppv for each prevalence, fixing the specificity and sensitivity</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a>ppvs <span class="ot">&lt;-</span> <span class="fu">ppv</span>(<span class="at">sensitivity =</span> <span class="fl">0.9</span>, <span class="at">specificity =</span> <span class="fl">0.8</span>, <span class="at">prevalence =</span> prevalence)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
-<img data-src="03-biostatistics_files/figure-revealjs/unnamed-chunk-24-1.svg" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="03-biostatistics_files/figure-revealjs/unnamed-chunk-22-1.svg" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="youdens-j-disclaimer" class="slide level2">
 <h2>Youden’s J, disclaimer</h2>
 <p>The Youden’s J is just an option among several alternatives for choosing the best threshold. For example the <code>cutpointr</code> package:</p>
@@ -1356,22 +1280,22 @@ Specificity = p(T^-|S^-) = \frac{p(S^-|T^-)p(T^-)}{p(S^-)} = \frac{\frac{TN}{TN 
 <div class="cell" data-layout-align="center">
 <details>
 <summary>Simulation code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>dat_ex <span class="ot">&lt;-</span> <span class="fu">sim_bin_class</span>(<span class="fl">0.75</span>, <span class="at">n =</span> <span class="dv">100</span>, <span class="at">prevalence =</span> <span class="fl">0.2</span>, <span class="at">var.names =</span> <span class="fu">c</span>(<span class="at">x =</span> <span class="st">"test"</span>, <span class="at">y =</span> <span class="st">"state"</span>))</span>
-<span id="cb16-2"><a href="#cb16-2"></a>dat_ex<span class="sc">$</span>state <span class="ot">&lt;-</span> <span class="fu">factor</span>(dat_ex<span class="sc">$</span>state, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"sick"</span>, <span class="st">"healthy"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>dat_ex <span class="ot">&lt;-</span> <span class="fu">sim_bin_class</span>(<span class="fl">0.75</span>, <span class="at">n =</span> <span class="dv">100</span>, <span class="at">prevalence =</span> <span class="fl">0.2</span>, <span class="at">var.names =</span> <span class="fu">c</span>(<span class="at">x =</span> <span class="st">"test"</span>, <span class="at">y =</span> <span class="st">"state"</span>))</span>
+<span id="cb15-2"><a href="#cb15-2"></a>dat_ex<span class="sc">$</span>state <span class="ot">&lt;-</span> <span class="fu">factor</span>(dat_ex<span class="sc">$</span>state, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"sick"</span>, <span class="st">"healthy"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output cell-output-stdout">
 <pre><code>    state   test
-1 healthy -1.065
-2 healthy -1.138
-3 healthy  -1.46
-4 healthy  0.811
+1 healthy  0.091
+2 healthy  0.566
+3 healthy -1.642
+4 healthy -0.841
 5     ...    ...
-6    sick  1.705
-7    sick -0.305
-8    sick  1.075
-9    sick  0.913</code></pre>
+6    sick  1.503
+7    sick   0.78
+8    sick -0.445
+9    sick  0.829</code></pre>
 </div>
 </div>
 </section>
@@ -1382,29 +1306,29 @@ Specificity = p(T^-|S^-) = \frac{p(S^-|T^-)p(T^-)}{p(S^-)} = \frac{\frac{TN}{TN 
 <div class="tab-content">
 <div id="tabset-1-1">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># total</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a><span class="fu">nrow</span>(dat_ex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># total</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="fu">nrow</span>(dat_ex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 100</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># prevalence</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a><span class="fu">table</span>(dat_ex<span class="sc">$</span>state)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># prevalence</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="fu">table</span>(dat_ex<span class="sc">$</span>state)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
    sick healthy 
      20      80 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">table</span>(dat_ex<span class="sc">$</span>state) <span class="sc">/</span> <span class="fu">nrow</span>(dat_ex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">table</span>(dat_ex<span class="sc">$</span>state) <span class="sc">/</span> <span class="fu">nrow</span>(dat_ex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
    sick healthy 
     0.2     0.8 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># difference in the test between the two groups</span></span>
-<span id="cb24-2"><a href="#cb24-2"></a><span class="fu">tapply</span>(dat_ex<span class="sc">$</span>test, dat_ex<span class="sc">$</span>state, mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># difference in the test between the two groups</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="fu">tapply</span>(dat_ex<span class="sc">$</span>test, dat_ex<span class="sc">$</span>state, mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      sick    healthy 
- 0.4308099 -0.3869299 </code></pre>
+ 0.8804449 -0.6920013 </code></pre>
 </div>
 </div>
 </div>
@@ -1413,7 +1337,7 @@ Specificity = p(T^-|S^-) = \frac{p(S^-|T^-)p(T^-)}{p(S^-)} = \frac{\frac{TN}{TN 
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="03-biostatistics_files/figure-revealjs/unnamed-chunk-29-1.svg" width="960"></p>
+<p><img data-src="03-biostatistics_files/figure-revealjs/unnamed-chunk-27-1.svg" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1425,7 +1349,7 @@ Specificity = p(T^-|S^-) = \frac{p(S^-|T^-)p(T^-)}{p(S^-)} = \frac{\frac{TN}{TN 
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="03-biostatistics_files/figure-revealjs/unnamed-chunk-30-1.svg" width="960"></p>
+<p><img data-src="03-biostatistics_files/figure-revealjs/unnamed-chunk-28-1.svg" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1438,7 +1362,7 @@ Specificity = p(T^-|S^-) = \frac{p(S^-|T^-)p(T^-)}{p(S^-)} = \frac{\frac{TN}{TN 
 <h2>Binary classifiers</h2>
 <p>Intuitively, as the mean difference (on the predictor) between the two groups increase the two groups are easy to discriminate:</p>
 
-<img data-src="03-biostatistics_files/figure-revealjs/unnamed-chunk-31-1.svg" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="03-biostatistics_files/figure-revealjs/unnamed-chunk-29-1.svg" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="binary-classifiers-thresholds" class="slide level2">
 <h2>Binary classifiers, Thresholds</h2>
 <p>To create a contingency table and calculate the related metrics we need to choose a threshold on the predictor variable:</p>
@@ -1450,7 +1374,7 @@ Specificity = p(T^-|S^-) = \frac{p(S^-|T^-)p(T^-)}{p(S^-)} = \frac{\frac{TN}{TN 
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="03-biostatistics_files/figure-revealjs/unnamed-chunk-33-1.svg" width="960"></p>
+<p><img data-src="03-biostatistics_files/figure-revealjs/unnamed-chunk-31-1.svg" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1461,7 +1385,7 @@ Specificity = p(T^-|S^-) = \frac{p(S^-|T^-)p(T^-)}{p(S^-)} = \frac{\frac{TN}{TN 
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="03-biostatistics_files/figure-revealjs/unnamed-chunk-34-1.svg" width="960"></p>
+<p><img data-src="03-biostatistics_files/figure-revealjs/unnamed-chunk-32-1.svg" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1472,7 +1396,7 @@ Specificity = p(T^-|S^-) = \frac{p(S^-|T^-)p(T^-)}{p(S^-)} = \frac{\frac{TN}{TN 
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="03-biostatistics_files/figure-revealjs/unnamed-chunk-35-1.svg" width="960"></p>
+<p><img data-src="03-biostatistics_files/figure-revealjs/unnamed-chunk-33-1.svg" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1517,15 +1441,15 @@ Truth
 <tr class="odd">
 <td rowspan="3" style="text-align: center; font-weight: bold; vertical-align: middle !important;">Test</td>
 <td style="text-align: center; font-weight: bold;">1</td>
-<td style="text-align: center;"><span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: lightgreen !important;">4035</span></td>
-<td style="text-align: center;"><span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FC8D8D !important;">937</span></td>
-<td style="text-align: center;">4972</td>
+<td style="text-align: center;"><span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: lightgreen !important;">4099</span></td>
+<td style="text-align: center;"><span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FC8D8D !important;">935</span></td>
+<td style="text-align: center;">5034</td>
 </tr>
 <tr class="even">
 <td style="text-align: center; font-weight: bold;">0</td>
-<td style="text-align: center;"><span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FC8D8D !important;">965</span></td>
-<td style="text-align: center;"><span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: lightgreen !important;">4063</span></td>
-<td style="text-align: center;">5028</td>
+<td style="text-align: center;"><span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FC8D8D !important;">901</span></td>
+<td style="text-align: center;"><span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: lightgreen !important;">4065</span></td>
+<td style="text-align: center;">4966</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center; font-weight: bold;">Tot</td>
@@ -1542,7 +1466,7 @@ Truth
 <td style="text-align: center;"></td>
 </tr>
 <tr class="even">
-<td style="text-align: center; padding: 0;"><sup></sup> <strong>Sensitivity</strong> = 0.807</td>
+<td style="text-align: center; padding: 0;"><sup></sup> <strong>Sensitivity</strong> = 0.820</td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
@@ -1556,7 +1480,7 @@ Truth
 <td style="text-align: center;"></td>
 </tr>
 <tr class="even">
-<td style="text-align: center; padding: 0;"><sup></sup> <strong>PPV</strong> = 0.812</td>
+<td style="text-align: center; padding: 0;"><sup></sup> <strong>PPV</strong> = 0.814</td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
@@ -1600,15 +1524,15 @@ Truth
 <tr class="odd">
 <td rowspan="3" style="text-align: center; font-weight: bold; vertical-align: middle !important;">Test</td>
 <td style="text-align: center; font-weight: bold;">1</td>
-<td style="text-align: center;"><span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: lightgreen !important;">4958</span></td>
-<td style="text-align: center;"><span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FC8D8D !important;">3672</span></td>
-<td style="text-align: center;">8630</td>
+<td style="text-align: center;"><span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: lightgreen !important;">4963</span></td>
+<td style="text-align: center;"><span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FC8D8D !important;">3637</span></td>
+<td style="text-align: center;">8600</td>
 </tr>
 <tr class="even">
 <td style="text-align: center; font-weight: bold;">0</td>
-<td style="text-align: center;"><span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FC8D8D !important;">42</span></td>
-<td style="text-align: center;"><span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: lightgreen !important;">1328</span></td>
-<td style="text-align: center;">1370</td>
+<td style="text-align: center;"><span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FC8D8D !important;">37</span></td>
+<td style="text-align: center;"><span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: lightgreen !important;">1363</span></td>
+<td style="text-align: center;">1400</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center; font-weight: bold;">Tot</td>
@@ -1625,21 +1549,21 @@ Truth
 <td style="text-align: center;"></td>
 </tr>
 <tr class="even">
-<td style="text-align: center; padding: 0;"><sup></sup> <strong>Sensitivity</strong> = 0.992</td>
+<td style="text-align: center; padding: 0;"><sup></sup> <strong>Sensitivity</strong> = 0.993</td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 </tr>
 <tr class="odd">
-<td style="text-align: center; padding: 0;"><sup></sup> <strong>Specificity</strong> = 0.266</td>
+<td style="text-align: center; padding: 0;"><sup></sup> <strong>Specificity</strong> = 0.273</td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 </tr>
 <tr class="even">
-<td style="text-align: center; padding: 0;"><sup></sup> <strong>PPV</strong> = 0.575</td>
+<td style="text-align: center; padding: 0;"><sup></sup> <strong>PPV</strong> = 0.577</td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
@@ -1683,15 +1607,15 @@ Truth
 <tr class="odd">
 <td rowspan="3" style="text-align: center; font-weight: bold; vertical-align: middle !important;">Test</td>
 <td style="text-align: center; font-weight: bold;">1</td>
-<td style="text-align: center;"><span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: lightgreen !important;">653</span></td>
-<td style="text-align: center;"><span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FC8D8D !important;">6</span></td>
-<td style="text-align: center;">659</td>
+<td style="text-align: center;"><span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: lightgreen !important;">665</span></td>
+<td style="text-align: center;"><span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FC8D8D !important;">9</span></td>
+<td style="text-align: center;">674</td>
 </tr>
 <tr class="even">
 <td style="text-align: center; font-weight: bold;">0</td>
-<td style="text-align: center;"><span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FC8D8D !important;">4347</span></td>
-<td style="text-align: center;"><span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: lightgreen !important;">4994</span></td>
-<td style="text-align: center;">9341</td>
+<td style="text-align: center;"><span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FC8D8D !important;">4335</span></td>
+<td style="text-align: center;"><span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: lightgreen !important;">4991</span></td>
+<td style="text-align: center;">9326</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center; font-weight: bold;">Tot</td>
@@ -1708,21 +1632,21 @@ Truth
 <td style="text-align: center;"></td>
 </tr>
 <tr class="even">
-<td style="text-align: center; padding: 0;"><sup></sup> <strong>Sensitivity</strong> = 0.131</td>
+<td style="text-align: center; padding: 0;"><sup></sup> <strong>Sensitivity</strong> = 0.133</td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 </tr>
 <tr class="odd">
-<td style="text-align: center; padding: 0;"><sup></sup> <strong>Specificity</strong> = 0.999</td>
+<td style="text-align: center; padding: 0;"><sup></sup> <strong>Specificity</strong> = 0.998</td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 </tr>
 <tr class="even">
-<td style="text-align: center; padding: 0;"><sup></sup> <strong>PPV</strong> = 0.991</td>
+<td style="text-align: center; padding: 0;"><sup></sup> <strong>PPV</strong> = 0.987</td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
@@ -1743,13 +1667,13 @@ Truth
 <h2>ROC</h2>
 <p>We can start by plotting the specificity and sensitivity for a given threshold:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>cmat <span class="ot">&lt;-</span> <span class="fu">classify</span>(dat_ex_90, state, test, <span class="at">c =</span> <span class="dv">0</span>)</span>
-<span id="cb26-2"><a href="#cb26-2"></a>cmat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>cmat <span class="ot">&lt;-</span> <span class="fu">classify</span>(dat_ex_90, state, test, <span class="at">c =</span> <span class="dv">0</span>)</span>
+<span id="cb25-2"><a href="#cb25-2"></a>cmat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>    tp  fp   tn  fn   tpr    fpr    tnr   fnr   tot prevalence c       ppv
-1 4035 937 4063 965 0.807 0.1874 0.8126 0.193 10000        0.5 0 0.8115447
+<pre><code>    tp  fp   tn  fn    tpr   fpr   tnr    fnr   tot prevalence c      ppv
+1 4099 935 4065 901 0.8198 0.187 0.813 0.1802 10000        0.5 0 0.814263
         npv
-1 0.8080748</code></pre>
+1 0.8185663</code></pre>
 </div>
 </div>
 <div class="fragment">
@@ -1757,7 +1681,7 @@ Truth
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="03-biostatistics_files/figure-revealjs/unnamed-chunk-41-1.svg" style="width:80.0%"></p>
+<p><img data-src="03-biostatistics_files/figure-revealjs/unnamed-chunk-39-1.svg" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
@@ -1783,7 +1707,7 @@ Truth
 <h2>ROC</h2>
 <p>The Area Under the Curve (AUC) range between 0.5 (null classification) and 1 (perfect classification):</p>
 
-<img data-src="03-biostatistics_files/figure-revealjs/unnamed-chunk-43-1.svg" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="03-biostatistics_files/figure-revealjs/unnamed-chunk-41-1.svg" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="youdens-j" class="slide level2">
 <h2>Youden’s J</h2>
 <p>Given the trade-off between sensitivity and specificity, the choice of the best threshold (<span class="math inline">\(c\)</span>) is not straightforward. An option is using the Youden’s J:</p>
@@ -1794,63 +1718,63 @@ J = sensitivity + specificity - 1
 <section id="youdens-j-1" class="slide level2">
 <h2>Youden’s J</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">set.seed</span>(<span class="dv">104</span>)</span>
-<span id="cb28-2"><a href="#cb28-2"></a>dat <span class="ot">&lt;-</span> <span class="fu">sim_bin_class</span>(<span class="at">auc =</span> <span class="fl">0.8</span>, <span class="at">n =</span> <span class="dv">100</span>, <span class="at">prevalence =</span> <span class="fl">0.5</span>)</span>
-<span id="cb28-3"><a href="#cb28-3"></a>fit_roc <span class="ot">&lt;-</span> <span class="fu">roc</span>(y <span class="sc">~</span> x, <span class="at">data =</span> dat)</span>
-<span id="cb28-4"><a href="#cb28-4"></a>J <span class="ot">&lt;-</span> <span class="fu">coords</span>(fit_roc, <span class="st">"best"</span>, <span class="at">best.method =</span> <span class="st">"youden"</span>)</span>
-<span id="cb28-5"><a href="#cb28-5"></a>J<span class="sc">$</span>J <span class="ot">&lt;-</span> J<span class="sc">$</span>specificity <span class="sc">+</span> J<span class="sc">$</span>sensitivity <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb28-6"><a href="#cb28-6"></a>Js <span class="ot">&lt;-</span> fit_roc<span class="sc">$</span>sensitivities <span class="sc">+</span> fit_roc<span class="sc">$</span>specificities <span class="sc">-</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">set.seed</span>(<span class="dv">104</span>)</span>
+<span id="cb27-2"><a href="#cb27-2"></a>dat <span class="ot">&lt;-</span> <span class="fu">sim_bin_class</span>(<span class="at">auc =</span> <span class="fl">0.8</span>, <span class="at">n =</span> <span class="dv">100</span>, <span class="at">prevalence =</span> <span class="fl">0.5</span>)</span>
+<span id="cb27-3"><a href="#cb27-3"></a>fit_roc <span class="ot">&lt;-</span> <span class="fu">roc</span>(y <span class="sc">~</span> x, <span class="at">data =</span> dat)</span>
+<span id="cb27-4"><a href="#cb27-4"></a>J <span class="ot">&lt;-</span> <span class="fu">coords</span>(fit_roc, <span class="st">"best"</span>, <span class="at">best.method =</span> <span class="st">"youden"</span>)</span>
+<span id="cb27-5"><a href="#cb27-5"></a>J<span class="sc">$</span>J <span class="ot">&lt;-</span> J<span class="sc">$</span>specificity <span class="sc">+</span> J<span class="sc">$</span>sensitivity <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb27-6"><a href="#cb27-6"></a>Js <span class="ot">&lt;-</span> fit_roc<span class="sc">$</span>sensitivities <span class="sc">+</span> fit_roc<span class="sc">$</span>specificities <span class="sc">-</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb29-2"><a href="#cb29-2"></a><span class="fu">plot</span>(fit_roc, <span class="at">main =</span> <span class="st">"ROC curve"</span>)</span>
-<span id="cb29-3"><a href="#cb29-3"></a><span class="fu">points</span>(<span class="at">x =</span> J<span class="sc">$</span>specificity, <span class="at">y =</span> J<span class="sc">$</span>sensitivity, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">"firebrick"</span>, <span class="at">cex =</span> <span class="fl">1.4</span>)</span>
-<span id="cb29-4"><a href="#cb29-4"></a></span>
-<span id="cb29-5"><a href="#cb29-5"></a><span class="fu">plot</span>(fit_roc<span class="sc">$</span>thresholds, Js, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">xlab =</span> <span class="st">"Thresholds"</span>, <span class="at">ylab =</span> <span class="st">"Youden's J"</span>,</span>
-<span id="cb29-6"><a href="#cb29-6"></a>     <span class="at">main =</span> <span class="st">"Youden's J"</span>)</span>
-<span id="cb29-7"><a href="#cb29-7"></a><span class="fu">points</span>(J<span class="sc">$</span>threshold, <span class="fu">max</span>(Js), <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">"firebrick"</span>, <span class="at">cex =</span> <span class="fl">1.4</span>)</span>
-<span id="cb29-8"><a href="#cb29-8"></a><span class="fu">text</span>(<span class="at">x =</span> <span class="fl">0.6</span>, <span class="at">y =</span> <span class="fl">0.45</span>, <span class="at">labels =</span> <span class="fu">sprintf</span>(<span class="st">"Cutoff = %.2f"</span>, J<span class="sc">$</span>threshold))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="fu">plot</span>(fit_roc, <span class="at">main =</span> <span class="st">"ROC curve"</span>)</span>
+<span id="cb28-3"><a href="#cb28-3"></a><span class="fu">points</span>(<span class="at">x =</span> J<span class="sc">$</span>specificity, <span class="at">y =</span> J<span class="sc">$</span>sensitivity, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">"firebrick"</span>, <span class="at">cex =</span> <span class="fl">1.4</span>)</span>
+<span id="cb28-4"><a href="#cb28-4"></a></span>
+<span id="cb28-5"><a href="#cb28-5"></a><span class="fu">plot</span>(fit_roc<span class="sc">$</span>thresholds, Js, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">xlab =</span> <span class="st">"Thresholds"</span>, <span class="at">ylab =</span> <span class="st">"Youden's J"</span>,</span>
+<span id="cb28-6"><a href="#cb28-6"></a>     <span class="at">main =</span> <span class="st">"Youden's J"</span>)</span>
+<span id="cb28-7"><a href="#cb28-7"></a><span class="fu">points</span>(J<span class="sc">$</span>threshold, <span class="fu">max</span>(Js), <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">"firebrick"</span>, <span class="at">cex =</span> <span class="fl">1.4</span>)</span>
+<span id="cb28-8"><a href="#cb28-8"></a><span class="fu">text</span>(<span class="at">x =</span> <span class="fl">0.6</span>, <span class="at">y =</span> <span class="fl">0.45</span>, <span class="at">labels =</span> <span class="fu">sprintf</span>(<span class="st">"Cutoff = %.2f"</span>, J<span class="sc">$</span>threshold))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
-<img data-src="03-biostatistics_files/figure-revealjs/unnamed-chunk-45-1.svg" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="03-biostatistics_files/figure-revealjs/unnamed-chunk-43-1.svg" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="data-simulation" class="slide level2 extra">
 <h2>Data simulation</h2>
 <p>All the example so far are based on simulated data. I wrote a little function (<code>sim_bin_class()</code>) that simulate a binary classifier assuming a latent probit model. You can play around to check what happens changing the parameters.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>sim_bin_class <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">auc =</span> <span class="cn">NULL</span>,</span>
-<span id="cb30-2"><a href="#cb30-2"></a>                          <span class="at">d =</span> <span class="cn">NULL</span>,</span>
-<span id="cb30-3"><a href="#cb30-3"></a>                          n, </span>
-<span id="cb30-4"><a href="#cb30-4"></a>                          prevalence, </span>
-<span id="cb30-5"><a href="#cb30-5"></a>                          <span class="at">x.mean =</span> <span class="dv">0</span>,</span>
-<span id="cb30-6"><a href="#cb30-6"></a>                          <span class="at">x.sd =</span> <span class="dv">1</span>,</span>
-<span id="cb30-7"><a href="#cb30-7"></a>                          <span class="at">var.names =</span> <span class="fu">c</span>(<span class="at">x =</span> <span class="st">"x"</span>, <span class="at">y =</span> <span class="st">"y"</span>)){</span>
-<span id="cb30-8"><a href="#cb30-8"></a>  <span class="cf">if</span>(<span class="fu">is.null</span>(auc) <span class="sc">&amp;</span> <span class="fu">is.null</span>(d)){</span>
-<span id="cb30-9"><a href="#cb30-9"></a>    <span class="fu">stop</span>(<span class="st">"AUC or d need to be specified"</span>)</span>
-<span id="cb30-10"><a href="#cb30-10"></a>  }</span>
-<span id="cb30-11"><a href="#cb30-11"></a>  </span>
-<span id="cb30-12"><a href="#cb30-12"></a>  <span class="cf">if</span>(<span class="fu">is.null</span>(d)){</span>
-<span id="cb30-13"><a href="#cb30-13"></a>    d <span class="ot">&lt;-</span> <span class="fu">auc_to_d</span>(auc)</span>
-<span id="cb30-14"><a href="#cb30-14"></a>  }</span>
-<span id="cb30-15"><a href="#cb30-15"></a>  </span>
-<span id="cb30-16"><a href="#cb30-16"></a>  n1 <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(n <span class="sc">*</span> prevalence)</span>
-<span id="cb30-17"><a href="#cb30-17"></a>  n0 <span class="ot">&lt;-</span> n <span class="sc">-</span> n1</span>
-<span id="cb30-18"><a href="#cb30-18"></a>  y <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="fu">c</span>(n0, n1))</span>
-<span id="cb30-19"><a href="#cb30-19"></a>  x <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(y <span class="sc">==</span> <span class="dv">1</span>, <span class="fu">rnorm</span>(n1, (d<span class="sc">/</span><span class="dv">2</span>)<span class="sc">*</span>x.sd <span class="sc">+</span> x.mean, <span class="dv">1</span>), <span class="fu">rnorm</span>(n0, (<span class="sc">-</span>d<span class="sc">/</span><span class="dv">2</span>)<span class="sc">*</span>x.sd <span class="sc">+</span> x.mean, <span class="dv">1</span>))</span>
-<span id="cb30-20"><a href="#cb30-20"></a>  dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y, x)</span>
-<span id="cb30-21"><a href="#cb30-21"></a>  <span class="fu">names</span>(dat) <span class="ot">&lt;-</span> var.names[<span class="fu">names</span>(dat)]</span>
-<span id="cb30-22"><a href="#cb30-22"></a>  <span class="fu">return</span>(dat)</span>
-<span id="cb30-23"><a href="#cb30-23"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>sim_bin_class <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">auc =</span> <span class="cn">NULL</span>,</span>
+<span id="cb29-2"><a href="#cb29-2"></a>                          <span class="at">d =</span> <span class="cn">NULL</span>,</span>
+<span id="cb29-3"><a href="#cb29-3"></a>                          n, </span>
+<span id="cb29-4"><a href="#cb29-4"></a>                          prevalence, </span>
+<span id="cb29-5"><a href="#cb29-5"></a>                          <span class="at">x.mean =</span> <span class="dv">0</span>,</span>
+<span id="cb29-6"><a href="#cb29-6"></a>                          <span class="at">x.sd =</span> <span class="dv">1</span>,</span>
+<span id="cb29-7"><a href="#cb29-7"></a>                          <span class="at">var.names =</span> <span class="fu">c</span>(<span class="at">x =</span> <span class="st">"x"</span>, <span class="at">y =</span> <span class="st">"y"</span>)){</span>
+<span id="cb29-8"><a href="#cb29-8"></a>  <span class="cf">if</span>(<span class="fu">is.null</span>(auc) <span class="sc">&amp;</span> <span class="fu">is.null</span>(d)){</span>
+<span id="cb29-9"><a href="#cb29-9"></a>    <span class="fu">stop</span>(<span class="st">"AUC or d need to be specified"</span>)</span>
+<span id="cb29-10"><a href="#cb29-10"></a>  }</span>
+<span id="cb29-11"><a href="#cb29-11"></a>  </span>
+<span id="cb29-12"><a href="#cb29-12"></a>  <span class="cf">if</span>(<span class="fu">is.null</span>(d)){</span>
+<span id="cb29-13"><a href="#cb29-13"></a>    d <span class="ot">&lt;-</span> <span class="fu">auc_to_d</span>(auc)</span>
+<span id="cb29-14"><a href="#cb29-14"></a>  }</span>
+<span id="cb29-15"><a href="#cb29-15"></a>  </span>
+<span id="cb29-16"><a href="#cb29-16"></a>  n1 <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(n <span class="sc">*</span> prevalence)</span>
+<span id="cb29-17"><a href="#cb29-17"></a>  n0 <span class="ot">&lt;-</span> n <span class="sc">-</span> n1</span>
+<span id="cb29-18"><a href="#cb29-18"></a>  y <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="fu">c</span>(n0, n1))</span>
+<span id="cb29-19"><a href="#cb29-19"></a>  x <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(y <span class="sc">==</span> <span class="dv">1</span>, <span class="fu">rnorm</span>(n1, (d<span class="sc">/</span><span class="dv">2</span>)<span class="sc">*</span>x.sd <span class="sc">+</span> x.mean, <span class="dv">1</span>), <span class="fu">rnorm</span>(n0, (<span class="sc">-</span>d<span class="sc">/</span><span class="dv">2</span>)<span class="sc">*</span>x.sd <span class="sc">+</span> x.mean, <span class="dv">1</span>))</span>
+<span id="cb29-20"><a href="#cb29-20"></a>  dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y, x)</span>
+<span id="cb29-21"><a href="#cb29-21"></a>  <span class="fu">names</span>(dat) <span class="ot">&lt;-</span> var.names[<span class="fu">names</span>(dat)]</span>
+<span id="cb29-22"><a href="#cb29-22"></a>  <span class="fu">return</span>(dat)</span>
+<span id="cb29-23"><a href="#cb29-23"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="data-simulation-1" class="slide level2 extra">
 <h2>Data simulation</h2>
 <p>Let’s make an example simulating a binary classifier with an AUC of 0.7:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">sim_bin_class</span>(<span class="at">auc =</span> <span class="fl">0.7</span>, <span class="at">n =</span> <span class="dv">100</span>, <span class="at">prevalence =</span> <span class="fl">0.5</span>)</span>
-<span id="cb31-2"><a href="#cb31-2"></a><span class="fu">head</span>(dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">sim_bin_class</span>(<span class="at">auc =</span> <span class="fl">0.7</span>, <span class="at">n =</span> <span class="dv">100</span>, <span class="at">prevalence =</span> <span class="fl">0.5</span>)</span>
+<span id="cb30-2"><a href="#cb30-2"></a><span class="fu">head</span>(dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  y          x
 1 0  0.8100790
@@ -1866,70 +1790,70 @@ J = sensitivity + specificity - 1
 <h2>Data simulation</h2>
 <p>Let’s see some useful descriptive plots:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">plot_class</span>(dat, y, x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">plot_class</span>(dat, y, x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="03-biostatistics_files/figure-revealjs/unnamed-chunk-48-1.svg" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="03-biostatistics_files/figure-revealjs/unnamed-chunk-46-1.svg" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="data-simulation-3" class="slide level2 extra">
 <h2>Data simulation</h2>
 <p>The <code>plot_class()</code> function is a shortcut to produce the dotplot-density combination that is useful when plotting a binary classifier:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>plot_class <span class="ot">&lt;-</span> <span class="cf">function</span>(data, y, x){</span>
-<span id="cb34-2"><a href="#cb34-2"></a>  </span>
-<span id="cb34-3"><a href="#cb34-3"></a>  x <span class="ot">&lt;-</span> <span class="fu">deparse</span>(<span class="fu">substitute</span>(x))</span>
-<span id="cb34-4"><a href="#cb34-4"></a>  y <span class="ot">&lt;-</span> <span class="fu">deparse</span>(<span class="fu">substitute</span>(y))</span>
-<span id="cb34-5"><a href="#cb34-5"></a>  </span>
-<span id="cb34-6"><a href="#cb34-6"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.numeric</span>(data[[y]])) <span class="fu">stop</span>(<span class="st">"The response variable need to be numeric (0-1)"</span>)</span>
-<span id="cb34-7"><a href="#cb34-7"></a></span>
-<span id="cb34-8"><a href="#cb34-8"></a>  dens <span class="ot">&lt;-</span> <span class="fu">tapply</span>(data[[x]], data[[y]], density)</span>
-<span id="cb34-9"><a href="#cb34-9"></a>  ndens <span class="ot">&lt;-</span> <span class="fu">names</span>(dens)</span>
-<span id="cb34-10"><a href="#cb34-10"></a>  </span>
-<span id="cb34-11"><a href="#cb34-11"></a>  fit <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> data, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>))</span>
-<span id="cb34-12"><a href="#cb34-12"></a>  def.par <span class="ot">=</span> <span class="fu">par</span>(<span class="at">no.readonly =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb34-13"><a href="#cb34-13"></a>  </span>
-<span id="cb34-14"><a href="#cb34-14"></a>  xlim <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">min</span>(<span class="fu">sapply</span>(dens, <span class="cf">function</span>(x) <span class="fu">min</span>(x<span class="sc">$</span>x))),</span>
-<span id="cb34-15"><a href="#cb34-15"></a>            <span class="fu">max</span>(<span class="fu">sapply</span>(dens, <span class="cf">function</span>(x) <span class="fu">max</span>(x<span class="sc">$</span>x))))</span>
-<span id="cb34-16"><a href="#cb34-16"></a>  </span>
-<span id="cb34-17"><a href="#cb34-17"></a>  ylim <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">max</span>(<span class="fu">sapply</span>(dens, <span class="cf">function</span>(x) <span class="fu">max</span>(x<span class="sc">$</span>y))))</span>
-<span id="cb34-18"><a href="#cb34-18"></a>  </span>
-<span id="cb34-19"><a href="#cb34-19"></a>  <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb34-20"><a href="#cb34-20"></a>  </span>
-<span id="cb34-21"><a href="#cb34-21"></a>  <span class="fu">plot</span>(dens[[<span class="dv">1</span>]],</span>
-<span id="cb34-22"><a href="#cb34-22"></a>       <span class="at">main =</span> <span class="st">"Density Plot"</span>,</span>
-<span id="cb34-23"><a href="#cb34-23"></a>       <span class="at">xlab =</span> x,</span>
-<span id="cb34-24"><a href="#cb34-24"></a>       <span class="at">col =</span> <span class="st">"firebrick"</span>,</span>
-<span id="cb34-25"><a href="#cb34-25"></a>       <span class="at">lwd =</span> <span class="fl">1.5</span>,</span>
-<span id="cb34-26"><a href="#cb34-26"></a>       <span class="at">xlim =</span> xlim,</span>
-<span id="cb34-27"><a href="#cb34-27"></a>       <span class="at">ylim =</span> ylim)</span>
-<span id="cb34-28"><a href="#cb34-28"></a>  <span class="fu">rug</span>(data[[x]][data[[y]] <span class="sc">==</span> ndens[<span class="dv">1</span>]], <span class="at">col =</span> <span class="st">"firebrick"</span>, <span class="at">lwd =</span> <span class="fl">1.5</span>)</span>
-<span id="cb34-29"><a href="#cb34-29"></a>  <span class="fu">rug</span>(data[[x]][data[[y]] <span class="sc">==</span> ndens[<span class="dv">2</span>]], <span class="at">col =</span> <span class="st">"dodgerblue3"</span>, <span class="at">lwd =</span> <span class="fl">1.5</span>)</span>
-<span id="cb34-30"><a href="#cb34-30"></a>  <span class="fu">lines</span>(dens[[<span class="dv">2</span>]], <span class="at">col =</span> <span class="st">"dodgerblue3"</span>, <span class="at">lwd =</span> <span class="fl">1.5</span>)</span>
-<span id="cb34-31"><a href="#cb34-31"></a>  </span>
-<span id="cb34-32"><a href="#cb34-32"></a>  xr <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(data[[x]]), <span class="fu">max</span>(data[[x]]), <span class="at">length.out =</span> <span class="dv">500</span>)</span>
-<span id="cb34-33"><a href="#cb34-33"></a>  pdata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(xr)</span>
-<span id="cb34-34"><a href="#cb34-34"></a>  <span class="fu">names</span>(pdata) <span class="ot">&lt;-</span> x</span>
-<span id="cb34-35"><a href="#cb34-35"></a>  pr <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit, <span class="at">newdata =</span> pdata, <span class="at">type =</span> <span class="st">"response"</span>)</span>
-<span id="cb34-36"><a href="#cb34-36"></a>  </span>
-<span id="cb34-37"><a href="#cb34-37"></a>  y_jitt <span class="ot">&lt;-</span> <span class="fu">jitter</span>(data[[y]], <span class="fl">0.2</span>)</span>
-<span id="cb34-38"><a href="#cb34-38"></a>  y_col <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data[[y]] <span class="sc">==</span> ndens[<span class="dv">1</span>], <span class="st">"firebrick"</span>, <span class="st">"dodgerblue3"</span>)</span>
-<span id="cb34-39"><a href="#cb34-39"></a>  </span>
-<span id="cb34-40"><a href="#cb34-40"></a>  <span class="fu">plot</span>(data[[x]], y_jitt, </span>
-<span id="cb34-41"><a href="#cb34-41"></a>       <span class="at">col =</span> scales<span class="sc">::</span><span class="fu">alpha</span>(y_col, <span class="fl">0.4</span>),</span>
-<span id="cb34-42"><a href="#cb34-42"></a>       <span class="at">pch =</span> <span class="dv">19</span>,</span>
-<span id="cb34-43"><a href="#cb34-43"></a>       <span class="at">main =</span> <span class="st">"Dotplot"</span>,</span>
-<span id="cb34-44"><a href="#cb34-44"></a>       <span class="at">xlab =</span> x,</span>
-<span id="cb34-45"><a href="#cb34-45"></a>       <span class="at">ylab =</span> y)</span>
-<span id="cb34-46"><a href="#cb34-46"></a>  <span class="fu">lines</span>(pdata[[<span class="dv">1</span>]], pr)</span>
-<span id="cb34-47"><a href="#cb34-47"></a>  </span>
-<span id="cb34-48"><a href="#cb34-48"></a>  <span class="fu">par</span>(def.par)</span>
-<span id="cb34-49"><a href="#cb34-49"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>plot_class <span class="ot">&lt;-</span> <span class="cf">function</span>(data, y, x){</span>
+<span id="cb33-2"><a href="#cb33-2"></a>  </span>
+<span id="cb33-3"><a href="#cb33-3"></a>  x <span class="ot">&lt;-</span> <span class="fu">deparse</span>(<span class="fu">substitute</span>(x))</span>
+<span id="cb33-4"><a href="#cb33-4"></a>  y <span class="ot">&lt;-</span> <span class="fu">deparse</span>(<span class="fu">substitute</span>(y))</span>
+<span id="cb33-5"><a href="#cb33-5"></a>  </span>
+<span id="cb33-6"><a href="#cb33-6"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.numeric</span>(data[[y]])) <span class="fu">stop</span>(<span class="st">"The response variable need to be numeric (0-1)"</span>)</span>
+<span id="cb33-7"><a href="#cb33-7"></a></span>
+<span id="cb33-8"><a href="#cb33-8"></a>  dens <span class="ot">&lt;-</span> <span class="fu">tapply</span>(data[[x]], data[[y]], density)</span>
+<span id="cb33-9"><a href="#cb33-9"></a>  ndens <span class="ot">&lt;-</span> <span class="fu">names</span>(dens)</span>
+<span id="cb33-10"><a href="#cb33-10"></a>  </span>
+<span id="cb33-11"><a href="#cb33-11"></a>  fit <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> data, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>))</span>
+<span id="cb33-12"><a href="#cb33-12"></a>  def.par <span class="ot">=</span> <span class="fu">par</span>(<span class="at">no.readonly =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb33-13"><a href="#cb33-13"></a>  </span>
+<span id="cb33-14"><a href="#cb33-14"></a>  xlim <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">min</span>(<span class="fu">sapply</span>(dens, <span class="cf">function</span>(x) <span class="fu">min</span>(x<span class="sc">$</span>x))),</span>
+<span id="cb33-15"><a href="#cb33-15"></a>            <span class="fu">max</span>(<span class="fu">sapply</span>(dens, <span class="cf">function</span>(x) <span class="fu">max</span>(x<span class="sc">$</span>x))))</span>
+<span id="cb33-16"><a href="#cb33-16"></a>  </span>
+<span id="cb33-17"><a href="#cb33-17"></a>  ylim <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">max</span>(<span class="fu">sapply</span>(dens, <span class="cf">function</span>(x) <span class="fu">max</span>(x<span class="sc">$</span>y))))</span>
+<span id="cb33-18"><a href="#cb33-18"></a>  </span>
+<span id="cb33-19"><a href="#cb33-19"></a>  <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb33-20"><a href="#cb33-20"></a>  </span>
+<span id="cb33-21"><a href="#cb33-21"></a>  <span class="fu">plot</span>(dens[[<span class="dv">1</span>]],</span>
+<span id="cb33-22"><a href="#cb33-22"></a>       <span class="at">main =</span> <span class="st">"Density Plot"</span>,</span>
+<span id="cb33-23"><a href="#cb33-23"></a>       <span class="at">xlab =</span> x,</span>
+<span id="cb33-24"><a href="#cb33-24"></a>       <span class="at">col =</span> <span class="st">"firebrick"</span>,</span>
+<span id="cb33-25"><a href="#cb33-25"></a>       <span class="at">lwd =</span> <span class="fl">1.5</span>,</span>
+<span id="cb33-26"><a href="#cb33-26"></a>       <span class="at">xlim =</span> xlim,</span>
+<span id="cb33-27"><a href="#cb33-27"></a>       <span class="at">ylim =</span> ylim)</span>
+<span id="cb33-28"><a href="#cb33-28"></a>  <span class="fu">rug</span>(data[[x]][data[[y]] <span class="sc">==</span> ndens[<span class="dv">1</span>]], <span class="at">col =</span> <span class="st">"firebrick"</span>, <span class="at">lwd =</span> <span class="fl">1.5</span>)</span>
+<span id="cb33-29"><a href="#cb33-29"></a>  <span class="fu">rug</span>(data[[x]][data[[y]] <span class="sc">==</span> ndens[<span class="dv">2</span>]], <span class="at">col =</span> <span class="st">"dodgerblue3"</span>, <span class="at">lwd =</span> <span class="fl">1.5</span>)</span>
+<span id="cb33-30"><a href="#cb33-30"></a>  <span class="fu">lines</span>(dens[[<span class="dv">2</span>]], <span class="at">col =</span> <span class="st">"dodgerblue3"</span>, <span class="at">lwd =</span> <span class="fl">1.5</span>)</span>
+<span id="cb33-31"><a href="#cb33-31"></a>  </span>
+<span id="cb33-32"><a href="#cb33-32"></a>  xr <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(data[[x]]), <span class="fu">max</span>(data[[x]]), <span class="at">length.out =</span> <span class="dv">500</span>)</span>
+<span id="cb33-33"><a href="#cb33-33"></a>  pdata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(xr)</span>
+<span id="cb33-34"><a href="#cb33-34"></a>  <span class="fu">names</span>(pdata) <span class="ot">&lt;-</span> x</span>
+<span id="cb33-35"><a href="#cb33-35"></a>  pr <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit, <span class="at">newdata =</span> pdata, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb33-36"><a href="#cb33-36"></a>  </span>
+<span id="cb33-37"><a href="#cb33-37"></a>  y_jitt <span class="ot">&lt;-</span> <span class="fu">jitter</span>(data[[y]], <span class="fl">0.2</span>)</span>
+<span id="cb33-38"><a href="#cb33-38"></a>  y_col <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data[[y]] <span class="sc">==</span> ndens[<span class="dv">1</span>], <span class="st">"firebrick"</span>, <span class="st">"dodgerblue3"</span>)</span>
+<span id="cb33-39"><a href="#cb33-39"></a>  </span>
+<span id="cb33-40"><a href="#cb33-40"></a>  <span class="fu">plot</span>(data[[x]], y_jitt, </span>
+<span id="cb33-41"><a href="#cb33-41"></a>       <span class="at">col =</span> scales<span class="sc">::</span><span class="fu">alpha</span>(y_col, <span class="fl">0.4</span>),</span>
+<span id="cb33-42"><a href="#cb33-42"></a>       <span class="at">pch =</span> <span class="dv">19</span>,</span>
+<span id="cb33-43"><a href="#cb33-43"></a>       <span class="at">main =</span> <span class="st">"Dotplot"</span>,</span>
+<span id="cb33-44"><a href="#cb33-44"></a>       <span class="at">xlab =</span> x,</span>
+<span id="cb33-45"><a href="#cb33-45"></a>       <span class="at">ylab =</span> y)</span>
+<span id="cb33-46"><a href="#cb33-46"></a>  <span class="fu">lines</span>(pdata[[<span class="dv">1</span>]], pr)</span>
+<span id="cb33-47"><a href="#cb33-47"></a>  </span>
+<span id="cb33-48"><a href="#cb33-48"></a>  <span class="fu">par</span>(def.par)</span>
+<span id="cb33-49"><a href="#cb33-49"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="data-simulation-4" class="slide level2 extra">
 <h2>Data Simulation</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>fit_roc <span class="ot">&lt;-</span> pROC<span class="sc">::</span><span class="fu">roc</span>(y <span class="sc">~</span> x, <span class="at">data =</span> dat)</span>
-<span id="cb35-2"><a href="#cb35-2"></a>fit_roc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>fit_roc <span class="ot">&lt;-</span> pROC<span class="sc">::</span><span class="fu">roc</span>(y <span class="sc">~</span> x, <span class="at">data =</span> dat)</span>
+<span id="cb34-2"><a href="#cb34-2"></a>fit_roc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1942,75 +1866,75 @@ Area under the curve: 0.742</code></pre>
 <div class="cell" data-layout-align="center">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>fit_roc <span class="sc">|&gt;</span> </span>
-<span id="cb37-2"><a href="#cb37-2"></a>  pROC<span class="sc">::</span><span class="fu">ggroc</span>() <span class="sc">+</span> </span>
-<span id="cb37-3"><a href="#cb37-3"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"darkgrey"</span>) <span class="sc">+</span></span>
-<span id="cb37-4"><a href="#cb37-4"></a>  <span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
-<span id="cb37-5"><a href="#cb37-5"></a>  <span class="fu">theme_minimal</span>(<span class="dv">15</span>) <span class="sc">+</span></span>
-<span id="cb37-6"><a href="#cb37-6"></a>  <span class="fu">xlab</span>(<span class="st">"Specificity"</span>) <span class="sc">+</span></span>
-<span id="cb37-7"><a href="#cb37-7"></a>  <span class="fu">ylab</span>(<span class="st">"Sensitivity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>fit_roc <span class="sc">|&gt;</span> </span>
+<span id="cb36-2"><a href="#cb36-2"></a>  pROC<span class="sc">::</span><span class="fu">ggroc</span>() <span class="sc">+</span> </span>
+<span id="cb36-3"><a href="#cb36-3"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"darkgrey"</span>) <span class="sc">+</span></span>
+<span id="cb36-4"><a href="#cb36-4"></a>  <span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
+<span id="cb36-5"><a href="#cb36-5"></a>  <span class="fu">theme_minimal</span>(<span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb36-6"><a href="#cb36-6"></a>  <span class="fu">xlab</span>(<span class="st">"Specificity"</span>) <span class="sc">+</span></span>
+<span id="cb36-7"><a href="#cb36-7"></a>  <span class="fu">ylab</span>(<span class="st">"Sensitivity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
-<img data-src="03-biostatistics_files/figure-revealjs/unnamed-chunk-51-1.svg" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="03-biostatistics_files/figure-revealjs/unnamed-chunk-49-1.svg" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="data-simulation-5" class="slide level2 extra">
 <h2>Data Simulation</h2>
 <p>Or manually using the <code>classify()</code> function that compute common classification metrics given one or more thresholds <span class="math inline">\(c_i\)</span>:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>classify <span class="ot">&lt;-</span> <span class="cf">function</span>(data, y, x, c, <span class="at">na.rm =</span> <span class="cn">FALSE</span>){</span>
-<span id="cb38-2"><a href="#cb38-2"></a>  xn <span class="ot">&lt;-</span> <span class="fu">deparse</span>(<span class="fu">substitute</span>(x))</span>
-<span id="cb38-3"><a href="#cb38-3"></a>  yn <span class="ot">&lt;-</span> <span class="fu">deparse</span>(<span class="fu">substitute</span>(y))</span>
-<span id="cb38-4"><a href="#cb38-4"></a>  </span>
-<span id="cb38-5"><a href="#cb38-5"></a>  <span class="cf">if</span>(na.rm){</span>
-<span id="cb38-6"><a href="#cb38-6"></a>    data <span class="ot">&lt;-</span> data[<span class="fu">complete.cases</span>(data[, <span class="fu">c</span>(xn, yn)]), ]</span>
-<span id="cb38-7"><a href="#cb38-7"></a>  }</span>
-<span id="cb38-8"><a href="#cb38-8"></a>  </span>
-<span id="cb38-9"><a href="#cb38-9"></a>  confusion <span class="ot">&lt;-</span> <span class="fu">lapply</span>(c, <span class="cf">function</span>(cr){</span>
-<span id="cb38-10"><a href="#cb38-10"></a>    <span class="co"># classify based on c</span></span>
-<span id="cb38-11"><a href="#cb38-11"></a>    yp <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data[[xn]] <span class="sc">&gt;=</span> cr, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb38-12"><a href="#cb38-12"></a>    </span>
-<span id="cb38-13"><a href="#cb38-13"></a>    out <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb38-14"><a href="#cb38-14"></a>      <span class="at">tp =</span> <span class="fu">sum</span>(data[[yn]] <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> yp <span class="sc">==</span> <span class="dv">1</span>),</span>
-<span id="cb38-15"><a href="#cb38-15"></a>      <span class="at">fp =</span> <span class="fu">sum</span>(data[[yn]] <span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span> yp <span class="sc">==</span> <span class="dv">1</span>),</span>
-<span id="cb38-16"><a href="#cb38-16"></a>      <span class="at">tn =</span> <span class="fu">sum</span>(data[[yn]] <span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span> yp <span class="sc">==</span> <span class="dv">0</span>),</span>
-<span id="cb38-17"><a href="#cb38-17"></a>      <span class="at">fn =</span> <span class="fu">sum</span>(data[[yn]] <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> yp <span class="sc">==</span> <span class="dv">0</span>)</span>
-<span id="cb38-18"><a href="#cb38-18"></a>    )</span>
-<span id="cb38-19"><a href="#cb38-19"></a>    </span>
-<span id="cb38-20"><a href="#cb38-20"></a>    <span class="co"># rates</span></span>
-<span id="cb38-21"><a href="#cb38-21"></a>    out<span class="sc">$</span>tpr <span class="ot">&lt;-</span> <span class="fu">with</span>(out, tp <span class="sc">/</span> (tp <span class="sc">+</span> fn))</span>
-<span id="cb38-22"><a href="#cb38-22"></a>    out<span class="sc">$</span>fpr <span class="ot">&lt;-</span> <span class="fu">with</span>(out, fp <span class="sc">/</span> (fp <span class="sc">+</span> tn))</span>
-<span id="cb38-23"><a href="#cb38-23"></a>    out<span class="sc">$</span>tnr <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> out<span class="sc">$</span>fpr</span>
-<span id="cb38-24"><a href="#cb38-24"></a>    out<span class="sc">$</span>fnr <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> out<span class="sc">$</span>tpr</span>
-<span id="cb38-25"><a href="#cb38-25"></a>    out<span class="sc">$</span>tot <span class="ot">&lt;-</span> <span class="fu">nrow</span>(data)</span>
-<span id="cb38-26"><a href="#cb38-26"></a>    out<span class="sc">$</span>prevalence <span class="ot">&lt;-</span> <span class="fu">mean</span>(data[[yn]] <span class="sc">==</span> <span class="dv">1</span>)</span>
-<span id="cb38-27"><a href="#cb38-27"></a>    out<span class="sc">$</span>c <span class="ot">&lt;-</span> cr</span>
-<span id="cb38-28"><a href="#cb38-28"></a>    out<span class="sc">$</span>ppv <span class="ot">&lt;-</span> <span class="fu">with</span>(out, tp <span class="sc">/</span> (tp <span class="sc">+</span> fp))</span>
-<span id="cb38-29"><a href="#cb38-29"></a>    out<span class="sc">$</span>npv <span class="ot">&lt;-</span> <span class="fu">with</span>(out, tn <span class="sc">/</span> (tn <span class="sc">+</span> fn))</span>
-<span id="cb38-30"><a href="#cb38-30"></a>    out</span>
-<span id="cb38-31"><a href="#cb38-31"></a>  })</span>
-<span id="cb38-32"><a href="#cb38-32"></a>  </span>
-<span id="cb38-33"><a href="#cb38-33"></a>  <span class="fu">do.call</span>(rbind, confusion)</span>
-<span id="cb38-34"><a href="#cb38-34"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>classify <span class="ot">&lt;-</span> <span class="cf">function</span>(data, y, x, c, <span class="at">na.rm =</span> <span class="cn">FALSE</span>){</span>
+<span id="cb37-2"><a href="#cb37-2"></a>  xn <span class="ot">&lt;-</span> <span class="fu">deparse</span>(<span class="fu">substitute</span>(x))</span>
+<span id="cb37-3"><a href="#cb37-3"></a>  yn <span class="ot">&lt;-</span> <span class="fu">deparse</span>(<span class="fu">substitute</span>(y))</span>
+<span id="cb37-4"><a href="#cb37-4"></a>  </span>
+<span id="cb37-5"><a href="#cb37-5"></a>  <span class="cf">if</span>(na.rm){</span>
+<span id="cb37-6"><a href="#cb37-6"></a>    data <span class="ot">&lt;-</span> data[<span class="fu">complete.cases</span>(data[, <span class="fu">c</span>(xn, yn)]), ]</span>
+<span id="cb37-7"><a href="#cb37-7"></a>  }</span>
+<span id="cb37-8"><a href="#cb37-8"></a>  </span>
+<span id="cb37-9"><a href="#cb37-9"></a>  confusion <span class="ot">&lt;-</span> <span class="fu">lapply</span>(c, <span class="cf">function</span>(cr){</span>
+<span id="cb37-10"><a href="#cb37-10"></a>    <span class="co"># classify based on c</span></span>
+<span id="cb37-11"><a href="#cb37-11"></a>    yp <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data[[xn]] <span class="sc">&gt;=</span> cr, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb37-12"><a href="#cb37-12"></a>    </span>
+<span id="cb37-13"><a href="#cb37-13"></a>    out <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb37-14"><a href="#cb37-14"></a>      <span class="at">tp =</span> <span class="fu">sum</span>(data[[yn]] <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> yp <span class="sc">==</span> <span class="dv">1</span>),</span>
+<span id="cb37-15"><a href="#cb37-15"></a>      <span class="at">fp =</span> <span class="fu">sum</span>(data[[yn]] <span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span> yp <span class="sc">==</span> <span class="dv">1</span>),</span>
+<span id="cb37-16"><a href="#cb37-16"></a>      <span class="at">tn =</span> <span class="fu">sum</span>(data[[yn]] <span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span> yp <span class="sc">==</span> <span class="dv">0</span>),</span>
+<span id="cb37-17"><a href="#cb37-17"></a>      <span class="at">fn =</span> <span class="fu">sum</span>(data[[yn]] <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> yp <span class="sc">==</span> <span class="dv">0</span>)</span>
+<span id="cb37-18"><a href="#cb37-18"></a>    )</span>
+<span id="cb37-19"><a href="#cb37-19"></a>    </span>
+<span id="cb37-20"><a href="#cb37-20"></a>    <span class="co"># rates</span></span>
+<span id="cb37-21"><a href="#cb37-21"></a>    out<span class="sc">$</span>tpr <span class="ot">&lt;-</span> <span class="fu">with</span>(out, tp <span class="sc">/</span> (tp <span class="sc">+</span> fn))</span>
+<span id="cb37-22"><a href="#cb37-22"></a>    out<span class="sc">$</span>fpr <span class="ot">&lt;-</span> <span class="fu">with</span>(out, fp <span class="sc">/</span> (fp <span class="sc">+</span> tn))</span>
+<span id="cb37-23"><a href="#cb37-23"></a>    out<span class="sc">$</span>tnr <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> out<span class="sc">$</span>fpr</span>
+<span id="cb37-24"><a href="#cb37-24"></a>    out<span class="sc">$</span>fnr <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> out<span class="sc">$</span>tpr</span>
+<span id="cb37-25"><a href="#cb37-25"></a>    out<span class="sc">$</span>tot <span class="ot">&lt;-</span> <span class="fu">nrow</span>(data)</span>
+<span id="cb37-26"><a href="#cb37-26"></a>    out<span class="sc">$</span>prevalence <span class="ot">&lt;-</span> <span class="fu">mean</span>(data[[yn]] <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb37-27"><a href="#cb37-27"></a>    out<span class="sc">$</span>c <span class="ot">&lt;-</span> cr</span>
+<span id="cb37-28"><a href="#cb37-28"></a>    out<span class="sc">$</span>ppv <span class="ot">&lt;-</span> <span class="fu">with</span>(out, tp <span class="sc">/</span> (tp <span class="sc">+</span> fp))</span>
+<span id="cb37-29"><a href="#cb37-29"></a>    out<span class="sc">$</span>npv <span class="ot">&lt;-</span> <span class="fu">with</span>(out, tn <span class="sc">/</span> (tn <span class="sc">+</span> fn))</span>
+<span id="cb37-30"><a href="#cb37-30"></a>    out</span>
+<span id="cb37-31"><a href="#cb37-31"></a>  })</span>
+<span id="cb37-32"><a href="#cb37-32"></a>  </span>
+<span id="cb37-33"><a href="#cb37-33"></a>  <span class="fu">do.call</span>(rbind, confusion)</span>
+<span id="cb37-34"><a href="#cb37-34"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="data-simulation-6" class="slide level2 extra">
 <h2>Data Simulation</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="fu">classify</span>(dat, y, x, <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">classify</span>(dat, y, x, <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  tp fp tn fn tpr  fpr  tnr fnr tot prevalence c       ppv    npv
 1 35 17 33 15 0.7 0.34 0.66 0.3 100        0.5 0 0.6730769 0.6875</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="fu">classify</span>(dat, y, x, <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">classify</span>(dat, y, x, <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  tp fp tn fn  tpr  fpr  tnr  fnr tot prevalence  c       ppv       npv
 1 47 36 14  3 0.94 0.72 0.28 0.06 100        0.5 -1 0.5662651 0.8235294
 2 35 17 33 15 0.70 0.34 0.66 0.30 100        0.5  0 0.6730769 0.6875000
 3 15  3 47 35 0.30 0.06 0.94 0.70 100        0.5  1 0.8333333 0.5731707</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="co"># ~ full roc curve</span></span>
-<span id="cb43-2"><a href="#cb43-2"></a>cs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="fl">0.1</span>), <span class="cn">Inf</span>)</span>
-<span id="cb43-3"><a href="#cb43-3"></a>car<span class="sc">::</span><span class="fu">some</span>(<span class="fu">classify</span>(dat, y, x, cs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="co"># ~ full roc curve</span></span>
+<span id="cb42-2"><a href="#cb42-2"></a>cs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="fl">0.1</span>), <span class="cn">Inf</span>)</span>
+<span id="cb42-3"><a href="#cb42-3"></a>car<span class="sc">::</span><span class="fu">some</span>(<span class="fu">classify</span>(dat, y, x, cs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   tp fp tn fn  tpr  fpr  tnr  fnr tot prevalence    c       ppv       npv
 12 50 50  0  0 1.00 1.00 0.00 0.00 100        0.5 -3.0 0.5000000       NaN
@@ -2029,15 +1953,15 @@ Area under the curve: 0.742</code></pre>
 <section id="data-simulation-7" class="slide level2 extra">
 <h2>Data Simulation</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a>cr <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="fl">0.1</span>) <span class="co"># vector of thresholds</span></span>
-<span id="cb45-2"><a href="#cb45-2"></a>cmat <span class="ot">&lt;-</span> <span class="fu">classify</span>(dat, y, x, cr)</span>
-<span id="cb45-3"><a href="#cb45-3"></a></span>
-<span id="cb45-4"><a href="#cb45-4"></a><span class="fu">plot</span>(cmat<span class="sc">$</span>tnr, cmat<span class="sc">$</span>tpr, <span class="at">xlim =</span> <span class="fu">rev</span>(<span class="fu">range</span>(cmat<span class="sc">$</span>tpr)), <span class="at">type =</span> <span class="st">"l"</span>,</span>
-<span id="cb45-5"><a href="#cb45-5"></a>     <span class="at">xlab =</span> <span class="st">"Specificity"</span>,</span>
-<span id="cb45-6"><a href="#cb45-6"></a>     <span class="at">ylab =</span> <span class="st">"Sensitivity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a>cr <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="fl">0.1</span>) <span class="co"># vector of thresholds</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a>cmat <span class="ot">&lt;-</span> <span class="fu">classify</span>(dat, y, x, cr)</span>
+<span id="cb44-3"><a href="#cb44-3"></a></span>
+<span id="cb44-4"><a href="#cb44-4"></a><span class="fu">plot</span>(cmat<span class="sc">$</span>tnr, cmat<span class="sc">$</span>tpr, <span class="at">xlim =</span> <span class="fu">rev</span>(<span class="fu">range</span>(cmat<span class="sc">$</span>tpr)), <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb44-5"><a href="#cb44-5"></a>     <span class="at">xlab =</span> <span class="st">"Specificity"</span>,</span>
+<span id="cb44-6"><a href="#cb44-6"></a>     <span class="at">ylab =</span> <span class="st">"Sensitivity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="03-biostatistics_files/figure-revealjs/unnamed-chunk-54-1.svg" width="960" class="r-stretch quarto-figure-center"></section></section>
+<img data-src="03-biostatistics_files/figure-revealjs/unnamed-chunk-52-1.svg" width="960" class="r-stretch quarto-figure-center"></section></section>
 <section>
 <section id="application-to-genetic-data" class="title-slide slide level1 section center">
 <h1>Application to genetic data</h1>
@@ -2068,7 +1992,7 @@ Area under the curve: 0.742</code></pre>
 <section id="steps" class="slide level2">
 <h2>Steps</h2>
 <ol type="1">
-<li>Load and explore the data (you can the <code>gene_data_clean.rds</code> or using the raw <code>curatedOvarianData</code>)</li>
+<li>Load and explore the data (you can the <code>ovarianclean.rds</code> or using the raw <code>curatedOvarianData</code>)</li>
 <li>Calculate the prevalence (<span class="math inline">\(p(S_1)\)</span>) of the <strong>optimal</strong> debulking for each dataset</li>
 <li>Choose a gene (<span class="math inline">\(g_i\)</span>) and plot the <span class="math inline">\(x_i\)</span> values according to the debulking</li>
 <li>Calculate the Sensitivity, Specificity, Youden’s J and PPV for all datasets based on the same gene.</li>
@@ -2083,320 +2007,38 @@ Area under the curve: 0.742</code></pre>
 <li>[Extra] Try to compute the standard error of the AUC using a <em>bootstrapping</em> approach. Essentially you need to sample with replacement (see <code>sample()</code>) <span class="math inline">\(n\)</span> rows from the dataset (where <span class="math inline">\(n\)</span> is the total number of rows), compute and store the AUC, repeat the process several times (at least 10000 times), calculate the standard deviation of the boostrapped AUC distribution.</li>
 </ol>
 <ul>
-<li>There is also the <code>pROC::ci.auc()</code> function with the <code>bootstrap</code> option. Try to manually code the boostrap and eventually compare the results</li>
-<li>The confidence interval can be calculated with the <code>quantile()</code> function <span class="citation" data-cites="Carpenter2000-dm">(see <a href="#/references" role="doc-biblioref" onclick="">Carpenter and Bithell 2000</a>)</span> with the desired coverage (e.g., 95%)</li>
+<li>There is also the <code>pROC::ci.auc()</code> function with the <code>bootstrap</code> option. Try to manually code the bootstrap and eventually compare the results</li>
+<li>The confidence interval can be calculated with the <code>quantile()</code> function <span class="citation" data-cites="Carpenter2000-dm">(see <a href="#/references-download-.bib-file" role="doc-biblioref" onclick="">Carpenter &amp; Bithell, 2000</a>)</span> with the desired coverage (e.g., 95%)</li>
 <li>Further details are available here https://cran.r-project.org/web/packages/pROC/pROC.pdf (page 5, Section Bootstrap)</li>
 </ul>
-</section></section>
-<section>
-<section id="proposed-solutions" class="title-slide slide level1 section center">
-<h1>Proposed solutions</h1>
-
 </section>
-<section id="setup" class="slide level2">
-<h2>Setup</h2>
-<p>Firstly, let’s subset the dataset selecting our predictor (i.e., the <strong>debulking</strong>), the dataset name and the selected gene.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>datl <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">here</span>(<span class="st">"03-biostatistics"</span>, <span class="st">"objects"</span>, <span class="st">"gene_data_clean.rds"</span>))</span>
-<span id="cb46-2"><a href="#cb46-2"></a>dat <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">bind_rows</span>(datl, <span class="at">.id =</span> <span class="st">"dataset"</span>)</span>
-<span id="cb46-3"><a href="#cb46-3"></a></span>
-<span id="cb46-4"><a href="#cb46-4"></a><span class="co"># creating the binary debulking variable</span></span>
-<span id="cb46-5"><a href="#cb46-5"></a>dat<span class="sc">$</span>debulking01 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(dat<span class="sc">$</span>debulking <span class="sc">==</span> <span class="st">"optimal"</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb46-6"><a href="#cb46-6"></a></span>
-<span id="cb46-7"><a href="#cb46-7"></a>gene <span class="ot">&lt;-</span> <span class="st">"ABCA1"</span></span>
-<span id="cb46-8"><a href="#cb46-8"></a>dat_meta <span class="ot">&lt;-</span> dat[, <span class="fu">c</span>(<span class="st">"dataset"</span>, <span class="st">"debulking"</span>, gene)]</span>
-<span id="cb46-9"><a href="#cb46-9"></a><span class="fu">head</span>(dat_meta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>          dataset  debulking     ABCA1
-1 E.MTAB.386_eset suboptimal 10.839395
-2 E.MTAB.386_eset    optimal 11.227465
-3 E.MTAB.386_eset    optimal 11.375979
-4 E.MTAB.386_eset    optimal  9.716625
-5 E.MTAB.386_eset suboptimal 11.647426
-6 E.MTAB.386_eset    optimal 10.291002</code></pre>
-</div>
-</div>
-</section>
-<section id="prevalence" class="slide level2">
-<h2>Prevalence</h2>
-<p>Now let’s see which is the prevalence of <em>optimal</em> debulking i.e.&nbsp;<span class="math inline">\(S_1\)</span></p>
-<div class="panel-tabset">
-<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">Code</a></li><li><a href="#tabset-4-2">Plot</a></li></ul>
-<div class="tab-content">
-<div id="tabset-4-1">
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a>prev_and_n <span class="ot">&lt;-</span> <span class="cf">function</span>(data){</span>
-<span id="cb48-2"><a href="#cb48-2"></a>  <span class="fu">data.frame</span>(</span>
-<span id="cb48-3"><a href="#cb48-3"></a>    <span class="at">p =</span> <span class="fu">mean</span>(data<span class="sc">$</span>debulking01, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb48-4"><a href="#cb48-4"></a>    <span class="at">n =</span> <span class="fu">nrow</span>(data)</span>
-<span id="cb48-5"><a href="#cb48-5"></a>  )</span>
-<span id="cb48-6"><a href="#cb48-6"></a>}</span>
-<span id="cb48-7"><a href="#cb48-7"></a>prev <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">split</span>(dat_meta, dat_meta<span class="sc">$</span>dataset), prev_and_n)</span>
-<span id="cb48-8"><a href="#cb48-8"></a>prev <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">bind_rows</span>(prev, <span class="at">.id =</span> <span class="st">"dataset"</span>)</span>
-<span id="cb48-9"><a href="#cb48-9"></a><span class="fu">head</span>(prev)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>          dataset  p   n
-1 E.MTAB.386_eset NA 129
-2   GSE12418_eset NA  54
-3   GSE17260_eset NA 110
-4   GSE26712_eset NA 195
-5   GSE30009_eset NA 103
-6   GSE30161_eset NA  58</code></pre>
-</div>
-</div>
-</div>
-<div id="tabset-4-2">
-<div class="cell" data-layout-align="center">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a>prev <span class="sc">|&gt;</span> </span>
-<span id="cb50-2"><a href="#cb50-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> p<span class="sc">*</span><span class="dv">100</span>, <span class="at">y =</span> dataset)) <span class="sc">+</span></span>
-<span id="cb50-3"><a href="#cb50-3"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb50-4"><a href="#cb50-4"></a>  <span class="fu">xlab</span>(<span class="st">"Prevalence (%)"</span>) <span class="sc">+</span></span>
-<span id="cb50-5"><a href="#cb50-5"></a>  <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">100</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="03-biostatistics_files/figure-revealjs/unnamed-chunk-57-1.svg" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="debulking-gene" class="slide level2">
-<h2>debulking ~ gene</h2>
-<p>Let’s see the density plots for dataset with the gene ABCA1:</p>
-<div class="cell" data-layout-align="center">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a>dat_meta <span class="sc">|&gt;</span> </span>
-<span id="cb51-2"><a href="#cb51-2"></a>  <span class="fu">drop_na</span>(debulking) <span class="sc">|&gt;</span> </span>
-<span id="cb51-3"><a href="#cb51-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> ABCA1, <span class="at">fill =</span> debulking)) <span class="sc">+</span></span>
-<span id="cb51-4"><a href="#cb51-4"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
-<span id="cb51-5"><a href="#cb51-5"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>dataset) <span class="sc">+</span></span>
-<span id="cb51-6"><a href="#cb51-6"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.9</span>,<span class="fl">0.1</span>),</span>
-<span id="cb51-7"><a href="#cb51-7"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb51-8"><a href="#cb51-8"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-
-</div>
-<img data-src="03-biostatistics_files/figure-revealjs/unnamed-chunk-58-1.svg" width="960" class="r-stretch quarto-figure-center"><p>In some datasets, the gene ABCA1 discriminate more between the the debulking outcomes.</p>
-</section>
-<section id="auc-and-standard-error" class="slide level2">
-<h2>AUC and standard error</h2>
-<div class="panel-tabset">
-<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">ROC</a></li><li><a href="#tabset-5-2">Analytical method</a></li><li><a href="#tabset-5-3">Plot</a></li><li><a href="#tabset-5-4">Bootstrapping</a></li><li><a href="#tabset-5-5">Plot</a></li></ul>
-<div class="tab-content">
-<div id="tabset-5-1">
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a>roc_list <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">split</span>(dat_meta, dat_meta<span class="sc">$</span>dataset), </span>
-<span id="cb52-2"><a href="#cb52-2"></a>                   <span class="cf">function</span>(x) pROC<span class="sc">::</span><span class="fu">roc</span>(debulking <span class="sc">~</span> ABCA1, <span class="at">data =</span> x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<div id="tabset-5-2">
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a>aucs <span class="ot">&lt;-</span> <span class="fu">sapply</span>(roc_list,  auc)</span>
-<span id="cb53-2"><a href="#cb53-2"></a><span class="co"># the var function is used to compute the sampling variability</span></span>
-<span id="cb53-3"><a href="#cb53-3"></a>aucs_se <span class="ot">&lt;-</span> <span class="fu">sapply</span>(roc_list, <span class="cf">function</span>(x) <span class="fu">sqrt</span>(<span class="fu">var</span>(x)))</span>
-<span id="cb53-4"><a href="#cb53-4"></a>auc_d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">dataset =</span> <span class="fu">names</span>(aucs), <span class="at">auc =</span> aucs, <span class="at">se =</span> aucs_se)</span>
-<span id="cb53-5"><a href="#cb53-5"></a>ci <span class="ot">&lt;-</span> <span class="fu">sapply</span>(roc_list, <span class="cf">function</span>(x) pROC<span class="sc">::</span><span class="fu">ci.auc</span>(x))</span>
-<span id="cb53-6"><a href="#cb53-6"></a>auc_d<span class="sc">$</span>lower <span class="ot">&lt;-</span> ci[<span class="dv">1</span>, ]</span>
-<span id="cb53-7"><a href="#cb53-7"></a>auc_d<span class="sc">$</span>upper <span class="ot">&lt;-</span> ci[<span class="dv">3</span>, ]</span>
-<span id="cb53-8"><a href="#cb53-8"></a></span>
-<span id="cb53-9"><a href="#cb53-9"></a><span class="fu">head</span>(auc_d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                        dataset       auc         se     lower     upper
-E.MTAB.386_eset E.MTAB.386_eset 0.4713921 0.07114057 0.3319592 0.6108251
-GSE12418_eset     GSE12418_eset 0.4969136 0.10737807 0.2864564 0.7073707
-GSE17260_eset     GSE17260_eset 0.5160543 0.05577309 0.4067410 0.6253675
-GSE26712_eset     GSE26712_eset 0.4933333 0.04290461 0.4092418 0.5774248
-GSE30009_eset     GSE30009_eset 0.5263749 0.07303915 0.3832208 0.6695290
-GSE30161_eset     GSE30161_eset 0.5435897 0.08069339 0.3854336 0.7017459</code></pre>
-</div>
-</div>
-</div>
-<div id="tabset-5-3">
-<div class="cell" data-layout-align="center">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a>auc_d <span class="sc">|&gt;</span> </span>
-<span id="cb55-2"><a href="#cb55-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> auc, <span class="at">y =</span> dataset)) <span class="sc">+</span></span>
-<span id="cb55-3"><a href="#cb55-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb55-4"><a href="#cb55-4"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> lower, <span class="at">xend =</span> upper, <span class="at">y =</span> dataset, <span class="at">yend =</span> dataset)) <span class="sc">+</span></span>
-<span id="cb55-5"><a href="#cb55-5"></a>  <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="03-biostatistics_files/figure-revealjs/unnamed-chunk-61-1.svg" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="tabset-5-4">
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a>boot_auc <span class="ot">&lt;-</span> <span class="cf">function</span>(data, <span class="at">direction =</span> <span class="st">"auto"</span>, <span class="at">nboot =</span> <span class="dv">10</span>){</span>
-<span id="cb56-2"><a href="#cb56-2"></a>  aucs <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, nboot)</span>
-<span id="cb56-3"><a href="#cb56-3"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nboot){</span>
-<span id="cb56-4"><a href="#cb56-4"></a>    idx <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(data), <span class="fu">nrow</span>(data), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb56-5"><a href="#cb56-5"></a>    datb <span class="ot">&lt;-</span> data[idx, ]</span>
-<span id="cb56-6"><a href="#cb56-6"></a>    aucs[[i]] <span class="ot">&lt;-</span> pROC<span class="sc">::</span><span class="fu">auc</span>(datb[, <span class="dv">2</span>] <span class="sc">~</span> datb[, <span class="dv">3</span>], <span class="at">direction =</span> direction, <span class="at">quiet =</span> <span class="cn">TRUE</span>)[[<span class="dv">1</span>]]</span>
-<span id="cb56-7"><a href="#cb56-7"></a>  }</span>
-<span id="cb56-8"><a href="#cb56-8"></a>  <span class="fu">return</span>(aucs)</span>
-<span id="cb56-9"><a href="#cb56-9"></a>}</span>
-<span id="cb56-10"><a href="#cb56-10"></a></span>
-<span id="cb56-11"><a href="#cb56-11"></a><span class="co"># get the direction, auto detecting direction could lead to biased AUC see https://cran.r-project.org/web/packages/pROC/pROC.pdf</span></span>
-<span id="cb56-12"><a href="#cb56-12"></a>direction <span class="ot">&lt;-</span> <span class="fu">sapply</span>(roc_list, <span class="cf">function</span>(x) x<span class="sc">$</span>direction)</span>
-<span id="cb56-13"><a href="#cb56-13"></a></span>
-<span id="cb56-14"><a href="#cb56-14"></a>auc_list <span class="ot">&lt;-</span> <span class="fu">mapply</span>(<span class="cf">function</span>(d, dir) <span class="fu">boot_auc</span>(d, dir), <span class="fu">split</span>(dat_meta, dat_meta<span class="sc">$</span>dataset), direction)</span>
-<span id="cb56-15"><a href="#cb56-15"></a>aucs_m <span class="ot">&lt;-</span>  <span class="fu">apply</span>(auc_list, <span class="dv">2</span>, median)</span>
-<span id="cb56-16"><a href="#cb56-16"></a>aucs_se <span class="ot">&lt;-</span> <span class="fu">apply</span>(auc_list, <span class="dv">2</span>, sd)</span>
-<span id="cb56-17"><a href="#cb56-17"></a>aucs_ci <span class="ot">&lt;-</span> <span class="fu">apply</span>(auc_list, <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="fu">quantile</span>(x, <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)))</span>
-<span id="cb56-18"><a href="#cb56-18"></a>aucs_d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">auc =</span> aucs_m, <span class="at">se =</span> aucs_se, <span class="at">lower =</span> aucs_ci[<span class="dv">1</span>, ], <span class="at">upper =</span> aucs_ci[<span class="dv">2</span>, ], <span class="at">dataset =</span> <span class="fu">names</span>(roc_list))</span>
-<span id="cb56-19"><a href="#cb56-19"></a></span>
-<span id="cb56-20"><a href="#cb56-20"></a><span class="fu">head</span>(aucs_d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                      auc         se     lower     upper         dataset
-E.MTAB.386_eset 0.5044379 0.06213286 0.3842916 0.5564459 E.MTAB.386_eset
-GSE12418_eset   0.4696637 0.09483494 0.3720486 0.6545699   GSE12418_eset
-GSE17260_eset   0.5622395 0.04842584 0.4555081 0.6045954   GSE17260_eset
-GSE26712_eset   0.4916090 0.03651884 0.4401318 0.5503618   GSE26712_eset
-GSE30009_eset   0.5604650 0.07183862 0.5104508 0.7084291   GSE30009_eset
-GSE30161_eset   0.5250189 0.06744519 0.4489217 0.6277099   GSE30161_eset</code></pre>
-</div>
-</div>
-</div>
-<div id="tabset-5-5">
-<div class="cell" data-layout-align="center">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a>aucs_d <span class="sc">|&gt;</span> </span>
-<span id="cb58-2"><a href="#cb58-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> auc, <span class="at">y =</span> dataset)) <span class="sc">+</span></span>
-<span id="cb58-3"><a href="#cb58-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb58-4"><a href="#cb58-4"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> lower, <span class="at">xend =</span> upper, <span class="at">y =</span> dataset, <span class="at">yend =</span> dataset)) <span class="sc">+</span></span>
-<span id="cb58-5"><a href="#cb58-5"></a>  <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="03-biostatistics_files/figure-revealjs/unnamed-chunk-63-1.svg" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="meta-analysis" class="slide level2">
-<h2>Meta-analysis</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a><span class="fu">library</span>(metafor)</span>
-<span id="cb59-2"><a href="#cb59-2"></a>auc_d<span class="sc">$</span>var <span class="ot">&lt;-</span> auc_d<span class="sc">$</span>se<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb59-3"><a href="#cb59-3"></a></span>
-<span id="cb59-4"><a href="#cb59-4"></a>fit_rma <span class="ot">&lt;-</span> <span class="fu">rma</span>(auc, var, <span class="at">data =</span> auc_d)</span>
-<span id="cb59-5"><a href="#cb59-5"></a><span class="fu">summary</span>(fit_rma)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Random-Effects Model (k = 15; tau^2 estimator: REML)
-
-  logLik  deviance       AIC       BIC      AICc   
- 20.1608  -40.3216  -36.3216  -35.0435  -35.2307   
-
-tau^2 (estimated amount of total heterogeneity): 0.0001 (SE = 0.0009)
-tau (square root of estimated tau^2 value):      0.0098
-I^2 (total heterogeneity / total variability):   3.50%
-H^2 (total variability / sampling variability):  1.04
-
-Test for Heterogeneity:
-Q(df = 14) = 13.0511, p-val = 0.5225
-
-Model Results:
-
-estimate      se     zval    pval   ci.lb   ci.ub      
-  0.5597  0.0134  41.7881  &lt;.0001  0.5334  0.5859  *** 
-
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-</div>
-</div>
-</section>
-<section id="meta-analysis-1" class="slide level2">
-<h2>Meta-analysis</h2>
-<p>We need to adjust the test statistics because the null value with the AUC is not 0 but 0.5.</p>
-<p><span class="math display">\[
-z = \frac{\hat{AUC} - AUC_0}{\hat{SE_{AUC}}}
-\]</span></p>
-<p><span class="math display">\[
-z = \frac{\hat{AUC} - 0.5}{SE_{\hat{AUC}}}
-\]</span></p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a><span class="co"># pvalue testing the null of 0.5</span></span>
-<span id="cb61-2"><a href="#cb61-2"></a><span class="fu">pnorm</span>((fit_rma<span class="sc">$</span>b[[<span class="dv">1</span>]] <span class="sc">-</span> <span class="fl">0.5</span>)<span class="sc">/</span>fit_rma<span class="sc">$</span>se, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)<span class="sc">*</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 8.38819e-06</code></pre>
-</div>
-</div>
-</section>
-<section id="forest-plot" class="slide level2">
-<h2>Forest Plot</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a><span class="fu">forest</span>(fit_rma, <span class="at">refline =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="03-biostatistics_files/figure-revealjs/unnamed-chunk-66-1.svg" width="960" class="r-stretch quarto-figure-center"></section></section>
-<section>
-<section id="comments" class="title-slide slide level1 question center">
-<h1>Comments?</h1>
-
-</section>
-<section id="references" class="slide level2 smaller scrollable">
-<h2>References</h2>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<a onclick="fetch('data:text/x-bibtex;base64,QFVOUFVCTElTSEVEe1Bhcm1pZ2lhbmkyMDIzLWRyLA0KICB0aXRsZSA9IHtEZWZpbmluZyByZXBsaWNhYmlsaXR5IG9mIHByZWRpY3Rpb24gcnVsZXN9LA0KICBhdXRob3IgPSB7UGFybWlnaWFuaSwgR2lvdmFubml9LA0KICBqb3VybmFsdGl0bGUgPSB7YXJYaXYgW3N0YXQuTUVdfSwNCiAgZGF0ZSA9IHsyMDIzLTA0LTMwfSwNCiAgZXByaW50ID0gezIzMDUuMDE1MTh9LA0KICBlcHJpbnRjbGFzcyA9IHtzdGF0Lk1FfSwNCiAgYWJzdHJhY3QgPSB7SW4gdGhpcyBhcnRpY2xlIEkgcHJvcG9zZSBhbiBhcHByb2FjaCBmb3IgZGVmaW5pbmcgcmVwbGljYWJpbGl0eQ0KICBmb3IgcHJlZGljdGlvbiBydWxlcy4gTW90aXZhdGVkIGJ5IGEgcmVjZW50IE5BUyByZXBvcnQsIEkgc3RhcnQgZnJvbSB0aGUNCiAgcGVyc3BlY3RpdmUgdGhhdCByZXBsaWNhYmlsaXR5IGlzIG9idGFpbmluZyBjb25zaXN0ZW50IHJlc3VsdHMgYWNyb3NzIHN0dWRpZXMNCiAgc3VpdGFibGUgdG8gYWRkcmVzcyB0aGUgc2FtZSBwcmVkaWN0aW9uIHF1ZXN0aW9uLCBlYWNoIG9mIHdoaWNoIGhhcyBvYnRhaW5lZA0KICBpdHMgb3duIGRhdGEuIEkgdGhlbiBkaXNjdXNzIGNvbmNlcHQgYW5kIGlzc3VlcyBpbiBkZWZpbmluZyBrZXkgZWxlbWVudHMgb2YNCiAgdGhpcyBzdGF0ZW1lbnQuIEkgZm9jdXMgc3BlY2lmaWNhbGx5IG9uIHRoZSBtZWFuaW5nIG9mICJjb25zaXN0ZW50IHJlc3VsdHMiIGluDQogIHR5cGljYWwgdXRpbGl6YXRpb24gY29udGV4dHMsIGFuZCBwcm9wb3NlIGEgbXVsdGktYWdlbnQgZnJhbWV3b3JrIGZvciBkZWZpbmluZw0KICByZXBsaWNhYmlsaXR5LCBpbiB3aGljaCBhZ2VudHMgYXJlIG5laXRoZXIgcGFydG5lcnMgbm9yIGFkdmVyc2FyaWVzLiBJIHJlY292ZXINCiAgc29tZSBvZiB0aGUgcHJldmFsZW50IHByYWN0aWNhbCBhcHByb2FjaGVzIGFzIHNwZWNpYWwgY2FzZXMuIEkgaG9wZSB0byBwcm92aWRlDQogIGd1aWRhbmNlIGZvciBhIG1vcmUgc3lzdGVtYXRpYyBhc3Nlc3NtZW50IG9mIHJlcGxpY2FiaWxpdHkgaW4gbWFjaGluZQ0KICBsZWFybmluZy59LA0KICB1cmwgPSB7aHR0cDovL2FyeGl2Lm9yZy9hYnMvMjMwNS4wMTUxOH0sDQogIHVybGRhdGUgPSB7MjAyMy0wOC0yMn0NCn0NCg0KQEFSVElDTEV7QnJlbm5lcjE5OTcteXEsDQogIHRpdGxlID0ge1ZhcmlhdGlvbiBvZiBzZW5zaXRpdml0eSwgc3BlY2lmaWNpdHksIGxpa2VsaWhvb2QgcmF0aW9zIGFuZA0KICBwcmVkaWN0aXZlIHZhbHVlcyB3aXRoIGRpc2Vhc2UgcHJldmFsZW5jZX0sDQogIGF1dGhvciA9IHtCcmVubmVyLCBIIGFuZCBHZWZlbGxlciwgT30sDQogIGpvdXJuYWx0aXRsZSA9IHtTdGF0LiBNZWQufSwNCiAgcHVibGlzaGVyID0ge1dpbGV5fSwNCiAgdm9sdW1lID0gezE2fSwNCiAgaXNzdWUgPSB7OX0sDQogIHBhZ2VzID0gezk4MS05OTF9LA0KICBkYXRlID0gezE5OTctMDUtMTV9LA0KICBkb2kgPSB7MTAuMTAwMi8oc2ljaSkxMDk3LTAyNTgoMTk5NzA1MTUpMTY6OTw5ODE6OmFpZC1zaW01MTA+My4wLmNvOzItbn0sDQogIHBtaWQgPSB7OTE2MDQ5M30sDQogIGlzc24gPSB7MTA5Ny0wMjU4LDAyNzctNjcxNX0sDQogIGFic3RyYWN0ID0ge1RoZSBzZW5zaXRpdml0eSwgc3BlY2lmaWNpdHkgYW5kIGxpa2VsaWhvb2QgcmF0aW9zIG9mIGJpbmFyeQ0KICBkaWFnbm9zdGljIHRlc3RzIGFyZSBvZnRlbiB0aG91Z2h0IG9mIGFzIGJlaW5nIGluZGVwZW5kZW50IG9mIGRpc2Vhc2UNCiAgcHJldmFsZW5jZS4gRW1waXJpY2FsIHN0dWRpZXMsIGhvd2V2ZXIsIGhhdmUgZnJlcXVlbnRseSByZXZlYWxlZCBzdWJzdGFudGlhbA0KICB2YXJpYXRpb24gb2YgdGhlc2UgbWVhc3VyZXMgZm9yIHRoZSBzYW1lIGRpYWdub3N0aWMgdGVzdCBpbiBkaWZmZXJlbnQNCiAgcG9wdWxhdGlvbnMuIE9uZSByZWFzb24gZm9yIHRoaXMgZGlzY3JlcGFuY3kgaXMgcmVsYXRlZCB0byB0aGUgZmFjdCB0aGF0IG9ubHkNCiAgZmV3IGRpYWdub3N0aWMgdGVzdHMgYXJlIGluaGVyZW50bHkgZGljaG90b21vdXMuIFRoZSBtYWpvcml0eSBvZiB0ZXN0cyBhcmUNCiAgYmFzZWQgb24gY2F0ZWdvcml6YXRpb24gb2YgaW5kaXZpZHVhbHMgYWNjb3JkaW5nIHRvIG9uZSBvciBzZXZlcmFsIHVuZGVybHlpbmcNCiAgY29udGludW91cyB0cmFpdHMuIEZvciB0aGVzZSB0ZXN0cywgdGhlIG1hZ25pdHVkZSBvZiBkaWFnbm9zdGljDQogIG1pc2NsYXNzaWZpY2F0aW9uIGRlcGVuZHMgbm90IG9ubHkgb24gdGhlIG1hZ25pdHVkZSBvZiB0aGUgbWVhc3VyZW1lbnQgb3INCiAgcGVyY2VwdGlvbiBlcnJvciBvZiB0aGUgdW5kZXJseWluZyB0cmFpdChzKSwgYnV0IGFsc28gb24gdGhlIGRpc3RyaWJ1dGlvbiBvZg0KICB0aGUgdW5kZXJseWluZyB0cmFpdChzKSBpbiB0aGUgcG9wdWxhdGlvbiByZWxhdGl2ZSB0byB0aGUgZGlhZ25vc3RpYyBjdXRwb2ludC4NCiAgU2luY2UgdGhpcyBkaXN0cmlidXRpb24gYWxzbyBkZXRlcm1pbmVzIHByZXZhbGVuY2Ugb2YgdGhlIGRpc2Vhc2UgaW4gdGhlDQogIHBvcHVsYXRpb24sIGRpYWdub3N0aWMgbWlzY2xhc3NpZmljYXRpb24gYW5kIGRpc2Vhc2UgcHJldmFsZW5jZSBhcmUgcmVsYXRlZA0KICBmb3IgdGhpcyB0eXBlIG9mIHRlc3QuIFdlIGFzc2VzcyB0aGUgdmFyaWF0aW9uIG9mIHZhcmlvdXMgbWVhc3VyZXMgb2YgdmFsaWRpdHkNCiAgb2YgZGlhZ25vc3RpYyB0ZXN0cyB3aXRoIGRpc2Vhc2UgcHJldmFsZW5jZSBmb3Igc2ltcGxlIG1vZGVscyBvZiB0aGUNCiAgZGlzdHJpYnV0aW9uIG9mIHRoZSB1bmRlcmx5aW5nIHRyYWl0KHMpIGFuZCB0aGUgbWVhc3VyZW1lbnQgb3IgcGVyY2VwdGlvbg0KICBlcnJvci4gV2UgaWxsdXN0cmF0ZSB0aGF0IHZhcmlhdGlvbiB3aXRoIGRpc2Vhc2UgcHJldmFsZW5jZSBpcyB0eXBpY2FsbHkNCiAgc3Ryb25nIGZvciBzZW5zaXRpdml0eSBhbmQgc3BlY2lmaWNpdHksIGFuZCBldmVuIG1vcmUgc28gZm9yIHRoZSBsaWtlbGlob29kDQogIHJhdGlvcy4gQWx0aG91Z2ggcG9zaXRpdmUgYW5kIG5lZ2F0aXZlIHByZWRpY3RpdmUgdmFsdWVzIGFsc28gc3Ryb25nbHkgdmFyeQ0KICB3aXRoIGRpc2Vhc2UgcHJldmFsZW5jZSwgdGhpcyB2YXJpYXRpb24gaXMgdXN1YWxseSBsZXNzIHByb25vdW5jZWQgdGhhbiBvbmUNCiAgd291bGQgZXhwZWN0IGlmIHNlbnNpdGl2aXR5IGFuZCBzcGVjaWZpY2l0eSB3ZXJlIGluZGVwZW5kZW50IG9mIGRpc2Vhc2UNCiAgcHJldmFsZW5jZS59LA0KICB1cmwgPSB7aHR0cHM6Ly9vbmxpbmVsaWJyYXJ5LndpbGV5LmNvbS9kb2kvYWJzLzEwLjEwMDIvJTI4U0lDSSUyOTEwOTctMDI1OCUyODE5OTcwNTE1JTI5MTYlM0E5JTNDOTgxJTNBJTNBQUlELVNJTTUxMCUzRTMuMC5DTyUzQjItTn0sDQogIHVybGRhdGUgPSB7MjAyMy0wOC0xOH0sDQogIGxhbmd1YWdlID0ge2VufQ0KfQ0KDQpAQVJUSUNMRXtDYXJwZW50ZXIyMDAwLWRtLA0KICB0aXRsZSA9IHtCb290c3RyYXAgY29uZmlkZW5jZSBpbnRlcnZhbHM6IHdoZW4sIHdoaWNoLCB3aGF0PyBBIHByYWN0aWNhbCBndWlkZQ0KICBmb3IgbWVkaWNhbCBzdGF0aXN0aWNpYW5zfSwNCiAgYXV0aG9yID0ge0NhcnBlbnRlciwgSiBhbmQgQml0aGVsbCwgSn0sDQogIGpvdXJuYWx0aXRsZSA9IHtTdGF0LiBNZWQufSwNCiAgcHVibGlzaGVyID0ge1dpbGV5fSwNCiAgdm9sdW1lID0gezE5fSwNCiAgaXNzdWUgPSB7OX0sDQogIHBhZ2VzID0gezExNDEtMTE2NH0sDQogIGRhdGUgPSB7MjAwMC0wNS0xNX0sDQogIGRvaSA9IHsxMC4xMDAyLyhzaWNpKTEwOTctMDI1OCgyMDAwMDUxNSkxOTo5PDExNDE6OmFpZC1zaW00Nzk+My4wLmNvOzItZn0sDQogIHBtaWQgPSB7MTA3OTc1MTN9LA0KICBpc3NuID0gezEwOTctMDI1OCwwMjc3LTY3MTV9LA0KICBhYnN0cmFjdCA9IHtTaW5jZSB0aGUgZWFybHkgMTk4MHMsIGEgYmV3aWxkZXJpbmcgYXJyYXkgb2YgbWV0aG9kcyBmb3INCiAgY29uc3RydWN0aW5nIGJvb3RzdHJhcCBjb25maWRlbmNlIGludGVydmFscyBoYXZlIGJlZW4gcHJvcG9zZWQuIEluIHRoaXMNCiAgYXJ0aWNsZSwgd2UgYWRkcmVzcyB0aGUgZm9sbG93aW5nIHF1ZXN0aW9ucy4gRmlyc3QsIHdoZW4gc2hvdWxkIGJvb3RzdHJhcA0KICBjb25maWRlbmNlIGludGVydmFscyBiZSB1c2VkLiBTZWNvbmRseSwgd2hpY2ggbWV0aG9kIHNob3VsZCBiZSBjaG9zZW4sIGFuZA0KICB0aGlyZGx5LCBob3cgc2hvdWxkIGl0IGJlIGltcGxlbWVudGVkLiBJbiBvcmRlciB0byBkbyB0aGlzLCB3ZSByZXZpZXcgdGhlDQogIGNvbW1vbiBhbGdvcml0aG1zIGZvciByZXNhbXBsaW5nIGFuZCBtZXRob2RzIGZvciBjb25zdHJ1Y3RpbmcgYm9vdHN0cmFwDQogIGNvbmZpZGVuY2UgaW50ZXJ2YWxzLCB0b2dldGhlciB3aXRoIHNvbWUgbGVzcyB3ZWxsIGtub3duIG9uZXMsIGhpZ2hsaWdodGluZw0KICB0aGVpciBzdHJlbmd0aHMgYW5kIHdlYWtuZXNzZXMuIFdlIHRoZW4gcHJlc2VudCBhIHNpbXVsYXRpb24gc3R1ZHksIGEgZmxvdw0KICBjaGFydCBmb3IgY2hvb3NpbmcgYW4gYXBwcm9wcmlhdGUgbWV0aG9kIGFuZCBhIHN1cnZpdmFsIGFuYWx5c2lzIGV4YW1wbGUufSwNCiAgdXJsID0ge2h0dHBzOi8vb25saW5lbGlicmFyeS53aWxleS5jb20vZG9pL2Ficy8xMC4xMDAyLyUyOFNJQ0klMjkxMDk3LTAyNTglMjgyMDAwMDUxNSUyOTE5JTNBOSUzQzExNDElM0ElM0FBSUQtU0lNNDc5JTNFMy4wLkNPJTNCMi1GfSwNCiAgdXJsZGF0ZSA9IHsyMDIzLTA4LTIzfSwNCiAgbGFuZ3VhZ2UgPSB7ZW59DQp9DQoNCkBBUlRJQ0xFe1BhdGlsMjAxOC1obSwNCiAgdGl0bGUgPSB7VHJhaW5pbmcgcmVwbGljYWJsZSBwcmVkaWN0b3JzIGluIG11bHRpcGxlIHN0dWRpZXN9LA0KICBhdXRob3IgPSB7UGF0aWwsIFByYXNhZCBhbmQgUGFybWlnaWFuaSwgR2lvdmFubml9LA0KICBqb3VybmFsdGl0bGUgPSB7UHJvYy4gTmF0bC4gQWNhZC4gU2NpLiBVLiBTLiBBLn0sDQogIHB1Ymxpc2hlciA9IHtOYXRpb25hbCBBY2FkZW15IG9mIFNjaWVuY2VzfSwNCiAgdm9sdW1lID0gezExNX0sDQogIGlzc3VlID0gezExfSwNCiAgcGFnZXMgPSB7MjU3OC0yNTgzfSwNCiAgZGF0ZSA9IHsyMDE4LTAzLTEzfSwNCiAgZG9pID0gezEwLjEwNzMvcG5hcy4xNzA4MjgzMTE1fSwNCiAgcG1jID0ge1BNQzU4NTY1MDR9LA0KICBwbWlkID0gezI5NTMxMDYwfSwNCiAgaXNzbiA9IHswMDI3LTg0MjQsMTA5MS02NDkwfSwNCiAgYWJzdHJhY3QgPSB7VGhpcyBhcnRpY2xlIGNvbnNpZGVycyByZXBsaWNhYmlsaXR5IG9mIHRoZSBwZXJmb3JtYW5jZSBvZg0KICBwcmVkaWN0b3JzIGFjcm9zcyBzdHVkaWVzLiBXZSBzdWdnZXN0IGEgZ2VuZXJhbCBhcHByb2FjaCB0byBpbnZlc3RpZ2F0aW5nIHRoaXMNCiAgaXNzdWUsIGJhc2VkIG9uIGVuc2VtYmxlcyBvZiBwcmVkaWN0aW9uIG1vZGVscyB0cmFpbmVkIG9uIGRpZmZlcmVudCBzdHVkaWVzLg0KICBXZSBxdWFudGlmeSBob3cgdGhlIGNvbW1vbiBwcmFjdGljZSBvZiB0cmFpbmluZyBvbiBhIHNpbmdsZSBzdHVkeSBhY2NvdW50cyBpbg0KICBwYXJ0IGZvciB0aGUgb2JzZXJ2ZWQgY2hhbGxlbmdlcyBpbiByZXBsaWNhYmlsaXR5IG9mIHByZWRpY3Rpb24gcGVyZm9ybWFuY2UuDQogIFdlIGFsc28gaW52ZXN0aWdhdGUgd2hldGhlciBlbnNlbWJsZXMgb2YgcHJlZGljdG9ycyB0cmFpbmVkIG9uIG11bHRpcGxlDQogIHN0dWRpZXMgY2FuIGJlIGNvbWJpbmVkLCB1c2luZyB1bmlxdWUgY3JpdGVyaWEsIHRvIGRlc2lnbiByb2J1c3QgZW5zZW1ibGUNCiAgbGVhcm5lcnMgdHJhaW5lZCB1cGZyb250IHRvIGluY29ycG9yYXRlIHJlcGxpY2FiaWxpdHkgaW50byBkaWZmZXJlbnQgY29udGV4dHMNCiAgYW5kIHBvcHVsYXRpb25zLn0sDQogIHVybCA9IHtodHRwczovL3d3dy5wbmFzLm9yZy9kb2kvYWJzLzEwLjEwNzMvcG5hcy4xNzA4MjgzMTE1fSwNCiAgdXJsZGF0ZSA9IHsyMDIzLTA4LTIyfSwNCiAga2V5d29yZHMgPSB7Y3Jvc3Mtc3R1ZHkgdmFsaWRhdGlvbjsgZW5zZW1ibGUgbGVhcm5pbmc7IG1hY2hpbmUgbGVhcm5pbmc7DQogIHJlcGxpY2FiaWxpdHk7IHZhbGlkYXRpb259LA0KICBsYW5ndWFnZSA9IHtlbn0NCn0NCg0KQEFSVElDTEV7R2FuemZyaWVkMjAxMy11dCwNCiAgdGl0bGUgPSB7Y3VyYXRlZE92YXJpYW5EYXRhOiBjbGluaWNhbGx5IGFubm90YXRlZCBkYXRhIGZvciB0aGUgb3ZhcmlhbiBjYW5jZXINCiAgdHJhbnNjcmlwdG9tZX0sDQogIGF1dGhvciA9IHtHYW56ZnJpZWQsIEJlbmphbWluIEZyZWRlcmljayBhbmQgUmllc3RlciwgTWFya3VzIGFuZCBIYWliZS1LYWlucywNCiAgQmVuamFtaW4gYW5kIFJpc2NoLCBUaG9tYXMgYW5kIFR5ZWt1Y2hldmEsIFN2aXRsYW5hIGFuZCBKYXppYywgSW5hIGFuZCBXYW5nLA0KICBYaW4gVmljdG9yaWEgYW5kIEFobWFkaWZhciwgTWFobmF6IGFuZCBCaXJyZXIsIE1pY2hhZWwgSiBhbmQgUGFybWlnaWFuaSwNCiAgR2lvdmFubmkgYW5kIEh1dHRlbmhvd2VyLCBDdXJ0aXMgYW5kIFdhbGRyb24sIExldml9LA0KICBqb3VybmFsdGl0bGUgPSB7RGF0YWJhc2UgKE94Zm9yZCl9LA0KICBwdWJsaXNoZXIgPSB7T3hmb3JkIFVuaXZlcnNpdHkgUHJlc3MgKE9VUCl9LA0KICB2b2x1bWUgPSB7MjAxM30sDQogIHBhZ2VzID0ge2JhdDAxM30sDQogIGRhdGUgPSB7MjAxMy0wNC0wMn0sDQogIGRvaSA9IHsxMC4xMDkzL2RhdGFiYXNlL2JhdDAxM30sDQogIHBtYyA9IHtQTUMzNjI1OTU0fSwNCiAgcG1pZCA9IHsyMzU1MDA2MX0sDQogIGlzc24gPSB7MTc1OC0wNDYzfSwNCiAgYWJzdHJhY3QgPSB7VGhpcyBhcnRpY2xlIGludHJvZHVjZXMgYSBtYW51YWxseSBjdXJhdGVkIGRhdGEgY29sbGVjdGlvbiBmb3INCiAgZ2VuZSBleHByZXNzaW9uIG1ldGEtYW5hbHlzaXMgb2YgcGF0aWVudHMgd2l0aCBvdmFyaWFuIGNhbmNlciBhbmQgc29mdHdhcmUgZm9yDQogIHJlcHJvZHVjaWJsZSBwcmVwYXJhdGlvbiBvZiBzaW1pbGFyIGRhdGFiYXNlcy4gVGhpcyByZXNvdXJjZSBwcm92aWRlcw0KICB1bmlmb3JtbHkgcHJlcGFyZWQgbWljcm9hcnJheSBkYXRhIGZvciAyOTcwIHBhdGllbnRzIGZyb20gMjMgc3R1ZGllcyB3aXRoDQogIGN1cmF0ZWQgYW5kIGRvY3VtZW50ZWQgY2xpbmljYWwgbWV0YWRhdGEuIEl0IGFsbG93cyB1c2VycyB0byBlZmZpY2llbnRseQ0KICBpZGVudGlmeSBzdHVkaWVzIGFuZCBwYXRpZW50IHN1Ymdyb3VwcyBvZiBpbnRlcmVzdCBmb3IgYW5hbHlzaXMgYW5kIHRvIHBlcmZvcm0NCiAgbWV0YS1hbmFseXNpcyBpbW1lZGlhdGVseSB3aXRob3V0IHRoZSBjaGFsbGVuZ2VzIHBvc2VkIGJ5IGhhcm1vbml6aW5nDQogIGhldGVyb2dlbmVvdXMgbWljcm9hcnJheSB0ZWNobm9sb2dpZXMsIHN0dWR5IGRlc2lnbnMsIGV4cHJlc3Npb24gZGF0YQ0KICBwcm9jZXNzaW5nIG1ldGhvZHMgYW5kIGNsaW5pY2FsIGRhdGEgZm9ybWF0cy4gV2UgY29uZmlybSB0aGF0IHRoZSByZWNlbnRseQ0KICBwcm9wb3NlZCBiaW9tYXJrZXIgQ1hDTDEyIGlzIGFzc29jaWF0ZWQgd2l0aCBwYXRpZW50IHN1cnZpdmFsLCBpbmRlcGVuZGVudGx5DQogIG9mIHN0YWdlIGFuZCBvcHRpbWFsIHN1cmdpY2FsIGRlYnVsa2luZywgd2hpY2ggd2FzIHBvc3NpYmxlIG9ubHkgdGhyb3VnaA0KICBtZXRhLWFuYWx5c2lzIG93aW5nIHRvIGluc3VmZmljaWVudCBzYW1wbGUgc2l6ZXMgb2YgdGhlIGluZGl2aWR1YWwgc3R1ZGllcy4NCiAgVGhlIGRhdGFiYXNlIGlzIGltcGxlbWVudGVkIGFzIHRoZSBjdXJhdGVkT3ZhcmlhbkRhdGEgQmlvY29uZHVjdG9yIHBhY2thZ2UgZm9yDQogIHRoZSBSIHN0YXRpc3RpY2FsIGNvbXB1dGluZyBsYW5ndWFnZSwgcHJvdmlkaW5nIGEgY29tcHJlaGVuc2l2ZSBhbmQgZmxleGlibGUNCiAgcmVzb3VyY2UgZm9yIGNsaW5pY2FsbHkgb3JpZW50ZWQgaW52ZXN0aWdhdGlvbiBvZiB0aGUgb3ZhcmlhbiBjYW5jZXINCiAgdHJhbnNjcmlwdG9tZS4gVGhlIHBhY2thZ2UgYW5kIHBpcGVsaW5lIGZvciBwcm9kdWNpbmcgaXQgYXJlIGF2YWlsYWJsZSBmcm9tDQogIGh0dHA6Ly9iY2IuZGZjaS5oYXJ2YXJkLmVkdS9vdmFyaWFuY2FuY2VyLn0sDQogIHVybCA9IHtodHRwczovL2FjYWRlbWljLm91cC5jb20vZGF0YWJhc2UvYXJ0aWNsZS9kb2kvMTAuMTA5My9kYXRhYmFzZS9iYXQwMTMvMzMwOTc4P3ZpZXc9bG9uZ30sDQogIGxhbmd1YWdlID0ge2VufQ0KfQ0KDQpAQVJUSUNMRXtNYXNvZXJvMjAyMy13YiwNCiAgdGl0bGUgPSB7Q3Jvc3MtU3R1ZHkgUmVwbGljYWJpbGl0eSBpbiBDbHVzdGVyIEFuYWx5c2lzfSwNCiAgYXV0aG9yID0ge01hc29lcm8sIExvcmVuem8gYW5kIFRob21hcywgRW1tYSBhbmQgUGFybWlnaWFuaSwgR2lvdmFubmkgYW5kDQogIFR5ZWt1Y2hldmEsIFN2aXRsYW5hIGFuZCBUcmlwcGEsIExvcmVuem99LA0KICBqb3VybmFsdGl0bGUgPSB7U3RhdC4gU2NpLn0sDQogIHB1Ymxpc2hlciA9IHtJbnN0aXR1dGUgb2YgTWF0aGVtYXRpY2FsIFN0YXRpc3RpY3N9LA0KICB2b2x1bWUgPSB7Mzh9LA0KICBpc3N1ZSA9IHsyfSwNCiAgcGFnZXMgPSB7MzAzLTMxNn0sDQogIGRhdGUgPSB7MjAyMy0wNS0wMX0sDQogIGRvaSA9IHsxMC4xMjE0LzIyLXN0czg3MX0sDQogIGlzc24gPSB7MDg4My00MjM3LDIxNjgtODc0NX0sDQogIGFic3RyYWN0ID0ge0luIGNhbmNlciByZXNlYXJjaCwgY2x1c3RlcmluZyB0ZWNobmlxdWVzIGFyZSB3aWRlbHkgdXNlZCBmb3INCiAgZXhwbG9yYXRvcnkgYW5hbHlzZXMsIHBsYXlpbmcgYSBjcml0aWNhbCByb2xlIGluIHRoZSBpZGVudGlmaWNhdGlvbiBvZiBub3ZlbA0KICBjYW5jZXIgc3VidHlwZXMgYW5kIHBhdGllbnQgbWFuYWdlbWVudC4gQXMgZGF0YSBjb2xsZWN0ZWQgYnkgbXVsdGlwbGUgcmVzZWFyY2gNCiAgZ3JvdXBzIGdyb3dzLCBpdCBpcyBpbmNyZWFzaW5nbHkgZmVhc2libGUgdG8gaW52ZXN0aWdhdGUgdGhlIHJlcGxpY2FiaWxpdHkgb2YNCiAgY2x1c3RlcmluZyBwcm9jZWR1cmVzLCB0aGF0IGlzLCB0aGVpciBhYmlsaXR5IHRvIGNvbnNpc3RlbnRseSByZWNvdmVyDQogIGJpb2xvZ2ljYWxseSBtZWFuaW5nZnVsIGNsdXN0ZXJzIGFjcm9zcyBzZXZlcmFsIGRhdGEgc2V0cy4gSW4gdGhpcyBwYXBlciwgd2UNCiAgcmV2aWV3IG1ldGhvZHMgZm9yIHJlcGxpY2FiaWxpdHkgb2YgY2x1c3RlcmluZyBhbmFseXNlcywgYW5kIGRpc2N1c3MgYSBub3ZlbA0KICBmcmFtZXdvcmsgZm9yIGV2YWx1YXRpbmcgY3Jvc3Mtc3R1ZHkgY2x1c3RlcmluZyByZXBsaWNhYmlsaXR5LCB1c2VmdWwgd2hlbiB0d28NCiAgb3IgbW9yZSBzdHVkaWVzIGFyZSBhdmFpbGFibGUuIE91ciBhcHByb2FjaCBjYW4gYmUgYXBwbGllZCB0byBhbnkgY2x1c3RlcmluZw0KICBhbGdvcml0aG0gYW5kIGNhbiBlbXBsb3kgZGlmZmVyZW50IG1lYXN1cmVzIG9mIHNpbWlsYXJpdHkgYmV0d2VlbiBwYXJ0aXRpb25zDQogIHRvIHF1YW50aWZ5IHJlcGxpY2FiaWxpdHksIGdsb2JhbGx5IChpLmUuLCBmb3IgdGhlIHdob2xlIHNhbXBsZSkgYXMgd2VsbCBhcw0KICBsb2NhbGx5IChpLmUuLCBmb3IgaW5kaXZpZHVhbCBjbHVzdGVycykuIFVzaW5nIGV4cGVyaW1lbnRzIG9uIHN5bnRoZXRpYyBhbmQNCiAgcmVhbCBnZW5lIGV4cHJlc3Npb24gZGF0YSwgd2UgaWxsdXN0cmF0ZSB0aGUgdXNlZnVsbmVzcyBvZiBvdXIgcHJvY2VkdXJlIHRvDQogIGV2YWx1YXRlIGlmIHRoZSBzYW1lIGNsdXN0ZXJzIGFyZSBpZGVudGlmaWVkIGNvbnNpc3RlbnRseSBhY3Jvc3MgYSBjb2xsZWN0aW9uDQogIG9mIGRhdGEgc2V0cy59LA0KICB1cmwgPSB7aHR0cHM6Ly9wcm9qZWN0ZXVjbGlkLm9yZy9qb3VybmFscy9zdGF0aXN0aWNhbC1zY2llbmNlL3ZvbHVtZS0zOC9pc3N1ZS0yL0Nyb3NzLVN0dWR5LVJlcGxpY2FiaWxpdHktaW4tQ2x1c3Rlci1BbmFseXNpcy8xMC4xMjE0LzIyLVNUUzg3MS5zaG9ydH0sDQogIHVybGRhdGUgPSB7MjAyMy0wOC0yMn0sDQogIGtleXdvcmRzID0ge2NsdXN0ZXJpbmc7IG11bHRpcGxlIHN0dWRpZXM7IHJlcGxpY2FiaWxpdHl9LA0KICBsYW5ndWFnZSA9IHtlbn0NCn0NCg0K').then(res => res.blob()).then(blob => {
-      const downloadURL = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      document.body.appendChild(a);
-      a.href = downloadURL;
-      a.download = 'references.bib'; a.click();
-      window.URL.revokeObjectURL(downloadURL);
-      document.body.removeChild(a);
-    });" href="">
-<button class="btn btn-danger"><i class="fa fa-book"></i> Download the bibtex file</button>
-</a>
-</div>
-</div>
+<section id="references-download-.bib-file" class="slide level2 smaller scrollable">
+<h2>References <button class="btn"><i class="fa fa-download"></i><a href="data:text/x-bibtex;base64,QEFSVElDTEV7QnJlbm5lcjE5OTcteXEsDQogIHRpdGxlID0ge1ZhcmlhdGlvbiBvZiBzZW5zaXRpdml0eSwgc3BlY2lmaWNpdHksIGxpa2VsaWhvb2QgcmF0aW9zIGFuZA0KICBwcmVkaWN0aXZlIHZhbHVlcyB3aXRoIGRpc2Vhc2UgcHJldmFsZW5jZX0sDQogIGF1dGhvciA9IHtCcmVubmVyLCBIIGFuZCBHZWZlbGxlciwgT30sDQogIGpvdXJuYWx0aXRsZSA9IHtTdGF0LiBNZWQufSwNCiAgcHVibGlzaGVyID0ge1dpbGV5fSwNCiAgdm9sdW1lID0gezE2fSwNCiAgaXNzdWUgPSB7OX0sDQogIHBhZ2VzID0gezk4MS05OTF9LA0KICBkYXRlID0gezE5OTctMDUtMTV9LA0KICBkb2kgPSB7MTAuMTAwMi8oc2ljaSkxMDk3LTAyNTgoMTk5NzA1MTUpMTY6OTw5ODE6OmFpZC1zaW01MTA+My4wLmNvOzItbn0sDQogIHBtaWQgPSB7OTE2MDQ5M30sDQogIGlzc24gPSB7MTA5Ny0wMjU4LDAyNzctNjcxNX0sDQogIGFic3RyYWN0ID0ge1RoZSBzZW5zaXRpdml0eSwgc3BlY2lmaWNpdHkgYW5kIGxpa2VsaWhvb2QgcmF0aW9zIG9mIGJpbmFyeQ0KICBkaWFnbm9zdGljIHRlc3RzIGFyZSBvZnRlbiB0aG91Z2h0IG9mIGFzIGJlaW5nIGluZGVwZW5kZW50IG9mIGRpc2Vhc2UNCiAgcHJldmFsZW5jZS4gRW1waXJpY2FsIHN0dWRpZXMsIGhvd2V2ZXIsIGhhdmUgZnJlcXVlbnRseSByZXZlYWxlZCBzdWJzdGFudGlhbA0KICB2YXJpYXRpb24gb2YgdGhlc2UgbWVhc3VyZXMgZm9yIHRoZSBzYW1lIGRpYWdub3N0aWMgdGVzdCBpbiBkaWZmZXJlbnQNCiAgcG9wdWxhdGlvbnMuIE9uZSByZWFzb24gZm9yIHRoaXMgZGlzY3JlcGFuY3kgaXMgcmVsYXRlZCB0byB0aGUgZmFjdCB0aGF0IG9ubHkNCiAgZmV3IGRpYWdub3N0aWMgdGVzdHMgYXJlIGluaGVyZW50bHkgZGljaG90b21vdXMuIFRoZSBtYWpvcml0eSBvZiB0ZXN0cyBhcmUNCiAgYmFzZWQgb24gY2F0ZWdvcml6YXRpb24gb2YgaW5kaXZpZHVhbHMgYWNjb3JkaW5nIHRvIG9uZSBvciBzZXZlcmFsIHVuZGVybHlpbmcNCiAgY29udGludW91cyB0cmFpdHMuIEZvciB0aGVzZSB0ZXN0cywgdGhlIG1hZ25pdHVkZSBvZiBkaWFnbm9zdGljDQogIG1pc2NsYXNzaWZpY2F0aW9uIGRlcGVuZHMgbm90IG9ubHkgb24gdGhlIG1hZ25pdHVkZSBvZiB0aGUgbWVhc3VyZW1lbnQgb3INCiAgcGVyY2VwdGlvbiBlcnJvciBvZiB0aGUgdW5kZXJseWluZyB0cmFpdChzKSwgYnV0IGFsc28gb24gdGhlIGRpc3RyaWJ1dGlvbiBvZg0KICB0aGUgdW5kZXJseWluZyB0cmFpdChzKSBpbiB0aGUgcG9wdWxhdGlvbiByZWxhdGl2ZSB0byB0aGUgZGlhZ25vc3RpYyBjdXRwb2ludC4NCiAgU2luY2UgdGhpcyBkaXN0cmlidXRpb24gYWxzbyBkZXRlcm1pbmVzIHByZXZhbGVuY2Ugb2YgdGhlIGRpc2Vhc2UgaW4gdGhlDQogIHBvcHVsYXRpb24sIGRpYWdub3N0aWMgbWlzY2xhc3NpZmljYXRpb24gYW5kIGRpc2Vhc2UgcHJldmFsZW5jZSBhcmUgcmVsYXRlZA0KICBmb3IgdGhpcyB0eXBlIG9mIHRlc3QuIFdlIGFzc2VzcyB0aGUgdmFyaWF0aW9uIG9mIHZhcmlvdXMgbWVhc3VyZXMgb2YgdmFsaWRpdHkNCiAgb2YgZGlhZ25vc3RpYyB0ZXN0cyB3aXRoIGRpc2Vhc2UgcHJldmFsZW5jZSBmb3Igc2ltcGxlIG1vZGVscyBvZiB0aGUNCiAgZGlzdHJpYnV0aW9uIG9mIHRoZSB1bmRlcmx5aW5nIHRyYWl0KHMpIGFuZCB0aGUgbWVhc3VyZW1lbnQgb3IgcGVyY2VwdGlvbg0KICBlcnJvci4gV2UgaWxsdXN0cmF0ZSB0aGF0IHZhcmlhdGlvbiB3aXRoIGRpc2Vhc2UgcHJldmFsZW5jZSBpcyB0eXBpY2FsbHkNCiAgc3Ryb25nIGZvciBzZW5zaXRpdml0eSBhbmQgc3BlY2lmaWNpdHksIGFuZCBldmVuIG1vcmUgc28gZm9yIHRoZSBsaWtlbGlob29kDQogIHJhdGlvcy4gQWx0aG91Z2ggcG9zaXRpdmUgYW5kIG5lZ2F0aXZlIHByZWRpY3RpdmUgdmFsdWVzIGFsc28gc3Ryb25nbHkgdmFyeQ0KICB3aXRoIGRpc2Vhc2UgcHJldmFsZW5jZSwgdGhpcyB2YXJpYXRpb24gaXMgdXN1YWxseSBsZXNzIHByb25vdW5jZWQgdGhhbiBvbmUNCiAgd291bGQgZXhwZWN0IGlmIHNlbnNpdGl2aXR5IGFuZCBzcGVjaWZpY2l0eSB3ZXJlIGluZGVwZW5kZW50IG9mIGRpc2Vhc2UNCiAgcHJldmFsZW5jZS59LA0KICB1cmwgPSB7aHR0cHM6Ly9vbmxpbmVsaWJyYXJ5LndpbGV5LmNvbS9kb2kvYWJzLzEwLjEwMDIvJTI4U0lDSSUyOTEwOTctMDI1OCUyODE5OTcwNTE1JTI5MTYlM0E5JTNDOTgxJTNBJTNBQUlELVNJTTUxMCUzRTMuMC5DTyUzQjItTn0sDQogIHVybGRhdGUgPSB7MjAyMy0wOC0xOH0sDQogIGxhbmd1YWdlID0ge2VufQ0KfQ0KDQpAVU5QVUJMSVNIRUR7UGFybWlnaWFuaTIwMjMtZHIsDQogIHRpdGxlID0ge0RlZmluaW5nIHJlcGxpY2FiaWxpdHkgb2YgcHJlZGljdGlvbiBydWxlc30sDQogIGF1dGhvciA9IHtQYXJtaWdpYW5pLCBHaW92YW5uaX0sDQogIGpvdXJuYWx0aXRsZSA9IHthclhpdiBbc3RhdC5NRV19LA0KICBkYXRlID0gezIwMjMtMDQtMzB9LA0KICBlcHJpbnQgPSB7MjMwNS4wMTUxOH0sDQogIGVwcmludGNsYXNzID0ge3N0YXQuTUV9LA0KICBhYnN0cmFjdCA9IHtJbiB0aGlzIGFydGljbGUgSSBwcm9wb3NlIGFuIGFwcHJvYWNoIGZvciBkZWZpbmluZyByZXBsaWNhYmlsaXR5DQogIGZvciBwcmVkaWN0aW9uIHJ1bGVzLiBNb3RpdmF0ZWQgYnkgYSByZWNlbnQgTkFTIHJlcG9ydCwgSSBzdGFydCBmcm9tIHRoZQ0KICBwZXJzcGVjdGl2ZSB0aGF0IHJlcGxpY2FiaWxpdHkgaXMgb2J0YWluaW5nIGNvbnNpc3RlbnQgcmVzdWx0cyBhY3Jvc3Mgc3R1ZGllcw0KICBzdWl0YWJsZSB0byBhZGRyZXNzIHRoZSBzYW1lIHByZWRpY3Rpb24gcXVlc3Rpb24sIGVhY2ggb2Ygd2hpY2ggaGFzIG9idGFpbmVkDQogIGl0cyBvd24gZGF0YS4gSSB0aGVuIGRpc2N1c3MgY29uY2VwdCBhbmQgaXNzdWVzIGluIGRlZmluaW5nIGtleSBlbGVtZW50cyBvZg0KICB0aGlzIHN0YXRlbWVudC4gSSBmb2N1cyBzcGVjaWZpY2FsbHkgb24gdGhlIG1lYW5pbmcgb2YgImNvbnNpc3RlbnQgcmVzdWx0cyIgaW4NCiAgdHlwaWNhbCB1dGlsaXphdGlvbiBjb250ZXh0cywgYW5kIHByb3Bvc2UgYSBtdWx0aS1hZ2VudCBmcmFtZXdvcmsgZm9yIGRlZmluaW5nDQogIHJlcGxpY2FiaWxpdHksIGluIHdoaWNoIGFnZW50cyBhcmUgbmVpdGhlciBwYXJ0bmVycyBub3IgYWR2ZXJzYXJpZXMuIEkgcmVjb3Zlcg0KICBzb21lIG9mIHRoZSBwcmV2YWxlbnQgcHJhY3RpY2FsIGFwcHJvYWNoZXMgYXMgc3BlY2lhbCBjYXNlcy4gSSBob3BlIHRvIHByb3ZpZGUNCiAgZ3VpZGFuY2UgZm9yIGEgbW9yZSBzeXN0ZW1hdGljIGFzc2Vzc21lbnQgb2YgcmVwbGljYWJpbGl0eSBpbiBtYWNoaW5lDQogIGxlYXJuaW5nLn0sDQogIHVybCA9IHtodHRwOi8vYXJ4aXYub3JnL2Ficy8yMzA1LjAxNTE4fSwNCiAgdXJsZGF0ZSA9IHsyMDIzLTA4LTIyfQ0KfQ0KDQpAQVJUSUNMRXtDYXJwZW50ZXIyMDAwLWRtLA0KICB0aXRsZSA9IHtCb290c3RyYXAgY29uZmlkZW5jZSBpbnRlcnZhbHM6IHdoZW4sIHdoaWNoLCB3aGF0PyBBIHByYWN0aWNhbCBndWlkZQ0KICBmb3IgbWVkaWNhbCBzdGF0aXN0aWNpYW5zfSwNCiAgYXV0aG9yID0ge0NhcnBlbnRlciwgSiBhbmQgQml0aGVsbCwgSn0sDQogIGpvdXJuYWx0aXRsZSA9IHtTdGF0LiBNZWQufSwNCiAgcHVibGlzaGVyID0ge1dpbGV5fSwNCiAgdm9sdW1lID0gezE5fSwNCiAgaXNzdWUgPSB7OX0sDQogIHBhZ2VzID0gezExNDEtMTE2NH0sDQogIGRhdGUgPSB7MjAwMC0wNS0xNX0sDQogIGRvaSA9IHsxMC4xMDAyLyhzaWNpKTEwOTctMDI1OCgyMDAwMDUxNSkxOTo5PDExNDE6OmFpZC1zaW00Nzk+My4wLmNvOzItZn0sDQogIHBtaWQgPSB7MTA3OTc1MTN9LA0KICBpc3NuID0gezEwOTctMDI1OCwwMjc3LTY3MTV9LA0KICBhYnN0cmFjdCA9IHtTaW5jZSB0aGUgZWFybHkgMTk4MHMsIGEgYmV3aWxkZXJpbmcgYXJyYXkgb2YgbWV0aG9kcyBmb3INCiAgY29uc3RydWN0aW5nIGJvb3RzdHJhcCBjb25maWRlbmNlIGludGVydmFscyBoYXZlIGJlZW4gcHJvcG9zZWQuIEluIHRoaXMNCiAgYXJ0aWNsZSwgd2UgYWRkcmVzcyB0aGUgZm9sbG93aW5nIHF1ZXN0aW9ucy4gRmlyc3QsIHdoZW4gc2hvdWxkIGJvb3RzdHJhcA0KICBjb25maWRlbmNlIGludGVydmFscyBiZSB1c2VkLiBTZWNvbmRseSwgd2hpY2ggbWV0aG9kIHNob3VsZCBiZSBjaG9zZW4sIGFuZA0KICB0aGlyZGx5LCBob3cgc2hvdWxkIGl0IGJlIGltcGxlbWVudGVkLiBJbiBvcmRlciB0byBkbyB0aGlzLCB3ZSByZXZpZXcgdGhlDQogIGNvbW1vbiBhbGdvcml0aG1zIGZvciByZXNhbXBsaW5nIGFuZCBtZXRob2RzIGZvciBjb25zdHJ1Y3RpbmcgYm9vdHN0cmFwDQogIGNvbmZpZGVuY2UgaW50ZXJ2YWxzLCB0b2dldGhlciB3aXRoIHNvbWUgbGVzcyB3ZWxsIGtub3duIG9uZXMsIGhpZ2hsaWdodGluZw0KICB0aGVpciBzdHJlbmd0aHMgYW5kIHdlYWtuZXNzZXMuIFdlIHRoZW4gcHJlc2VudCBhIHNpbXVsYXRpb24gc3R1ZHksIGEgZmxvdw0KICBjaGFydCBmb3IgY2hvb3NpbmcgYW4gYXBwcm9wcmlhdGUgbWV0aG9kIGFuZCBhIHN1cnZpdmFsIGFuYWx5c2lzIGV4YW1wbGUufSwNCiAgdXJsID0ge2h0dHBzOi8vb25saW5lbGlicmFyeS53aWxleS5jb20vZG9pL2Ficy8xMC4xMDAyLyUyOFNJQ0klMjkxMDk3LTAyNTglMjgyMDAwMDUxNSUyOTE5JTNBOSUzQzExNDElM0ElM0FBSUQtU0lNNDc5JTNFMy4wLkNPJTNCMi1GfSwNCiAgdXJsZGF0ZSA9IHsyMDIzLTA4LTIzfSwNCiAgbGFuZ3VhZ2UgPSB7ZW59DQp9DQoNCkBBUlRJQ0xFe01hc29lcm8yMDIzLXdiLA0KICB0aXRsZSA9IHtDcm9zcy1TdHVkeSBSZXBsaWNhYmlsaXR5IGluIENsdXN0ZXIgQW5hbHlzaXN9LA0KICBhdXRob3IgPSB7TWFzb2VybywgTG9yZW56byBhbmQgVGhvbWFzLCBFbW1hIGFuZCBQYXJtaWdpYW5pLCBHaW92YW5uaSBhbmQNCiAgVHlla3VjaGV2YSwgU3ZpdGxhbmEgYW5kIFRyaXBwYSwgTG9yZW56b30sDQogIGpvdXJuYWx0aXRsZSA9IHtTdGF0LiBTY2kufSwNCiAgcHVibGlzaGVyID0ge0luc3RpdHV0ZSBvZiBNYXRoZW1hdGljYWwgU3RhdGlzdGljc30sDQogIHZvbHVtZSA9IHszOH0sDQogIGlzc3VlID0gezJ9LA0KICBwYWdlcyA9IHszMDMtMzE2fSwNCiAgZGF0ZSA9IHsyMDIzLTA1LTAxfSwNCiAgZG9pID0gezEwLjEyMTQvMjItc3RzODcxfSwNCiAgaXNzbiA9IHswODgzLTQyMzcsMjE2OC04NzQ1fSwNCiAgYWJzdHJhY3QgPSB7SW4gY2FuY2VyIHJlc2VhcmNoLCBjbHVzdGVyaW5nIHRlY2huaXF1ZXMgYXJlIHdpZGVseSB1c2VkIGZvcg0KICBleHBsb3JhdG9yeSBhbmFseXNlcywgcGxheWluZyBhIGNyaXRpY2FsIHJvbGUgaW4gdGhlIGlkZW50aWZpY2F0aW9uIG9mIG5vdmVsDQogIGNhbmNlciBzdWJ0eXBlcyBhbmQgcGF0aWVudCBtYW5hZ2VtZW50LiBBcyBkYXRhIGNvbGxlY3RlZCBieSBtdWx0aXBsZSByZXNlYXJjaA0KICBncm91cHMgZ3Jvd3MsIGl0IGlzIGluY3JlYXNpbmdseSBmZWFzaWJsZSB0byBpbnZlc3RpZ2F0ZSB0aGUgcmVwbGljYWJpbGl0eSBvZg0KICBjbHVzdGVyaW5nIHByb2NlZHVyZXMsIHRoYXQgaXMsIHRoZWlyIGFiaWxpdHkgdG8gY29uc2lzdGVudGx5IHJlY292ZXINCiAgYmlvbG9naWNhbGx5IG1lYW5pbmdmdWwgY2x1c3RlcnMgYWNyb3NzIHNldmVyYWwgZGF0YSBzZXRzLiBJbiB0aGlzIHBhcGVyLCB3ZQ0KICByZXZpZXcgbWV0aG9kcyBmb3IgcmVwbGljYWJpbGl0eSBvZiBjbHVzdGVyaW5nIGFuYWx5c2VzLCBhbmQgZGlzY3VzcyBhIG5vdmVsDQogIGZyYW1ld29yayBmb3IgZXZhbHVhdGluZyBjcm9zcy1zdHVkeSBjbHVzdGVyaW5nIHJlcGxpY2FiaWxpdHksIHVzZWZ1bCB3aGVuIHR3bw0KICBvciBtb3JlIHN0dWRpZXMgYXJlIGF2YWlsYWJsZS4gT3VyIGFwcHJvYWNoIGNhbiBiZSBhcHBsaWVkIHRvIGFueSBjbHVzdGVyaW5nDQogIGFsZ29yaXRobSBhbmQgY2FuIGVtcGxveSBkaWZmZXJlbnQgbWVhc3VyZXMgb2Ygc2ltaWxhcml0eSBiZXR3ZWVuIHBhcnRpdGlvbnMNCiAgdG8gcXVhbnRpZnkgcmVwbGljYWJpbGl0eSwgZ2xvYmFsbHkgKGkuZS4sIGZvciB0aGUgd2hvbGUgc2FtcGxlKSBhcyB3ZWxsIGFzDQogIGxvY2FsbHkgKGkuZS4sIGZvciBpbmRpdmlkdWFsIGNsdXN0ZXJzKS4gVXNpbmcgZXhwZXJpbWVudHMgb24gc3ludGhldGljIGFuZA0KICByZWFsIGdlbmUgZXhwcmVzc2lvbiBkYXRhLCB3ZSBpbGx1c3RyYXRlIHRoZSB1c2VmdWxuZXNzIG9mIG91ciBwcm9jZWR1cmUgdG8NCiAgZXZhbHVhdGUgaWYgdGhlIHNhbWUgY2x1c3RlcnMgYXJlIGlkZW50aWZpZWQgY29uc2lzdGVudGx5IGFjcm9zcyBhIGNvbGxlY3Rpb24NCiAgb2YgZGF0YSBzZXRzLn0sDQogIHVybCA9IHtodHRwczovL3Byb2plY3RldWNsaWQub3JnL2pvdXJuYWxzL3N0YXRpc3RpY2FsLXNjaWVuY2Uvdm9sdW1lLTM4L2lzc3VlLTIvQ3Jvc3MtU3R1ZHktUmVwbGljYWJpbGl0eS1pbi1DbHVzdGVyLUFuYWx5c2lzLzEwLjEyMTQvMjItU1RTODcxLnNob3J0fSwNCiAgdXJsZGF0ZSA9IHsyMDIzLTA4LTIyfSwNCiAga2V5d29yZHMgPSB7Y2x1c3RlcmluZzsgbXVsdGlwbGUgc3R1ZGllczsgcmVwbGljYWJpbGl0eX0sDQogIGxhbmd1YWdlID0ge2VufQ0KfQ0KDQpAQVJUSUNMRXtXYWxkcm9uMjAxNC15diwNCiAgdGl0bGUgPSB7Q29tcGFyYXRpdmUgbWV0YS1hbmFseXNpcyBvZiBwcm9nbm9zdGljIGdlbmUgc2lnbmF0dXJlcyBmb3INCiAgbGF0ZS1zdGFnZSBvdmFyaWFuIGNhbmNlcn0sDQogIGF1dGhvciA9IHtXYWxkcm9uLCBMZXZpIGFuZCBIYWliZS1LYWlucywgQmVuamFtaW4gYW5kIEN1bGhhbmUsIEFlZMOtbiBDIGFuZA0KICBSaWVzdGVyLCBNYXJrdXMgYW5kIERpbmcsIEppZSBhbmQgV2FuZywgWGluIFZpY3RvcmlhIGFuZCBBaG1hZGlmYXIsIE1haG5heiBhbmQNCiAgVHlla3VjaGV2YSwgU3ZpdGxhbmEgYW5kIEJlcm5hdSwgQ2hyaXN0b3BoIGFuZCBSaXNjaCwgVGhvbWFzIGFuZCBHYW56ZnJpZWQsDQogIEJlbmphbWluIEZyZWRlcmljayBhbmQgSHV0dGVuaG93ZXIsIEN1cnRpcyBhbmQgQmlycmVyLCBNaWNoYWVsIGFuZCBQYXJtaWdpYW5pLA0KICBHaW92YW5uaX0sDQogIGpvdXJuYWx0aXRsZSA9IHtKLiBOYXRsLiBDYW5jZXIgSW5zdC59LA0KICBwdWJsaXNoZXIgPSB7T3hmb3JkIFVuaXZlcnNpdHkgUHJlc3MgKE9VUCl9LA0KICB2b2x1bWUgPSB7MTA2fSwNCiAgaXNzdWUgPSB7NX0sDQogIHBhZ2VzID0ge2RqdTA0OX0sDQogIGRhdGUgPSB7MjAxNC0wNC0wM30sDQogIGRvaSA9IHsxMC4xMDkzL2puY2kvZGp1MDQ5fSwNCiAgcG1jID0ge1BNQzQ1ODA1NTR9LA0KICBwbWlkID0gezI0NzAwODAxfSwNCiAgaXNzbiA9IHswMDI3LTg4NzQsMTQ2MC0yMTA1fSwNCiAgYWJzdHJhY3QgPSB7QkFDS0dST1VORDogT3ZhcmlhbiBjYW5jZXIgaXMgdGhlIGZpZnRoIG1vc3QgY29tbW9uIGNhdXNlIG9mDQogIGNhbmNlciBkZWF0aHMgaW4gd29tZW4gaW4gdGhlIFVuaXRlZCBTdGF0ZXMuIE51bWVyb3VzIGdlbmUgc2lnbmF0dXJlcyBvZg0KICBwYXRpZW50IHByb2dub3NpcyBoYXZlIGJlZW4gcHJvcG9zZWQsIGJ1dCBkaXZlcnNlIGRhdGEgYW5kIG1ldGhvZHMgbWFrZSB0aGVzZQ0KICBkaWZmaWN1bHQgdG8gY29tcGFyZSBvciB1c2UgaW4gYSBjbGluaWNhbGx5IG1lYW5pbmdmdWwgd2F5LiBXZSBzb3VnaHQgdG8NCiAgaWRlbnRpZnkgc3VjY2Vzc2Z1bCBwdWJsaXNoZWQgcHJvZ25vc3RpYyBnZW5lIHNpZ25hdHVyZXMgdGhyb3VnaCBzeXN0ZW1hdGljDQogIHZhbGlkYXRpb24gdXNpbmcgcHVibGljIGRhdGEuIE1FVEhPRFM6IEEgc3lzdGVtYXRpYyByZXZpZXcgaWRlbnRpZmllZCAxNA0KICBwcm9nbm9zdGljIG1vZGVscyBmb3IgbGF0ZS1zdGFnZSBvdmFyaWFuIGNhbmNlci4gRm9yIGVhY2gsIHdlIGV2YWx1YXRlZCBpdHMgMSkNCiAgcmVpbXBsZW1lbnRhdGlvbiBhcyBkZXNjcmliZWQgYnkgdGhlIG9yaWdpbmFsIHN0dWR5LCAyKSBwZXJmb3JtYW5jZSBmb3INCiAgcHJvZ25vc2lzIG9mIG92ZXJhbGwgc3Vydml2YWwgaW4gaW5kZXBlbmRlbnQgZGF0YSwgYW5kIDMpIHBlcmZvcm1hbmNlIGNvbXBhcmVkDQogIHdpdGggcmFuZG9tIGdlbmUgc2lnbmF0dXJlcy4gV2UgY29tcGFyZWQgYW5kIHJhbmtlZCBtb2RlbHMgYnkgdmFsaWRhdGlvbiBpbiAxMA0KICBwdWJsaXNoZWQgZGF0YXNldHMgY29tcHJpc2luZyAxMjUxIHByaW1hcmlseSBoaWdoLWdyYWRlLCBsYXRlLXN0YWdlIHNlcm91cw0KICBvdmFyaWFuIGNhbmNlciBwYXRpZW50cy4gQWxsIHRlc3RzIG9mIHN0YXRpc3RpY2FsIHNpZ25pZmljYW5jZSB3ZXJlIHR3by1zaWRlZC4NCiAgUkVTVUxUUzogVHdlbHZlIHB1Ymxpc2hlZCBtb2RlbHMgaGFkIDk1XCUgY29uZmlkZW5jZSBpbnRlcnZhbHMgb2YgdGhlIEMtaW5kZXgNCiAgdGhhdCBkaWQgbm90IGluY2x1ZGUgdGhlIG51bGwgdmFsdWUgb2YgMC41OyBlaWdodCBvdXRwZXJmb3JtZWQgOTcuNVwlIG9mDQogIHNpZ25hdHVyZXMgaW5jbHVkaW5nIHRoZSBzYW1lIG51bWJlciBvZiByYW5kb21seSBzZWxlY3RlZCBnZW5lcyBhbmQgdHJhaW5lZCBvbg0KICB0aGUgc2FtZSBkYXRhLiBUaGUgZm91ciB0b3AtcmFua2VkIG1vZGVscyBhY2hpZXZlZCBvdmVyYWxsIHZhbGlkYXRpb24NCiAgQy1pbmRpY2VzIG9mIDAuNTYgdG8gMC42MCBhbmQgc2hhcmVkIGFudGljb3JyZWxhdGlvbiB3aXRoIGV4cHJlc3Npb24gb2YgaW1tdW5lDQogIHJlc3BvbnNlIHBhdGh3YXlzLiBNb3N0IG1vZGVscyBkZW1vbnN0cmF0ZWQgbG93ZXIgYWNjdXJhY3kgaW4gbmV3IGRhdGFzZXRzDQogIHRoYW4gaW4gdmFsaWRhdGlvbiBzZXRzIHByZXNlbnRlZCBpbiB0aGVpciBwdWJsaWNhdGlvbi4gQ09OQ0xVU0lPTlM6IFRoaXMNCiAgYW5hbHlzaXMgcHJvdmlkZXMgZGVmaW5pdGl2ZSBzdXBwb3J0IGZvciBhIGhhbmRmdWwgb2YgcHJvZ25vc3RpYyBtb2RlbHMgYnV0DQogIGFsc28gY29uZmlybXMgdGhhdCB0aGVzZSByZXF1aXJlIGltcHJvdmVtZW50IHRvIGJlIG9mIGNsaW5pY2FsIHZhbHVlLiBUaGlzDQogIHdvcmsgYWRkcmVzc2VzIG91dHN0YW5kaW5nIGNvbnRyb3ZlcnNpZXMgaW4gdGhlIG92YXJpYW4gY2FuY2VyIGxpdGVyYXR1cmUgYW5kDQogIHByb3ZpZGVzIGEgcmVwcm9kdWNpYmxlIGZyYW1ld29yayBmb3IgbWV0YS1hbmFseXRpYyBldmFsdWF0aW9uIG9mIGdlbmUNCiAgc2lnbmF0dXJlcy59LA0KICB1cmwgPSB7aHR0cHM6Ly9hY2FkZW1pYy5vdXAuY29tL2puY2kvYXJ0aWNsZS1hYnN0cmFjdC8xMDYvNS9kanUwNDkvMjYwNjk3OX0sDQogIGxhbmd1YWdlID0ge2VufQ0KfQ0KDQpAQVJUSUNMRXtHYW56ZnJpZWQyMDEzLXV0LA0KICB0aXRsZSA9IHtjdXJhdGVkT3ZhcmlhbkRhdGE6IGNsaW5pY2FsbHkgYW5ub3RhdGVkIGRhdGEgZm9yIHRoZSBvdmFyaWFuIGNhbmNlcg0KICB0cmFuc2NyaXB0b21lfSwNCiAgYXV0aG9yID0ge0dhbnpmcmllZCwgQmVuamFtaW4gRnJlZGVyaWNrIGFuZCBSaWVzdGVyLCBNYXJrdXMgYW5kIEhhaWJlLUthaW5zLA0KICBCZW5qYW1pbiBhbmQgUmlzY2gsIFRob21hcyBhbmQgVHlla3VjaGV2YSwgU3ZpdGxhbmEgYW5kIEphemljLCBJbmEgYW5kIFdhbmcsDQogIFhpbiBWaWN0b3JpYSBhbmQgQWhtYWRpZmFyLCBNYWhuYXogYW5kIEJpcnJlciwgTWljaGFlbCBKIGFuZCBQYXJtaWdpYW5pLA0KICBHaW92YW5uaSBhbmQgSHV0dGVuaG93ZXIsIEN1cnRpcyBhbmQgV2FsZHJvbiwgTGV2aX0sDQogIGpvdXJuYWx0aXRsZSA9IHtEYXRhYmFzZSAoT3hmb3JkKX0sDQogIHB1Ymxpc2hlciA9IHtPeGZvcmQgVW5pdmVyc2l0eSBQcmVzcyAoT1VQKX0sDQogIHZvbHVtZSA9IHsyMDEzfSwNCiAgcGFnZXMgPSB7YmF0MDEzfSwNCiAgZGF0ZSA9IHsyMDEzLTA0LTAyfSwNCiAgZG9pID0gezEwLjEwOTMvZGF0YWJhc2UvYmF0MDEzfSwNCiAgcG1jID0ge1BNQzM2MjU5NTR9LA0KICBwbWlkID0gezIzNTUwMDYxfSwNCiAgaXNzbiA9IHsxNzU4LTA0NjN9LA0KICBhYnN0cmFjdCA9IHtUaGlzIGFydGljbGUgaW50cm9kdWNlcyBhIG1hbnVhbGx5IGN1cmF0ZWQgZGF0YSBjb2xsZWN0aW9uIGZvcg0KICBnZW5lIGV4cHJlc3Npb24gbWV0YS1hbmFseXNpcyBvZiBwYXRpZW50cyB3aXRoIG92YXJpYW4gY2FuY2VyIGFuZCBzb2Z0d2FyZSBmb3INCiAgcmVwcm9kdWNpYmxlIHByZXBhcmF0aW9uIG9mIHNpbWlsYXIgZGF0YWJhc2VzLiBUaGlzIHJlc291cmNlIHByb3ZpZGVzDQogIHVuaWZvcm1seSBwcmVwYXJlZCBtaWNyb2FycmF5IGRhdGEgZm9yIDI5NzAgcGF0aWVudHMgZnJvbSAyMyBzdHVkaWVzIHdpdGgNCiAgY3VyYXRlZCBhbmQgZG9jdW1lbnRlZCBjbGluaWNhbCBtZXRhZGF0YS4gSXQgYWxsb3dzIHVzZXJzIHRvIGVmZmljaWVudGx5DQogIGlkZW50aWZ5IHN0dWRpZXMgYW5kIHBhdGllbnQgc3ViZ3JvdXBzIG9mIGludGVyZXN0IGZvciBhbmFseXNpcyBhbmQgdG8gcGVyZm9ybQ0KICBtZXRhLWFuYWx5c2lzIGltbWVkaWF0ZWx5IHdpdGhvdXQgdGhlIGNoYWxsZW5nZXMgcG9zZWQgYnkgaGFybW9uaXppbmcNCiAgaGV0ZXJvZ2VuZW91cyBtaWNyb2FycmF5IHRlY2hub2xvZ2llcywgc3R1ZHkgZGVzaWducywgZXhwcmVzc2lvbiBkYXRhDQogIHByb2Nlc3NpbmcgbWV0aG9kcyBhbmQgY2xpbmljYWwgZGF0YSBmb3JtYXRzLiBXZSBjb25maXJtIHRoYXQgdGhlIHJlY2VudGx5DQogIHByb3Bvc2VkIGJpb21hcmtlciBDWENMMTIgaXMgYXNzb2NpYXRlZCB3aXRoIHBhdGllbnQgc3Vydml2YWwsIGluZGVwZW5kZW50bHkNCiAgb2Ygc3RhZ2UgYW5kIG9wdGltYWwgc3VyZ2ljYWwgZGVidWxraW5nLCB3aGljaCB3YXMgcG9zc2libGUgb25seSB0aHJvdWdoDQogIG1ldGEtYW5hbHlzaXMgb3dpbmcgdG8gaW5zdWZmaWNpZW50IHNhbXBsZSBzaXplcyBvZiB0aGUgaW5kaXZpZHVhbCBzdHVkaWVzLg0KICBUaGUgZGF0YWJhc2UgaXMgaW1wbGVtZW50ZWQgYXMgdGhlIGN1cmF0ZWRPdmFyaWFuRGF0YSBCaW9jb25kdWN0b3IgcGFja2FnZSBmb3INCiAgdGhlIFIgc3RhdGlzdGljYWwgY29tcHV0aW5nIGxhbmd1YWdlLCBwcm92aWRpbmcgYSBjb21wcmVoZW5zaXZlIGFuZCBmbGV4aWJsZQ0KICByZXNvdXJjZSBmb3IgY2xpbmljYWxseSBvcmllbnRlZCBpbnZlc3RpZ2F0aW9uIG9mIHRoZSBvdmFyaWFuIGNhbmNlcg0KICB0cmFuc2NyaXB0b21lLiBUaGUgcGFja2FnZSBhbmQgcGlwZWxpbmUgZm9yIHByb2R1Y2luZyBpdCBhcmUgYXZhaWxhYmxlIGZyb20NCiAgaHR0cDovL2JjYi5kZmNpLmhhcnZhcmQuZWR1L292YXJpYW5jYW5jZXIufSwNCiAgdXJsID0ge2h0dHBzOi8vYWNhZGVtaWMub3VwLmNvbS9kYXRhYmFzZS9hcnRpY2xlL2RvaS8xMC4xMDkzL2RhdGFiYXNlL2JhdDAxMy8zMzA5Nzg/dmlldz1sb25nfSwNCiAgbGFuZ3VhZ2UgPSB7ZW59DQp9DQoNCkBBUlRJQ0xFe1BhdGlsMjAxOC1obSwNCiAgdGl0bGUgPSB7VHJhaW5pbmcgcmVwbGljYWJsZSBwcmVkaWN0b3JzIGluIG11bHRpcGxlIHN0dWRpZXN9LA0KICBhdXRob3IgPSB7UGF0aWwsIFByYXNhZCBhbmQgUGFybWlnaWFuaSwgR2lvdmFubml9LA0KICBqb3VybmFsdGl0bGUgPSB7UHJvYy4gTmF0bC4gQWNhZC4gU2NpLiBVLiBTLiBBLn0sDQogIHB1Ymxpc2hlciA9IHtOYXRpb25hbCBBY2FkZW15IG9mIFNjaWVuY2VzfSwNCiAgdm9sdW1lID0gezExNX0sDQogIGlzc3VlID0gezExfSwNCiAgcGFnZXMgPSB7MjU3OC0yNTgzfSwNCiAgZGF0ZSA9IHsyMDE4LTAzLTEzfSwNCiAgZG9pID0gezEwLjEwNzMvcG5hcy4xNzA4MjgzMTE1fSwNCiAgcG1jID0ge1BNQzU4NTY1MDR9LA0KICBwbWlkID0gezI5NTMxMDYwfSwNCiAgaXNzbiA9IHswMDI3LTg0MjQsMTA5MS02NDkwfSwNCiAgYWJzdHJhY3QgPSB7VGhpcyBhcnRpY2xlIGNvbnNpZGVycyByZXBsaWNhYmlsaXR5IG9mIHRoZSBwZXJmb3JtYW5jZSBvZg0KICBwcmVkaWN0b3JzIGFjcm9zcyBzdHVkaWVzLiBXZSBzdWdnZXN0IGEgZ2VuZXJhbCBhcHByb2FjaCB0byBpbnZlc3RpZ2F0aW5nIHRoaXMNCiAgaXNzdWUsIGJhc2VkIG9uIGVuc2VtYmxlcyBvZiBwcmVkaWN0aW9uIG1vZGVscyB0cmFpbmVkIG9uIGRpZmZlcmVudCBzdHVkaWVzLg0KICBXZSBxdWFudGlmeSBob3cgdGhlIGNvbW1vbiBwcmFjdGljZSBvZiB0cmFpbmluZyBvbiBhIHNpbmdsZSBzdHVkeSBhY2NvdW50cyBpbg0KICBwYXJ0IGZvciB0aGUgb2JzZXJ2ZWQgY2hhbGxlbmdlcyBpbiByZXBsaWNhYmlsaXR5IG9mIHByZWRpY3Rpb24gcGVyZm9ybWFuY2UuDQogIFdlIGFsc28gaW52ZXN0aWdhdGUgd2hldGhlciBlbnNlbWJsZXMgb2YgcHJlZGljdG9ycyB0cmFpbmVkIG9uIG11bHRpcGxlDQogIHN0dWRpZXMgY2FuIGJlIGNvbWJpbmVkLCB1c2luZyB1bmlxdWUgY3JpdGVyaWEsIHRvIGRlc2lnbiByb2J1c3QgZW5zZW1ibGUNCiAgbGVhcm5lcnMgdHJhaW5lZCB1cGZyb250IHRvIGluY29ycG9yYXRlIHJlcGxpY2FiaWxpdHkgaW50byBkaWZmZXJlbnQgY29udGV4dHMNCiAgYW5kIHBvcHVsYXRpb25zLn0sDQogIHVybCA9IHtodHRwOi8vZHguZG9pLm9yZy8xMC4xMDczL3BuYXMuMTcwODI4MzExNX0sDQogIHVybGRhdGUgPSB7MjAyMy0wOC0yMn0sDQogIGtleXdvcmRzID0ge2Nyb3NzLXN0dWR5IHZhbGlkYXRpb247IGVuc2VtYmxlIGxlYXJuaW5nOyBtYWNoaW5lIGxlYXJuaW5nOw0KICByZXBsaWNhYmlsaXR5OyB2YWxpZGF0aW9uO3JlcGxpY2F0aW9uLXN1bW1lci1zY2hvb2wtMjAyM30sDQogIGxhbmd1YWdlID0ge2VufQ0KfQ0KDQo=" download="refs_to_download.bib"> Download .bib file</a></button></h2>
 <p><br></p>
 <div class="footer footer-default">
 
 </div>
-<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
 <div id="ref-Brenner1997-yq" class="csl-entry" role="listitem">
-Brenner, H, and O Gefeller. 1997. <span>“Variation of Sensitivity, Specificity, Likelihood Ratios and Predictive Values with Disease Prevalence.”</span> <em>Stat. Med.</em> 16 (May): 981–91. <a href="https://doi.org/10.1002/(sici)1097-0258(19970515)16:9<981::aid-sim510>3.0.co;2-n">https://doi.org/10.1002/(sici)1097-0258(19970515)16:9&lt;981::aid-sim510&gt;3.0.co;2-n</a>.
+Brenner, H., &amp; Gefeller, O. (1997). Variation of sensitivity, specificity, likelihood ratios and predictive values with disease prevalence. <em>Stat. Med.</em>, <em>16</em>, 981–991. <a href="https://doi.org/10.1002/(sici)1097-0258(19970515)16:9<981::aid-sim510>3.0.co;2-n">https://doi.org/10.1002/(sici)1097-0258(19970515)16:9&lt;981::aid-sim510&gt;3.0.co;2-n</a>
 </div>
 <div id="ref-Carpenter2000-dm" class="csl-entry" role="listitem">
-Carpenter, J, and J Bithell. 2000. <span>“Bootstrap Confidence Intervals: When, Which, What? A Practical Guide for Medical Statisticians.”</span> <em>Stat. Med.</em> 19 (May): 1141–64. <a href="https://doi.org/10.1002/(sici)1097-0258(20000515)19:9<1141::aid-sim479>3.0.co;2-f">https://doi.org/10.1002/(sici)1097-0258(20000515)19:9&lt;1141::aid-sim479&gt;3.0.co;2-f</a>.
+Carpenter, J., &amp; Bithell, J. (2000). Bootstrap confidence intervals: When, which, what? A practical guide for medical statisticians. <em>Stat. Med.</em>, <em>19</em>, 1141–1164. <a href="https://doi.org/10.1002/(sici)1097-0258(20000515)19:9<1141::aid-sim479>3.0.co;2-f">https://doi.org/10.1002/(sici)1097-0258(20000515)19:9&lt;1141::aid-sim479&gt;3.0.co;2-f</a>
 </div>
 <div id="ref-Ganzfried2013-ut" class="csl-entry" role="listitem">
-Ganzfried, Benjamin Frederick, Markus Riester, Benjamin Haibe-Kains, Thomas Risch, Svitlana Tyekucheva, Ina Jazic, Xin Victoria Wang, et al. 2013. <span>“curatedOvarianData: Clinically Annotated Data for the Ovarian Cancer Transcriptome.”</span> <em>Database (Oxford)</em> 2013 (April): bat013. <a href="https://doi.org/10.1093/database/bat013">https://doi.org/10.1093/database/bat013</a>.
+Ganzfried, B. F., Riester, M., Haibe-Kains, B., Risch, T., Tyekucheva, S., Jazic, I., Wang, X. V., Ahmadifar, M., Birrer, M. J., Parmigiani, G., Huttenhower, C., &amp; Waldron, L. (2013). curatedOvarianData: Clinically annotated data for the ovarian cancer transcriptome. <em>Database (Oxford)</em>, <em>2013</em>, bat013. <a href="https://doi.org/10.1093/database/bat013">https://doi.org/10.1093/database/bat013</a>
 </div>
 <div id="ref-Masoero2023-wb" class="csl-entry" role="listitem">
-Masoero, Lorenzo, Emma Thomas, Giovanni Parmigiani, Svitlana Tyekucheva, and Lorenzo Trippa. 2023. <span>“Cross-Study Replicability in Cluster Analysis.”</span> <em>Stat. Sci.</em> 38 (May): 303–16. <a href="https://doi.org/10.1214/22-sts871">https://doi.org/10.1214/22-sts871</a>.
+Masoero, L., Thomas, E., Parmigiani, G., Tyekucheva, S., &amp; Trippa, L. (2023). Cross-study replicability in cluster analysis. <em>Stat. Sci.</em>, <em>38</em>, 303–316. <a href="https://doi.org/10.1214/22-sts871">https://doi.org/10.1214/22-sts871</a>
 </div>
 <div id="ref-Parmigiani2023-dr" class="csl-entry" role="listitem">
-Parmigiani, Giovanni. 2023. <span>“Defining Replicability of Prediction Rules.”</span> <em>arXiv [Stat.ME]</em>. <a href="http://arxiv.org/abs/2305.01518">http://arxiv.org/abs/2305.01518</a>.
+Parmigiani, G. (2023). Defining replicability of prediction rules. In <em>arXiv [stat.ME]</em>. <a href="http://arxiv.org/abs/2305.01518">http://arxiv.org/abs/2305.01518</a>
 </div>
 <div id="ref-Patil2018-hm" class="csl-entry" role="listitem">
-Patil, Prasad, and Giovanni Parmigiani. 2018. <span>“Training Replicable Predictors in Multiple Studies.”</span> <em>Proc. Natl. Acad. Sci. U. S. A.</em> 115 (March): 2578–83. <a href="https://doi.org/10.1073/pnas.1708283115">https://doi.org/10.1073/pnas.1708283115</a>.
+Patil, P., &amp; Parmigiani, G. (2018). Training replicable predictors in multiple studies. <em>Proc. Natl. Acad. Sci. U. S. A.</em>, <em>115</em>, 2578–2583. <a href="https://doi.org/10.1073/pnas.1708283115">https://doi.org/10.1073/pnas.1708283115</a>
 </div>
 <div id="ref-Waldron2014-yv" class="csl-entry" role="listitem">
-Waldron, Levi, Benjamin Haibe-Kains, Aedín C Culhane, Markus Riester, Jie Ding, Xin Victoria Wang, Mahnaz Ahmadifar, et al. 2014. <span>“Comparative Meta-Analysis of Prognostic Gene Signatures for Late-Stage Ovarian Cancer.”</span> <em>J. Natl. Cancer Inst.</em> 106 (April): dju049. <a href="https://doi.org/10.1093/jnci/dju049">https://doi.org/10.1093/jnci/dju049</a>.
+Waldron, L., Haibe-Kains, B., Culhane, A. C., Riester, M., Ding, J., Wang, X. V., Ahmadifar, M., Tyekucheva, S., Bernau, C., Risch, T., Ganzfried, B. F., Huttenhower, C., Birrer, M., &amp; Parmigiani, G. (2014). Comparative meta-analysis of prognostic gene signatures for late-stage ovarian cancer. <em>J. Natl. Cancer Inst.</em>, <em>106</em>, dju049. <a href="https://doi.org/10.1093/jnci/dju049">https://doi.org/10.1093/jnci/dju049</a>
 </div>
 </div>
 </section></section>

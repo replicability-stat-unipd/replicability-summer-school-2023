@@ -20,6 +20,8 @@ $presentation-font-size-root: 30px;
 
 /*-- scss:rules --*/
 
+// ----------------  FINAL SLIDE
+
 .final-slide {
   background-color: $final-slide-bg!important;
   padding-top: 25%;
@@ -33,21 +35,34 @@ $presentation-font-size-root: 30px;
   color: $main-color!important;
 }
 
-.cons::before {
-  content: "❌ ";
+// ----------------  TWEAKS
+
+// pro-cons
+
+.pros ul li::marker {
+  content: "✅    ";
+  font-size: 80%;
 }
 
-.pros::before {
-  content: "✅ ";
+.cons ul li::marker {
+  content: "❌   ";
+  font-size: 80%;
 }
+
+// important
 
 .imp {
   color: $important;
   font-weight: bold;
 }
 
-// SLIDE NUMBER
+// hide menu button
 
+.reveal .slide-menu-button {
+  display: none!important;
+}
+
+// ----------------  SLIDE NUMBER
 
 .reveal .final-slide .slide-number {
   font-size: 100px;
@@ -58,33 +73,8 @@ $presentation-font-size-root: 30px;
   color: black; 
 }
 
-p code:not(.sourceCode){
-  font-size:          75%;
-  font-weight:        400;
-  color:              #231F20;
-  background:         #E8EDEE;
-  border-radius:      3px;
-  padding:            1px 1px 1px 1px;
-}
-
-.section {
-    background-color: $main-color!important;
-    color: #F3F3F3!important;
-}
-
-.extra h2{
-  color: #D63168!important;
-}
-
-.extra h2::before{
-  content: "💬";
-}
-
-.section h1::before{
-  content: "> \00a0";
-}
-
 // hide slide number trick https://github.com/quarto-dev/quarto-cli/discussions/5566#discussioncomment-5925054
+
 .reveal .slide-number > a[href*='title-slide'] {
   display: none;
 }
@@ -101,9 +91,39 @@ p code:not(.sourceCode){
   display: none!important;
 }
 
-.reveal .slide-menu-button {
-  display: none!important;
+// ----------------  CODE
+
+.reveal code {
+  font-size:70%;
+  background: lightgray;
+  color: black;
+  border-radius: 1ch;
+  padding-block: 0.2ch;
+  padding-inline: 1ch;
 }
+
+// ----------------  EXTRA SLIDES
+
+.extra h2{
+  color: #D63168!important;
+}
+
+.extra h2::before{
+  content: "💬";
+}
+
+// ----------------  SECTION SLIDES
+
+.section {
+  background-color: $main-color!important;
+  color: #F3F3F3!important;
+}
+
+.section h1::before{
+  content: "> \00a0";
+}
+
+// ----------------  QUESTIONS SLIDES
 
 .question h1 {
   color: black!important;
@@ -112,6 +132,8 @@ p code:not(.sourceCode){
 .question h1::before{
   content:"❓\00a0";
 }
+
+/// ----------------  NOTATION SLIDE
 
 .notation-slide h2{
   text-align: center;

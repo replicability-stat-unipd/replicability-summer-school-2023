@@ -24,7 +24,7 @@ for(i in 1:nrow(sim)){ # iterate for each condition
                        tau2 = sim$tau2[i],
                        n0 = sim$n[i],
                        n1 = sim$n[i])
-    fit <- rma(yi, vi, data = dat, method = "REML")
+    fit <- srma(yi, vi, data = dat, method = "REML")
     pval[j] <- fit$pval
   }
   sim$power[i] <- mean(pval <= alpha) # calculate power

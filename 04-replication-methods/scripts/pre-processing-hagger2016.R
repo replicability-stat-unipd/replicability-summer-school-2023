@@ -41,9 +41,9 @@ dat$type <- "replication"
 orig <- data.frame(id = 0, NA, NA, NA, NA, NA, NA, yi = 0.62, vi = 0.02^2, type = "original")
 names(orig) <- names(dat)
 
-dat <- rbind(orig, dat)
+hagger2016 <- rbind(orig, dat)
 
 # saving
 
-saveRDS(dat, "04-replication-methods/objects/hagger2016_clean.rds")
-save(dat, file = "data/hagger2016.rda")
+saveRDS(hagger2016, "04-replication-methods/objects/hagger2016.rds")
+save(hagger2016, file = "data/hagger2016.rda")

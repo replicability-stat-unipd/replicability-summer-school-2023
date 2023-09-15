@@ -16,10 +16,13 @@ filters:
     - parse-latex
 format:
   filor-revealjs:
-    toc: false
+    toc: true
+    toc-depth: 1
     margin: 0.1
+    theme: "../../files/custom.css"
 bibliography: "`r filor::fil()$bib`"
-notation-slide: true
+csl: "`r filor::fil()$csl`"
+notation-slide: false
 params:
   solutions: true
 ---
@@ -29,12 +32,7 @@ params:
 knitr::opts_chunk$set(echo = TRUE,
                       dev = "svg",
                       fig.align = "center")
-```
-
-```{css, include = FALSE}
-.reveal > .slides > section > section {
-    transform-style: flat;
-}
+solutions <- params$solutions == "yes"
 ```
 
 ## Setup R
@@ -82,22 +80,28 @@ qtab <- function(data){
 }
 
 funs <- filor::get_funs(here("R", "utils-biostat.R"))
+filor::write_bib_rmd(input_bib = filor::fil()$bib, output_bib = "refs_to_download.bib")
 ```
 
 ### Loading Data
 
 ```{r}
 #| label: data
-datl <- readRDS(here("03-biostatistics", "objects", "gene_data_clean.rds"))
+datl <- readRDS(here("03-biostatistics", "objects", "ovarianclean.rds"))
 ```
 
-# Reproducibility in Biostatistics
+# Replicability in Biostatistics {.section}
 
-## Reproducibility in Biostatistics
+## Replicability in Biostatistics
 
 - In *Biostatistics* is common to have a similar experimental setup (i.e., same genes and variables), repeated across multiple studies. Replicability in this framework refer to how consistent is a variable (e.g., gene expression) in predicting a certain outcome across different dataset.
 
+. . .
+
 - Recent research suggest the importance of cross-study training of prediction models to improve the overall predictive performance and replicability [@Patil2018-hm; @Parmigiani2023-dr; @Masoero2023-wb]
+
+. . .
+
 
 - We will try to assess how a certain variable consistently (or not) predict a certain outcome using a binary classification and meta-analytic approach
 
@@ -107,9 +111,9 @@ datl <- readRDS(here("03-biostatistics", "objects", "gene_data_clean.rds"))
 
 For this lecture we will use:
 
-- Gene expression data
+- **Gene expression** data
 - Analysis of **contingency tables**
-- Binary classifiers
+- **Binary classifiers**
 - **Receiver Operating Characteristic** (ROC) curves
 - The **Youden index** to analyze ROC curves
 
@@ -140,14 +144,6 @@ data(package = "curatedOvarianData")$result[, "Item"]
 
 ## Data structure
 
-```{r}
-#| echo: false
-data(package = "curatedOvarianData")$result[, c("Item", "Title")] |> 
-  data.frame()
-```
-
-## Data structure
-
 For example, we want to extract the `ARHGAP5` and `ZNF487` *genes* and `debulking` and `tumorstage` *phenotype* variables.
 
 ```{r}
@@ -170,7 +166,7 @@ filor::show_file(here("03-biostatistics/scripts/gene-data-preprocessing.R"), how
 The pre-processing create a dataframe with datasets having both the `debulking` variable and all genes in common. In this way we can analyze and compare genes among all datasets.
 
 ```{r}
-datl <- readRDS(here("03-biostatistics", "objects", "gene_data_clean.rds"))
+datl <- readRDS(here("03-biostatistics", "objects", "ovarianclean.rds"))
 str(datl, max.level = 1)
 ```
 
@@ -313,7 +309,7 @@ dd |>
   kable(col.names = c("", "", "", "", ""),
         align = "c",
         escape = FALSE) |> 
-  kable_styling() |>
+  kable_styling(font_size = 23) |>
   column_spec(1:2, bold = TRUE) |> 
   add_header_above(c(" " = 2, 1, 0, "")) |> 
   add_header_above(c(" " = 2, "Truth" = 2, "")) |> 
@@ -796,14 +792,14 @@ Some questions are:
 
 We saw that working with contingency tables requires giving labels to the actual data. In this case we set the following conventions:
 
-- the **suboptimal** state is coded as 0 i.e. having the *disease*
-- the **optimal** state is coded as 1 i.e. not having the *disease*
+- the **suboptimal** state is coded as 0 i.e. not having the *disease*
+- the **optimal** state is coded as 1 i.e. having the *disease*
 - higher values of gene expressions ($x_{g_i}$) are associated with higher probability of **suboptimal** state
 - we call the **state** (S) the variable representing the *TRUE* surgery outcome and **test** (T) the predicted outcome using the gene expression. Thus e.g. $p(T_1|S_1)$ is the Sensitivity
 
 ## Steps
 
-1. Load and explore the data (you can the `gene_data_clean.rds` or using the raw `curatedOvarianData`)
+1. Load and explore the data (you can the `ovarianclean.rds` or using the raw `curatedOvarianData`)
 2. Calculate the prevalence ($p(S_1)$) of the **optimal** debulking for each dataset
 3. Choose a gene ($g_i$) and plot the $x_i$ values according to the debulking
 4. Calculate the Sensitivity, Specificity, Youden's J and PPV for all datasets based on the same gene.
@@ -814,29 +810,14 @@ We saw that working with contingency tables requires giving labels to the actual
 ## Steps (optional)
 
 6. [Extra] Try to compute the standard error of the AUC using a *bootstrapping* approach. Essentially you need to sample with replacement (see `sample()`) $n$ rows from the dataset (where $n$ is the total number of rows), compute and store the AUC, repeat the process several times (at least 10000 times), calculate the standard deviation of the boostrapped AUC distribution.
-  - There is also the `pROC::ci.auc()` function with the `bootstrap` option. Try to manually code the boostrap and eventually compare the results
+  - There is also the `pROC::ci.auc()` function with the `bootstrap` option. Try to manually code the bootstrap and eventually compare the results
   - The confidence interval can be calculated with the `quantile()` function [see @Carpenter2000-dm] with the desired coverage (e.g., 95%)
   - Further details are available here https://cran.r-project.org/web/packages/pROC/pROC.pdf (page 5, Section Bootstrap)
 
-# Proposed solutions {.section}
-
-{{< include 03-biostatistics-solutions.qmd >}}
-
-## References
-
-```{r}
-#| echo: false
-filor::write_bib_rmd(input_bib = filor::fil()$bib,
-                     output_bib = "refs_to_download.bib")  |>
-  downloadthis::download_file(
-  output_name = "references",
-  button_label = "Download the bibtex file",
-  button_type = "danger",
-  has_icon = TRUE,
-  icon = "fa fa-book",
-  self_contained = TRUE
-)
+```{r eval = solutions, child="03-biostatistics-solutions.qmd"}
 ```
+
+## References `r link_refs()` {.smaller}
 
 </br>
 

@@ -1,10 +1,58 @@
-## 1. Importing and exploring
+---
+title: Meta-Analysis and Multi-Lab Replication studies
+subtitle: Proposed Solutions
+date: last-modified
+date-format: "[18-22 September] YYYY"
+author: 
+  - name: Filippo Gambarota
+    email: filippo.gambarota@unipd.it
+    orcid: "`r filor::fil()$orcid`"
+    twitter: "fgambarota"
+    github: "filippogambarota"
+  - name: Gianmarco Altoè
+    email: gianmarco.altoe@unipd.it
+    orcid: "0000-0003-1154-9528"
+final-slide: true
+filters: 
+    - code-fullscreen
+    - line-highlight
+format:
+  filor-revealjs:
+    toc: false
+    margin: 0.1
+    theme: "../../files/custom.css"
+csl: "`r filor::fil()$csl`"
+bibliography: "`r filor::fil()$bib`"
+code-link: true
+notation-slide: false
+---
+
+```{r}
+#| label: setup
+knitr::opts_chunk$set(echo = TRUE,
+                      dev = "svg",
+                      fig.align = "center")
+```
+
+```{r}
+#| label: packages
+#| include: false
+library(ggdist)
+library(here)
+library(tidyverse) # for data manipulation
+library(metafor) # for meta-analysis
+devtools::load_all() # load all utils functions
+```
+
+# Proposed solutions {.section}
+
+## @Oliveira2023-yf
 
 We have `nrow(oliveira2023)` studies, and this is the dataset structure with some summary statistics:
 
 ```{r}
 #| eval: false
-oliveira2023 <- readRDS(here("02-meta-analysis/objects/oliveira2023_clean.rds"))
+oliveira2023 <- readRDS(here("02-meta-analysis/objects/oliveira2023.rds"))
 
 str(oliveira2023)
 

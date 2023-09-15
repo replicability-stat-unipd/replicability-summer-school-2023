@@ -21,7 +21,9 @@ filters:
     - code-fullscreen
 format:
   filor-revealjs:
-    theme: custom.css
+    theme: "../../files/custom.css"
+    code-link: true
+    code-line-numbers: false
 ---
 
 ```{r}
@@ -29,7 +31,11 @@ format:
 knitr::opts_chunk$set(echo = TRUE,
                       dev = "svg",
                       fig.align = "center")
+
+library(kableExtra)
 ```
+
+# Doing research is hard... {.center}
 
 ## Doing research is hard...
 
@@ -47,7 +53,7 @@ knitr::opts_chunk$set(echo = TRUE,
 
 . . .
 
-- you have to **analyze data**, create figures and tables
+- you have to **analyze data**, create **figures** and **tables**
 
 . . .
 
@@ -55,8 +61,10 @@ knitr::opts_chunk$set(echo = TRUE,
 
 ## Doing research is hard...
 
+<center>
+
 ::: {layout-nrow=2}
-![](img/meme1.jpg){width=300}
+![](img/meme1.jpg){width=200}
 
 ![](img/meme2.jpg){width=300}
 
@@ -65,7 +73,9 @@ knitr::opts_chunk$set(echo = TRUE,
 ![](img/meme4.png){width=300}
 :::
 
-## Doing reproducible research is even harder...
+</center>
+
+## Doing <u>reproducible</u> research is even harder... `r emo::ji("scream")`
 
 . . .
 
@@ -89,7 +99,7 @@ knitr::opts_chunk$set(echo = TRUE,
 
 . . .
 
-- ### A general purpose (or flexible enough) [programming language]{.imp}
+- ### A general purpose (or flexible enough) [programming language]{.imp} such as `r icons::fontawesome("r-project")` or `r icons::fontawesome("python")`
 
 . . .
 
@@ -109,7 +119,7 @@ knitr::opts_chunk$set(echo = TRUE,
 
 > R is a free software environment for statistical computing and graphics.
 
-- Is not a proper general purpose programming language (such as C++ or Python).
+- (TBH) Is not a proper general purpose programming language (such as C++ or Python).
 - New extensions (*packages*) allow R to do pretty everything (file manager, image processing, webscraping, etc.)
 - It is free and open-source
 - The community is extremely active and keep growing
@@ -118,61 +128,87 @@ knitr::opts_chunk$set(echo = TRUE,
 
 The CRAN is the repository where package developers upload their packages and other users can install them.
 
+<center>
+
 ```{r}
 #| echo: false
 knitr::include_url("https://cran.r-project.org/web/packages/")
 ```
 
+</center>
+
+. . .
+
+As the saying goes: if something exist, there is for sure an R package for doing it! :smile:
+
 ## R - PYPL Index
 
-| **Rank<br>** | **Language** | **Share** | **1-year trend** |
-|:---:|:---:|:---:|:---:|
-| 1 | Python | 28.04 % | +0.3 % |
-| 2 | Java | 15.78 % | -1.3 % |
-| 3 | JavaScript | 9.27 % | -0.2 % |
-| 4 | C# | 6.77 % | -0.2 % |
-| 5 | C/C++ | 6.59 % | +0.4 % |
-| 6 | PHP | 5.01 % | -0.4 % |
-| 7 | R | 4.35 % | +0.0 % |
-| 8 | TypeScript | 3.09 % | +0.3 % |
-| 9 | Swift | 2.54 % | +0.5 % |
-| 10 | Objective-C | 2.15 % | +0.1 % |
-| 11 | Rust | 2.14 % | +0.5 % |
-| 12 | Go | 1.93 % | -0.2 % |
-| 13 | Kotlin | 1.77 % | -0.0 % |
-| 14 | Matlab | 1.63 % | +0.1 % |
-: Source: [https://pypl.github.io/PYPL.html](https://pypl.github.io/PYPL.html)
+```{r}
+#| echo: false
+#| output: asis
+#| tbl-cap: "Source: [https://pypl.github.io/PYPL.html](https://pypl.github.io/PYPL.html)"
+rpop <- data.frame(
+  stringsAsFactors = FALSE,
+       check.names = FALSE,
+              Rank = c(1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 11L),
+          Language = c("Python","Java","JavaScript",
+                       "C#","C/C++","PHP","R","TypeScript","Swift",
+                       "Objective-C","Rust"),
+             Share = c("28.04%","15.78%","9.27%",
+                       "6.77%","6.59%","5.01%","4.35%","3.09%","2.54%",
+                       "2.15%","2.14%"),
+    `1-year.trend` = c("0.30%","-1.30%","-0.20%",
+                       "-0.20%","0.40%","-0.40%","0.00%","0.30%","0.50%",
+                       "0.10%","0.50%")
+)
+
+rpop |> 
+    kable(format = "html") |> 
+    kable_styling(font_size = 25)
+```
 
 ## R - PYPL Index
 
 The popularity is on a different scale compared to Python but still increasing:
 
-![](img/pypl-r.png)
+![Source: [https://pypl.github.io/PYPL.html](https://pypl.github.io/PYPL.html)
+](img/pypl.svg){height=500}
 
 ## R or Python?
 
-- Python is a good alternative. Personally I use and enjoy python but I do most of my work in R.
+- Python is a good alternative. Personally, I use and enjoy python but I do most of my work in R.
 
-- Python is a very general-purpose language more powerful for general task.
+- Python is a very general-purpose language more powerful for general tasks.
 
-- I find python very useful for programming cognitive experiments, image processing and manipulation, automatizing tasks and communicating with the operating system.
+- I find python very useful for programming cognitive experiments, image processing, automatizing tasks and interacting with the operating system
 
-- R is still a little bit superior in terms of plotting and data manipulation. Python as more machine learning and related implementations.
+- R is still a little bit superior in terms of data manipulation and visualization. Python is faster and more powerful for complex machine learning.
 
 ## Modern R
 
-R is quite powerful and changes a lot during the last years. The scope of this week is not getting started with R but few concepts are important:
+. . .
 
-- **functional programming**
-- **tidy** approach
+- For purist programmers, R is somehow weird: arrays starts with 1, object-oriented programming is hidden, a lot of built-in vectorized functions, etc. See [The R Inferno](https://www.burns-stat.com/pages/Tutor/R_inferno.pdf) book for an overview.
+
+. . .
+
+- Despite the weirdness, R have the majority of common programming paradigms (functions, conditionals, iterations, etc.).
+
+. . .
+
+- The scope of this week is not providing an introduction to R but I would put the focus on two topics for a modern usage of R:
+    - **functional programming**
+    - the **tidy** approach
 
 ## Functional Programming
 
 > In computer science, functional programming is a programming paradigm where programs are constructed by applying and composing functions.
 
-Despite R can be used both with an imperative and object-oriented approach, the functional side is quite powerful.
+Despite R can be used both with an **imperative** and **object-oriented approach**, the functional side is quite powerful.
 
-## Functional Programming
+Actually, functional programming is quite complex. Here we refer to breaking down our code into small functions. These functions can be function from packages, custom or anonymous functions.
+
+## Functional Programming, example...
 
 We have a dataset (`mtcars`) and we want to calculate the mean, median, standard deviation, minimum and maximum of each column and store the result in a table.
 
@@ -183,7 +219,7 @@ str(mtcars)
 
 ## Functional Programming
 
-The standard option is using a `for` loop, iterating trhough columns, calculate the values and store into another data structure.
+The standard (~imperative) option is using a `for` loop, iterating through columns, calculate the values and store into another data structure.
 
 ```{r}
 ncols <- ncol(mtcars)
@@ -204,7 +240,9 @@ results
 
 ## Functional Programming
 
-We can decompose (and symplify the problem) by individuating the repeated patterns and writing a function.
+We can decompose (and symplify the problem) by writing a function and looping through columns.
+
+. . .
 
 ```{r}
 summ <- function(x){
@@ -223,13 +261,71 @@ results
 
 ## Functional Programming
 
+. . .
+
 We can be even more minimalistic by removing the `for` loop and using the `*apply` family that provide a series of compact iterative method.
+
+. . .
 
 ```{r}
 results <- lapply(mtcars, summ)
 results <- do.call(rbind, results)
 results
 ```
+
+## Functional Programming, `*apply`
+
+. . .
+
+The `*apply` family is one of the best tool in R. The idea is pretty simple: apply a function to each element of a list. 
+
+. . .
+
+The powerful side is that in R everything can be considered as a list. A vector is a list of single elements, a dataframe is a list of columns etc.
+
+. . .
+
+Internally, R is still using a `for` loop but the verbose part (preallocation, choosing the iterator, indexing) is encapsulated into the `*apply` function.
+
+. . .
+
+```{r}
+#| eval: false
+means <- rep(0, ncol(mtcars))
+for(i in 1:length(means)){
+  means[i] <- mean(mtcars[[i]])
+}
+
+# the same with sapply
+means <- sapply(mtcars, mean)
+```
+
+## `for` loops are bad?
+
+`for` loops are the core of each operation in R (and in every programming language). For complex operation thery are more readable and effective compared to `*apply`. In R we need extra care for writing efficent `for` loops.
+
+Extremely slow, no preallocation:
+
+```{r}
+#| eval: false
+res <- c()
+for(i in 1:1000){
+  # do something
+  res[i] <- x
+}
+```
+
+Very fast, no difference compared to `*apply`
+
+```{r}
+#| eval: false
+res <- rep(0, 1000)
+for(i in 1:length(res)){
+  # do something
+  res[i] <- x
+}
+```
+
 
 ## Why functional programming?
 
@@ -249,14 +345,17 @@ results
 
 - Advanced R by Hadley Wickham, section on Functional Programming ([https://adv-r.hadley.nz/fp.html](https://adv-r.hadley.nz/fp.html))
 - Hands-On Programming with R by Garrett Grolemund [https://rstudio-education.github.io/hopr/](https://rstudio-education.github.io/hopr/)
-- [https://carpentries-incubator.github.io/open-science-with-r/07-making-functions-r/index.html](https://carpentries-incubator.github.io/open-science-with-r/07-making-functions-r/index.html)
 - Hadley Wickham: [The Joy of Functional Programming (for Data Science)](https://www.youtube.com/watch?v=bzUmK0Y07ck)
 - [Bruno Rodrigues Youtube Channel](https://www.youtube.com/@brodriguesco/videos)
+
+<center>
 
 ::: {layout-ncol=2}
 ![Advanced R](img/advanced-r.jpg){width=200 fig-align="center"}
 ![Hands-on Programming With R](img/hand-on-programming.jpeg){width=200 fig-align="center"}
 :::
+
+</center>
 
 ## The Tidy approach
 
@@ -325,6 +424,7 @@ iris |>
   mutate(wi = runif(n())) |>
   ggplot(aes(x = Sepal.Length, y = Petal.Width, color = Species)) +
   geom_point(aes(size = wi)) +
+  geom_smooth(method = "lm", se = FALSE)
   guides(size = "none") +
   theme_minimal(15)
 ```
@@ -338,8 +438,39 @@ iris |>
   mutate(wi = runif(n())) |>
   ggplot(aes(x = Sepal.Length, y = Petal.Width, color = Species)) +
   geom_point(aes(size = wi)) +
+  geom_smooth(method = "lm", se = FALSE) +
   guides(size = "none") +
   theme_minimal(15)
+```
+
+### Base R Code
+
+More verbose, more hard coding, more steps and intermidiate objects.
+
+```{r}
+#| eval: false
+iris_l <- split(iris, iris$Species)
+lms <- lapply(iris_l, function(x) lm(Petal.Width ~ Sepal.Length, data = x))
+
+plot(iris$Sepal.Length, iris$Petal.Width, col = as.numeric(iris$Species), pch = 19)
+abline(lms[[1]], col = 1, lwd = 2)
+abline(lms[[2]], col = 2, lwd = 2)
+abline(lms[[3]], col = 3, lwd = 2)
+legend("topleft", legend = levels(iris$Species), fill = 1:3)
+```
+
+### Base R Result
+
+```{r}
+#| echo: false
+iris_l <- split(iris, iris$Species)
+lms <- lapply(iris_l, function(x) lm(Petal.Width ~ Sepal.Length, data = x))
+
+plot(iris$Sepal.Length, iris$Petal.Width, col = as.numeric(iris$Species), pch = 19)
+abline(lms[[1]], col = 1, lwd = 2)
+abline(lms[[2]], col = 2, lwd = 2)
+abline(lms[[3]], col = 3, lwd = 2)
+legend("topleft", legend = levels(iris$Species), fill = 1:3)
 ```
 
 :::
@@ -375,9 +506,9 @@ Beyond the coding part, the markup language is the core element of a literate pr
 - XML
 - ...
 
-## LaTex
+## LaTeX ^[[https://latexbase.com/](https://latexbase.com/d/47cd5b2a-3a74-47cc-ac13-042c9760e192)]
 
-<iframe src="https://latexbase.com/d/47cd5b2a-3a74-47cc-ac13-042c9760e192" height="700" width="1000" style="border: 1px solid #464646;display:block;" allowfullscreen="" allow="autoplay"></iframe>
+<iframe src="https://latexbase.com/d/47cd5b2a-3a74-47cc-ac13-042c9760e192" height="500" width="1000" style="border: 1px solid #464646;display:block;" allowfullscreen="" allow="autoplay"></iframe>
 
 ## HTML
 
@@ -409,9 +540,10 @@ più recentemente da software di impaginazione come Aldus PageMaker, che include
 </body>
 </html>
 ```
-## Markdown
 
-<iframe src="https://markdownlivepreview.com/" height="700" width="1000" style="border: 1px solid #464646;display:block;" allowfullscreen="" allow="autoplay"></iframe>
+## Markdown^[[https://markdownlivepreview.com/](https://markdownlivepreview.com/)]
+
+<iframe src="https://markdownlivepreview.com/" height="500" width="1000" style="border: 1px solid #464646;display:block;" allowfullscreen="" allow="autoplay"></iframe>
 
 ## Markdown
 
@@ -420,6 +552,21 @@ Markdown is one of the most popular markup languages for several reasons:
 - easy to write and read compared to Latex and HTML
 - easy to convert from Markdown to basically every other format using `pandoc`
 - easy to implement new features
+
+## Markdown (source code)
+
+```markdown
+## Markdown
+
+Markdown is one of the most popular markup languages for several reasons:
+
+- easy to write and read compared to Latex and HTML
+- easy to convert from Markdown to basically every other format using `pandoc`
+- easy to implement new features
+```
+. . .
+
+Also the source code can be used, compared to Latex or HTML, to take notes and read. Latex and HTML need to be compiled otherwise they are very hard to read.
 
 ## What's wrong about Microsoft Word?
 
@@ -453,34 +600,50 @@ In MS Word (or similar) we need to produce everyting outside and then manually p
 
 Quarto ([https://quarto.org/](https://quarto.org/)) is the evolution of R Markdown that integrate a programming language with the Markdown markup language. It is very simple but quite powerful.
 
+<center>
+
 :::: {.columns}
 ::: {.column width='50%'}
 
-![](https://raw.githubusercontent.com/rstudio/hex-stickers/main/SVG/rmarkdown.svg)
+![](https://raw.githubusercontent.com/rstudio/hex-stickers/main/SVG/rmarkdown.svg){width="300px"}
 
 :::
 ::: {.column width='50%'}
 
-![](https://raw.githubusercontent.com/rstudio/hex-stickers/main/SVG/quarto.svg)
+![](https://raw.githubusercontent.com/rstudio/hex-stickers/main/SVG/quarto.svg){width="300px"}
 
 :::
 ::::
 
-# Let's see a practical example!
+</center>
+
+## Basic Markdown
+
+Markdown can be learned in minutes. You can go to the following link [https://quarto.org/docs/authoring/markdown-basics.html](https://quarto.org/docs/authoring/markdown-basics.html) and try to understand the syntax.
+
+<iframe src='https://quarto.org/docs/authoring/markdown-basics.html' style='width:1000px; height:500px;'></iframe>
+
+# Let's see a practical example! {.section}
 
 ## More about Quarto and R Markdown
 
-The topic is extremely vast. You can do pretty everything, a website, thesis, your CV, etc.
+The topic is extremely vast. You can do everything in Quarto, a website, thesis, your CV, etc.
 
 - Yihui Xie - R Markdown Cookbook [https://bookdown.org/yihui/rmarkdown-cookbook/](https://bookdown.org/yihui/rmarkdown-cookbook/)
 - Yihui Xie - R Markdown: The Definitive Guide [https://bookdown.org/yihui/rmarkdown/](https://bookdown.org/yihui/rmarkdown/)
 - Quarto documentation [https://quarto.org/docs/guide/](https://quarto.org/docs/guide/)
 
-# GIT and Github
+# Git and Github {.section}
+
+## Git and Github
 
 The basic idea is to track changes within a folder, assign a `message` and eventually a `tag` to a specific version obtaining a version hystory. The version history is completely navigable, you can go back to a previous version of the code.
 
+. . .
+
 The are advanced features like `branches` for creating an independent version of the project to test new features and then `merge` into the main streamline.
+
+. . .
 
 The entire (local) Git project can be hosted on Github to improve collaboration. Other people or collaborators can `clone` the repository and `push` their changes to the project.
 
@@ -529,6 +692,10 @@ Now our local repository is linked with the remote repository. Every time we do 
 
 If you worked on the repository from another machine or a colleague add some changes, you can do `git pull` and your local machine will be updated.
 
+</br>
+
+The repository `git-test` is online and can be seen here [filippogambarota/git-test](https://github.com/filippogambarota/git-test).
+
 ## Github
 
 An now let's see on Github the result:
@@ -567,6 +734,8 @@ It's very easy to create a new project, then you simply need to add files and sh
 
 ![](img/osf-test.png)
 
+The project can be accessed here (depending on the visibility) [https://osf.io/yf9tg/](https://osf.io/yf9tg/).
+
 ## Open Science Framework
 
 ### OSF and Github
@@ -586,7 +755,8 @@ OSF is also linked to a popular service for preprints called PsyArXiv [https://p
 
 In general, I highly suggest the online book **The Open Science Manual** [https://arca-dpss.github.io/manual-open-science/](https://arca-dpss.github.io/manual-open-science/) written by my friend **Claudio Zandonella** and **Davide Massidda** where these and other topics are explained in details:
 
-```{r}
-#| echo: false
-knitr::include_url("https://arca-dpss.github.io/manual-open-science/")
-```
+<center>
+
+<iframe src='https://arca-dpss.github.io/manual-open-science/' style='width:1000px; height:500px;'></iframe>
+
+</center>

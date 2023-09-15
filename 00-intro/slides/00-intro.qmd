@@ -21,7 +21,7 @@ filters:
     - code-fullscreen
 format:
   filor-revealjs:
-    theme: custom.css
+    theme: "../../files/custom.css"
 ---
 
 ```{r}
@@ -31,16 +31,17 @@ knitr::opts_chunk$set(echo = TRUE,
                       fig.align = "center")
 ```
 
-# About us {.about}
+# About us {.section}
 
 ## About us {.about}
 
 :::: {.columns}
 ::: {.column width='40%'}
 
-### Filippo Gambarota
+### Filippo Gambarota 
 
-![](img/fg.jpg){width=300 fig-align="center"}
+![[`r icons::fontawesome("envelope")`](mailto:filippo.gambarota@unipd.it) [`r icons::fontawesome("globe")`](filippogambarota.xyz) [`r icons::fontawesome("github")`](github.com/filippogambarota)  
+](img/fg.jpg){width=200 fig-align="center"}
 
 - [**Postdoctoral Researcher**]{.imp}: Department of Developmental and Social Psychology
 - **Research interests**: meta-analysis, psychometrics, data simulation, programming
@@ -52,12 +53,21 @@ knitr::opts_chunk$set(echo = TRUE,
 
 ### Gianmarco Altoè
 
-![](img/ga.png){width=300 fig-align="center"}
+![[`r icons::fontawesome("envelope")`](mailto:gianmarco.altoe@unipd.it) [`r icons::fontawesome("globe")`](https://www.didattica.unipd.it/off/docente/6A8AF57C3282433554D456917489A756) ](img/ga.png){width=200 fig-align="center"}
 
 - [**Associate Professor**]{.imp}: Department of Developmental and Social Psychology
+- **Research interests**: psychological testing, Bayesian statistics, Power and design analysis
 
 :::
 ::::
+
+## About us {.about}
+
+We are part of the **Psicostat** research group. A interdisciplinary research group interested in Psychology and Statistics. `r icons::fontawesome("globe")` [psicostat.dpss.psy.unipd.it](https://psicostat.dpss.psy.unipd.it/)
+
+<center>
+<iframe src="https://psicostat.dpss.psy.unipd.it/" style="width:1000px; height:500px"></iframe>
+</center>
 
 # Program {.section}
 
@@ -82,11 +92,17 @@ knitr::opts_chunk$set(echo = TRUE,
 
 . . .
 
-- 💻 For code debugging, exercises or general questions we can use this shared online code editor [etherpad.wikimedia.org/p/replicability-summer-school-2023](https://etherpad.wikimedia.org/p/replicability-summer-school-2023). Basically we can write code together.
+- 💻 For code debugging, exercises or general questions we can use this shared online code editor [etherpad.wikimedia.org/p/replicability-summer-school-2023](https://etherpad.wikimedia.org/p/replicability-summer-school-2023). Basically we can write code together `r emo::ji("smile")`
 
 . . .
 
 - ⚙️ We are going to use mainly the slides, R Studio, the Github website and the shared editor. **I suggest you to bookmark the Github website and the editor**
+
+# The website {.section}
+
+::: {.notes}
+Show the website here
+:::
 
 ## Other info
 

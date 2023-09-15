@@ -1,9 +1,49 @@
+---
+title: Exploring Replicability in Biostatistics
+subtitle: Proposed Solutions
+date: last-modified
+date-format: "[18-22 September] YYYY"
+author: 
+  - name: Filippo Gambarota
+    email: filippo.gambarota@unipd.it
+    orcid: "`r filor::fil()$orcid`"
+  - name: Gianmarco Altoè
+    email: gianmarco.altoe@unipd.it
+    orcid: "0000-0003-1154-9528"
+final-slide: false
+filters: 
+    - code-fullscreen
+    - parse-latex
+format:
+  filor-revealjs:
+    toc: false
+    margin: 0.1
+    theme: "../../files/custom.css"
+bibliography: "`r filor::fil()$bib`"
+csl: "`r filor::fil()$csl`"
+notation-slide: false
+---
+
+### Packages
+
+```{r}
+#| include: false
+library(tidyverse) # for data manipulation
+library(curatedOvarianData) # workshop data
+library(pROC)
+devtools::load_all() # load all functions for the workshop
+library(here)
+library(kableExtra)
+```
+
+# Proposed solutions {.section}
+
 ## Setup
 
 Firstly, let's subset the dataset selecting our predictor (i.e., the **debulking**), the dataset name and the selected gene.
 
 ```{r}
-datl <- readRDS(here("03-biostatistics", "objects", "gene_data_clean.rds"))
+datl <- readRDS(here("03-biostatistics", "objects", "ovarianclean.rds"))
 dat <- dplyr::bind_rows(datl, .id = "dataset")
 
 # creating the binary debulking variable

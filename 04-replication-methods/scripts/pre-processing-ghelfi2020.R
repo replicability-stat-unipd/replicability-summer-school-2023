@@ -37,9 +37,9 @@ names(dat) <- c("id", "m_exp", "m_ctrl", "s_exp", "s_ctrl", "n_exp", "n_ctrl", "
 
 # combining
 
-dat <- rbind(orig, dat)
+ghelfi2020 <- rbind(orig, dat)
 
 # saving
 
-saveRDS(dat, "04-replication-methods/objects/ghelfi2020_clean.rds")
-save(dat, file = "data/ghelfi2020.rda")
+saveRDS(ghelfi2020, "04-replication-methods/objects/ghelfi2020.rds")
+save(ghelfi2020, file = "data/ghelfi2020.rda")
