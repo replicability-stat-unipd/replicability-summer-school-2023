@@ -2,7 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
-
 _site
 .sass-cache
 .jekyll-metadata
@@ -13,3 +12,4 @@ deprecated/
 examples/**/**.log
 examples/**/**.tex
 examples/**/**.html
+test
