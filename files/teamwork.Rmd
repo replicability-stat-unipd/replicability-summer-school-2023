@@ -1,0 +1,10 @@
+# Teamwork
+
+For the teamwork you can find the papers in the table below. You can download the entire folder (`papers/pdfs`) from the following [link](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/replicability-stat-unipd/replicability-summer-school-2023/tree/master/papers).
+
+```{r}
+#| results: asis
+#| echo: false
+df[, c("Authors", "Title", "File")] |> 
+    kable(format = "markdown")
+```
