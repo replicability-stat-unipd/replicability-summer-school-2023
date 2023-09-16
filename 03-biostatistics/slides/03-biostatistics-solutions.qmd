@@ -84,6 +84,7 @@ head(prev)
 ```{r}
 #| code-fold: true
 #| warnign: false
+#| out-width: 70%
 prev |> 
   ggplot(aes(x = p*100, y = dataset)) +
   geom_col(width = 0.2) +
