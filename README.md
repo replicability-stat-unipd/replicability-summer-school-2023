@@ -157,53 +157,50 @@ for the workshops. To reproduce the slides, plots and the overall
 project (not required to follow the workshops) there are extra packages.
 You can avoid installing it but this is a complete list:
 
-| package            | version    | repository             |
-|:-------------------|:-----------|:-----------------------|
-| bayestestR         | 0.13.1     | CRAN                   |
-| bib2df             | 1.1.1      | CRAN                   |
-| Biobase            | 2.60.0     | bioconductor           |
-| broom              | 1.0.5      | CRAN                   |
-| car                | 3.1-2      | CRAN                   |
-| cli                | 3.6.1      | CRAN                   |
-| cowplot            | 1.1.1      | CRAN                   |
-| curatedOvarianData | 1.38.0     | bioconductor           |
-| devtools           | 2.4.5      | CRAN                   |
-| distributional     | 0.3.2      | CRAN                   |
-| dplyr              | 1.1.2      | CRAN                   |
-| DT                 | 0.28       | CRAN                   |
-| emo                | 0.0.0.9000 | hadley/emo             |
-| fansi              | 1.0.4      | CRAN                   |
-| filor              | 0.1.0      | filippogambarota/filor |
-| gganimate          | 1.0.8.9000 | thomasp85/gganimate    |
-| ggdist             | 3.3.0      | CRAN                   |
-| ggplot2            | 3.4.2      | CRAN                   |
-| here               | 1.0.1      | CRAN                   |
-| icons              | 0.2.0      | ropenscilabs/icon      |
-| kableExtra         | 1.3.4.9000 | haozhu233/kableExtra   |
-| knitr              | 1.43       | CRAN                   |
-| latex2exp          | 0.9.6      | CRAN                   |
-| lsr                | 0.5.2      | CRAN                   |
-| ltxplot            | 1.0.0      | alicewchen/ltxplot     |
-| magrittr           | 2.0.3      | CRAN                   |
-| metafor            | 4.2-0      | CRAN                   |
-| MetaUtility        | 2.1.2      | CRAN                   |
-| pROC               | 1.18.4     | CRAN                   |
-| purrr              | 1.0.2      | CRAN                   |
-| pwr                | 1.3-0      | CRAN                   |
-| quarto             | 1.2        | CRAN                   |
-| readxl             | 1.4.3      | CRAN                   |
-| RefManageR         | 1.4.0      | CRAN                   |
-| renv               | 1.0.1      | CRAN                   |
-| Replicate          | 1.2.0      | CRAN                   |
-| rmarkdown          | 2.23       | CRAN                   |
-| rstanarm           | 2.21.4     | CRAN                   |
-| scales             | 1.2.1      | CRAN                   |
-| shiny              | 1.7.4.1    | CRAN                   |
-| sjPlot             | 2.8.14     | CRAN                   |
-| tibble             | 3.2.1      | CRAN                   |
-| tidyr              | 1.3.0      | CRAN                   |
-| tidyverse          | 2.0.0      | CRAN                   |
-| xfun               | 0.40       | CRAN                   |
+| package            | version    | repository           |
+|:-------------------|:-----------|:---------------------|
+| bayestestR         | 0.13.1     | CRAN                 |
+| bib2df             | 1.1.1      | CRAN                 |
+| Biobase            | 2.58.0     | bioconductor         |
+| broom              | 1.0.4      | CRAN                 |
+| car                | 3.1-2      | CRAN                 |
+| cli                | 3.6.1      | CRAN                 |
+| cowplot            | 1.1.1      | CRAN                 |
+| curatedOvarianData | 1.36.0     | bioconductor         |
+| devtools           | 2.4.5      | CRAN                 |
+| distributional     | 0.3.2      | CRAN                 |
+| dplyr              | 1.1.2      | CRAN                 |
+| DT                 | 0.28       | CRAN                 |
+| emo                | 0.0.0.9000 | hadley/emo           |
+| fansi              | 1.0.4      | CRAN                 |
+| filor              | 0.1.0      | other                |
+| ggdist             | 3.2.1      | CRAN                 |
+| ggplot2            | 3.4.2      | CRAN                 |
+| here               | 1.0.1      | CRAN                 |
+| kableExtra         | 1.3.4.9000 | haozhu233/kableExtra |
+| knitr              | 1.42       | CRAN                 |
+| latex2exp          | 0.9.6      | CRAN                 |
+| lsr                | 0.5.2      | CRAN                 |
+| ltxplot            | 1.0.0      | alicewchen/ltxplot   |
+| magrittr           | 2.0.3      | CRAN                 |
+| metafor            | 4.0-0      | CRAN                 |
+| pROC               | 1.18.4     | CRAN                 |
+| purrr              | 1.0.1      | CRAN                 |
+| pwr                | 1.3-0      | CRAN                 |
+| quarto             | 1.2        | CRAN                 |
+| readxl             | 1.4.2      | CRAN                 |
+| RefManageR         | 1.4.0      | CRAN                 |
+| renv               | 0.17.3     | CRAN                 |
+| rmarkdown          | 2.21       | CRAN                 |
+| rstanarm           | 2.21.4     | CRAN                 |
+| scales             | 1.2.1      | CRAN                 |
+| shiny              | 1.7.4      | CRAN                 |
+| sjPlot             | 2.8.14     | CRAN                 |
+| stringr            | 1.5.0      | CRAN                 |
+| tibble             | 3.2.1      | CRAN                 |
+| tidyr              | 1.3.0      | CRAN                 |
+| tidyverse          | 2.0.0      | CRAN                 |
+| xfun               | 0.39       | CRAN                 |
 
 # Repository
 
@@ -295,15 +292,390 @@ For the teamwork you can find the papers in the table below. You can
 download the entire folder (`papers/pdfs`) from the following
 [link](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/replicability-stat-unipd/replicability-summer-school-2023/tree/master/papers).
 
-| Authors                                                               | Title                                                                                                           | File                                                                                                                                                                                                  |
-|:----------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Amrhein, Trafimow, and Greenland (2019)                               | Inferential Statistics as Descriptive Statistics: There Is No Replication Crisis if We Don’t Expect Replication | [pdf](papers/pdfs/Amrhein%20et%20al.%202019%20-%20Inferential%20Statistics%20as%20Descriptive%20Statistics%20-%20There%20Is%20No%20Replication%20Crisis%20if%20We%20Don’t%20Expect%20Replication.pdf) |
-| Benjamini (2020)                                                      | Selective inference: The silent killer of replicability                                                         | [pdf](papers/pdfs/Benjamini%202020%20-%20Selective%20inference%20-%20The%20silent%20killer%20of%20replicability.pdf)                                                                                  |
-| Errington, Mathur, Soderberg, Denis, Perfito, Iorns, and Nosek (2021) | Investigating the replicability of preclinical cancer biology                                                   | [pdf](papers/pdfs/Errington%20et%20al.%202021%20-%20Investigating%20the%20replicability%20of%20preclinical%20cancer%20biology.pdf)                                                                    |
-| Franklin and Howson (1984)                                            | Why do scientists prefer to vary their experiments?                                                             | [pdf](papers/pdfs/Franklin%20and%20Howson%201984%20-%20Why%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf)                                                                          |
-| Jaljuli, Benjamini, Shenhav, Panagiotou, and Heller (2023)            | Quantifying Replicability and Consistency in Systematic Reviews                                                 | [pdf](papers/pdfs/Jaljuli%20et%20al.%202023%20-%20Quantifying%20Replicability%20and%20Consistency%20in%20Systematic%20Reviews.pdf)                                                                    |
-| Ly, Etz, Marsman, and Wagenmakers (2019)                              | Replication Bayes factors from evidence updating                                                                | [pdf](papers/pdfs/Ly%20et%20al.%202019%20-%20Replication%20Bayes%20factors%20from%20evidence%20updating.pdf)                                                                                          |
-| Patil and Parmigiani (2018)                                           | Training replicable predictors in multiple studies                                                              | [pdf](papers/pdfs/Patil%20and%20Parmigiani%202018%20-%20Training%20replicable%20predictors%20in%20multiple%20studies.pdf)                                                                             |
-| Steegen, Tuerlinckx, Gelman, and Vanpaemel (2016)                     | Increasing Transparency Through a Multiverse Analysis                                                           | [pdf](papers/pdfs/Steegen%20et%20al.%202016%20-%20Increasing%20Transparency%20Through%20a%20Multiverse%20Analysis.pdf)                                                                                |
-| Yang, Youyou, and Uzzi (2020)                                         | Estimating the deep replicability of scientific findings using human and artificial intelligence                | [pdf](papers/pdfs/Yang%20et%20al.%202020%20-%20Estimating%20the%20deep%20replicability%20of%20scientific%20findings%20using%20human%20and%20artificial%20intelligence.pdf)                            |
-| Zondervan-Zwijnenburg, Van de Schoot, and Hoijtink (2022)             | Testing ANOVA Replications by Means of the Prior Predictive p-Value                                             | [pdf](papers/pdfs/Zondervan-Zwijnenburg%20et%20al.%202022%20-%20Testing%20ANOVA%20Replications%20by%20Means%20of%20the%20Prior%20Predictive%20p-Value.pdf)                                            |
+    #> 
+    #> Attaching package: 'dplyr'
+    #> The following object is masked from 'package:kableExtra':
+    #> 
+    #>     group_rows
+    #> The following objects are masked from 'package:stats':
+    #> 
+    #>     filter, lag
+    #> The following objects are masked from 'package:base':
+    #> 
+    #>     intersect, setdiff, setequal, union
+    #> Warning in left_join(df[, c("group", "Authors", "Title")], students, by = "group"): Detected an unexpected many-to-many relationship between `x` and `y`.
+    #> ℹ Row 1 of `x` matches multiple rows in `y`.
+    #> ℹ Row 1 of `y` matches multiple rows in `x`.
+    #> ℹ If a many-to-many relationship is expected, set `relationship =
+    #>   "many-to-many"` to silence this warning.
+
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+Group
+</th>
+<th style="text-align:left;">
+Name
+</th>
+<th style="text-align:left;">
+Surname
+</th>
+<th style="text-align:left;">
+Authors
+</th>
+<th style="text-align:left;">
+Title
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;vertical-align: middle !important;" rowspan="6">
+1
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="2">
+Amani
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="2">
+Al Tawil
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="6">
+Collins (1984)<br><br>Franklin and Howson (1984)
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="6">
+<a href="papers/pdfs/Collins%201984%20-%20When%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf">When
+do scientists prefer to vary their
+experiments?</a><br><br><a href="papers/pdfs/Franklin%20and%20Howson%201984%20-%20Why%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf">Why
+do scientists prefer to vary their experiments?</a>
+</td>
+</tr>
+<tr>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="2">
+Francesco
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="2">
+Seganfreddo
+</td>
+</tr>
+<tr>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="2">
+Giovanni
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="2">
+Toto
+</td>
+</tr>
+<tr>
+</tr>
+<tr>
+<td style="text-align:right;vertical-align: middle !important;" rowspan="3">
+2
+</td>
+<td style="text-align:left;">
+Elena
+</td>
+<td style="text-align:left;">
+Bortolato
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+Zondervan-Zwijnenburg, Van de Schoot, and Hoijtink (2022)
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+<a href="papers/pdfs/Zondervan-Zwijnenburg%20et%20al.%202022%20-%20Testing%20ANOVA%20Replications%20by%20Means%20of%20the%20Prior%20Predictive%20p-Value.pdf">Testing
+ANOVA Replications by Means of the Prior Predictive p-Value</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Filippo
+</td>
+<td style="text-align:left;">
+Da Re
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Tobia
+</td>
+<td style="text-align:left;">
+Fogarin
+</td>
+</tr>
+<tr>
+<td style="text-align:right;vertical-align: middle !important;" rowspan="3">
+3
+</td>
+<td style="text-align:left;">
+Gabriele
+</td>
+<td style="text-align:left;">
+Loccioni
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+Errington, Mathur, Soderberg, Denis, Perfito, Iorns, and Nosek (2021)
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+<a href="papers/pdfs/Errington%20et%20al.%202021%20-%20Investigating%20the%20replicability%20of%20preclinical%20cancer%20biology.pdf">Investigating
+the replicability of preclinical cancer biology</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Giovanni
+</td>
+<td style="text-align:left;">
+Romanò
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Riccardo
+</td>
+<td style="text-align:left;">
+De Santis
+</td>
+</tr>
+<tr>
+<td style="text-align:right;vertical-align: middle !important;" rowspan="3">
+4
+</td>
+<td style="text-align:left;">
+Andrea
+</td>
+<td style="text-align:left;">
+Moio
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+Ly, Etz, Marsman, and Wagenmakers (2019)
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+<a href="papers/pdfs/Ly%20et%20al.%202019%20-%20Replication%20Bayes%20factors%20from%20evidence%20updating.pdf">Replication
+Bayes factors from evidence updating</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lorenzo
+</td>
+<td style="text-align:left;">
+Dell’oro
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Silvia
+</td>
+<td style="text-align:left;">
+Salvalaggio
+</td>
+</tr>
+<tr>
+<td style="text-align:right;vertical-align: middle !important;" rowspan="3">
+5
+</td>
+<td style="text-align:left;">
+Diego
+</td>
+<td style="text-align:left;">
+Bonato
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+Patil and Parmigiani (2018)
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+<a href="papers/pdfs/Patil%20and%20Parmigiani%202018%20-%20Training%20replicable%20predictors%20in%20multiple%20studies.pdf">Training
+replicable predictors in multiple studies</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Matteo
+</td>
+<td style="text-align:left;">
+Gasparin
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sofia
+</td>
+<td style="text-align:left;">
+Pedrini
+</td>
+</tr>
+<tr>
+<td style="text-align:right;vertical-align: middle !important;" rowspan="3">
+6
+</td>
+<td style="text-align:left;">
+Anna
+</td>
+<td style="text-align:left;">
+Gerna
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+Steegen, Tuerlinckx, Gelman, and Vanpaemel (2016)
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+<a href="papers/pdfs/Steegen%20et%20al.%202016%20-%20Increasing%20Transparency%20Through%20a%20Multiverse%20Analysis.pdf">Increasing
+Transparency Through a Multiverse Analysis</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Daniele
+</td>
+<td style="text-align:left;">
+Girolimetto
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Patric
+</td>
+<td style="text-align:left;">
+Dolmeta
+</td>
+</tr>
+<tr>
+<td style="text-align:right;vertical-align: middle !important;" rowspan="3">
+7
+</td>
+<td style="text-align:left;">
+Claudia
+</td>
+<td style="text-align:left;">
+Collarin
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+Yang, Youyou, and Uzzi (2020)
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+<a href="papers/pdfs/Yang%20et%20al.%202020%20-%20Estimating%20the%20deep%20replicability%20of%20scientific%20findings%20using%20human%20and%20artificial%20intelligence.pdf">Estimating
+the deep replicability of scientific findings using human and artificial
+intelligence</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="2">
+Giovanni
+</td>
+<td style="text-align:left;">
+Bocchi
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sanavio
+</td>
+</tr>
+<tr>
+<td style="text-align:right;vertical-align: middle !important;" rowspan="3">
+8
+</td>
+<td style="text-align:left;">
+Andrea
+</td>
+<td style="text-align:left;">
+Panarotto
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+Jaljuli, Benjamini, Shenhav, Panagiotou, and Heller (2023)
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+<a href="papers/pdfs/Jaljuli%20et%20al.%202023%20-%20Quantifying%20Replicability%20and%20Consistency%20in%20Systematic%20Reviews.pdf">Quantifying
+Replicability and Consistency in Systematic Reviews</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Goar
+</td>
+<td style="text-align:left;">
+Shaboian
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martina
+</td>
+<td style="text-align:left;">
+Scauda
+</td>
+</tr>
+<tr>
+<td style="text-align:right;vertical-align: middle !important;" rowspan="3">
+9
+</td>
+<td style="text-align:left;">
+Claudia
+</td>
+<td style="text-align:left;">
+Franceschini
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+Amrhein, Trafimow, and Greenland (2019)
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+<a href="papers/pdfs/Amrhein%20et%20al.%202019%20-%20Inferential%20Statistics%20as%20Descriptive%20Statistics%20-%20There%20Is%20No%20Replication%20Crisis%20if%20We%20Don%E2%80%99t%20Expect%20Replication.pdf">Inferential
+Statistics as Descriptive Statistics: There Is No Replication Crisis if
+We Don’t Expect Replication</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Giovanni
+</td>
+<td style="text-align:left;">
+Duca
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Roberto
+</td>
+<td style="text-align:left;">
+Macrì Demartino
+</td>
+</tr>
+<tr>
+<td style="text-align:right;vertical-align: middle !important;" rowspan="3">
+10
+</td>
+<td style="text-align:left;">
+Claudia
+</td>
+<td style="text-align:left;">
+Cozzolino
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+Benjamini (2020)
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+<a href="papers/pdfs/Benjamini%202020%20-%20Selective%20inference%20-%20The%20silent%20killer%20of%20replicability.pdf">Selective
+inference: The silent killer of replicability</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Daniele
+</td>
+<td style="text-align:left;">
+Tancini
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Davide
+</td>
+<td style="text-align:left;">
+Benussi
+</td>
+</tr>
+</tbody>
+</table>

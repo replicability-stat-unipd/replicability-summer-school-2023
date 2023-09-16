@@ -1,5 +1,6 @@
 ---
 output: github_document
+always_allow_html: true
 params:
     teamwork: true
     solutions: false
@@ -35,8 +36,9 @@ df <- df[order(df$AUTHOR), ]
 df$file <- sort(files)
 
 df$Authors <- sapply(df$BIBTEXKEY, function(x) Citet(bib, x))
-df$File <- sprintf("[pdf](%s)", file.path("papers/pdfs", df$file)) 
+#df$File <- sprintf("[pdf](%s)", file.path("papers/pdfs", df$file)) 
 df$Title <- unname(unlist(bib$title))
+df$Title <- sprintf('<a href="papers/pdfs/%s">%s</a>', df$file, df$Title)
 df$Title <- gsub("\\{|\\}", "", df$Title)
 df$Title <- gsub("\\n", "", df$Title)
 ```
