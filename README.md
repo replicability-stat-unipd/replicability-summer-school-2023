@@ -26,6 +26,7 @@
 - [Materials](#materials)
   - [Slides](#slides)
   - [Data](#data)
+- [Teamwork](#teamwork)
 
 # Information
 
@@ -290,26 +291,10 @@ ls()
 
 For the teamwork you can find the papers in the table below. You can
 download the entire folder (`papers/pdfs`) from the following
-[link](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/replicability-stat-unipd/replicability-summer-school-2023/tree/master/papers).
+[link](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/replicability-stat-unipd/replicability-summer-school-2023/tree/master/papers)
+or by clicking on the single paper title.
 
-    #> 
-    #> Attaching package: 'dplyr'
-    #> The following object is masked from 'package:kableExtra':
-    #> 
-    #>     group_rows
-    #> The following objects are masked from 'package:stats':
-    #> 
-    #>     filter, lag
-    #> The following objects are masked from 'package:base':
-    #> 
-    #>     intersect, setdiff, setequal, union
-    #> Warning in left_join(df[, c("group", "Authors", "Title")], students, by = "group"): Detected an unexpected many-to-many relationship between `x` and `y`.
-    #> ℹ Row 1 of `x` matches multiple rows in `y`.
-    #> ℹ Row 1 of `y` matches multiple rows in `x`.
-    #> ℹ If a many-to-many relationship is expected, set `relationship =
-    #>   "many-to-many"` to silence this warning.
-
-<table class="table" style="margin-left: auto; margin-right: auto;">
+<table class="table table-condensed" style="font-size: 13px; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:right;">
