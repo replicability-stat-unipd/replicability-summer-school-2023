@@ -20,6 +20,7 @@ format:
     toc-depth: 1
     margin: 0.1
     theme: "../../files/custom.css"
+    html-math-method: mathjax
 bibliography: "`r filor::fil()$bib`"
 csl: "`r filor::fil()$csl`"
 notation-slide: false
@@ -487,7 +488,7 @@ legend("topleft",
 
 ## Prediction interval (PI), what to expect from a replication
 
-@Spence2016-tz proposed to use the prediction interval to assess the range of effects that we could expect assuming that the original and the (hypothetical) replication study comes from the same population (i.e., successful replication).
+One problem of the previous approaches is taking into account only the uncertainty of the original or the replication study. @Patil2016-vc and @Spence2016-tz proposed a method to take into account both sources of uncertainty.
 
 If the original and replication studies comes from the same population, the sampling distribution of the difference is centered on 0 with a certain standard error $\theta_{orig} - \theta_{rep_0} \sim \mathcal{N}\left( 0, \sqrt{\sigma^2_{\hat \theta_{orig} - \hat \theta_{rep}}} \right)$ (subscript $0$ to indicate that is expected to be sampled from the same population as $\theta_{orig}$)
 
@@ -495,7 +496,7 @@ $$
 \hat \theta_{orig} \pm z_{95\%} \sqrt{\sigma^2_{\theta_{orig} - \theta_{rep}}}
 $$
 
-If factors other than standard error influence the replication result, $\theta_{rep_0}$  is expected to be contained within the 95% prediction interval.
+If factors other than standard error influence the replication result, $\theta_{rep_0}$  is not expected to be contained within the 95% prediction interval.
 
 ## Prediction interval (PI), what to expect from a replication
 
@@ -510,8 +511,6 @@ The first term is just the standard error of the difference between the two grou
 In this way we estimate an interval where, combining sampling variance from both studies and assuming that they comes from the same population, the replication should fall.
 
 ## Prediction interval (PI), what to expect from a replication
-
-Let's make a simulated example:
 
 ::: {.panel-tabset}
 
@@ -536,29 +535,12 @@ od + qnorm(c(0.025, 0.975)) * se_o_r
 
 ```{r}
 #| code-fold: true
+#| out-width: 70%
+
+par(mar = c(4, 4, 0.1, 0.1))  
 curve(dnorm(x, od, se_o_r), od - se_o_r*4, od + se_o_r*4, lwd = 2, xlab = latex2exp::TeX("$\\theta$"), ylab = "Density")
 abline(v = od + qnorm(c(0.025, 0.975)) * se_o_r, lty = "dashed")
 ```
-
-:::
-
-## Prediction interval (PI), original vs replication
-
-::: {.panel-tabset}
-
-### Theory
-
-One problem of the previous approaches is taking into account only the uncertainty of the original or the replication study. @Patil2016-vc and @Spence2016-tz proposed a method to take into account both sources of uncertainty.
-
-> What effect would we expect to see in the replication study once we have seen the original effect?
-
-Formally:
-
-$$
-\hat \theta_{orig} \pm z_{95\%} \sqrt{\sigma_{rep}^2 + \sigma_{orig}^2}
-$$
-
-Where $z_{95\%}$ is the quantile of the standard normal distribution.
 
 ### Pros/Cons
 
@@ -570,78 +552,6 @@ Where $z_{95\%}$ is the quantile of the standard normal distribution.
 - Low precise original studies lead to wide PI. For a replication study is difficult to fall outside the PI
 - Mainly for *one-to-one* replications design
 :::
-
-### Equations
-
-The idea is that the 95% of the difference between pairs of $\theta_{orig}$ and $\theta_{rep}$ correspond to the 95% PI [@Patil2016-vc; @Spence2016-tz]. If $\theta_{rep}$ falls outside the 95% PI, there is evidence that something else than sampling error (e.g., actual difference in the real effect) is influencing the results. For the example of mean difference for both studies on a $\mathcal{N}(0, 1)$ scale:
-
-$$
-\sigma^2_{orig - rep} = \sqrt{\frac{4}{2n_{orig}} + \frac{4}{2n_{rep}}}
-$$
-
-### R Code
-
-```{r}
-# original study
-n_orig <- 30
-theta_orig <- 0.5
-
-# replication study
-n_rep <- 100
-theta_rep <- 0.1
-
-eff_orig <- rnorm(1e5, theta_orig, sqrt(4/(n_orig * 2)))
-eff_rep <- rnorm(1e5, 0, sqrt(4/(n_rep * 2)))
-
-preds <- eff_orig - eff_rep
-```
-
-### Plots
-
-```{r, echo = FALSE}
-hist(preds, breaks = 50, col = "#FA9494", main = "95% Prediction Interval",
-     xlab = latex2exp::TeX("$\\theta$"))
-points(theta_rep, 100, pch = 19, cex = 2, col = "blue")
-points(theta_orig, 100, pch = 19, cex = 2, col = "firebrick")
-abline(v = quantile(preds, c(0.025, 0.975)), lty = "dashed")
-legend("topleft", legend = c("Original", "Replication"), fill = c("firebrick", "blue"))
-```
-
-### R Code with simulated data
-
-```{r}
-#| code-fold: true
-
-## original study
-n_orig <- 30
-theta_orig <- theta_from_z(2, n_orig)
-
-orig <- data.frame(
-  yi = theta_orig,
-  vi = 4/(n_orig*2)
-)
-
-orig$sei <- sqrt(orig$vi)
-orig <- summary_es(orig)
-
-## replications
-
-n_rep <- 100
-
-reps <- data.frame(
-  yi = 0.1,
-  vi = 4/(n_rep * 2)
-)
-reps$sei <- sqrt(reps$vi)
-reps <- summary_es(reps)
-```
-
-```{r}
-reps$yi # replication
-PI <- orig$yi + qnorm(c(0.025, 0.975)) * sqrt(orig$vi + reps$vi)
-names(PI) <- c("95% lower", "95% higher")
-PI
-```
 
 :::
 
