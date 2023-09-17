@@ -24,10 +24,15 @@ csl: "`r filor::fil()$csl`"
 notation-slide: false
 ---
 
+```{r}
+#| include: false
+knitr::opts_chunk$set(echo = TRUE)
+```
+
 ### Packages
 
 ```{r}
-#| include: false
+#| include: true
 library(tidyverse) # for data manipulation
 library(curatedOvarianData) # workshop data
 library(pROC)
@@ -50,7 +55,7 @@ dat <- dplyr::bind_rows(datl, .id = "dataset")
 dat$debulking01 <- ifelse(dat$debulking == "optimal", 1, 0)
 
 gene <- "ABCA1"
-dat_meta <- dat[, c("dataset", "debulking", gene)]
+dat_meta <- dat[, c("dataset", "debulking", "debulking01", gene)]
 head(dat_meta)
 ```
 
@@ -78,6 +83,8 @@ head(prev)
 
 ```{r}
 #| code-fold: true
+#| warnign: false
+#| out-width: 70%
 prev |> 
   ggplot(aes(x = p*100, y = dataset)) +
   geom_col(width = 0.2) +
@@ -112,6 +119,7 @@ In some datasets, the gene `r gene` discriminate more between the the debulking 
 ### ROC
 
 ```{r}
+#| echo: true
 roc_list <- lapply(split(dat_meta, dat_meta$dataset), 
                    function(x) pROC::roc(debulking ~ ABCA1, data = x))
 ```
@@ -119,6 +127,7 @@ roc_list <- lapply(split(dat_meta, dat_meta$dataset),
 ### Analytical method
 
 ```{r}
+#| echo: true
 aucs <- sapply(roc_list,  auc)
 # the var function is used to compute the sampling variability
 aucs_se <- sapply(roc_list, function(x) sqrt(var(x)))
@@ -144,24 +153,27 @@ auc_d |>
 ### Bootstrapping
 
 ```{r}
-boot_auc <- function(data, direction = "auto", nboot = 10){
-  aucs <- rep(0, nboot)
-  for(i in 1:nboot){
-    idx <- sample(1:nrow(data), nrow(data), replace = TRUE)
-    datb <- data[idx, ]
-    aucs[[i]] <- pROC::auc(datb[, 2] ~ datb[, 3], direction = direction, quiet = TRUE)[[1]]
-  }
-  return(aucs)
+#| echo: true
+#| cache: true
+boot_auc <- function(fit, nboot = 5e3, direction = NULL){
+    if(is.null(direction)) direction <- fit$direction
+    aucs <- rep(0, nboot)
+    for(i in 1:nboot){
+        controls <- sample(fit$controls, replace = TRUE)
+        cases <- sample(fit$cases, replace = TRUE)
+        aucs[i] <- pROC::roc(cases = cases, controls = controls, direction = direction, quiet = TRUE)$auc
+    }
+    return(aucs)
 }
 
+set.seed(2023)
 # get the direction, auto detecting direction could lead to biased AUC see https://cran.r-project.org/web/packages/pROC/pROC.pdf
-direction <- sapply(roc_list, function(x) x$direction)
 
-auc_list <- mapply(function(d, dir) boot_auc(d, dir), split(dat_meta, dat_meta$dataset), direction)
-aucs_m <-  apply(auc_list, 2, median)
-aucs_se <- apply(auc_list, 2, sd)
-aucs_ci <- apply(auc_list, 2, function(x) quantile(x, c(0.025, 0.975)))
-aucs_d <- data.frame(auc = aucs_m, se = aucs_se, lower = aucs_ci[1, ], upper = aucs_ci[2, ], dataset = names(roc_list))
+auc_list <- lapply(roc_list, boot_auc)
+aucs_se <- sapply(auc_list, sd)
+aucs_qs <- sapply(auc_list, function(x) quantile(x, c(0.025, 0.5, 0.975)))
+aucs_qs <- t(aucs_qs)
+aucs_d <- data.frame(auc = aucs_qs[, 2], se = aucs_se, lower = aucs_qs[, 1], upper = aucs_qs[, 3], dataset = names(roc_list))
 
 head(aucs_d)
 ```

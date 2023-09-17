@@ -1,7 +1,7 @@
 ---
 output: github_document
+always_allow_html: true
 params:
-    teamwork: true
     solutions: false
 ---
 
@@ -20,6 +20,8 @@ devtools::source_gist("c83e078bf8c81b035e32c3fc0cf04ee8",
 ```{r, include = FALSE}
 library(RefManageR)
 library(kableExtra)
+library(flextable)
+library(ftExtra)
 library(bib2df)
 devtools::load_all()
 ```
@@ -35,8 +37,10 @@ df <- df[order(df$AUTHOR), ]
 df$file <- sort(files)
 
 df$Authors <- sapply(df$BIBTEXKEY, function(x) Citet(bib, x))
-df$File <- sprintf("[pdf](%s)", file.path("papers/pdfs", df$file)) 
+#df$File <- sprintf("[pdf](%s)", file.path("papers/pdfs", df$file)) 
 df$Title <- unname(unlist(bib$title))
+#df$Title <- sprintf('<a href="papers/pdfs/%s">%s</a>', df$file, df$Title)
+df$Title <- sprintf("[%s](%s)", df$Title, file.path("papers/pdfs", df$file)) 
 df$Title <- gsub("\\{|\\}", "", df$Title)
 df$Title <- gsub("\\n", "", df$Title)
 ```
@@ -230,5 +234,67 @@ data("dear2019")
 ls()
 ```
 
-```{r, child="files/teamwork.Rmd", eval=params$teamwork}
+# Teamwork
+
+For the teamwork you can find the papers in the table below. You can download the entire folder (`papers/pdfs`) from the following [link](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/replicability-stat-unipd/replicability-summer-school-2023/tree/master/papers) or by clicking on the single paper title.
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| results: asis
+library(dplyr)
+df$group <- c(9, 10, 1, 3, 1, 8, 4, 5, 6, 7, 2)
+
+students <- data.frame(
+    stringsAsFactors = FALSE,
+    group = c(1L,1L,1L,2L,2L,2L,3L,3L,
+              3L,4L,4L,4L,5L,5L,5L,6L,6L,6L,7L,7L,7L,8L,
+              8L,8L,9L,9L,9L,10L,10L,10L),
+    name = c("Amani","Francesco",
+             "Giovanni ","Elena","Filippo","Tobia","Riccardo","Gabriele",
+             "Giovanni","Lorenzo","Andrea","SILVIA","Diego",
+             "Matteo","Sofia","Patric","Anna","Daniele","Giovanni",
+             "Claudia","Giovanni   ","Andrea","Martina","Goar",
+             "Giovanni","Claudia","Roberto","Davide","Claudia","Daniele"),
+    surname = c("Al Tawil","Seganfreddo",
+                "Toto","Bortolato","Da Re","Fogarin","De Santis",
+                "Loccioni","Romanò","Dell'Oro","Moio","SALVALAGGIO",
+                "Bonato","Gasparin","Pedrini","Dolmeta","Gerna",
+                "Girolimetto","Bocchi","Collarin","Sanavio","Panarotto",
+                "Scauda","Shaboian","Duca","Franceschini","Macrì Demartino",
+                "Benussi","Cozzolino","Tancini")
+)
+
+df <- left_join(df[, c("group", "Authors", "Title")], students, by = "group")
+
+df <- df |> 
+    select(group, name, surname, Authors, Title)
+names(df) <- stringr::str_to_title(names(df))
+df$Name <- stringr::str_to_title(df$Name)
+df$Surname <- stringr::str_to_title(df$Surname)
+df <- arrange(df, Group, Name, Surname)
+
+df1 <- df[df$Group == 1, ]
+
+# df[df$Group == 1, ]$Authors <- paste(unique(df1$Authors), collapse = "<br><br>")
+# df[df$Group == 1, ]$Title <- paste(unique(df1$Title), collapse = "<br><br>")
+
+df[df$Group == 1, ]$Authors <- paste(unique(df1$Authors), collapse = "\n\n")
+df[df$Group == 1, ]$Title <- paste(unique(df1$Title), collapse = "\n\n")
+
+# df |> 
+#     arrange(Group, Name, Surname) |> 
+#     kable(escape = FALSE) |> 
+#     kable_styling(bootstrap_options = c("condensed"), font_size = 13) |> 
+#     collapse_rows(c(1, 2, 3, 4, 5))
+
+df |> 
+    arrange(Group, Name, Surname) |> 
+    flextable() |> 
+    merge_v(1:5) |> 
+    theme_vanilla() |> 
+    autofit() |> 
+    ftExtra::colformat_md(part = "all") |> 
+    flextable_to_rmd()
 ```

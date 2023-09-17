@@ -13,3 +13,4 @@ examples/**/**.log
 examples/**/**.tex
 examples/**/**.html
 test
+**/*_cache
