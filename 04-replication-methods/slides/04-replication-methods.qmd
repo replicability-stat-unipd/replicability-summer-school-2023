@@ -485,13 +485,70 @@ legend("topleft",
 
 :::
 
+## Prediction interval (PI), what to expect from a replication
+
+@Spence2016-tz proposed to use the prediction interval to assess the range of effects that we could expect assuming that the original and the (hypothetical) replication study comes from the same population (i.e., successful replication).
+
+If the original and replication studies comes from the same population, the sampling distribution of the difference is centered on 0 with a certain standard error $\theta_{orig} - \theta_{rep_0} \sim \mathcal{N}\left( 0, \sqrt{\sigma^2_{\hat \theta_{orig} - \hat \theta_{rep}}} \right)$ (subscript $0$ to indicate that is expected to be sampled from the same population as $\theta_{orig}$)
+
+$$
+\hat \theta_{orig} \pm z_{95\%} \sqrt{\sigma^2_{\theta_{orig} - \theta_{rep}}}
+$$
+
+If factors other than standard error influence the replication result, $\theta_{rep_0}$  is expected to be contained within the 95% prediction interval.
+
+## Prediction interval (PI), what to expect from a replication
+
+In the case of a unstandardized mean difference we can compute the prediction interval as:
+
+$$
+\sqrt{\sigma^2_{\epsilon_{\hat \theta_{orig} - \hat \theta_{rep_0}}}} = \left( \frac{\hat \sigma^2_{o1}}{n_{o1}} +\frac{\hat \sigma^2_{o2}}{n_{o2}}\right) + \left(\frac{\hat \sigma^2_{o1}}{n_{r1}} + \frac{\hat\sigma^2_{o2}}{n_{r2}}\right)
+$$
+
+The first term is just the standard error of the difference between the two groups in the original study and the second term is the standard error of the **hypothetical** replication study assuming the same standard deviation of the original but a different $n$.
+
+In this way we estimate an interval where, combining sampling variance from both studies and assuming that they comes from the same population, the replication should fall.
+
+## Prediction interval (PI), what to expect from a replication
+
+Let's make a simulated example:
+
+::: {.panel-tabset}
+
+### R Code
+
+```{r}
+set.seed(2025)
+
+o1 <- rnorm(50, 0.5, 1) # group 1
+o2 <- rnorm(50, 0, 1) # group 2
+od <- mean(o1) - mean(o2) # effect size
+se_o <- sqrt(var(o1)/50 + var(o2)/50) # standard error of the difference
+
+n_r <- 100 # sample size replication
+
+se_o_r <- sqrt(se_o^2 + (var(o1)/100 + var(o2)/100))
+
+od + qnorm(c(0.025, 0.975)) * se_o_r
+```
+
+### Plot
+
+```{r}
+#| code-fold: true
+curve(dnorm(x, od, se_o_r), od - se_o_r*4, od + se_o_r*4, lwd = 2, xlab = latex2exp::TeX("$\\theta$"), ylab = "Density")
+abline(v = od + qnorm(c(0.025, 0.975)) * se_o_r, lty = "dashed")
+```
+
+:::
+
 ## Prediction interval (PI), original vs replication
 
 ::: {.panel-tabset}
 
 ### Theory
 
-One problem of the previous approaches is taking into account only the uncertainty of the original or the replication study. @Patil2016-vc proposed a method to take into account both sources of uncertainty.
+One problem of the previous approaches is taking into account only the uncertainty of the original or the replication study. @Patil2016-vc and @Spence2016-tz proposed a method to take into account both sources of uncertainty.
 
 > What effect would we expect to see in the replication study once we have seen the original effect?
 
