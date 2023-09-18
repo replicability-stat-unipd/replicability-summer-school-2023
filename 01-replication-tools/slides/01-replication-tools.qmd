@@ -594,7 +594,7 @@ Beyond the pure writing process, there are other aspects related to research dat
 - producing tables
 - producing plots
 
-In MS Word (or similar) we need to produce everyting outside and then manually put figures and tables.
+In MS Word (or similar) we need to produce everything outside and then manually put figures and tables.
 
 ## The solution... Quarto
 
