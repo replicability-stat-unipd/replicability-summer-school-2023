@@ -283,9 +283,6 @@ df1 <- df[df$Group == 1, ]
 df[df$Group == 1, ]$Authors <- paste(unique(df1$Authors), collapse = "\n\n")
 df[df$Group == 1, ]$Title <- paste(unique(df1$Title), collapse = "\n\n")
 
-df[df$Group == 7, ]
-
-
 df |>
     arrange(Group) |>
     kable(escape = FALSE) |>

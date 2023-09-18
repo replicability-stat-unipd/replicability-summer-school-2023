@@ -298,13 +298,6 @@ download the entire folder (`papers/pdfs`) from the following
 [link](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/replicability-stat-unipd/replicability-summer-school-2023/tree/master/papers)
 or by clicking on the single paper title.
 
-# A tibble: 3 × 5
-
-Group Name Surname Authors Title  
-<dbl> <chr> <chr> <chr> <chr>  
-1 7 “Giovanni” Bocchi Yang, Youyou, and Uzzi (2020) “\<a href="papers/…
-2 7”Claudia” Collarin Yang, Youyou, and Uzzi (2020) “\<a href="papers/…
-3 7”Giovanni ” Sanavio Yang, Youyou, and Uzzi (2020) “\<a href="papers/…
 <table class="table table-condensed" style="font-size: 13px; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
