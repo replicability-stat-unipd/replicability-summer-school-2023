@@ -22,6 +22,7 @@ format:
     toc-depth: 1
     margin: 0.1
     theme: "../../files/custom.css"
+    html-math-method: mathjax
 csl: "`r filor::fil()$csl`"
 bibliography: "`r filor::fil()$bib`"
 code-link: true
