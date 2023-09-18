@@ -187,6 +187,7 @@ You can avoid installing it but this is a complete list:
 | ltxplot            | 1.0.0      | alicewchen/ltxplot   |
 | magrittr           | 2.0.3      | CRAN                 |
 | metafor            | 4.0-0      | CRAN                 |
+| MetaUtility        | 2.1.2      | CRAN                 |
 | pROC               | 1.18.4     | CRAN                 |
 | purrr              | 1.0.1      | CRAN                 |
 | pwr                | 1.3-0      | CRAN                 |
@@ -194,6 +195,7 @@ You can avoid installing it but this is a complete list:
 | readxl             | 1.4.2      | CRAN                 |
 | RefManageR         | 1.4.0      | CRAN                 |
 | renv               | 0.17.3     | CRAN                 |
+| Replicate          | 1.2.0      | CRAN                 |
 | rmarkdown          | 2.21       | CRAN                 |
 | rstanarm           | 2.21.4     | CRAN                 |
 | scales             | 1.2.1      | CRAN                 |
@@ -296,4 +298,388 @@ download the entire folder (`papers/pdfs`) from the following
 [link](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/replicability-stat-unipd/replicability-summer-school-2023/tree/master/papers)
 or by clicking on the single paper title.
 
-<div class="tabwid"><style>.cl-3f9a0b7a{}.cl-3f94c02a{font-family:'Helvetica';font-size:11pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-3f94c034{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-3f94c03e{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 255, 1.00);background-color:transparent;}.cl-3f96be70{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-3f96be7a{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-3f96c99c{width:0.743in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96c99d{width:1.016in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96c9a6{width:1.414in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96c9a7{width:4.99in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96c9a8{width:18.035in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96c9a9{width:0.743in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96c9b0{width:1.016in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96c9b1{width:1.414in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96c9b2{width:4.99in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96c9b3{width:18.035in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96c9ba{width:0.743in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96c9bb{width:1.016in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96c9bc{width:1.414in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96c9c4{width:4.99in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96c9c5{width:18.035in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96c9c6{width:0.743in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96c9ce{width:1.016in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96c9cf{width:1.414in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96c9d0{width:4.99in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96c9d8{width:18.035in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96c9d9{width:0.743in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96c9da{width:1.016in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96c9e2{width:1.414in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96c9e3{width:4.99in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96c9e4{width:18.035in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96c9ec{width:0.743in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96c9ed{width:1.016in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96c9ee{width:1.414in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96c9ef{width:4.99in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96c9f0{width:18.035in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96c9f6{width:0.743in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96c9f7{width:1.016in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96c9f8{width:1.414in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96ca00{width:4.99in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96ca01{width:18.035in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96ca02{width:0.743in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96ca03{width:4.99in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96ca0a{width:18.035in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96ca0b{width:1.016in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3f96ca0c{width:1.414in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-3f9a0b7a'><thead><tr style="overflow-wrap:break-word;"><th class="cl-3f96c99c"><p class="cl-3f96be70"><span class="cl-3f94c02a">Group</span></p></th><th class="cl-3f96c99d"><p class="cl-3f96be7a"><span class="cl-3f94c02a">Name</span></p></th><th class="cl-3f96c9a6"><p class="cl-3f96be7a"><span class="cl-3f94c02a">Surname</span></p></th><th class="cl-3f96c9a7"><p class="cl-3f96be7a"><span class="cl-3f94c02a">Authors</span></p></th><th class="cl-3f96c9a8"><p class="cl-3f96be7a"><span class="cl-3f94c02a">Title</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td  rowspan="6"class="cl-3f96c9a9"><p class="cl-3f96be70"><span class="cl-3f94c034">1</span></p></td><td  rowspan="2"class="cl-3f96c9b0"><p class="cl-3f96be7a"><span class="cl-3f94c034">Amani</span></p></td><td  rowspan="2"class="cl-3f96c9b1"><p class="cl-3f96be7a"><span class="cl-3f94c034">Al</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">Tawil</span></p></td><td  rowspan="6"class="cl-3f96c9b2"><p class="cl-3f96be7a"><span class="cl-3f94c034">Collins</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">(1984)</span><br><br><span class="cl-3f94c034">Franklin</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">and</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">Howson</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">(1984)</span></p></td><td  rowspan="6"class="cl-3f96c9b3"><p class="cl-3f96be7a"><a href="papers/pdfs/Collins%201984%20-%20When%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf"><span class="cl-3f94c03e">When</span></a><a href="papers/pdfs/Collins%201984%20-%20When%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Collins%201984%20-%20When%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf"><span class="cl-3f94c03e">do</span></a><a href="papers/pdfs/Collins%201984%20-%20When%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Collins%201984%20-%20When%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf"><span class="cl-3f94c03e">scientists</span></a><a href="papers/pdfs/Collins%201984%20-%20When%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Collins%201984%20-%20When%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf"><span class="cl-3f94c03e">prefer</span></a><a href="papers/pdfs/Collins%201984%20-%20When%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Collins%201984%20-%20When%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf"><span class="cl-3f94c03e">to</span></a><a href="papers/pdfs/Collins%201984%20-%20When%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Collins%201984%20-%20When%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf"><span class="cl-3f94c03e">vary</span></a><a href="papers/pdfs/Collins%201984%20-%20When%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Collins%201984%20-%20When%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf"><span class="cl-3f94c03e">their</span></a><a href="papers/pdfs/Collins%201984%20-%20When%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Collins%201984%20-%20When%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf"><span class="cl-3f94c03e">experiments?</span></a><br><br><a href="papers/pdfs/Franklin%20and%20Howson%201984%20-%20Why%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf"><span class="cl-3f94c03e">Why</span></a><a href="papers/pdfs/Franklin%20and%20Howson%201984%20-%20Why%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Franklin%20and%20Howson%201984%20-%20Why%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf"><span class="cl-3f94c03e">do</span></a><a href="papers/pdfs/Franklin%20and%20Howson%201984%20-%20Why%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Franklin%20and%20Howson%201984%20-%20Why%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf"><span class="cl-3f94c03e">scientists</span></a><a href="papers/pdfs/Franklin%20and%20Howson%201984%20-%20Why%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Franklin%20and%20Howson%201984%20-%20Why%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf"><span class="cl-3f94c03e">prefer</span></a><a href="papers/pdfs/Franklin%20and%20Howson%201984%20-%20Why%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Franklin%20and%20Howson%201984%20-%20Why%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf"><span class="cl-3f94c03e">to</span></a><a href="papers/pdfs/Franklin%20and%20Howson%201984%20-%20Why%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Franklin%20and%20Howson%201984%20-%20Why%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf"><span class="cl-3f94c03e">vary</span></a><a href="papers/pdfs/Franklin%20and%20Howson%201984%20-%20Why%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Franklin%20and%20Howson%201984%20-%20Why%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf"><span class="cl-3f94c03e">their</span></a><a href="papers/pdfs/Franklin%20and%20Howson%201984%20-%20Why%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Franklin%20and%20Howson%201984%20-%20Why%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf"><span class="cl-3f94c03e">experiments?</span></a></p></td></tr><tr style="overflow-wrap:break-word;"></tr><tr style="overflow-wrap:break-word;"><td  rowspan="2"class="cl-3f96c9bb"><p class="cl-3f96be7a"><span class="cl-3f94c034">Francesco</span></p></td><td  rowspan="2"class="cl-3f96c9bc"><p class="cl-3f96be7a"><span class="cl-3f94c034">Seganfreddo</span></p></td></tr><tr style="overflow-wrap:break-word;"></tr><tr style="overflow-wrap:break-word;"><td  rowspan="2"class="cl-3f96c9bb"><p class="cl-3f96be7a"><span class="cl-3f94c034">Giovanni</span></p></td><td  rowspan="2"class="cl-3f96c9bc"><p class="cl-3f96be7a"><span class="cl-3f94c034">Toto</span></p></td></tr><tr style="overflow-wrap:break-word;"></tr><tr style="overflow-wrap:break-word;"><td  rowspan="3"class="cl-3f96c9c6"><p class="cl-3f96be70"><span class="cl-3f94c034">2</span></p></td><td class="cl-3f96c9ce"><p class="cl-3f96be7a"><span class="cl-3f94c034">Elena</span></p></td><td class="cl-3f96c9cf"><p class="cl-3f96be7a"><span class="cl-3f94c034">Bortolato</span></p></td><td  rowspan="3"class="cl-3f96c9d0"><p class="cl-3f96be7a"><span class="cl-3f94c034">Zondervan-Zwijnenburg,</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">Van</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">de</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">Schoot,</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">and</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">Hoijtink</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">(2022)</span></p></td><td  rowspan="3"class="cl-3f96c9d8"><p class="cl-3f96be7a"><a href="papers/pdfs/Zondervan-Zwijnenburg%20et%20al.%202022%20-%20Testing%20ANOVA%20Replications%20by%20Means%20of%20the%20Prior%20Predictive%20p-Value.pdf"><span class="cl-3f94c03e">Testing</span></a><a href="papers/pdfs/Zondervan-Zwijnenburg%20et%20al.%202022%20-%20Testing%20ANOVA%20Replications%20by%20Means%20of%20the%20Prior%20Predictive%20p-Value.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Zondervan-Zwijnenburg%20et%20al.%202022%20-%20Testing%20ANOVA%20Replications%20by%20Means%20of%20the%20Prior%20Predictive%20p-Value.pdf"><span class="cl-3f94c03e">ANOVA</span></a><a href="papers/pdfs/Zondervan-Zwijnenburg%20et%20al.%202022%20-%20Testing%20ANOVA%20Replications%20by%20Means%20of%20the%20Prior%20Predictive%20p-Value.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Zondervan-Zwijnenburg%20et%20al.%202022%20-%20Testing%20ANOVA%20Replications%20by%20Means%20of%20the%20Prior%20Predictive%20p-Value.pdf"><span class="cl-3f94c03e">Replications</span></a><a href="papers/pdfs/Zondervan-Zwijnenburg%20et%20al.%202022%20-%20Testing%20ANOVA%20Replications%20by%20Means%20of%20the%20Prior%20Predictive%20p-Value.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Zondervan-Zwijnenburg%20et%20al.%202022%20-%20Testing%20ANOVA%20Replications%20by%20Means%20of%20the%20Prior%20Predictive%20p-Value.pdf"><span class="cl-3f94c03e">by</span></a><a href="papers/pdfs/Zondervan-Zwijnenburg%20et%20al.%202022%20-%20Testing%20ANOVA%20Replications%20by%20Means%20of%20the%20Prior%20Predictive%20p-Value.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Zondervan-Zwijnenburg%20et%20al.%202022%20-%20Testing%20ANOVA%20Replications%20by%20Means%20of%20the%20Prior%20Predictive%20p-Value.pdf"><span class="cl-3f94c03e">Means</span></a><a href="papers/pdfs/Zondervan-Zwijnenburg%20et%20al.%202022%20-%20Testing%20ANOVA%20Replications%20by%20Means%20of%20the%20Prior%20Predictive%20p-Value.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Zondervan-Zwijnenburg%20et%20al.%202022%20-%20Testing%20ANOVA%20Replications%20by%20Means%20of%20the%20Prior%20Predictive%20p-Value.pdf"><span class="cl-3f94c03e">of</span></a><a href="papers/pdfs/Zondervan-Zwijnenburg%20et%20al.%202022%20-%20Testing%20ANOVA%20Replications%20by%20Means%20of%20the%20Prior%20Predictive%20p-Value.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Zondervan-Zwijnenburg%20et%20al.%202022%20-%20Testing%20ANOVA%20Replications%20by%20Means%20of%20the%20Prior%20Predictive%20p-Value.pdf"><span class="cl-3f94c03e">the</span></a><a href="papers/pdfs/Zondervan-Zwijnenburg%20et%20al.%202022%20-%20Testing%20ANOVA%20Replications%20by%20Means%20of%20the%20Prior%20Predictive%20p-Value.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Zondervan-Zwijnenburg%20et%20al.%202022%20-%20Testing%20ANOVA%20Replications%20by%20Means%20of%20the%20Prior%20Predictive%20p-Value.pdf"><span class="cl-3f94c03e">Prior</span></a><a href="papers/pdfs/Zondervan-Zwijnenburg%20et%20al.%202022%20-%20Testing%20ANOVA%20Replications%20by%20Means%20of%20the%20Prior%20Predictive%20p-Value.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Zondervan-Zwijnenburg%20et%20al.%202022%20-%20Testing%20ANOVA%20Replications%20by%20Means%20of%20the%20Prior%20Predictive%20p-Value.pdf"><span class="cl-3f94c03e">Predictive</span></a><a href="papers/pdfs/Zondervan-Zwijnenburg%20et%20al.%202022%20-%20Testing%20ANOVA%20Replications%20by%20Means%20of%20the%20Prior%20Predictive%20p-Value.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Zondervan-Zwijnenburg%20et%20al.%202022%20-%20Testing%20ANOVA%20Replications%20by%20Means%20of%20the%20Prior%20Predictive%20p-Value.pdf"><span class="cl-3f94c03e">p-Value</span></a></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-3f96c9ce"><p class="cl-3f96be7a"><span class="cl-3f94c034">Filippo</span></p></td><td class="cl-3f96c9cf"><p class="cl-3f96be7a"><span class="cl-3f94c034">Da</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">Re</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-3f96c9ce"><p class="cl-3f96be7a"><span class="cl-3f94c034">Tobia</span></p></td><td class="cl-3f96c9cf"><p class="cl-3f96be7a"><span class="cl-3f94c034">Fogarin</span></p></td></tr><tr style="overflow-wrap:break-word;"><td  rowspan="3"class="cl-3f96c9c6"><p class="cl-3f96be70"><span class="cl-3f94c034">3</span></p></td><td class="cl-3f96c9ce"><p class="cl-3f96be7a"><span class="cl-3f94c034">Gabriele</span></p></td><td class="cl-3f96c9cf"><p class="cl-3f96be7a"><span class="cl-3f94c034">Loccioni</span></p></td><td  rowspan="3"class="cl-3f96c9d0"><p class="cl-3f96be7a"><span class="cl-3f94c034">Errington,</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">Mathur,</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">Soderberg,</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">Denis,</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">Perfito,</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">Iorns,</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">and</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">Nosek</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">(2021)</span></p></td><td  rowspan="3"class="cl-3f96c9d8"><p class="cl-3f96be7a"><a href="papers/pdfs/Errington%20et%20al.%202021%20-%20Investigating%20the%20replicability%20of%20preclinical%20cancer%20biology.pdf"><span class="cl-3f94c03e">Investigating</span></a><a href="papers/pdfs/Errington%20et%20al.%202021%20-%20Investigating%20the%20replicability%20of%20preclinical%20cancer%20biology.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Errington%20et%20al.%202021%20-%20Investigating%20the%20replicability%20of%20preclinical%20cancer%20biology.pdf"><span class="cl-3f94c03e">the</span></a><a href="papers/pdfs/Errington%20et%20al.%202021%20-%20Investigating%20the%20replicability%20of%20preclinical%20cancer%20biology.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Errington%20et%20al.%202021%20-%20Investigating%20the%20replicability%20of%20preclinical%20cancer%20biology.pdf"><span class="cl-3f94c03e">replicability</span></a><a href="papers/pdfs/Errington%20et%20al.%202021%20-%20Investigating%20the%20replicability%20of%20preclinical%20cancer%20biology.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Errington%20et%20al.%202021%20-%20Investigating%20the%20replicability%20of%20preclinical%20cancer%20biology.pdf"><span class="cl-3f94c03e">of</span></a><a href="papers/pdfs/Errington%20et%20al.%202021%20-%20Investigating%20the%20replicability%20of%20preclinical%20cancer%20biology.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Errington%20et%20al.%202021%20-%20Investigating%20the%20replicability%20of%20preclinical%20cancer%20biology.pdf"><span class="cl-3f94c03e">preclinical</span></a><a href="papers/pdfs/Errington%20et%20al.%202021%20-%20Investigating%20the%20replicability%20of%20preclinical%20cancer%20biology.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Errington%20et%20al.%202021%20-%20Investigating%20the%20replicability%20of%20preclinical%20cancer%20biology.pdf"><span class="cl-3f94c03e">cancer</span></a><a href="papers/pdfs/Errington%20et%20al.%202021%20-%20Investigating%20the%20replicability%20of%20preclinical%20cancer%20biology.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Errington%20et%20al.%202021%20-%20Investigating%20the%20replicability%20of%20preclinical%20cancer%20biology.pdf"><span class="cl-3f94c03e">biology</span></a></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-3f96c9ce"><p class="cl-3f96be7a"><span class="cl-3f94c034">Giovanni</span></p></td><td class="cl-3f96c9cf"><p class="cl-3f96be7a"><span class="cl-3f94c034">Romanò</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-3f96c9ce"><p class="cl-3f96be7a"><span class="cl-3f94c034">Riccardo</span></p></td><td class="cl-3f96c9cf"><p class="cl-3f96be7a"><span class="cl-3f94c034">De</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">Santis</span></p></td></tr><tr style="overflow-wrap:break-word;"><td  rowspan="3"class="cl-3f96c9d9"><p class="cl-3f96be70"><span class="cl-3f94c034">4</span></p></td><td class="cl-3f96c9da"><p class="cl-3f96be7a"><span class="cl-3f94c034">Andrea</span></p></td><td class="cl-3f96c9e2"><p class="cl-3f96be7a"><span class="cl-3f94c034">Moio</span></p></td><td  rowspan="3"class="cl-3f96c9e3"><p class="cl-3f96be7a"><span class="cl-3f94c034">Ly,</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">Etz,</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">Marsman,</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">and</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">Wagenmakers</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">(2019)</span></p></td><td  rowspan="3"class="cl-3f96c9e4"><p class="cl-3f96be7a"><a href="papers/pdfs/Ly%20et%20al.%202019%20-%20Replication%20Bayes%20factors%20from%20evidence%20updating.pdf"><span class="cl-3f94c03e">Replication</span></a><a href="papers/pdfs/Ly%20et%20al.%202019%20-%20Replication%20Bayes%20factors%20from%20evidence%20updating.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Ly%20et%20al.%202019%20-%20Replication%20Bayes%20factors%20from%20evidence%20updating.pdf"><span class="cl-3f94c03e">Bayes</span></a><a href="papers/pdfs/Ly%20et%20al.%202019%20-%20Replication%20Bayes%20factors%20from%20evidence%20updating.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Ly%20et%20al.%202019%20-%20Replication%20Bayes%20factors%20from%20evidence%20updating.pdf"><span class="cl-3f94c03e">factors</span></a><a href="papers/pdfs/Ly%20et%20al.%202019%20-%20Replication%20Bayes%20factors%20from%20evidence%20updating.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Ly%20et%20al.%202019%20-%20Replication%20Bayes%20factors%20from%20evidence%20updating.pdf"><span class="cl-3f94c03e">from</span></a><a href="papers/pdfs/Ly%20et%20al.%202019%20-%20Replication%20Bayes%20factors%20from%20evidence%20updating.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Ly%20et%20al.%202019%20-%20Replication%20Bayes%20factors%20from%20evidence%20updating.pdf"><span class="cl-3f94c03e">evidence</span></a><a href="papers/pdfs/Ly%20et%20al.%202019%20-%20Replication%20Bayes%20factors%20from%20evidence%20updating.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Ly%20et%20al.%202019%20-%20Replication%20Bayes%20factors%20from%20evidence%20updating.pdf"><span class="cl-3f94c03e">updating</span></a></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-3f96c9da"><p class="cl-3f96be7a"><span class="cl-3f94c034">Lorenzo</span></p></td><td class="cl-3f96c9e2"><p class="cl-3f96be7a"><span class="cl-3f94c034">Dell’oro</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-3f96c9ce"><p class="cl-3f96be7a"><span class="cl-3f94c034">Silvia</span></p></td><td class="cl-3f96c9cf"><p class="cl-3f96be7a"><span class="cl-3f94c034">Salvalaggio</span></p></td></tr><tr style="overflow-wrap:break-word;"><td  rowspan="3"class="cl-3f96c9d9"><p class="cl-3f96be70"><span class="cl-3f94c034">5</span></p></td><td class="cl-3f96c9da"><p class="cl-3f96be7a"><span class="cl-3f94c034">Diego</span></p></td><td class="cl-3f96c9e2"><p class="cl-3f96be7a"><span class="cl-3f94c034">Bonato</span></p></td><td  rowspan="3"class="cl-3f96c9e3"><p class="cl-3f96be7a"><span class="cl-3f94c034">Patil</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">and</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">Parmigiani</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">(2018)</span></p></td><td  rowspan="3"class="cl-3f96c9e4"><p class="cl-3f96be7a"><a href="papers/pdfs/Patil%20and%20Parmigiani%202018%20-%20Training%20replicable%20predictors%20in%20multiple%20studies.pdf"><span class="cl-3f94c03e">Training</span></a><a href="papers/pdfs/Patil%20and%20Parmigiani%202018%20-%20Training%20replicable%20predictors%20in%20multiple%20studies.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Patil%20and%20Parmigiani%202018%20-%20Training%20replicable%20predictors%20in%20multiple%20studies.pdf"><span class="cl-3f94c03e">replicable</span></a><a href="papers/pdfs/Patil%20and%20Parmigiani%202018%20-%20Training%20replicable%20predictors%20in%20multiple%20studies.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Patil%20and%20Parmigiani%202018%20-%20Training%20replicable%20predictors%20in%20multiple%20studies.pdf"><span class="cl-3f94c03e">predictors</span></a><a href="papers/pdfs/Patil%20and%20Parmigiani%202018%20-%20Training%20replicable%20predictors%20in%20multiple%20studies.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Patil%20and%20Parmigiani%202018%20-%20Training%20replicable%20predictors%20in%20multiple%20studies.pdf"><span class="cl-3f94c03e">in</span></a><a href="papers/pdfs/Patil%20and%20Parmigiani%202018%20-%20Training%20replicable%20predictors%20in%20multiple%20studies.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Patil%20and%20Parmigiani%202018%20-%20Training%20replicable%20predictors%20in%20multiple%20studies.pdf"><span class="cl-3f94c03e">multiple</span></a><a href="papers/pdfs/Patil%20and%20Parmigiani%202018%20-%20Training%20replicable%20predictors%20in%20multiple%20studies.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Patil%20and%20Parmigiani%202018%20-%20Training%20replicable%20predictors%20in%20multiple%20studies.pdf"><span class="cl-3f94c03e">studies</span></a></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-3f96c9da"><p class="cl-3f96be7a"><span class="cl-3f94c034">Matteo</span></p></td><td class="cl-3f96c9e2"><p class="cl-3f96be7a"><span class="cl-3f94c034">Gasparin</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-3f96c9da"><p class="cl-3f96be7a"><span class="cl-3f94c034">Sofia</span></p></td><td class="cl-3f96c9e2"><p class="cl-3f96be7a"><span class="cl-3f94c034">Pedrini</span></p></td></tr><tr style="overflow-wrap:break-word;"><td  rowspan="3"class="cl-3f96c9c6"><p class="cl-3f96be70"><span class="cl-3f94c034">6</span></p></td><td class="cl-3f96c9ce"><p class="cl-3f96be7a"><span class="cl-3f94c034">Anna</span></p></td><td class="cl-3f96c9cf"><p class="cl-3f96be7a"><span class="cl-3f94c034">Gerna</span></p></td><td  rowspan="3"class="cl-3f96c9d0"><p class="cl-3f96be7a"><span class="cl-3f94c034">Steegen,</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">Tuerlinckx,</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">Gelman,</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">and</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">Vanpaemel</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">(2016)</span></p></td><td  rowspan="3"class="cl-3f96c9d8"><p class="cl-3f96be7a"><a href="papers/pdfs/Steegen%20et%20al.%202016%20-%20Increasing%20Transparency%20Through%20a%20Multiverse%20Analysis.pdf"><span class="cl-3f94c03e">Increasing</span></a><a href="papers/pdfs/Steegen%20et%20al.%202016%20-%20Increasing%20Transparency%20Through%20a%20Multiverse%20Analysis.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Steegen%20et%20al.%202016%20-%20Increasing%20Transparency%20Through%20a%20Multiverse%20Analysis.pdf"><span class="cl-3f94c03e">Transparency</span></a><a href="papers/pdfs/Steegen%20et%20al.%202016%20-%20Increasing%20Transparency%20Through%20a%20Multiverse%20Analysis.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Steegen%20et%20al.%202016%20-%20Increasing%20Transparency%20Through%20a%20Multiverse%20Analysis.pdf"><span class="cl-3f94c03e">Through</span></a><a href="papers/pdfs/Steegen%20et%20al.%202016%20-%20Increasing%20Transparency%20Through%20a%20Multiverse%20Analysis.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Steegen%20et%20al.%202016%20-%20Increasing%20Transparency%20Through%20a%20Multiverse%20Analysis.pdf"><span class="cl-3f94c03e">a</span></a><a href="papers/pdfs/Steegen%20et%20al.%202016%20-%20Increasing%20Transparency%20Through%20a%20Multiverse%20Analysis.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Steegen%20et%20al.%202016%20-%20Increasing%20Transparency%20Through%20a%20Multiverse%20Analysis.pdf"><span class="cl-3f94c03e">Multiverse</span></a><a href="papers/pdfs/Steegen%20et%20al.%202016%20-%20Increasing%20Transparency%20Through%20a%20Multiverse%20Analysis.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Steegen%20et%20al.%202016%20-%20Increasing%20Transparency%20Through%20a%20Multiverse%20Analysis.pdf"><span class="cl-3f94c03e">Analysis</span></a></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-3f96c9ce"><p class="cl-3f96be7a"><span class="cl-3f94c034">Daniele</span></p></td><td class="cl-3f96c9cf"><p class="cl-3f96be7a"><span class="cl-3f94c034">Girolimetto</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-3f96c9ce"><p class="cl-3f96be7a"><span class="cl-3f94c034">Patric</span></p></td><td class="cl-3f96c9cf"><p class="cl-3f96be7a"><span class="cl-3f94c034">Dolmeta</span></p></td></tr><tr style="overflow-wrap:break-word;"><td  rowspan="3"class="cl-3f96c9d9"><p class="cl-3f96be70"><span class="cl-3f94c034">7</span></p></td><td class="cl-3f96c9da"><p class="cl-3f96be7a"><span class="cl-3f94c034">Claudia</span></p></td><td class="cl-3f96c9e2"><p class="cl-3f96be7a"><span class="cl-3f94c034">Collarin</span></p></td><td  rowspan="3"class="cl-3f96c9e3"><p class="cl-3f96be7a"><span class="cl-3f94c034">Yang,</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">Youyou,</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">and</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">Uzzi</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">(2020)</span></p></td><td  rowspan="3"class="cl-3f96c9e4"><p class="cl-3f96be7a"><a href="papers/pdfs/Yang%20et%20al.%202020%20-%20Estimating%20the%20deep%20replicability%20of%20scientific%20findings%20using%20human%20and%20artificial%20intelligence.pdf"><span class="cl-3f94c03e">Estimating</span></a><a href="papers/pdfs/Yang%20et%20al.%202020%20-%20Estimating%20the%20deep%20replicability%20of%20scientific%20findings%20using%20human%20and%20artificial%20intelligence.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Yang%20et%20al.%202020%20-%20Estimating%20the%20deep%20replicability%20of%20scientific%20findings%20using%20human%20and%20artificial%20intelligence.pdf"><span class="cl-3f94c03e">the</span></a><a href="papers/pdfs/Yang%20et%20al.%202020%20-%20Estimating%20the%20deep%20replicability%20of%20scientific%20findings%20using%20human%20and%20artificial%20intelligence.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Yang%20et%20al.%202020%20-%20Estimating%20the%20deep%20replicability%20of%20scientific%20findings%20using%20human%20and%20artificial%20intelligence.pdf"><span class="cl-3f94c03e">deep</span></a><a href="papers/pdfs/Yang%20et%20al.%202020%20-%20Estimating%20the%20deep%20replicability%20of%20scientific%20findings%20using%20human%20and%20artificial%20intelligence.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Yang%20et%20al.%202020%20-%20Estimating%20the%20deep%20replicability%20of%20scientific%20findings%20using%20human%20and%20artificial%20intelligence.pdf"><span class="cl-3f94c03e">replicability</span></a><a href="papers/pdfs/Yang%20et%20al.%202020%20-%20Estimating%20the%20deep%20replicability%20of%20scientific%20findings%20using%20human%20and%20artificial%20intelligence.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Yang%20et%20al.%202020%20-%20Estimating%20the%20deep%20replicability%20of%20scientific%20findings%20using%20human%20and%20artificial%20intelligence.pdf"><span class="cl-3f94c03e">of</span></a><a href="papers/pdfs/Yang%20et%20al.%202020%20-%20Estimating%20the%20deep%20replicability%20of%20scientific%20findings%20using%20human%20and%20artificial%20intelligence.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Yang%20et%20al.%202020%20-%20Estimating%20the%20deep%20replicability%20of%20scientific%20findings%20using%20human%20and%20artificial%20intelligence.pdf"><span class="cl-3f94c03e">scientific</span></a><a href="papers/pdfs/Yang%20et%20al.%202020%20-%20Estimating%20the%20deep%20replicability%20of%20scientific%20findings%20using%20human%20and%20artificial%20intelligence.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Yang%20et%20al.%202020%20-%20Estimating%20the%20deep%20replicability%20of%20scientific%20findings%20using%20human%20and%20artificial%20intelligence.pdf"><span class="cl-3f94c03e">findings</span></a><a href="papers/pdfs/Yang%20et%20al.%202020%20-%20Estimating%20the%20deep%20replicability%20of%20scientific%20findings%20using%20human%20and%20artificial%20intelligence.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Yang%20et%20al.%202020%20-%20Estimating%20the%20deep%20replicability%20of%20scientific%20findings%20using%20human%20and%20artificial%20intelligence.pdf"><span class="cl-3f94c03e">using</span></a><a href="papers/pdfs/Yang%20et%20al.%202020%20-%20Estimating%20the%20deep%20replicability%20of%20scientific%20findings%20using%20human%20and%20artificial%20intelligence.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Yang%20et%20al.%202020%20-%20Estimating%20the%20deep%20replicability%20of%20scientific%20findings%20using%20human%20and%20artificial%20intelligence.pdf"><span class="cl-3f94c03e">human</span></a><a href="papers/pdfs/Yang%20et%20al.%202020%20-%20Estimating%20the%20deep%20replicability%20of%20scientific%20findings%20using%20human%20and%20artificial%20intelligence.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Yang%20et%20al.%202020%20-%20Estimating%20the%20deep%20replicability%20of%20scientific%20findings%20using%20human%20and%20artificial%20intelligence.pdf"><span class="cl-3f94c03e">and</span></a><a href="papers/pdfs/Yang%20et%20al.%202020%20-%20Estimating%20the%20deep%20replicability%20of%20scientific%20findings%20using%20human%20and%20artificial%20intelligence.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Yang%20et%20al.%202020%20-%20Estimating%20the%20deep%20replicability%20of%20scientific%20findings%20using%20human%20and%20artificial%20intelligence.pdf"><span class="cl-3f94c03e">artificial</span></a><a href="papers/pdfs/Yang%20et%20al.%202020%20-%20Estimating%20the%20deep%20replicability%20of%20scientific%20findings%20using%20human%20and%20artificial%20intelligence.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Yang%20et%20al.%202020%20-%20Estimating%20the%20deep%20replicability%20of%20scientific%20findings%20using%20human%20and%20artificial%20intelligence.pdf"><span class="cl-3f94c03e">intelligence</span></a></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-3f96c9da"><p class="cl-3f96be7a"><span class="cl-3f94c034">Giovanni</span></p></td><td class="cl-3f96c9e2"><p class="cl-3f96be7a"><span class="cl-3f94c034">Bocchi</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-3f96c9da"><p class="cl-3f96be7a"><span class="cl-3f94c034">Giovanni</span></p></td><td class="cl-3f96c9e2"><p class="cl-3f96be7a"><span class="cl-3f94c034">Sanavio</span></p></td></tr><tr style="overflow-wrap:break-word;"><td  rowspan="3"class="cl-3f96c9c6"><p class="cl-3f96be70"><span class="cl-3f94c034">8</span></p></td><td class="cl-3f96c9ce"><p class="cl-3f96be7a"><span class="cl-3f94c034">Andrea</span></p></td><td class="cl-3f96c9cf"><p class="cl-3f96be7a"><span class="cl-3f94c034">Panarotto</span></p></td><td  rowspan="3"class="cl-3f96c9d0"><p class="cl-3f96be7a"><span class="cl-3f94c034">Jaljuli,</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">Benjamini,</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">Shenhav,</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">Panagiotou,</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">and</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">Heller</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">(2023)</span></p></td><td  rowspan="3"class="cl-3f96c9d8"><p class="cl-3f96be7a"><a href="papers/pdfs/Jaljuli%20et%20al.%202023%20-%20Quantifying%20Replicability%20and%20Consistency%20in%20Systematic%20Reviews.pdf"><span class="cl-3f94c03e">Quantifying</span></a><a href="papers/pdfs/Jaljuli%20et%20al.%202023%20-%20Quantifying%20Replicability%20and%20Consistency%20in%20Systematic%20Reviews.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Jaljuli%20et%20al.%202023%20-%20Quantifying%20Replicability%20and%20Consistency%20in%20Systematic%20Reviews.pdf"><span class="cl-3f94c03e">Replicability</span></a><a href="papers/pdfs/Jaljuli%20et%20al.%202023%20-%20Quantifying%20Replicability%20and%20Consistency%20in%20Systematic%20Reviews.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Jaljuli%20et%20al.%202023%20-%20Quantifying%20Replicability%20and%20Consistency%20in%20Systematic%20Reviews.pdf"><span class="cl-3f94c03e">and</span></a><a href="papers/pdfs/Jaljuli%20et%20al.%202023%20-%20Quantifying%20Replicability%20and%20Consistency%20in%20Systematic%20Reviews.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Jaljuli%20et%20al.%202023%20-%20Quantifying%20Replicability%20and%20Consistency%20in%20Systematic%20Reviews.pdf"><span class="cl-3f94c03e">Consistency</span></a><a href="papers/pdfs/Jaljuli%20et%20al.%202023%20-%20Quantifying%20Replicability%20and%20Consistency%20in%20Systematic%20Reviews.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Jaljuli%20et%20al.%202023%20-%20Quantifying%20Replicability%20and%20Consistency%20in%20Systematic%20Reviews.pdf"><span class="cl-3f94c03e">in</span></a><a href="papers/pdfs/Jaljuli%20et%20al.%202023%20-%20Quantifying%20Replicability%20and%20Consistency%20in%20Systematic%20Reviews.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Jaljuli%20et%20al.%202023%20-%20Quantifying%20Replicability%20and%20Consistency%20in%20Systematic%20Reviews.pdf"><span class="cl-3f94c03e">Systematic</span></a><a href="papers/pdfs/Jaljuli%20et%20al.%202023%20-%20Quantifying%20Replicability%20and%20Consistency%20in%20Systematic%20Reviews.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Jaljuli%20et%20al.%202023%20-%20Quantifying%20Replicability%20and%20Consistency%20in%20Systematic%20Reviews.pdf"><span class="cl-3f94c03e">Reviews</span></a></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-3f96c9ce"><p class="cl-3f96be7a"><span class="cl-3f94c034">Goar</span></p></td><td class="cl-3f96c9cf"><p class="cl-3f96be7a"><span class="cl-3f94c034">Shaboian</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-3f96c9ce"><p class="cl-3f96be7a"><span class="cl-3f94c034">Martina</span></p></td><td class="cl-3f96c9cf"><p class="cl-3f96be7a"><span class="cl-3f94c034">Scauda</span></p></td></tr><tr style="overflow-wrap:break-word;"><td  rowspan="3"class="cl-3f96c9ec"><p class="cl-3f96be70"><span class="cl-3f94c034">9</span></p></td><td class="cl-3f96c9ed"><p class="cl-3f96be7a"><span class="cl-3f94c034">Claudia</span></p></td><td class="cl-3f96c9ee"><p class="cl-3f96be7a"><span class="cl-3f94c034">Franceschini</span></p></td><td  rowspan="3"class="cl-3f96c9ef"><p class="cl-3f96be7a"><span class="cl-3f94c034">Amrhein,</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">Trafimow,</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">and</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">Greenland</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">(2019)</span></p></td><td  rowspan="3"class="cl-3f96c9f0"><p class="cl-3f96be7a"><a href="papers/pdfs/Amrhein%20et%20al.%202019%20-%20Inferential%20Statistics%20as%20Descriptive%20Statistics%20-%20There%20Is%20No%20Replication%20Crisis%20if%20We%20Don’t%20Expect%20Replication.pdf"><span class="cl-3f94c03e">Inferential</span></a><a href="papers/pdfs/Amrhein%20et%20al.%202019%20-%20Inferential%20Statistics%20as%20Descriptive%20Statistics%20-%20There%20Is%20No%20Replication%20Crisis%20if%20We%20Don’t%20Expect%20Replication.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Amrhein%20et%20al.%202019%20-%20Inferential%20Statistics%20as%20Descriptive%20Statistics%20-%20There%20Is%20No%20Replication%20Crisis%20if%20We%20Don’t%20Expect%20Replication.pdf"><span class="cl-3f94c03e">Statistics</span></a><a href="papers/pdfs/Amrhein%20et%20al.%202019%20-%20Inferential%20Statistics%20as%20Descriptive%20Statistics%20-%20There%20Is%20No%20Replication%20Crisis%20if%20We%20Don’t%20Expect%20Replication.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Amrhein%20et%20al.%202019%20-%20Inferential%20Statistics%20as%20Descriptive%20Statistics%20-%20There%20Is%20No%20Replication%20Crisis%20if%20We%20Don’t%20Expect%20Replication.pdf"><span class="cl-3f94c03e">as</span></a><a href="papers/pdfs/Amrhein%20et%20al.%202019%20-%20Inferential%20Statistics%20as%20Descriptive%20Statistics%20-%20There%20Is%20No%20Replication%20Crisis%20if%20We%20Don’t%20Expect%20Replication.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Amrhein%20et%20al.%202019%20-%20Inferential%20Statistics%20as%20Descriptive%20Statistics%20-%20There%20Is%20No%20Replication%20Crisis%20if%20We%20Don’t%20Expect%20Replication.pdf"><span class="cl-3f94c03e">Descriptive</span></a><a href="papers/pdfs/Amrhein%20et%20al.%202019%20-%20Inferential%20Statistics%20as%20Descriptive%20Statistics%20-%20There%20Is%20No%20Replication%20Crisis%20if%20We%20Don’t%20Expect%20Replication.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Amrhein%20et%20al.%202019%20-%20Inferential%20Statistics%20as%20Descriptive%20Statistics%20-%20There%20Is%20No%20Replication%20Crisis%20if%20We%20Don’t%20Expect%20Replication.pdf"><span class="cl-3f94c03e">Statistics:</span></a><a href="papers/pdfs/Amrhein%20et%20al.%202019%20-%20Inferential%20Statistics%20as%20Descriptive%20Statistics%20-%20There%20Is%20No%20Replication%20Crisis%20if%20We%20Don’t%20Expect%20Replication.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Amrhein%20et%20al.%202019%20-%20Inferential%20Statistics%20as%20Descriptive%20Statistics%20-%20There%20Is%20No%20Replication%20Crisis%20if%20We%20Don’t%20Expect%20Replication.pdf"><span class="cl-3f94c03e">There</span></a><a href="papers/pdfs/Amrhein%20et%20al.%202019%20-%20Inferential%20Statistics%20as%20Descriptive%20Statistics%20-%20There%20Is%20No%20Replication%20Crisis%20if%20We%20Don’t%20Expect%20Replication.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Amrhein%20et%20al.%202019%20-%20Inferential%20Statistics%20as%20Descriptive%20Statistics%20-%20There%20Is%20No%20Replication%20Crisis%20if%20We%20Don’t%20Expect%20Replication.pdf"><span class="cl-3f94c03e">Is</span></a><a href="papers/pdfs/Amrhein%20et%20al.%202019%20-%20Inferential%20Statistics%20as%20Descriptive%20Statistics%20-%20There%20Is%20No%20Replication%20Crisis%20if%20We%20Don’t%20Expect%20Replication.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Amrhein%20et%20al.%202019%20-%20Inferential%20Statistics%20as%20Descriptive%20Statistics%20-%20There%20Is%20No%20Replication%20Crisis%20if%20We%20Don’t%20Expect%20Replication.pdf"><span class="cl-3f94c03e">No</span></a><a href="papers/pdfs/Amrhein%20et%20al.%202019%20-%20Inferential%20Statistics%20as%20Descriptive%20Statistics%20-%20There%20Is%20No%20Replication%20Crisis%20if%20We%20Don’t%20Expect%20Replication.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Amrhein%20et%20al.%202019%20-%20Inferential%20Statistics%20as%20Descriptive%20Statistics%20-%20There%20Is%20No%20Replication%20Crisis%20if%20We%20Don’t%20Expect%20Replication.pdf"><span class="cl-3f94c03e">Replication</span></a><a href="papers/pdfs/Amrhein%20et%20al.%202019%20-%20Inferential%20Statistics%20as%20Descriptive%20Statistics%20-%20There%20Is%20No%20Replication%20Crisis%20if%20We%20Don’t%20Expect%20Replication.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Amrhein%20et%20al.%202019%20-%20Inferential%20Statistics%20as%20Descriptive%20Statistics%20-%20There%20Is%20No%20Replication%20Crisis%20if%20We%20Don’t%20Expect%20Replication.pdf"><span class="cl-3f94c03e">Crisis</span></a><a href="papers/pdfs/Amrhein%20et%20al.%202019%20-%20Inferential%20Statistics%20as%20Descriptive%20Statistics%20-%20There%20Is%20No%20Replication%20Crisis%20if%20We%20Don’t%20Expect%20Replication.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Amrhein%20et%20al.%202019%20-%20Inferential%20Statistics%20as%20Descriptive%20Statistics%20-%20There%20Is%20No%20Replication%20Crisis%20if%20We%20Don’t%20Expect%20Replication.pdf"><span class="cl-3f94c03e">if</span></a><a href="papers/pdfs/Amrhein%20et%20al.%202019%20-%20Inferential%20Statistics%20as%20Descriptive%20Statistics%20-%20There%20Is%20No%20Replication%20Crisis%20if%20We%20Don’t%20Expect%20Replication.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Amrhein%20et%20al.%202019%20-%20Inferential%20Statistics%20as%20Descriptive%20Statistics%20-%20There%20Is%20No%20Replication%20Crisis%20if%20We%20Don’t%20Expect%20Replication.pdf"><span class="cl-3f94c03e">We</span></a><a href="papers/pdfs/Amrhein%20et%20al.%202019%20-%20Inferential%20Statistics%20as%20Descriptive%20Statistics%20-%20There%20Is%20No%20Replication%20Crisis%20if%20We%20Don’t%20Expect%20Replication.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Amrhein%20et%20al.%202019%20-%20Inferential%20Statistics%20as%20Descriptive%20Statistics%20-%20There%20Is%20No%20Replication%20Crisis%20if%20We%20Don’t%20Expect%20Replication.pdf"><span class="cl-3f94c03e">Don’t</span></a><a href="papers/pdfs/Amrhein%20et%20al.%202019%20-%20Inferential%20Statistics%20as%20Descriptive%20Statistics%20-%20There%20Is%20No%20Replication%20Crisis%20if%20We%20Don’t%20Expect%20Replication.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Amrhein%20et%20al.%202019%20-%20Inferential%20Statistics%20as%20Descriptive%20Statistics%20-%20There%20Is%20No%20Replication%20Crisis%20if%20We%20Don’t%20Expect%20Replication.pdf"><span class="cl-3f94c03e">Expect</span></a><a href="papers/pdfs/Amrhein%20et%20al.%202019%20-%20Inferential%20Statistics%20as%20Descriptive%20Statistics%20-%20There%20Is%20No%20Replication%20Crisis%20if%20We%20Don’t%20Expect%20Replication.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Amrhein%20et%20al.%202019%20-%20Inferential%20Statistics%20as%20Descriptive%20Statistics%20-%20There%20Is%20No%20Replication%20Crisis%20if%20We%20Don’t%20Expect%20Replication.pdf"><span class="cl-3f94c03e">Replication</span></a></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-3f96c9ed"><p class="cl-3f96be7a"><span class="cl-3f94c034">Giovanni</span></p></td><td class="cl-3f96c9ee"><p class="cl-3f96be7a"><span class="cl-3f94c034">Duca</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-3f96c9ed"><p class="cl-3f96be7a"><span class="cl-3f94c034">Roberto</span></p></td><td class="cl-3f96c9ee"><p class="cl-3f96be7a"><span class="cl-3f94c034">Macrì</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">Demartino</span></p></td></tr><tr style="overflow-wrap:break-word;"><td  rowspan="3"class="cl-3f96c9f6"><p class="cl-3f96be70"><span class="cl-3f94c034">10</span></p></td><td class="cl-3f96c9f7"><p class="cl-3f96be7a"><span class="cl-3f94c034">Claudia</span></p></td><td class="cl-3f96c9f8"><p class="cl-3f96be7a"><span class="cl-3f94c034">Cozzolino</span></p></td><td  rowspan="3"class="cl-3f96ca00"><p class="cl-3f96be7a"><span class="cl-3f94c034">Benjamini</span><span class="cl-3f94c034"> </span><span class="cl-3f94c034">(2020)</span></p></td><td  rowspan="3"class="cl-3f96ca01"><p class="cl-3f96be7a"><a href="papers/pdfs/Benjamini%202020%20-%20Selective%20inference%20-%20The%20silent%20killer%20of%20replicability.pdf"><span class="cl-3f94c03e">Selective</span></a><a href="papers/pdfs/Benjamini%202020%20-%20Selective%20inference%20-%20The%20silent%20killer%20of%20replicability.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Benjamini%202020%20-%20Selective%20inference%20-%20The%20silent%20killer%20of%20replicability.pdf"><span class="cl-3f94c03e">inference:</span></a><a href="papers/pdfs/Benjamini%202020%20-%20Selective%20inference%20-%20The%20silent%20killer%20of%20replicability.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Benjamini%202020%20-%20Selective%20inference%20-%20The%20silent%20killer%20of%20replicability.pdf"><span class="cl-3f94c03e">The</span></a><a href="papers/pdfs/Benjamini%202020%20-%20Selective%20inference%20-%20The%20silent%20killer%20of%20replicability.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Benjamini%202020%20-%20Selective%20inference%20-%20The%20silent%20killer%20of%20replicability.pdf"><span class="cl-3f94c03e">silent</span></a><a href="papers/pdfs/Benjamini%202020%20-%20Selective%20inference%20-%20The%20silent%20killer%20of%20replicability.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Benjamini%202020%20-%20Selective%20inference%20-%20The%20silent%20killer%20of%20replicability.pdf"><span class="cl-3f94c03e">killer</span></a><a href="papers/pdfs/Benjamini%202020%20-%20Selective%20inference%20-%20The%20silent%20killer%20of%20replicability.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Benjamini%202020%20-%20Selective%20inference%20-%20The%20silent%20killer%20of%20replicability.pdf"><span class="cl-3f94c03e">of</span></a><a href="papers/pdfs/Benjamini%202020%20-%20Selective%20inference%20-%20The%20silent%20killer%20of%20replicability.pdf"><span class="cl-3f94c03e"> </span></a><a href="papers/pdfs/Benjamini%202020%20-%20Selective%20inference%20-%20The%20silent%20killer%20of%20replicability.pdf"><span class="cl-3f94c03e">replicability</span></a></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-3f96c9f7"><p class="cl-3f96be7a"><span class="cl-3f94c034">Daniele</span></p></td><td class="cl-3f96c9f8"><p class="cl-3f96be7a"><span class="cl-3f94c034">Tancini</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-3f96ca0b"><p class="cl-3f96be7a"><span class="cl-3f94c034">Davide</span></p></td><td class="cl-3f96ca0c"><p class="cl-3f96be7a"><span class="cl-3f94c034">Benussi</span></p></td></tr></tbody></table></div>
+# A tibble: 3 × 5
+
+Group Name Surname Authors Title  
+<dbl> <chr> <chr> <chr> <chr>  
+1 7 “Giovanni” Bocchi Yang, Youyou, and Uzzi (2020) “\<a href="papers/…
+2 7”Claudia” Collarin Yang, Youyou, and Uzzi (2020) “\<a href="papers/…
+3 7”Giovanni ” Sanavio Yang, Youyou, and Uzzi (2020) “\<a href="papers/…
+<table class="table table-condensed" style="font-size: 13px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+Group
+</th>
+<th style="text-align:left;">
+Name
+</th>
+<th style="text-align:left;">
+Surname
+</th>
+<th style="text-align:left;">
+Authors
+</th>
+<th style="text-align:left;">
+Title
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;vertical-align: middle !important;" rowspan="6">
+1
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="2">
+Amani
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="2">
+Al Tawil
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="6">
+
+Collins (1984)
+
+Franklin and Howson (1984)
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="6">
+
+<a href="papers/pdfs/Collins%201984%20-%20When%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf">When
+do scientists prefer to vary their experiments?</a>
+
+<a href="papers/pdfs/Franklin%20and%20Howson%201984%20-%20Why%20do%20scientists%20prefer%20to%20vary%20their%20experiments.pdf">Why
+do scientists prefer to vary their experiments?</a>
+</td>
+</tr>
+<tr>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="2">
+Francesco
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="2">
+Seganfreddo
+</td>
+</tr>
+<tr>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="2">
+Giovanni
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="2">
+Toto
+</td>
+</tr>
+<tr>
+</tr>
+<tr>
+<td style="text-align:right;vertical-align: middle !important;" rowspan="3">
+2
+</td>
+<td style="text-align:left;">
+Elena
+</td>
+<td style="text-align:left;">
+Bortolato
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+Zondervan-Zwijnenburg, Van de Schoot, and Hoijtink (2022)
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+<a href="papers/pdfs/Zondervan-Zwijnenburg%20et%20al.%202022%20-%20Testing%20ANOVA%20Replications%20by%20Means%20of%20the%20Prior%20Predictive%20p-Value.pdf">Testing
+ANOVA Replications by Means of the Prior Predictive p-Value</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Filippo
+</td>
+<td style="text-align:left;">
+Da Re
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Tobia
+</td>
+<td style="text-align:left;">
+Fogarin
+</td>
+</tr>
+<tr>
+<td style="text-align:right;vertical-align: middle !important;" rowspan="3">
+3
+</td>
+<td style="text-align:left;">
+Riccardo
+</td>
+<td style="text-align:left;">
+De Santis
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+Errington, Mathur, Soderberg, Denis, Perfito, Iorns, and Nosek (2021)
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+<a href="papers/pdfs/Errington%20et%20al.%202021%20-%20Investigating%20the%20replicability%20of%20preclinical%20cancer%20biology.pdf">Investigating
+the replicability of preclinical cancer biology</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gabriele
+</td>
+<td style="text-align:left;">
+Loccioni
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Giovanni
+</td>
+<td style="text-align:left;">
+Romanò
+</td>
+</tr>
+<tr>
+<td style="text-align:right;vertical-align: middle !important;" rowspan="3">
+4
+</td>
+<td style="text-align:left;">
+Lorenzo
+</td>
+<td style="text-align:left;">
+Dell’oro
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+Ly, Etz, Marsman, and Wagenmakers (2019)
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+<a href="papers/pdfs/Ly%20et%20al.%202019%20-%20Replication%20Bayes%20factors%20from%20evidence%20updating.pdf">Replication
+Bayes factors from evidence updating</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Andrea
+</td>
+<td style="text-align:left;">
+Moio
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Silvia
+</td>
+<td style="text-align:left;">
+Salvalaggio
+</td>
+</tr>
+<tr>
+<td style="text-align:right;vertical-align: middle !important;" rowspan="3">
+5
+</td>
+<td style="text-align:left;">
+Diego
+</td>
+<td style="text-align:left;">
+Bonato
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+Patil and Parmigiani (2018)
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+<a href="papers/pdfs/Patil%20and%20Parmigiani%202018%20-%20Training%20replicable%20predictors%20in%20multiple%20studies.pdf">Training
+replicable predictors in multiple studies</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Matteo
+</td>
+<td style="text-align:left;">
+Gasparin
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sofia
+</td>
+<td style="text-align:left;">
+Pedrini
+</td>
+</tr>
+<tr>
+<td style="text-align:right;vertical-align: middle !important;" rowspan="3">
+6
+</td>
+<td style="text-align:left;">
+Patric
+</td>
+<td style="text-align:left;">
+Dolmeta
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+Steegen, Tuerlinckx, Gelman, and Vanpaemel (2016)
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+<a href="papers/pdfs/Steegen%20et%20al.%202016%20-%20Increasing%20Transparency%20Through%20a%20Multiverse%20Analysis.pdf">Increasing
+Transparency Through a Multiverse Analysis</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Anna
+</td>
+<td style="text-align:left;">
+Gerna
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Daniele
+</td>
+<td style="text-align:left;">
+Girolimetto
+</td>
+</tr>
+<tr>
+<td style="text-align:right;vertical-align: middle !important;" rowspan="3">
+7
+</td>
+<td style="text-align:left;">
+Giovanni
+</td>
+<td style="text-align:left;">
+Bocchi
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+Yang, Youyou, and Uzzi (2020)
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+<a href="papers/pdfs/Yang%20et%20al.%202020%20-%20Estimating%20the%20deep%20replicability%20of%20scientific%20findings%20using%20human%20and%20artificial%20intelligence.pdf">Estimating
+the deep replicability of scientific findings using human and artificial
+intelligence</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Claudia
+</td>
+<td style="text-align:left;">
+Collarin
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Giovanni
+</td>
+<td style="text-align:left;">
+Sanavio
+</td>
+</tr>
+<tr>
+<td style="text-align:right;vertical-align: middle !important;" rowspan="3">
+8
+</td>
+<td style="text-align:left;">
+Andrea
+</td>
+<td style="text-align:left;">
+Panarotto
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+Jaljuli, Benjamini, Shenhav, Panagiotou, and Heller (2023)
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+<a href="papers/pdfs/Jaljuli%20et%20al.%202023%20-%20Quantifying%20Replicability%20and%20Consistency%20in%20Systematic%20Reviews.pdf">Quantifying
+Replicability and Consistency in Systematic Reviews</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martina
+</td>
+<td style="text-align:left;">
+Scauda
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Goar
+</td>
+<td style="text-align:left;">
+Shaboian
+</td>
+</tr>
+<tr>
+<td style="text-align:right;vertical-align: middle !important;" rowspan="3">
+9
+</td>
+<td style="text-align:left;">
+Giovanni
+</td>
+<td style="text-align:left;">
+Duca
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+Amrhein, Trafimow, and Greenland (2019)
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+<a href="papers/pdfs/Amrhein%20et%20al.%202019%20-%20Inferential%20Statistics%20as%20Descriptive%20Statistics%20-%20There%20Is%20No%20Replication%20Crisis%20if%20We%20Don%E2%80%99t%20Expect%20Replication.pdf">Inferential
+Statistics as Descriptive Statistics: There Is No Replication Crisis if
+We Don’t Expect Replication</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Claudia
+</td>
+<td style="text-align:left;">
+Franceschini
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Roberto
+</td>
+<td style="text-align:left;">
+Macrì Demartino
+</td>
+</tr>
+<tr>
+<td style="text-align:right;vertical-align: middle !important;" rowspan="3">
+10
+</td>
+<td style="text-align:left;">
+Davide
+</td>
+<td style="text-align:left;">
+Benussi
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+Benjamini (2020)
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="3">
+<a href="papers/pdfs/Benjamini%202020%20-%20Selective%20inference%20-%20The%20silent%20killer%20of%20replicability.pdf">Selective
+inference: The silent killer of replicability</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Claudia
+</td>
+<td style="text-align:left;">
+Cozzolino
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Daniele
+</td>
+<td style="text-align:left;">
+Tancini
+</td>
+</tr>
+</tbody>
+</table>

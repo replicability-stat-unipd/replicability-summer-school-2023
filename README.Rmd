@@ -39,8 +39,8 @@ df$file <- sort(files)
 df$Authors <- sapply(df$BIBTEXKEY, function(x) Citet(bib, x))
 #df$File <- sprintf("[pdf](%s)", file.path("papers/pdfs", df$file)) 
 df$Title <- unname(unlist(bib$title))
-#df$Title <- sprintf('<a href="papers/pdfs/%s">%s</a>', df$file, df$Title)
-df$Title <- sprintf("[%s](%s)", df$Title, file.path("papers/pdfs", df$file)) 
+df$Title <- sprintf('<a href="papers/pdfs/%s">%s</a>', df$file, df$Title)
+#df$Title <- sprintf("[%s](%s)", df$Title, file.path("papers/pdfs", df$file)) 
 df$Title <- gsub("\\{|\\}", "", df$Title)
 df$Title <- gsub("\\n", "", df$Title)
 ```
@@ -254,7 +254,7 @@ students <- data.frame(
     name = c("Amani","Francesco",
              "Giovanni ","Elena","Filippo","Tobia","Riccardo","Gabriele",
              "Giovanni","Lorenzo","Andrea","SILVIA","Diego",
-             "Matteo","Sofia","Patric","Anna","Daniele","Giovanni",
+             "Matteo","Sofia","Patric","Anna","Daniele","Giovanni  ",
              "Claudia","Giovanni   ","Andrea","Martina","Goar",
              "Giovanni","Claudia","Roberto","Davide","Claudia","Daniele"),
     surname = c("Al Tawil","Seganfreddo",
@@ -273,7 +273,7 @@ df <- df |>
 names(df) <- stringr::str_to_title(names(df))
 df$Name <- stringr::str_to_title(df$Name)
 df$Surname <- stringr::str_to_title(df$Surname)
-df <- arrange(df, Group, Name, Surname)
+df <- arrange(df, Group, Surname, Name)
 
 df1 <- df[df$Group == 1, ]
 
@@ -283,18 +283,21 @@ df1 <- df[df$Group == 1, ]
 df[df$Group == 1, ]$Authors <- paste(unique(df1$Authors), collapse = "\n\n")
 df[df$Group == 1, ]$Title <- paste(unique(df1$Title), collapse = "\n\n")
 
+df[df$Group == 7, ]
+
+
+df |>
+    arrange(Group) |>
+    kable(escape = FALSE) |>
+    kable_styling(bootstrap_options = c("condensed"), font_size = 13) |>
+    collapse_rows(c(1, 2, 3, 4, 5))
+
 # df |> 
 #     arrange(Group, Name, Surname) |> 
-#     kable(escape = FALSE) |> 
-#     kable_styling(bootstrap_options = c("condensed"), font_size = 13) |> 
-#     collapse_rows(c(1, 2, 3, 4, 5))
-
-df |> 
-    arrange(Group, Name, Surname) |> 
-    flextable() |> 
-    merge_v(1:5) |> 
-    theme_vanilla() |> 
-    autofit() |> 
-    ftExtra::colformat_md(part = "all") |> 
-    flextable_to_rmd()
+#     flextable() |> 
+#     merge_v(1:5) |> 
+#     theme_vanilla() |> 
+#     autofit() |> 
+#     ftExtra::colformat_md(part = "all") |> 
+#     flextable_to_rmd()
 ```
