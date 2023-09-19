@@ -593,7 +593,7 @@ SE_y = \sqrt{\frac{s^2_1}{n_1} + \frac{s^2_2}{n_2}}
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>ybar <span class="ot">&lt;-</span> <span class="fu">mean</span>(dat<span class="sc">$</span>yi)</span>
 <span id="cb5-2"><a href="#cb5-2"></a>ybar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4965958</code></pre>
+<pre><code>[1] 0.368178</code></pre>
 </div>
 </div>
 </div>
@@ -604,6 +604,7 @@ SE_y = \sqrt{\frac{s^2_1}{n_1} + \frac{s^2_2}{n_2}}
 <ul id="tabset-3" class="panel-tabset-tabby">
 <li><a data-tabby-default="" href="#tabset-3-1">Plot</a></li>
 <li><a href="#tabset-3-2">Equation</a></li>
+<li><a href="#tabset-3-3">R Code</a></li>
 </ul>
 <div class="tab-content">
 <div id="tabset-3-1">
@@ -624,15 +625,17 @@ SE_y = \sqrt{\frac{s^2_1}{n_1} + \frac{s^2_2}{n_2}}
 \]</span> <span id="eq-wi"><span class="math display">\[
 w_i = \frac{1}{v_i}
 \tag{1}\]</span></span></p>
+</div>
+<div id="tabset-3-3">
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>wi <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>dat<span class="sc">$</span>vi</span>
 <span id="cb7-2"><a href="#cb7-2"></a>ywbar <span class="ot">&lt;-</span> <span class="fu">weighted.mean</span>(dat<span class="sc">$</span>yi, wi) </span>
 <span id="cb7-3"><a href="#cb7-3"></a>ywbar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4785897</code></pre>
+<pre><code>[1] 0.3740467</code></pre>
 </div>
 </div>
-<p>The value is (not so) different compared to the unweighted version (0.4965958). They are not exactly the same but given that weights are pretty homogeneous the two estimate are similar.</p>
+<p>The value is (not so) different compared to the unweighted version (0.368178). They are not exactly the same but given that weights are pretty homogeneous the two estimate are similar.</p>
 </div>
 </div>
 </div>
@@ -820,7 +823,7 @@ y_i \sim \mathcal{N}(\Delta, \frac{1}{n_1} + \frac{1}{n_2})
 <div id="tabset-6-2">
 <p>Clearly we can include <span class="math inline">\(\tau^2\)</span> to include between-study variability. For an equal-effects model <span class="math inline">\(\Delta = \theta\)</span> thus the equation is unchanged. For a random-effects model, <span class="math inline">\(\Delta = \theta_i = \mu_\theta + \delta_i\)</span></p>
 <p><span class="math display">\[
-y_i \sim \mathcal{N}(\mu_\theta + \delta_i, \tau^2 + \frac{1}{n_1} + \frac{1}{n_2})
+y_i \sim \mathcal{N}(\Delta, \tau^2 + \frac{1}{n_1} + \frac{1}{n_2})
 \]</span></p>
 </div>
 <div id="tabset-6-3">
@@ -840,17 +843,17 @@ y_i \sim \mathcal{N}(\mu_\theta + \delta_i, \tau^2 + \frac{1}{n_1} + \frac{1}{n_
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">sim_studies</span>(<span class="at">k =</span> <span class="dv">10</span>, <span class="at">theta =</span> <span class="fl">0.5</span>, <span class="at">tau2 =</span> <span class="fl">0.2</span>, <span class="at">n0 =</span> <span class="dv">30</span>, <span class="at">n1 =</span> <span class="dv">30</span>)</span>
 <span id="cb13-2"><a href="#cb13-2"></a>dat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>            yi         vi       sei
-1   1.53610995 0.05449316 0.2334377
-2   0.88014679 0.06899015 0.2626598
-3   0.20347597 0.06987412 0.2643371
-4   0.39903679 0.05287389 0.2299432
-5   0.64834993 0.07528309 0.2743776
-6  -0.05689787 0.07401077 0.2720492
-7   0.17873762 0.08760796 0.2959864
-8   0.22707713 0.05538927 0.2353493
-9   0.61985317 0.05839663 0.2416540
-10  0.15755833 0.06637123 0.2576261</code></pre>
+<pre><code>           yi         vi       sei
+1  0.88048465 0.05485043 0.2342017
+2  0.56234228 0.07623055 0.2760988
+3  0.27584902 0.05188164 0.2277754
+4  0.11505130 0.07632857 0.2762763
+5  0.03174055 0.05155293 0.2270527
+6  0.03241681 0.05097325 0.2257726
+7  1.70899812 0.07133676 0.2670894
+8  0.14385805 0.06557869 0.2560834
+9  0.20483751 0.06360575 0.2522018
+10 0.19229924 0.06883797 0.2623699</code></pre>
 </div>
 </div>
 </div>
@@ -1064,13 +1067,13 @@ I^2 = 100\% \times \frac{\hat{\tau}^2}{\hat{\tau}^2 + \tilde{v}}
 <span id="cb25-5"><a href="#cb25-5"></a>dat<span class="sc">$</span>n <span class="ot">&lt;-</span> n <span class="co"># n1 and n2 are the same, put only one</span></span>
 <span id="cb25-6"><a href="#cb25-6"></a><span class="fu">head</span>(dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>         yi         vi       sei  n
-1 0.1701476 0.03907282 0.1976685 58
-2 0.3710925 0.14986696 0.3871265 15
-3 0.3561636 0.06698277 0.2588103 28
-4 0.6353070 0.07203349 0.2683906 32
-5 0.3053436 0.04741730 0.2177551 56
-6 0.2644912 0.06734926 0.2595174 36</code></pre>
+<pre><code>           yi         vi       sei  n
+1  0.28737542 0.08397865 0.2897907 18
+2  0.69979175 0.04611211 0.2147373 45
+3  0.10918208 0.03754535 0.1937662 50
+4 -0.08953505 0.21708838 0.4659274 12
+5  0.20589062 0.03398338 0.1843458 55
+6  0.42980185 0.04503824 0.2122221 52</code></pre>
 </div>
 </div>
 </section><section id="equal-effects-model-in-r-2" class="slide level2"><h2>Equal-effects model in R</h2>
@@ -1079,20 +1082,20 @@ I^2 = 100\% \times \frac{\hat{\tau}^2}{\hat{\tau}^2 + \tilde{v}}
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># unweighted summary statistics for the effect</span></span>
 <span id="cb27-2"><a href="#cb27-2"></a><span class="fu">summary</span>(dat<span class="sc">$</span>yi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
--0.2815  0.1722  0.2741  0.2727  0.3852  0.7886 </code></pre>
+<pre><code>    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+-0.08954  0.18491  0.27600  0.27807  0.37648  0.69979 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co"># unweighted summary statistics for the variances</span></span>
 <span id="cb29-2"><a href="#cb29-2"></a><span class="fu">summary</span>(dat<span class="sc">$</span>vi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-0.02814 0.04497 0.05622 0.06441 0.07057 0.15169 </code></pre>
+0.03398 0.04413 0.05612 0.06675 0.06570 0.21709 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># sample sizes</span></span>
 <span id="cb31-2"><a href="#cb31-2"></a><span class="fu">summary</span>(dat<span class="sc">$</span>n) <span class="co"># n0 and n1 are the same</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  15.00   27.25   34.50   36.50   47.00   58.00 </code></pre>
+  11.00   30.25   35.50   35.90   44.50   55.00 </code></pre>
 </div>
 </div>
 </section><section id="equal-effects-model-in-r-3" class="slide level2"><h2>Equal-effects model in R</h2>
@@ -1105,18 +1108,18 @@ I^2 = 100\% \times \frac{\hat{\tau}^2}{\hat{\tau}^2 + \tilde{v}}
 Equal-Effects Model (k = 30)
 
   logLik  deviance       AIC       BIC      AICc   
-  1.5816   26.9465   -1.1631    0.2381   -1.0203   
+  6.5486   16.4831  -11.0972   -9.6960  -10.9543   
 
 I^2 (total heterogeneity / total variability):   0.00%
-H^2 (total variability / sampling variability):  0.93
+H^2 (total variability / sampling variability):  0.57
 
 Test for Heterogeneity:
-Q(df = 29) = 26.9465, p-val = 0.5746
+Q(df = 29) = 16.4831, p-val = 0.9696
 
 Model Results:
 
 estimate      se    zval    pval   ci.lb   ci.ub      
-  0.2585  0.0423  6.1064  &lt;.0001  0.1755  0.3415  *** 
+  0.2910  0.0428  6.7977  &lt;.0001  0.2071  0.3749  *** 
 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
@@ -1129,7 +1132,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <span id="cb35-2"><a href="#cb35-2"></a></span>
 <span id="cb35-3"><a href="#cb35-3"></a><span class="fu">weighted.mean</span>(dat<span class="sc">$</span>yi, wi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2584917</code></pre>
+<pre><code>[1] 0.2910324</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">summary</span>(fit_ee)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1137,18 +1140,18 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 Equal-Effects Model (k = 30)
 
   logLik  deviance       AIC       BIC      AICc   
-  1.5816   26.9465   -1.1631    0.2381   -1.0203   
+  6.5486   16.4831  -11.0972   -9.6960  -10.9543   
 
 I^2 (total heterogeneity / total variability):   0.00%
-H^2 (total variability / sampling variability):  0.93
+H^2 (total variability / sampling variability):  0.57
 
 Test for Heterogeneity:
-Q(df = 29) = 26.9465, p-val = 0.5746
+Q(df = 29) = 16.4831, p-val = 0.9696
 
 Model Results:
 
 estimate      se    zval    pval   ci.lb   ci.ub      
-  0.2585  0.0423  6.1064  &lt;.0001  0.1755  0.3415  *** 
+  0.2910  0.0428  6.7977  &lt;.0001  0.2071  0.3749  *** 
 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
@@ -1164,20 +1167,20 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 Random-Effects Model (k = 30; tau^2 estimator: REML)
 
   logLik  deviance       AIC       BIC      AICc   
-  1.0388   -2.0777    1.9223    4.6569    2.3839   
+  6.0172  -12.0345   -8.0345   -5.2999   -7.5729   
 
-tau^2 (estimated amount of total heterogeneity): 0.0000 (SE = 0.0133)
-tau (square root of estimated tau^2 value):      0.0009
+tau^2 (estimated amount of total heterogeneity): 0 (SE = 0.0138)
+tau (square root of estimated tau^2 value):      0
 I^2 (total heterogeneity / total variability):   0.00%
 H^2 (total variability / sampling variability):  1.00
 
 Test for Heterogeneity:
-Q(df = 29) = 26.9465, p-val = 0.5746
+Q(df = 29) = 16.4831, p-val = 0.9696
 
 Model Results:
 
 estimate      se    zval    pval   ci.lb   ci.ub      
-  0.2585  0.0423  6.1064  &lt;.0001  0.1755  0.3415  *** 
+  0.2910  0.0428  6.7977  &lt;.0001  0.2071  0.3749  *** 
 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
@@ -1190,12 +1193,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <span id="cb41-2"><a href="#cb41-2"></a>  <span class="fu">round</span>(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        fit_ee  fit_re
-b      0.25849 0.25849
-se     0.04233 0.04233
-stat   6.10643 6.10638
+b      0.29103 0.29103
+se     0.04281 0.04281
+stat   6.79767 6.79767
 pval   0.00000 0.00000
-ci.lb  0.17552 0.17552
-ci.ub  0.34146 0.34146
+ci.lb  0.20712 0.20712
+ci.ub  0.37495 0.37495
 tau2_1 0.00000 0.00000</code></pre>
 </div>
 </div>
@@ -1213,20 +1216,20 @@ tau2_1 0.00000 0.00000</code></pre>
 Random-Effects Model (k = 30; tau^2 estimator: REML)
 
   logLik  deviance       AIC       BIC      AICc   
--30.0589   60.1178   64.1178   66.8524   64.5794   
+-17.5176   35.0352   39.0352   41.7698   39.4968   
 
-tau^2 (estimated amount of total heterogeneity): 0.4001 (SE = 0.1216)
-tau (square root of estimated tau^2 value):      0.6325
-I^2 (total heterogeneity / total variability):   87.98%
-H^2 (total variability / sampling variability):  8.32
+tau^2 (estimated amount of total heterogeneity): 0.1342 (SE = 0.0510)
+tau (square root of estimated tau^2 value):      0.3663
+I^2 (total heterogeneity / total variability):   70.98%
+H^2 (total variability / sampling variability):  3.45
 
 Test for Heterogeneity:
-Q(df = 29) = 244.5437, p-val &lt; .0001
+Q(df = 29) = 100.8279, p-val &lt; .0001
 
 Model Results:
 
-estimate      se    zval    pval    ci.lb   ci.ub    
-  0.2063  0.1243  1.6595  0.0970  -0.0374  0.4500  . 
+estimate      se    zval    pval   ci.lb   ci.ub     
+  0.2629  0.0809  3.2508  0.0012  0.1044  0.4214  ** 
 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>

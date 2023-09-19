@@ -260,6 +260,8 @@ $$
 w_i = \frac{1}{v_i}
 $${#eq-wi}
 
+### R Code
+
 ```{r}
 wi <- 1/dat$vi
 ywbar <- weighted.mean(dat$yi, wi) 
@@ -482,7 +484,7 @@ $$
 Clearly we can include $\tau^2$ to include between-study variability. For an equal-effects model $\Delta = \theta$ thus the equation is unchanged. For a random-effects model, $\Delta = \theta_i = \mu_\theta + \delta_i$
 
 $$
-y_i \sim \mathcal{N}(\mu_\theta + \delta_i, \tau^2 + \frac{1}{n_1} + \frac{1}{n_2})
+y_i \sim \mathcal{N}(\Delta, \tau^2 + \frac{1}{n_1} + \frac{1}{n_2})
 $$
 
 ### Code {.smaller}
