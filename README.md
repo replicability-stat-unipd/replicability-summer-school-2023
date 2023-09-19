@@ -264,6 +264,41 @@ documentation is available).
 
 ## Lectures Slides
 
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Date
+</th>
+<th style="text-align:left;">
+Speaker
+</th>
+<th style="text-align:left;">
+Title
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+09-18-2023
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="2">
+Prof. Branden Fitelson
+</td>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="2">
+<a href="lectures/fitelson.pdf">Philosophical and statistical bases of
+replicability</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+09-19-2023
+</td>
+</tr>
+</tbody>
+</table>
+
 ## Workshops Slides
 
 The slides are located into the specific folders. Then when relevant

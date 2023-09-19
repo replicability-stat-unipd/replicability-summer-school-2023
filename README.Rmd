@@ -178,6 +178,26 @@ Relevant functions are documented. You can see the documentation directly within
 
 ## Lectures Slides
 
+```{r}
+#| echo: false
+lect <- data.frame(
+  stringsAsFactors = FALSE,
+              Date = c("09-18-2023", "09-19-2023"),
+           Speaker = c("Prof. Branden Fitelson", "Prof. Branden Fitelson"),
+             Title = c("Philosophical and statistical bases of replicability",
+                       "Philosophical and statistical bases of replicability"),
+              File = c("lectures/fitelson.pdf", "lectures/fitelson.pdf")
+)
+
+lect$Title <- sprintf('<a href="%s">%s</a>', lect$File, lect$Title)
+
+lect |> 
+    dplyr::select(-File) |> 
+    kable(escape = FALSE) |> 
+    kable_styling() |> 
+    collapse_rows(1:3)
+```
+
 ## Workshops Slides
 
 The slides are located into the specific folders. Then when relevant `script/` and `objects/` folders contains extra documents and files used in the slides and for exercises. You can directly open the slides clicking on `html` or accessing the source code with `qmd`.
