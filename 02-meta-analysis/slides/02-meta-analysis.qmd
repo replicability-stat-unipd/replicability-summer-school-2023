@@ -184,7 +184,7 @@ $$
 $$
 
 $$
-SE_y = \sqrt{\frac{s^2_1}{n_1} + \frac{s^2_2}{n_2}}
+SE_{\Delta} = \sqrt{\frac{s^2_1}{n_1} + \frac{s^2_2}{n_2}}
 $$
 
 With $X_{1_i} \sim \mathcal{N}(0, 1)$ and $X_{2_i} \sim \mathcal{N}(\Delta, 1)$

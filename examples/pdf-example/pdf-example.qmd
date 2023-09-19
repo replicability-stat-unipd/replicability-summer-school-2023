@@ -21,7 +21,7 @@ number-sections: true
 
 You can write standard markdown code. Using **bold**, *italic* or ~~underlined~~ text. You can include an external figure and also using cross reference with `@fig-quarto` that produce @fig-quarto
 
-![My beautiful caption](https://raw.githubusercontent.com/rstudio/hex-stickers/main/SVG/quarto.svg){#fig-quarto}
+![My beautiful caption](quarto.png){#fig-quarto}
 
 ## Math
 
@@ -44,17 +44,6 @@ You can cite references from a `.bib` file using the syntax `[@Chen2021-jb]` tha
 
 A reference section will be automatically created at the end of the document (see @sec-refs).
 
-## Code chunks
-
-The real beauty is including code chunks. Let's do some computations. This is a code chunk as written in the source file.
-
-````{verbatim}
-```{r}
-dat <- iris
-summary(iris)
-```
-````
-
 This is the result:
 
 ```{r}
@@ -64,7 +53,6 @@ summary(iris)
 
 ## Code chunks - Plots
 
-````{verbatim}
 ```{r}
 library(ggplot2)
 dat |>
@@ -73,11 +61,11 @@ dat |>
     geom_smooth(method = "lm", se = FALSE) +
     theme_minimal(20)
 ```
-````
 
 ```{r}
 #| echo: false
 #| fig-align: center
+
 library(ggplot2)
 dat |>
     ggplot(aes(x = Sepal.Length, y = Petal.Width, color = Species)) +
@@ -103,14 +91,15 @@ Let's produce the table with the `broom` and `kableExtra` packages:
 ```{r}
 #| echo: true
 #| tbl-cap: My caption
-library(kableExtra)
+
+library(flextable)
 library(broom)
 
 fit |> 
     broom::tidy() |> 
-    kable() |> 
-    kable_styling(full_width = FALSE,
-                  font_size = 20)
+    flextable() |> 
+    autofit() |> 
+    theme_booktabs()
 ```
 
 ## Inline code chunks
