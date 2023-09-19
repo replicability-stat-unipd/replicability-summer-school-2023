@@ -24,9 +24,11 @@
   - [Functions](#functions)
   - [Useful links](#useful-links)
 - [Materials](#materials)
-  - [Slides](#slides)
+  - [Lectures Slides](#lectures-slides)
+  - [Workshops Slides](#workshops-slides)
   - [Data](#data)
 - [Teamwork](#teamwork)
+- [Photos](#photos)
 
 # Information
 
@@ -158,54 +160,55 @@ for the workshops. To reproduce the slides, plots and the overall
 project (not required to follow the workshops) there are extra packages.
 You can avoid installing it but this is a complete list:
 
-| package            | version    | repository           |
-|:-------------------|:-----------|:---------------------|
-| bayestestR         | 0.13.1     | CRAN                 |
-| bib2df             | 1.1.1      | CRAN                 |
-| Biobase            | 2.58.0     | bioconductor         |
-| broom              | 1.0.4      | CRAN                 |
-| car                | 3.1-2      | CRAN                 |
-| cli                | 3.6.1      | CRAN                 |
-| cowplot            | 1.1.1      | CRAN                 |
-| curatedOvarianData | 1.36.0     | bioconductor         |
-| devtools           | 2.4.5      | CRAN                 |
-| distributional     | 0.3.2      | CRAN                 |
-| dplyr              | 1.1.2      | CRAN                 |
-| DT                 | 0.28       | CRAN                 |
-| emo                | 0.0.0.9000 | hadley/emo           |
-| fansi              | 1.0.4      | CRAN                 |
-| filor              | 0.1.0      | other                |
-| flextable          | 0.9.3      | CRAN                 |
-| ftExtra            | 0.6.0      | CRAN                 |
-| ggdist             | 3.2.1      | CRAN                 |
-| ggplot2            | 3.4.2      | CRAN                 |
-| here               | 1.0.1      | CRAN                 |
-| kableExtra         | 1.3.4.9000 | haozhu233/kableExtra |
-| knitr              | 1.42       | CRAN                 |
-| latex2exp          | 0.9.6      | CRAN                 |
-| lsr                | 0.5.2      | CRAN                 |
-| ltxplot            | 1.0.0      | alicewchen/ltxplot   |
-| magrittr           | 2.0.3      | CRAN                 |
-| metafor            | 4.0-0      | CRAN                 |
-| MetaUtility        | 2.1.2      | CRAN                 |
-| pROC               | 1.18.4     | CRAN                 |
-| purrr              | 1.0.1      | CRAN                 |
-| pwr                | 1.3-0      | CRAN                 |
-| quarto             | 1.2        | CRAN                 |
-| readxl             | 1.4.2      | CRAN                 |
-| RefManageR         | 1.4.0      | CRAN                 |
-| renv               | 0.17.3     | CRAN                 |
-| Replicate          | 1.2.0      | CRAN                 |
-| rmarkdown          | 2.21       | CRAN                 |
-| rstanarm           | 2.21.4     | CRAN                 |
-| scales             | 1.2.1      | CRAN                 |
-| shiny              | 1.7.4      | CRAN                 |
-| sjPlot             | 2.8.14     | CRAN                 |
-| stringr            | 1.5.0      | CRAN                 |
-| tibble             | 3.2.1      | CRAN                 |
-| tidyr              | 1.3.0      | CRAN                 |
-| tidyverse          | 2.0.0      | CRAN                 |
-| xfun               | 0.39       | CRAN                 |
+| package            | version    | repository              |
+|:-------------------|:-----------|:------------------------|
+| bayestestR         | 0.13.1     | CRAN                    |
+| bib2df             | 1.1.1      | CRAN                    |
+| Biobase            | 2.58.0     | bioconductor            |
+| broom              | 1.0.4      | CRAN                    |
+| car                | 3.1-2      | CRAN                    |
+| cli                | 3.6.1      | CRAN                    |
+| cowplot            | 1.1.1      | CRAN                    |
+| curatedOvarianData | 1.36.0     | bioconductor            |
+| devtools           | 2.4.5      | CRAN                    |
+| distributional     | 0.3.2      | CRAN                    |
+| dplyr              | 1.1.2      | CRAN                    |
+| DT                 | 0.28       | CRAN                    |
+| emo                | 0.0.0.9000 | hadley/emo              |
+| fansi              | 1.0.4      | CRAN                    |
+| filor              | 0.1.0      | other                   |
+| flextable          | 0.9.3      | CRAN                    |
+| ftExtra            | 0.6.0      | CRAN                    |
+| ggdist             | 3.2.1      | CRAN                    |
+| ggplot2            | 3.4.2      | CRAN                    |
+| here               | 1.0.1      | CRAN                    |
+| icons              | 0.2.0      | mitchelloharawild/icons |
+| kableExtra         | 1.3.4.9000 | haozhu233/kableExtra    |
+| knitr              | 1.42       | CRAN                    |
+| latex2exp          | 0.9.6      | CRAN                    |
+| lsr                | 0.5.2      | CRAN                    |
+| ltxplot            | 1.0.0      | alicewchen/ltxplot      |
+| magrittr           | 2.0.3      | CRAN                    |
+| metafor            | 4.0-0      | CRAN                    |
+| MetaUtility        | 2.1.2      | CRAN                    |
+| pROC               | 1.18.4     | CRAN                    |
+| purrr              | 1.0.1      | CRAN                    |
+| pwr                | 1.3-0      | CRAN                    |
+| quarto             | 1.2        | CRAN                    |
+| readxl             | 1.4.2      | CRAN                    |
+| RefManageR         | 1.4.0      | CRAN                    |
+| renv               | 0.17.3     | CRAN                    |
+| Replicate          | 1.2.0      | CRAN                    |
+| rmarkdown          | 2.21       | CRAN                    |
+| rstanarm           | 2.21.4     | CRAN                    |
+| scales             | 1.2.1      | CRAN                    |
+| shiny              | 1.7.4      | CRAN                    |
+| sjPlot             | 2.8.14     | CRAN                    |
+| stringr            | 1.5.0      | CRAN                    |
+| tibble             | 3.2.1      | CRAN                    |
+| tidyr              | 1.3.0      | CRAN                    |
+| tidyverse          | 2.0.0      | CRAN                    |
+| xfun               | 0.39       | CRAN                    |
 
 # Repository
 
@@ -242,7 +245,7 @@ the workshop. These functions can be loaded with `devtools::load_all()`:
 - `R/utils.R`: general utilities for managing the project (not useful
   for the workshop)
 - `R/utils-meta.R`: utilities for the meta-analysis workshop
-- `R/utils-biostat.R`: utilities for the biostatistic workshop
+- `R/utils-biostat.R`: utilities for the biostatistics workshop
 - `R/utils-replication.R`: utilities for the replication methods
   workshop
 
@@ -259,7 +262,9 @@ documentation is available).
 
 # Materials
 
-## Slides
+## Lectures Slides
+
+## Workshops Slides
 
 The slides are located into the specific folders. Then when relevant
 `script/` and `objects/` folders contains extra documents and files used
@@ -676,3 +681,10 @@ Tancini
 </tr>
 </tbody>
 </table>
+
+# Photos
+
+<figure>
+<img src="files/group-picture.jpg" alt="19-09-2023" />
+<figcaption aria-hidden="true"><strong>19-09-2023</strong></figcaption>
+</figure>

@@ -165,7 +165,7 @@ Within slides and exercises we use some custom functions developed for the works
 
 - `R/utils.R`: general utilities for managing the project (not useful for the workshop)
 - `R/utils-meta.R`: utilities for the meta-analysis workshop
-- `R/utils-biostat.R`: utilities for the biostatistic workshop
+- `R/utils-biostat.R`: utilities for the biostatistics workshop
 - `R/utils-replication.R`: utilities for the replication methods workshop
 
 Relevant functions are documented. You can see the documentation directly within the `R` files or using the standard syntax `?function` after using `devtools::load_all()` (for functions where the documentation is available).
@@ -176,7 +176,9 @@ Relevant functions are documented. You can see the documentation directly within
 
 # Materials
 
-## Slides
+## Lectures Slides
+
+## Workshops Slides
 
 The slides are located into the specific folders. Then when relevant `script/` and `objects/` folders contains extra documents and files used in the slides and for exercises. You can directly open the slides clicking on `html` or accessing the source code with `qmd`.
 
@@ -298,3 +300,7 @@ df |>
 #     ftExtra::colformat_md(part = "all") |> 
 #     flextable_to_rmd()
 ```
+
+# Photos
+
+![**19-09-2023**](files/group-picture.jpg)
