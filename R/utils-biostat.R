@@ -8,7 +8,10 @@
 #' @return a dataframe
 #' @export
 #'
-get_bio_data <- function(data, gene, phenotype){
+get_bio_data <- function(data, gene = NULL, phenotype = NULL){
+  gene <- if(is.null(gene)) get_gene_names(data) else gene
+  phenotype <- if(is.null(phenotype)) get_pheno_names(data) else phenotype
+  
   phend <- data.frame(Biobase::pData(data)[, phenotype])
   gened <- data.frame(Biobase::exprs(data)[gene, ])
   if(length(gene) != 1){
@@ -18,6 +21,14 @@ get_bio_data <- function(data, gene, phenotype){
   colnames(out) <- c(phenotype, gene)
   rownames(out) <- NULL
   return(out)
+}
+
+has_pheno <- function(data, pheno){
+    pheno %in% get_pheno_names(data)
+}
+
+has_gene <- function(data, gene){
+    gene %in% get_gene_names(data)
 }
 
 #' sim_bin_class
@@ -156,7 +167,7 @@ plot_class <- function(data, y, x){
   dens <- tapply(data[[x]], data[[y]], density)
   ndens <- names(dens)
   
-  fit <- glm(y ~ x, data = data, family = binomial(link = "logit"))
+  fit <- glm(data[[y]] ~ data[[x]], family = binomial(link = "logit"))
   def.par = par(no.readonly = TRUE)
   
   xlim <- c(min(sapply(dens, function(x) min(x$x))),
@@ -178,9 +189,8 @@ plot_class <- function(data, y, x){
   lines(dens[[2]], col = "dodgerblue3", lwd = 1.5)
   
   xr <- seq(min(data[[x]]), max(data[[x]]), length.out = 500)
-  pdata <- data.frame(xr)
-  names(pdata) <- x
-  pr <- predict(fit, newdata = pdata, type = "response")
+  
+  pr <- plogis(coef(fit)[1] + coef(fit)[2]*xr)
   
   y_jitt <- jitter(data[[y]], 0.2)
   y_col <- ifelse(data[[y]] == ndens[1], "firebrick", "dodgerblue3")
@@ -191,7 +201,7 @@ plot_class <- function(data, y, x){
        main = "Dotplot",
        xlab = x,
        ylab = y)
-  lines(pdata[[1]], pr)
+  lines(xr, pr)
   
   par(def.par)
 }
@@ -202,8 +212,13 @@ plot_class <- function(data, y, x){
 #'
 getdata <- function(dataset, package){
   env <- new.env()
-  data(list = dataset, package = package, envir = env)
-  base::get(dataset, envir = env)
+  lapply(dataset, function(x) data(list = x, package = package, envir = env))
+  dlist <- lapply(dataset, function(x) base::get(x, envir = env))
+  names(dlist) <- dataset
+  if(length(dlist) == 1){
+      dlist <- dlist[[1]]
+  }
+  return(dlist)
 }
 
 #' get_gene_names
@@ -212,6 +227,14 @@ getdata <- function(dataset, package){
 #' 
 get_gene_names <- function(data){
   rownames(Biobase::exprs(data))
+}
+
+#' get_gene_names
+#' 
+#' @export
+#' 
+get_pheno_names <- function(data){
+    rownames(data.frame(Biobase::phenoData(data)@varMetadata))
 }
 
 #' contingency_tab
