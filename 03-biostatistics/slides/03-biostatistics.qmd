@@ -128,27 +128,55 @@ knitr::include_url("https://bioconductor.org/packages/release/data/experiment/ht
 
 ## Data structure
 
-Gene **Expression** data are very complex in terms of acquisition, pre-processing and organization. For the purpose of this workshop we will transform the gene-phenotype database in a standard 2d dataframe using the `get_bio_data()` function. The majority of packages that we are going to use works better with this data structure.
-
-```{r, results='asis', echo=FALSE}
-filor::print_fun(funs$get_bio_data)
-```
-
-## Data structure
-
-All the datasets are available using the `data(dataset, package = "curatedOvarianData")`. To see a list of available datasets (when the package is loaded using `library()` the `package =` argument can be omitted):
+Gene **Expression** data are very complex in terms of acquisition, pre-processing and organization. The full list of datasets can be seen using `data(dataset, package = "curatedOvarianData")` (when the package is loaded using `library()` the `package =` argument can be omitted):
 
 ```{r}
 data(package = "curatedOvarianData")$result[, "Item"]
 ```
 
-## Data structure
+## Data loading
+
+Instead of using the `data()` function to load the datasets you can use the `getdata()` function:
+
+```{r, results='asis', echo=FALSE}
+filor::print_fun(funs$getdata)
+```
+
+```{r}
+dat <- getdata("GSE12418_eset", package = "curatedOvarianData")
+```
+
+## Data extraction
+
+To get all the genes names from a dataset you can use `get_gene_names()` and to get all *phenotype* variables you can use the `get_pheno_names()`. Not all datasets have the same genes and variables.
+
+```{r, results='asis', echo=FALSE}
+filor::print_fun(c(funs$get_gene_names, funs$get_pheno_names))
+```
+
+## Data extraction
+
+You can check also if a specific gene or phenotype is present within a dataset (if you want to select all datasets with certain properties) using the `has_pheno()` and `has_gene()` functions:
+
+```{r, results='asis', echo=FALSE}
+filor::print_fun(c(funs$has_gene, funs$has_pheno))
+```
+
+## Data transformation
+
+For the purpose of this workshop we will transform the gene-phenotype database in a standard 2d dataframe using the `get_bio_data()` function. The majority of packages that we are going to use works better with this data structure.
+
+```{r, results='asis', echo=FALSE}
+filor::print_fun(funs$get_bio_data)
+```
+
+## Data transformation
 
 For example, we want to extract the `ARHGAP5` and `ZNF487` *genes* and `debulking` and `tumorstage` *phenotype* variables.
 
 ```{r}
-data(GSE32063_eset) # load the dataset
-get_bio_data(GSE32063_eset, c("ARHGAP5", "ZNF487"), c("debulking", "tumorstage"))
+dat <- getdata("GSE32063_eset", "curatedOvarianData")
+get_bio_data(dat, c("ARHGAP5", "ZNF487"), c("debulking", "tumorstage"))
 ```
 
 ## Data structure
@@ -178,6 +206,17 @@ I prefer always working (if possible) with a simple dataframe:
 dat <- dplyr::bind_rows(datl, .id = "dataset")
 head(dat)
 ```
+
+## Alternative data
+
+Prof. Parmigiani suggests a list of genes of interest from the `curatedOvarianData` dataset that could be missing from the proposed cleaned dataset. If you want to try these genes for the exercises you can use the previous functions to create your dataset(s):
+
+```r
+# genes of interest
+genes <- c("MMP2", "TIMP3", "ADAMTS1", "VCL", "TGFB1", "SPARC", "CYR61", "EGR1", "SMADs", "GLIs", "VCAN", "CNY61", "LOX", "TAFs", "ACTA2", "POSTN", "CXCL14", "CCL13", "FAP", "NUAK1", "PTCH1", "TGFBR2", "TNFAIP6", "POSTN", "CXCL14", "CCL13", "FAP", "NUAK1", "PTCH1", "TGFBR2", "TNFAIP6")
+```
+
+
 
 ## Contingency tables (CT)
 
@@ -792,20 +831,19 @@ Some questions are:
 
 We saw that working with contingency tables requires giving labels to the actual data. In this case we set the following conventions:
 
-- the **suboptimal** state is coded as 0 i.e. not having the *disease*
-- the **optimal** state is coded as 1 i.e. having the *disease*
-- higher values of gene expressions ($x_{g_i}$) are associated with higher probability of **suboptimal** state
+- the **suboptimal** state is coded as 0 i.e. having the *disease*
+- the **optimal** state is coded as 1 i.e. not having the *disease*
 - we call the **state** (S) the variable representing the *TRUE* surgery outcome and **test** (T) the predicted outcome using the gene expression. Thus e.g. $p(T_1|S_1)$ is the Sensitivity
 
 ## Steps
 
-1. Load and explore the data (you can the `ovarianclean.rds` or using the raw `curatedOvarianData`)
+1. Load and explore the data (you can the `ovarianclean.rds` or using the raw `curatedOvarianData`) or the genes proposed at the beginning.
 2. Calculate the prevalence ($p(S_1)$) of the **optimal** debulking for each dataset
 3. Choose a gene ($g_i$) and plot the $x_i$ values according to the debulking
 4. Calculate the Sensitivity, Specificity, Youden's J and PPV for all datasets based on the same gene.
 5. Compare graphically and descriptively the results
-6. Calculate the standard error of the AUC (see the `pROC::var()` function)
-7. Compute and represent a **random-effects meta-analysis** polling the AUC for the same gene, across datasets. Interpret the pooled effect, heterogeneity and Q-statistics.
+6. Compute the ROC curve and the AUC with a standard error (see the `pROC` package, in particular the `var` function)
+7. Compute and represent a **random-effects meta-analysis** combining the AUCs for the same gene, across datasets. Interpret the pooled effect, heterogeneity and Q-statistics.
 
 ## Steps (optional)
 
@@ -813,6 +851,7 @@ We saw that working with contingency tables requires giving labels to the actual
   - There is also the `pROC::ci.auc()` function with the `bootstrap` option. Try to manually code the bootstrap and eventually compare the results
   - The confidence interval can be calculated with the `quantile()` function [see @Carpenter2000-dm] with the desired coverage (e.g., 95%)
   - Further details are available here https://cran.r-project.org/web/packages/pROC/pROC.pdf (page 5, Section Bootstrap)
+7. You can also explore some other *phenotypes*
 
 ```{r eval = solutions, child="03-biostatistics-solutions.qmd"}
 ```
@@ -820,4 +859,3 @@ We saw that working with contingency tables requires giving labels to the actual
 ## References `r link_refs()` {.smaller}
 
 </br>
-
