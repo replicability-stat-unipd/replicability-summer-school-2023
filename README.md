@@ -278,20 +278,19 @@ documentation is available).
 - 09-18-2023 [Replicability in Science: 1: A Case
   Study](lectures/parmigiani1.pdf)
 - 09-19-2023 [Replicability in Science: 2: The National Academies 2019
-  Report](lectures/parmigiani1.pdf) [Replicability and Decision
-  Theory](lectures/parmigiani2.pdf)
+  Report](lectures/parmigiani2.pdf)
 - 09-19-2023 [Replicability in Science: 3: Replicability and Decision
   Theory](lectures/parmigiani3.pdf)
 
 ### Annibale Biggeri
 
 - 09-20-2023 [Replicability Issues in Epidemiologic
-  Research](biggeri.pdf)
+  Research](lectures/biggeri.pdf)
 
 ### Davide Posillipo
 
 - 09-20-2023 [Replicability challenges in applied data science: insights
-  from the industry](posillipo.pdf)
+  from the industry](lectures/posillipo.pdf)
 
 ## Workshops Slides
 
