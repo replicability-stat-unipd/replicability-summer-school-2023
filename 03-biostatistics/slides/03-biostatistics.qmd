@@ -154,12 +154,28 @@ To get all the genes names from a dataset you can use `get_gene_names()` and to 
 filor::print_fun(c(funs$get_gene_names, funs$get_pheno_names))
 ```
 
+```{r}
+get_gene_names(dat)
+```
+
+```{r}
+get_pheno_names(dat)
+```
+
 ## Data extraction
 
 You can check also if a specific gene or phenotype is present within a dataset (if you want to select all datasets with certain properties) using the `has_pheno()` and `has_gene()` functions:
 
 ```{r, results='asis', echo=FALSE}
 filor::print_fun(c(funs$has_gene, funs$has_pheno))
+```
+
+```{r}
+has_gene(dat, c("ABLIM3", "ABRACL"))
+```
+
+```{r}
+has_pheno(dat, "debulking")
 ```
 
 ## Data transformation
@@ -215,8 +231,6 @@ Prof. Parmigiani suggests a list of genes of interest from the `curatedOvarianDa
 # genes of interest
 genes <- c("MMP2", "TIMP3", "ADAMTS1", "VCL", "TGFB1", "SPARC", "CYR61", "EGR1", "SMADs", "GLIs", "VCAN", "CNY61", "LOX", "TAFs", "ACTA2", "POSTN", "CXCL14", "CCL13", "FAP", "NUAK1", "PTCH1", "TGFBR2", "TNFAIP6", "POSTN", "CXCL14", "CCL13", "FAP", "NUAK1", "PTCH1", "TGFBR2", "TNFAIP6")
 ```
-
-
 
 ## Contingency tables (CT)
 
