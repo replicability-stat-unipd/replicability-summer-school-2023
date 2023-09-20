@@ -223,14 +223,10 @@ slides <- data.frame(
                        "[qmd](04-replication-methods/slides/04-replication-methods.html)"),
          Solutions = c(NA,NA,
                        "[html](02-meta-analysis/slides/02-meta-analysis-solutions.html) - [qmd](02-meta-analysis/slides/02-meta-analysis-solutions.qmd)",
-                       "[html](03-biostatistics/slides/03-biostatistics-solutions.html) - [qmd](03-biostatistics/slides/03-biostatistics-solutions.qmd)",NA)
+                       NA,NA)
 )
 
 slides[is.na(slides)] <- ""
-
-if(!params$solutions){
-    slides <- slides[, -5]
-}
 
 slides |> 
     kable(format = "markdown")

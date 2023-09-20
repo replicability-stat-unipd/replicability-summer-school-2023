@@ -306,13 +306,13 @@ The slides are located into the specific folders. Then when relevant
 in the slides and for exercises. You can directly open the slides
 clicking on `html` or accessing the source code with `qmd`.
 
-| Day        | Title                                               | Slides                                                            | Source                                                           |
-|:-----------|:----------------------------------------------------|:------------------------------------------------------------------|:-----------------------------------------------------------------|
-| 09-18-2023 | **Introduction to the workshops**                   | [html](00-intro/slides/00-intro.html)                             | [qmd](00-intro/slides/00-intro.qmd)                              |
-| 09-18-2023 | **Tools for reproducible research**                 | [html](01-replication-tools/slides/01-replication-tools.html)     | [qmd](01-replication-tools/slides/01-replication-tools.qmd)      |
-| 09-19-2023 | **Meta-Analysis and Multi-Lab Replication studies** | [html](02-meta-analysis/slides/02-meta-analysis.html)             | [qmd](02-meta-analysis/slides/02-meta-analysis.qmd)              |
-| 09-20-2023 | **Exploring Replicability in Biostatistics**        | [html](03-biostatistics/slides/03-biostatistics.html)             | [qmd](03-biostatistics/slides/03-biostatistics.qmd)              |
-| 09-21-2023 | **Statistical Methods for Replication Assessment**  | [html](04-replication-methods/slides/04-replication-methods.html) | [qmd](04-replication-methods/slides/04-replication-methods.html) |
+| Day        | Title                                               | Slides                                                            | Source                                                           | Solutions                                                                                                                       |
+|:-----------|:----------------------------------------------------|:------------------------------------------------------------------|:-----------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------|
+| 09-18-2023 | **Introduction to the workshops**                   | [html](00-intro/slides/00-intro.html)                             | [qmd](00-intro/slides/00-intro.qmd)                              |                                                                                                                                 |
+| 09-18-2023 | **Tools for reproducible research**                 | [html](01-replication-tools/slides/01-replication-tools.html)     | [qmd](01-replication-tools/slides/01-replication-tools.qmd)      |                                                                                                                                 |
+| 09-19-2023 | **Meta-Analysis and Multi-Lab Replication studies** | [html](02-meta-analysis/slides/02-meta-analysis.html)             | [qmd](02-meta-analysis/slides/02-meta-analysis.qmd)              | [html](02-meta-analysis/slides/02-meta-analysis-solutions.html) - [qmd](02-meta-analysis/slides/02-meta-analysis-solutions.qmd) |
+| 09-20-2023 | **Exploring Replicability in Biostatistics**        | [html](03-biostatistics/slides/03-biostatistics.html)             | [qmd](03-biostatistics/slides/03-biostatistics.qmd)              |                                                                                                                                 |
+| 09-21-2023 | **Statistical Methods for Replication Assessment**  | [html](04-replication-methods/slides/04-replication-methods.html) | [qmd](04-replication-methods/slides/04-replication-methods.html) |                                                                                                                                 |
 
 ## Data
 
