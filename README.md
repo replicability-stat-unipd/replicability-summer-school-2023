@@ -29,6 +29,7 @@
     - [Giovanni Parmigiani](#giovanni-parmigiani)
     - [Annibale Biggeri](#annibale-biggeri)
     - [Davide Posillipo](#davide-posillipo)
+    - [Andrea Cignarella](#andrea-cignarella)
   - [Workshops Slides](#workshops-slides)
   - [Data](#data)
 - [Teamwork](#teamwork)
@@ -291,6 +292,11 @@ documentation is available).
 
 - 09-20-2023 [Replicability challenges in applied data science: insights
   from the industry](lectures/posillipo.pdf)
+
+### Andrea Cignarella
+
+- 09-20-2023 [Replicability issues in pharmacological and clinical
+  research](lectures/cignarella.pdf)
 
 ## Workshops Slides
 
