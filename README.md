@@ -25,6 +25,10 @@
   - [Useful links](#useful-links)
 - [Materials](#materials)
   - [Lectures Slides](#lectures-slides)
+    - [Branden Fitelson](#branden-fitelson)
+    - [Giovanni Parmigiani](#giovanni-parmigiani)
+    - [Annibale Biggeri](#annibale-biggeri)
+    - [Davide Posillipo](#davide-posillipo)
   - [Workshops Slides](#workshops-slides)
   - [Data](#data)
 - [Teamwork](#teamwork)
@@ -264,40 +268,30 @@ documentation is available).
 
 ## Lectures Slides
 
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Date
-</th>
-<th style="text-align:left;">
-Speaker
-</th>
-<th style="text-align:left;">
-Title
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-09-18-2023
-</td>
-<td style="text-align:left;vertical-align: middle !important;" rowspan="2">
-Prof. Branden Fitelson
-</td>
-<td style="text-align:left;vertical-align: middle !important;" rowspan="2">
-<a href="lectures/fitelson.pdf">Philosophical and statistical bases of
-replicability</a>
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-09-19-2023
-</td>
-</tr>
-</tbody>
-</table>
+### Branden Fitelson
+
+- 09-18-2023 - 09-19-2023 [Replicability crisis in science? A View from
+  Philosophy of Science](lectures/fitelson.pdf)
+
+### Giovanni Parmigiani
+
+- 09-18-2023 [Replicability in Science: 1: A Case
+  Study](lectures/parmigiani1.pdf)
+- 09-19-2023 [Replicability in Science: 2: The National Academies 2019
+  Report](lectures/parmigiani1.pdf) [Replicability and Decision
+  Theory](lectures/parmigiani2.pdf)
+- 09-19-2023 [Replicability in Science: 3: Replicability and Decision
+  Theory](lectures/parmigiani3.pdf)
+
+### Annibale Biggeri
+
+- 09-20-2023 [Replicability Issues in Epidemiologic
+  Research](biggeri.pdf)
+
+### Davide Posillipo
+
+- 09-20-2023 [Replicability challenges in applied data science: insights
+  from the industry](posillipo.pdf)
 
 ## Workshops Slides
 
