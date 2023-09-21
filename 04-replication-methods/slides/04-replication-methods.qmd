@@ -107,8 +107,8 @@ Exact replications are commonly considered as the *gold-standard* but in practic
 Let's imagine, an original study $y_{or}$ finding a result.
 
 - Replication $y_{rep}$ with the *exact* same method find the same result. **Replication or not?**
-- Replication $y_{rep}$ with *similar* same method find the same result. **Replication or not?**
-- Replication $y_{rep}$ with *similar* same method did not find the same result. **Replication or not?**
+- Replication $y_{rep}$ with a *similar* method find the same result. **Replication or not?**
+- Replication $y_{rep}$ with *similar* method did not find the same result. **Replication or not?**
 
 ## Direct and Conceptual replications [@Schmidt2009-mq]
 
@@ -880,6 +880,8 @@ Simonsohn [-@Simonsohn2015-kg] introduced 3 main questions when evaluating repli
 
 The idea is simple but quite powerful and insightful. Let's assume that an original study found an effect of $y_{orig} = 0.7$ on a two-sample design with $n = 20$ per group.
 
+. . .
+
 - we define a threshold as the effect size that is associated with a certain low power level e.g., $33\%$ given the sample size i.e. $\theta_{small} = 0.5$
 - the replication study found an effect of $y{rep} = 0.2$ with $n = 100$ subjects
 
@@ -1157,14 +1159,14 @@ If $H_0$ is more likely after seeing the data, there is evidence against the rep
 
 ## Example
 
-Let's assume that the original study ($n_{1,2} = 30$) estimate a $y_{orig} = 0.4$ and a standard error of $\sigma^2_1/n_1 + \sigma^2_2/n_2$. Let's assume also that $\sigma^2_1 = \sigma^2_2 = 1$. The standard error is ~`r round(sqrt(1/30 + 1/30), 2)`.
+Let's assume that the original study ($n = 30$) estimate a $y_{orig} = 0.4$ and a standard error of $\sigma^2/n$.
 
 ```{r}
 #| echo: true
 # original study
 n <- 30
 yorig <- 0.4
-se <- sqrt(1/30 + 1/30)
+se <- sqrt(1/30)
 ```
 
 ::: {.callout-note}
@@ -1193,13 +1195,13 @@ With an uninformative prior the credible interval is the same as the confidence 
 
 ## Example
 
-Let's imagine that a new study tried to replicate the original one. They collected $n_{1,2} = 100$ participants with the same protocol and found and effect of $y_{rep} = 0.1$.
+Let's imagine that a new study tried to replicate the original one. They collected $n = 100$ participants with the same protocol and found and effect of $y_{rep} = 0.1$.
 
 ```{r}
 nrep <- 100
 yrep <- MASS::mvrnorm(nrep, mu = 0.1, Sigma = 1, empirical = TRUE)[, 1]
 dat <- data.frame(y = yrep)
-hist(yrep, main = "Replication Study (n1 = n2 = 100)", xlab = latex2exp::TeX("$y_{rep}$"))
+hist(yrep, main = "Replication Study (n1 = 100)", xlab = latex2exp::TeX("$y_{rep}$"))
 abline(v = mean(yrep), lwd = 2, col = "firebrick")
 ```
 

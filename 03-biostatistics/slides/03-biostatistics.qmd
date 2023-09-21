@@ -155,11 +155,11 @@ filor::print_fun(c(funs$get_gene_names, funs$get_pheno_names))
 ```
 
 ```{r}
-get_gene_names(dat)
+get_gene_names(dat) |> head()
 ```
 
 ```{r}
-get_pheno_names(dat)
+get_pheno_names(dat) |> head()
 ```
 
 ## Data extraction

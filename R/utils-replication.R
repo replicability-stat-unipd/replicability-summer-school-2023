@@ -66,7 +66,7 @@ Qrep <- function(yi, vi, lambda0 = 0, alpha = 0.05){
   df <- k - 1
   Qp <- pchisq(Q, df = df, ncp = lambda0, lower.tail = FALSE)
   pval <- ifelse(Qp < 0.001, "p < 0.001", sprintf("p = %.3f", Qp))
-  lambda <- Q - df
+  lambda <- ifelse((Q - df) < 0, 0, (Q - df))
   res <- list(Q = Q, lambda = lambda, pval = Qp, df = df, k = k, alpha = alpha, lambda0 = lambda0)
   H0 <- ifelse(lambda0 != 0, paste("H0: lambda <", lambda0), "H0: lambda = 0")
   title <- ifelse(lambda0 != 0, "Q test for Approximate Replication", "Q test for Exact Replication")
