@@ -204,6 +204,10 @@ Relevant functions are documented. You can see the documentation directly within
 
 - 09-20-2023 [Replicability in biomedical research: limitations, risks and solutions](lectures/martello.pdf)
 
+### Giulia Calignano
+
+### Michelangelo Vianello
+
 ## Workshops Slides
 
 The slides are located into the specific folders. Then when relevant `script/` and `objects/` folders contains extra documents and files used in the slides and for exercises. You can directly open the slides clicking on `html` or accessing the source code with `qmd`.

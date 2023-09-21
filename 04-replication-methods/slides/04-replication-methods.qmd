@@ -500,10 +500,10 @@ If factors other than standard error influence the replication result, $\theta_{
 
 ## Prediction interval (PI), what to expect from a replication
 
-In the case of a unstandardized mean difference we can compute the prediction interval as:
+In the case of a (un)standardized mean difference we can compute the prediction interval as:
 
 $$
-\sqrt{\sigma^2_{\epsilon_{\hat \theta_{orig} - \hat \theta_{rep_0}}}} = \left( \frac{\hat \sigma^2_{o1}}{n_{o1}} +\frac{\hat \sigma^2_{o2}}{n_{o2}}\right) + \left(\frac{\hat \sigma^2_{o1}}{n_{r1}} + \frac{\hat\sigma^2_{o2}}{n_{r2}}\right)
+\sqrt{\sigma^2_{\epsilon_{\hat \theta_{orig} - \hat \theta_{rep_0}}}} = \sqrt{\left( \frac{\hat \sigma^2_{o1}}{n_{o1}} +\frac{\hat \sigma^2_{o2}}{n_{o2}}\right) + \left(\frac{\hat \sigma^2_{o1}}{n_{r1}} + \frac{\hat\sigma^2_{o2}}{n_{r2}}\right)}
 $$
 
 The first term is just the standard error of the difference between the two groups in the original study and the second term is the standard error of the **hypothetical** replication study assuming the same standard deviation of the original but a different $n$.
@@ -564,7 +564,7 @@ abline(v = od + qnorm(c(0.025, 0.975)) * se_o_r, lty = "dashed")
 Mathur & VanderWeele [-@Mathur2020-nw] proposed a new method based on the prediction interval to calculate a p value $p_{orig}$ representing the probability that $\theta_{orig}$ is consistent with the replications. This method is suited for *many-to-one* replication designs. Formally:
 
 $$
-P_{orig} = 2 \left[ 1 - \Phi \left( \frac{|\hat \theta_{orig} - \hat \mu_{\theta_{rep}}|}{\sqrt{\hat \tau^2 + \sigma^2_{orig} + \hat{SE}_{\hat \mu_{\theta_{rep}}}}} \right) \right]
+P_{orig} = 2 \left[ 1 - \Phi \left( \frac{|\hat \theta_{orig} - \hat \mu_{\theta_{rep}}|}{\sqrt{\hat \tau^2 + \sigma^2_{orig} + \hat{SE}^2_{\hat \mu_{\theta_{rep}}}}} \right) \right]
 $$
 
 - $\mu_{\theta_{rep}}$ is the pooled (i.e., meta-analytic) estimation of the $k$ replications

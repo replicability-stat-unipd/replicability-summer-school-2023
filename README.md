@@ -31,6 +31,8 @@
     - [Davide Posillipo](#davide-posillipo)
     - [Andrea Cignarella](#andrea-cignarella)
     - [Graziano Martello](#graziano-martello)
+    - [Giulia Calignano](#giulia-calignano)
+    - [Michelangelo Vianello](#michelangelo-vianello)
   - [Workshops Slides](#workshops-slides)
   - [Data](#data)
 - [Teamwork](#teamwork)
@@ -303,6 +305,10 @@ documentation is available).
 
 - 09-20-2023 [Replicability in biomedical research: limitations, risks
   and solutions](lectures/martello.pdf)
+
+### Giulia Calignano
+
+### Michelangelo Vianello
 
 ## Workshops Slides
 
