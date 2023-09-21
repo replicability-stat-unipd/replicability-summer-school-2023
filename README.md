@@ -30,6 +30,7 @@
     - [Annibale Biggeri](#annibale-biggeri)
     - [Davide Posillipo](#davide-posillipo)
     - [Andrea Cignarella](#andrea-cignarella)
+    - [Graziano Martello](#graziano-martello)
   - [Workshops Slides](#workshops-slides)
   - [Data](#data)
 - [Teamwork](#teamwork)
@@ -297,6 +298,11 @@ documentation is available).
 
 - 09-20-2023 [Replicability issues in pharmacological and clinical
   research](lectures/cignarella.pdf)
+
+### Graziano Martello
+
+- 09-20-2023 [Replicability in biomedical research: limitations, risks
+  and solutions](lectures/martello.pdf)
 
 ## Workshops Slides
 
