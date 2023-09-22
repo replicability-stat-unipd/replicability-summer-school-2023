@@ -24,6 +24,8 @@
   - [Functions](#functions)
   - [Useful links](#useful-links)
 - [Materials](#materials)
+  - [Workshop: Replicability crisis in science?
+    09-19-2023](#workshop:-replicability-crisis-in-science?-09-19-2023)
   - [Lectures Slides](#lectures-slides)
     - [Branden Fitelson](#branden-fitelson)
     - [Giovanni Parmigiani](#giovanni-parmigiani)
@@ -33,10 +35,12 @@
     - [Graziano Martello](#graziano-martello)
     - [Giulia Calignano](#giulia-calignano)
     - [Michelangelo Vianello](#michelangelo-vianello)
+    - [Tommaso Dorigo](#tommaso-dorigo)
   - [Workshops Slides](#workshops-slides)
   - [Data](#data)
 - [Teamwork](#teamwork)
 - [Photos](#photos)
+- [Final Questionnaire](#final-questionnaire)
 
 # Information
 
@@ -270,6 +274,21 @@ documentation is available).
 
 # Materials
 
+## Workshop: Replicability crisis in science? 09-19-2023
+
+- **Branden Fitelson**: *Northeastern University (USA)* - [“The
+  Replication Crisis: A View from Philosophy of
+  Science”](lectures/workshop-09-19-2023/fitelson.pdf)
+- **Giovanni Parmigiani**: *Harvard University (USA)* - [“Replicability
+  and Decision Theory”](lectures/workshop-09-19-2023/parmigiani.pdf)
+- **Alessandra Salvan**: *Dep. of Statistical Sciences - University of
+  Padua* - [“Replicability and Safe, Anytime Valid Inference
+  (SAVI)”](lectures/workshop-09-19-2023/salvan.pdf)
+- **Gianmarco Altoè**: *Dep. of Developmental Psychology and
+  Socialisation - University of Padua* - [“Replicability crisis … is not
+  the only one: Other current challenges/opportunities to enhance
+  science”](lectures/workshop-09-19-2023/altoe.pdf)
+
 ## Lectures Slides
 
 ### Branden Fitelson
@@ -308,7 +327,21 @@ documentation is available).
 
 ### Giulia Calignano
 
+- 09-20-2023 [Dealing with uncertainty in developmental psychology: the
+  multiverse approach 1](lectures/calignano1.pdf)
+- 09-20-2023 [Dealing with uncertainty in developmental psychology: the
+  multiverse approach 2](lectures/calignano2.pdf)
+
 ### Michelangelo Vianello
+
+- 09-21-2023 [Replicability in Psychology: A tale of two
+  schools](lectures/vianello.pdf)
+
+### Tommaso Dorigo
+
+- 09-21-2023 [From Science in Theory to Science in Practice: Particle
+  Physics Challenges in Fulfilling Replicability
+  Standards](lectures/dorigo.pdf)
 
 ## Workshops Slides
 
@@ -734,3 +767,9 @@ Tancini
 <img src="files/group-picture.jpg" alt="19-09-2023" />
 <figcaption aria-hidden="true"><strong>19-09-2023</strong></figcaption>
 </figure>
+
+# Final Questionnaire
+
+<center>
+<img src="files/qr-final-quest.jpeg" style="width:30.0%" />
+</center>
